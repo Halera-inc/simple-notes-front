@@ -9,4 +9,4 @@
 ## 📃 Pages:
 * home page - `/`
 * notes - `/notes`
-* 
+* added
