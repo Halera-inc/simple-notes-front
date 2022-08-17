@@ -1,12 +1,12 @@
 import A from "./A";
 import {ReactNode} from "react";
 
-type MainContainerTypeProps={
-    children:ReactNode
+type MainContainerTypeProps = {
+    children: ReactNode
 }
 
 
-const MainContainer = (props:MainContainerTypeProps) => {
+const MainContainer = (props: MainContainerTypeProps) => {
     return (
         <>
             <div className="navbar">
