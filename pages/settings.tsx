@@ -1,13 +1,13 @@
 import MainContainer from "../src/components/MainContainer";
 
-const Notes = () => {
+const Settings = () => {
     return (
         <MainContainer>
             <div>
-                <h1>My notes</h1>
+                SETTINGS
             </div>
         </MainContainer>
-    )
-}
+    );
+};
 
-export default Notes
+export default Settings;
