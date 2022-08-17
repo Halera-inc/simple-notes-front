@@ -1,6 +1,6 @@
 import type {NextPage} from 'next'
-import styles from '../styles/Home.module.css'
-import MainContainer from "../components/MainContainer";
+import styles from '../src/styles/Home.module.css'
+import MainContainer from "../src/components/MainContainer";
 
 const Home: NextPage = () => {
     return (
