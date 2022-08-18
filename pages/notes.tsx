@@ -12,7 +12,7 @@ const Notes = () => {
     return (
         <MainContainer>
             <div>
-                <MyNotes title='My Notes'/>
+                <MyNotes title='My Notes' nameUser='DimaUser'/>
                 <Note textNode={'Hello, you are my frends'} titleNode={'your note'} style={colorStyle}/>
 
             </div>

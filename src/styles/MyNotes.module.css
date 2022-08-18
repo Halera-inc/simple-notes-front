@@ -1,5 +1,22 @@
-.MyNotes{
-padding: 20px;
+.myNotes {
+    padding: 20px;
     @apply
-    w-96
+    flex
+}
+.title{
+margin: 10px;
+    font-size: xx-large;
+    @apply
+    w-72
+}
+.icons{
+    margin: 10px;
+    @apply
+    flex
+    w-72
+    justify-evenly
+
+}
+.user{
+    margin: 10px;
 }
