@@ -1,14 +1,16 @@
 import s from './../styles/Note.module.css'
+import EditIcon from "../assets/images/EditIcon";
+import DeleteIcon from "../assets/images/DeleteIcon";
 
-const Note = (props:{titleNode:string,textNode:string,style:any}) => {
+const Note = (props: { titleNode: string, textNode: string, style: any }) => {
     return (
         <div className={s.card} style={props.style}>
-                <h2 className={s.cardTitle} >{props.titleNode}</h2>
-                <p>{props.textNode}</p>
-                <div className={s.cardAction}>
-                    <img className={s.editIcon}/>
-                    <img className={s.delete}/>
-                </div>
+            <h2 className={s.cardTitle}>{props.titleNode}</h2>
+            <p>{props.textNode}</p>
+            <div className={s.cardAction}>
+                <EditIcon/>
+                <DeleteIcon/>
+            </div>
         </div>
     );
 };
