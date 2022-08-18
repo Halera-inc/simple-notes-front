@@ -1,8 +1,6 @@
 .card{
-    background-color: #E5F1FD;
-    border: 3px solid #5590C1;
+    border: 3px solid;
     border-radius: 20px;
-    color:#5590C1;
     padding: 25px;
     @apply
     w-96
