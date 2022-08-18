@@ -13,6 +13,6 @@ export const notesSlice = createSlice({
     extraReducers: {}
 })
 
-export const {} = notesSlice.actions
+// export const {} = notesSlice.actions
 
 export default notesSlice.reducer
