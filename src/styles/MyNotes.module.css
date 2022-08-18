@@ -1,0 +1,5 @@
+.MyNotes{
+padding: 20px;
+    @apply
+    w-96
+}

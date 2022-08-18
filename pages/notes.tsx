@@ -1,5 +1,6 @@
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note";
+import MyNotes from "src/components/MyNotes";
 
 
 const Notes = () => {
@@ -11,7 +12,7 @@ const Notes = () => {
     return (
         <MainContainer>
             <div>
-                <h1>My notes</h1>
+                <MyNotes title='My Notes'/>
                 <Note textNode={'Hello, you are my frends'} titleNode={'your note'} style={colorStyle}/>
 
             </div>
