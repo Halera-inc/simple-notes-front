@@ -5,8 +5,8 @@ module.exports = {
         "./pages/**/*.{js,ts,jsx,tsx}",
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
-    extend: {
-        theme: {
+    theme: {
+        extend: {
             colors: {
                 "bg-black": "#212121",
                 "white": "#FFFFFF",
@@ -22,6 +22,9 @@ module.exports = {
                 "gray": "#E5E5E5",
                 "red": "#F06464"
             },
+            fontFamily: {
+                'sans': ['Montserrat', 'sans-serif']
+            }
         },
     },
     plugins: [
