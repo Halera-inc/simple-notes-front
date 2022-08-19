@@ -1,8 +1,8 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, {AxiosResponse} from 'axios'
 
 const instance = axios.create({
-    baseURL: '#',
-    withCredentials: true,
+    baseURL: 'https://simple-notes-back.herokuapp.com/',
+    withCredentials: false,
     headers: {
         'API-KEY': '#'
     }
@@ -11,17 +11,17 @@ const instance = axios.create({
 
 export const notesAPI = {
     //for Notes
-    getNote() {
-        return instance.get<Array<NoteTextType>>('#');
+    getNotes() {
+        return instance.get(`notes`);
     },
     createNote(title: string) {
-        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: NoteTextType }>>>('#', {title});
+        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: NoteTextType }>>>('notes', {title});
     },
     deleteNote(id: string) {
-        return instance.delete<ResponseType>(`#/${id}`);
+        return instance.delete<ResponseType>(`notes/${id}`);
     },
-    updateNote(id: string, title: string) {
-        return instance.put<{ title: string }, AxiosResponse<ResponseType>>(`#/${id}`, {title});
+    updateNote(id: string, title: string, noteColor: string) {
+        return instance.put(`notes/${id}`, {title, noteColor});
     },
 
     //for Tasks
@@ -41,32 +41,6 @@ export const notesAPI = {
 
 // Types
 
-//Notes Type
-export interface NoteTodoType {
-    id: string
-    mode: NoteViewType
-    title: string | null
-    dateOfCreate: Date
-    todos: Array<TaskType | null>
-}
-
-export type NoteTextType = {
-    id: string
-    mode: NoteViewType
-    title: string | null
-    text: string | null
-    dateOfCreate: Date
-}
-
-export type TaskType = {
-    idTask: string
-    taskTitle: string
-    isDone: boolean
-}
-
-//Tasks Type
-
-//
 export type ResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
@@ -74,4 +48,52 @@ export type ResponseType<D = {}> = {
     data: D
 }
 
-export type NoteViewType = 'TODO' | 'TEXT'
+// U S E R
+
+export type UserType = {
+    id: number,
+    name: string,
+    email: string,
+    password: string,
+    dateToRegistration: Date,
+    avatar: string,
+    settings: SettingsType,
+}
+export type SettingsType = {
+    darkMode: boolean,
+    lineMode: boolean,
+}
+
+// N O T E S
+
+export type NoteTodoType = {
+    id: number,
+    notemode: NoteViewType
+    title: string | null,
+    todos: Array<TaskType | null>
+    dateOfCreate: Date,
+    color: string
+}
+export type NoteTextType = {
+    id: number,
+    notemode: NoteViewType
+    title: string | null,
+    notetext: string | null,
+    dateOfCreate: Date,
+    color: string
+}
+export type TaskType = {
+    idTask: string,
+    taskTitle: string,
+    isDone: boolean
+}
+export type NoteViewType = 'NoteText' | 'NoteTodo'
+
+// export type ColorType = {
+//     default: string
+//     blue: string
+//     green: string
+//     violet: string
+//     mustard: string
+//     dark: string
+// }
