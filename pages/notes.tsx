@@ -1,3 +1,4 @@
+import MyNotes from "src/components/MyNotes";
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note";
 
@@ -13,7 +14,8 @@ const Notes = () => {
             <div>
                 <h1>My notes</h1>
                 <Note textNode={'Hello, you are my friends'} titleNode={'your note'} style={colorStyle}/>
-
+                <MyNotes title='My Notes' nameUser='DimaUser'/>
+                <Note textNode={'Hello, you are my frends'} titleNode={'your note'} style={colorStyle}/>
             </div>
         </MainContainer>
     )
