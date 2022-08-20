@@ -40,8 +40,8 @@ const Note = ({color, title, text}: NotePropsType) => {
     return (
         <>
             <label id='show-modal-btn' htmlFor="my-modal" className="btn modal-button hidden">open modal</label>
-            <ModalWindow titleNode={title}
-                         extNode={text}
+            <ModalWindow titleNode={title ? title : ''}
+                         textNode={text ? text : ''}
                          modalType={modalType}/>
             <div className={s.card} onClick={onCardClickHandler}>
                 <h2 className={s.cardTitle}>{title}</h2>
