@@ -3,11 +3,13 @@ import s from '../../styles/SidebarItem.module.css'
 
 type PropsType = {
     icon: ReactNode
+    tooltipInfo?: string
 }
 
-const SidebarItem = ({icon}: PropsType) => {
+const SidebarItem = ({icon, tooltipInfo}: PropsType) => {
     return (
-        <div className={s.wrapper}>
+        <div className={`tooltip tooltip-right ${s.wrapper}`}
+             data-tip={tooltipInfo ? tooltipInfo : 'Other'}>
             {icon}
         </div>
     )
