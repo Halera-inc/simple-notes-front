@@ -5,12 +5,6 @@ import Note from "../src/components/Note";
 import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 
-const colorStyle = {
-    backgroundColor: '#E5F1FD',
-    color: '#5590C1',
-    borderColor: '#5590C1',
-}
-
 const Notes = () => {
 
     const dispatch = useAppDispatch()
@@ -24,7 +18,7 @@ const Notes = () => {
         <MainContainer>
             <div className={s.notesBlock}>
                 <h1>My notes</h1>
-                <div>
+                <div className={'flex row-auto flex-wrap'}>
                     {notes.map((n) =>
                         <Note title={n.title} text={n.notetext} color={n.color}
                               key={n.id}/>
