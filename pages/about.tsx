@@ -1,11 +1,14 @@
 import s from './../src/styles/About.module.css';
+import MainContainer from "../src/components/MainContainer";
 
 const About = () => {
     return (
-        <div>
-           <div className={s.title}>About me</div>
-            <div className={s.text}></div>
-        </div>
+        <MainContainer>
+            <div>
+                <div className={s.title}>About me</div>
+                <div className={s.text}></div>
+            </div>
+        </MainContainer>
     );
 };
 

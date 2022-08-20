@@ -15,6 +15,8 @@ const MainContainer = (props: MainContainerTypeProps) => {
                 <NavItem text={'Settings'} href={"/settings"}/>
                 <NavItem text={'About'} href={"/about"}/>
                 <NavItem text={'404'} href={"/404"}/>
+                <NavItem text={'Registration'} href={"/registration"}/>
+                <NavItem text={'SingIn'} href={"/signIn"}/>
             </div>
             <div>{props.children}</div>
         </>
