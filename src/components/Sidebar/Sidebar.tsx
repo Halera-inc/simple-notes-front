@@ -7,8 +7,12 @@ import SunnyIcon from "../../assets/images/SunnyIcon";
 import PlusIcon from "../../assets/images/PlusIcon";
 import PencilIcon from "../../assets/images/PencilIcon";
 import SidebarItem from "./SidebarItem";
+import {useRouter} from "next/router";
 
 const Sidebar = () => {
+
+    const router = useRouter()
+
     return (
         <div className={s.sidebarWrapper}>
             <div className={s.upBox}>
@@ -21,9 +25,11 @@ const Sidebar = () => {
                              link={'/notes'}
                              icon={<PlusIcon width={50} fill={'#5590C1'}/>}/>
                 <SidebarItem tooltipInfo={'My notes'}
+                             active={router.pathname === '/notes'}
                              link={'/notes'}
                              icon={<NotesIcon width={50} fill={'#5590C1'}/>}/>
                 <SidebarItem tooltipInfo={'Settings'}
+                             active={router.pathname === '/settings'}
                              link={'/settings'}
                              icon={<SettingIcon width={50} fill={'#5590C1'}/>}/>
             </div>
