@@ -5,7 +5,6 @@ import {store} from '../src/bll/store'
 import {Provider} from 'react-redux'
 import Sidebar from "../src/components/Sidebar/Sidebar";
 
-
 function MyApp({Component, pageProps}: AppProps) {
     return (
         <Provider store={store}>
