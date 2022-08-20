@@ -1,19 +1,10 @@
 import * as React from "react"
 import {SVGProps} from "react"
+import s from "../../components/Sidebar/Sidebar.module.css";
 
-const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
-    <svg
-        width={32}
-        height={28}
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-    >
-        <path
-            d="M10 0a2 2 0 0 0 0 4h12a2 2 0 0 0 0-4H10ZM4 8a2 2 0 0 1 2-2h20a2 2 0 0 1 0 4H6a2 2 0 0 1-2-2Zm-4 8a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4v-8Z"
-            fill="#E5F1FD"
-        />
-    </svg>
-)
 
-export default SvgComponent
+export const MenuIcon = (props: SVGProps<SVGSVGElement>) => {
+    return (
+        <svg className={s.interface_icon__style} viewBox="0 0 24 24" {...props}><path d="M21 9V6H7v3h14m0-6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14M3 19h15v2H3a2 2 0 0 1-2-2V8h2Z"></path></svg>
+    )
+}
