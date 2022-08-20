@@ -15,7 +15,6 @@
     font-style: normal;
     font-display: swap;
 }
-
 @font-face {
     font-family: 'Montserrat';
     src: url('../assets/fonts/Montserrat-Medium.eot');
@@ -34,18 +33,4 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Montserrat, sans-serif;
-
-}
-
-:root {
-    --bg-black: #212121;
-    --white: white;
-    /*--grey-light: #787D85;*/
-    /*--primary: #7653FC;*/
-    /*--primary-hover: #6344df;*/
-    /*--red: red;*/
-    /*--green: #1DC37E;*/
-    /*--green-light: #C8F8E4;*/
-    /*--font-family: 'Noto Sans KR', sans-serif;*/
-    /*--grey-dark: #787D85;*/
 }

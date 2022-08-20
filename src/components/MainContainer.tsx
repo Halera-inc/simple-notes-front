@@ -1,4 +1,4 @@
-import A from "./A";
+import NavItem from "./NavItem";
 import {ReactNode} from "react";
 
 type MainContainerTypeProps = {
@@ -10,11 +10,13 @@ const MainContainer = (props: MainContainerTypeProps) => {
     return (
         <>
             <div className="navbar">
-                <A text={'Landing'} href={"/"}/>
-                <A text={'My notes'} href={"/notes"}/>
-                <A text={'Settings'} href={"/settings"}/>
-                <A text={'My account'} href={"/myAccount"}/>
-                <A text={'404'} href={"/404"}/>
+                <NavItem text={'Landing'} href={"/"}/>
+                <NavItem text={'My notes'} href={"/notes"}/>
+                <NavItem text={'Settings'} href={"/settings"}/>
+                <NavItem text={'About'} href={"/about"}/>
+                <NavItem text={'404'} href={"/404"}/>
+                <NavItem text={'Registration'} href={"/registration"}/>
+                <NavItem text={'SingIn'} href={"/signIn"}/>
             </div>
             <div>{props.children}</div>
         </>

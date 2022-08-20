@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 
-const A = (props: { text: string, href: string }) => {
+const NavItem = (props: { text: string, href: string }) => {
     return (
         <Link href={props.href}>
             <a>{props.text}</a>
@@ -9,4 +9,4 @@ const A = (props: { text: string, href: string }) => {
     )
 }
 
-export default A;
+export default NavItem;
