@@ -2,6 +2,7 @@ import s from './../styles/Note.module.css'
 import EditIcon from "../assets/images/EditIcon";
 import DeleteIcon from "../assets/images/DeleteIcon";
 
+
 type NotePropsType = {
     title: string | null
     text: string | null
@@ -25,6 +26,7 @@ const Note = ({title, text, color}: NotePropsType) => {
                 <EditIcon/>
                 <DeleteIcon/>
             </div>
+
         </div>
     );
 };

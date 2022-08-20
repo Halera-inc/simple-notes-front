@@ -4,6 +4,7 @@ import SearchIcon from "src/assets/images/SearchIcon";
 import UserCircleIcon from "src/assets/images/UserCircleIcon";
 import ChevronDownIcon from "src/assets/images/ChevronDownIcon";
 
+
 const MyNotes = (props: { title: string, nameUser: string }) => {
     return (
         <div className={s.myNotes}>
