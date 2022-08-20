@@ -8,7 +8,7 @@ export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
         const notes = res.data.results
         return notes
     } catch (error) {
-        const data = error?.response?.data;
+        const data = error
         if (axios.isAxiosError(error) && data) {
             // dispatch(setAppError(data.error || 'Some error occurred'));
             // } else (dispatch(setAppError(error.message + '. More details in the console')))

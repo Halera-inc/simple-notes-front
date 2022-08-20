@@ -1,8 +1,21 @@
-import React, {SVGProps} from 'react';
-import s from "../../components/Sidebar/Sidebar.module.css";
+import * as React from "react"
+import { SVGProps } from "react"
 
-export function PlusIcon(props: SVGProps<SVGSVGElement>) {
-    return (
-        <svg className={s.interface_icon__style} viewBox="0 0 24 24" {...props}><path d="M12 17q.425 0 .713-.288Q13 16.425 13 16v-3h3.025q.425 0 .7-.288Q17 12.425 17 12t-.288-.713Q16.425 11 16 11h-3V7.975q0-.425-.287-.7Q12.425 7 12 7t-.712.287Q11 7.575 11 8v3H7.975q-.425 0-.7.287Q7 11.575 7 12t.287.712Q7.575 13 8 13h3v3.025q0 .425.288.7q.287.275.712.275Zm0 5q-2.075 0-3.9-.788q-1.825-.787-3.175-2.137q-1.35-1.35-2.137-3.175Q2 14.075 2 12t.788-3.9q.787-1.825 2.137-3.175q1.35-1.35 3.175-2.138Q9.925 2 12 2t3.9.787q1.825.788 3.175 2.138q1.35 1.35 2.137 3.175Q22 9.925 22 12t-.788 3.9q-.787 1.825-2.137 3.175q-1.35 1.35-3.175 2.137Q14.075 22 12 22Z"></path></svg>
-    )
-}
+const PlusIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className={props.className ? props.className : ""}
+        width={props.width ? props.width : ''}
+        fill={props.fill ? props.fill : ''}
+        viewBox="0 0 20 20"
+        {...props}
+    >
+        <path
+            fillRule="evenodd"
+            d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-11a1 1 0 1 0-2 0v2H7a1 1 0 1 0 0 2h2v2a1 1 0 1 0 2 0v-2h2a1 1 0 1 0 0-2h-2V7z"
+            clipRule="evenodd"
+        />
+    </svg>
+)
+
+export default PlusIcon

@@ -1,28 +1,33 @@
 import React from 'react';
-import s from './Sidebar.module.css';
+import s from '../../styles/Sidebar.module.css'
 import LoginIcon from "../../assets/images/LoginIcon";
-import {PlusIcon} from "../../assets/images/PlusIcon";
-import {SunnyIcon} from "../../assets/images/SunnyIcon";
-import {MenuIcon} from "../../assets/images/MenuIcon";
-import {SettingIcon} from "../../assets/images/SettingIcon";
-import {PencilIcon} from "../../assets/images/PencilIcon";
+import NotesIcon from "../../assets/images/NotesIcon";
+import SettingIcon from "../../assets/images/SettingIcon";
+import SunnyIcon from "../../assets/images/SunnyIcon";
+import PlusIcon from "../../assets/images/PlusIcon";
+import PencilIcon from "../../assets/images/PencilIcon";
+import SidebarItem from "./SidebarItem";
 
-export const Sidebar = (): JSX.Element => {
+const Sidebar = () => {
     return (
-        <div className={s.sidebar_wrapper}>
-            <div className={s.addNote_icon}>
-                <PencilIcon width={"5em"} height={"5em"}/>
+        <div className={s.sidebarWrapper}>
+            <div className={s.upBox}>
+                <span className={s.whiteBg}>
+                    <PencilIcon width={50} fill={'none'} stroke={'#5590C1'}/>
+                </span>
             </div>
-            <div className={s.interface_icons}>
-                <PlusIcon/>
-                <MenuIcon/>
-                <SettingIcon/>
+            <div className={s.middleBox}>
+                <SidebarItem icon={<PlusIcon width={50} fill={'#5590C1'}/>}/>
+                <SidebarItem icon={<NotesIcon width={50} fill={'#5590C1'}/>}/>
+                <SidebarItem icon={<SettingIcon width={50} fill={'#5590C1'}/>}/>
             </div>
-            <div className={s.login_block}>
-                <SunnyIcon/>
-                <LoginIcon/>
+            <div className={s.bottomBox}>
+                <SidebarItem icon={<SunnyIcon width={50} fill={'#5590C1'}/>}/>
+                <SidebarItem icon={<LoginIcon width={50} fill={'#5590C1'}/>}/>
             </div>
             <div className={'bg'}></div>
         </div>
     );
 };
+
+export default Sidebar;

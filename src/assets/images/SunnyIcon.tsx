@@ -1,7 +1,21 @@
-import React, {SVGProps} from "react";
-import s from "../../components/Sidebar/Sidebar.module.css";
-export const SunnyIcon = (props: SVGProps<SVGSVGElement>) => {
-    return (
-        <svg className={s.interface_icon__style} viewBox="0 0 512 512" {...props}><path d="M256 118a22 22 0 0 1-22-22V48a22 22 0 0 1 44 0v48a22 22 0 0 1-22 22Zm0 368a22 22 0 0 1-22-22v-48a22 22 0 0 1 44 0v48a22 22 0 0 1-22 22Zm113.14-321.14a22 22 0 0 1-15.56-37.55l33.94-33.94a22 22 0 0 1 31.11 31.11l-33.94 33.94a21.93 21.93 0 0 1-15.55 6.44ZM108.92 425.08a22 22 0 0 1-15.55-37.56l33.94-33.94a22 22 0 1 1 31.11 31.11l-33.94 33.94a21.94 21.94 0 0 1-15.56 6.45ZM464 278h-48a22 22 0 0 1 0-44h48a22 22 0 0 1 0 44Zm-368 0H48a22 22 0 0 1 0-44h48a22 22 0 0 1 0 44Zm307.08 147.08a21.94 21.94 0 0 1-15.56-6.45l-33.94-33.94a22 22 0 0 1 31.11-31.11l33.94 33.94a22 22 0 0 1-15.55 37.56ZM142.86 164.86a21.89 21.89 0 0 1-15.55-6.44l-33.94-33.94a22 22 0 0 1 31.11-31.11l33.94 33.94a22 22 0 0 1-15.56 37.55ZM256 358a102 102 0 1 1 102-102a102.12 102.12 0 0 1-102 102Z"></path></svg>
-    )
-}
+import * as React from "react"
+import { SVGProps } from "react"
+
+const SunnyIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        className={props.className ? props.className : ""}
+        width={props.width ? props.width : ''}
+        fill={props.fill ? props.fill : ''}
+        {...props}
+    >
+        <path
+            fillRule="evenodd"
+            d="M10 2a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm4 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0zm-.464 4.95.707.707a1 1 0 0 0 1.414-1.414l-.707-.707a1 1 0 0 0-1.414 1.414zm2.12-10.607a1 1 0 0 1 0 1.414l-.706.707a1 1 0 1 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 0zM17 11a1 1 0 1 0 0-2h-1a1 1 0 1 0 0 2h1zm-7 4a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1zM5.05 6.464A1 1 0 1 0 6.465 5.05l-.708-.707a1 1 0 0 0-1.414 1.414l.707.707zm1.414 8.486-.707.707a1 1 0 0 1-1.414-1.414l.707-.707a1 1 0 0 1 1.414 1.414zM4 11a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2h1z"
+            clipRule="evenodd"
+        />
+    </svg>
+)
+
+export default SunnyIcon

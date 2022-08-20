@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {UserType} from 'src/utils/types'
+import {UserType} from "../../api/notes-api";
+
 
 const initialState = {
     user: {} as UserType,
