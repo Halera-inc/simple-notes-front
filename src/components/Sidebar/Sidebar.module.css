@@ -1,0 +1,49 @@
+.sidebar_wrapper {
+    display: grid;
+    /*grid-template-columns: 140px;*/
+    grid-template-rows: 2fr 4fr 6fr;
+    height: 100%;
+    background: #E5F1FD;
+    width: 140px;
+}
+
+.sidebar_wrapper svg {
+    cursor: pointer;
+}
+
+.addNote_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pencil_icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    transform: translateX(18px);
+    top: 12px;
+}
+
+.interface_icons {
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login_block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 37px;
+}
+
+.interface_icon__style {
+    width: 3em;
+    height: 3em;
+    fill: #5590C1;
+    margin-top: 50px;
+}
