@@ -1,19 +1,20 @@
 .sidebar_wrapper {
-    position: absolute;
+    display: grid;
+    /*grid-template-columns: 140px;*/
+    grid-template-rows: 2fr 4fr 6fr;
+    height: 100%;
+    background: #E5F1FD;
     width: 140px;
-    height: 1080px;
-    top: 33px;
-    background: var(--bg-black);
+}
+
+.sidebar_wrapper svg {
+    cursor: pointer;
 }
 
 .addNote_icon {
-    background-color: var(--white);
-    width: 80px;
-    height: 80px;
-    left: 30px;
-    top: 39px;
-    border-radius: 30px;
-    margin: 41px auto 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .pencil_icon {
@@ -32,10 +33,17 @@
     align-items: center;
 }
 
-.copyright_text {
-    position: absolute;
-    color: var(--white);
-    text-align: center;
-    bottom: 37px;
-    width: 100%;
+.login_block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 37px;
+}
+
+.interface_icon__style {
+    width: 3em;
+    height: 3em;
+    fill: #5590C1;
+    margin-top: 50px;
 }
