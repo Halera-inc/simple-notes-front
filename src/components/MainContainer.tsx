@@ -7,10 +7,12 @@ type MainContainerTypeProps = {
 
 
 const MainContainer = (props: MainContainerTypeProps) => {
+
     return (
         <>
-            <div className="navbar">
-                <NavItem text={'Landing'} href={"/"}/>
+            <div className="navbar absolute left-50 bottom-0 border-2 border-red flex justify-center">
+                <h1><b>DEV MENU:</b></h1>
+                <NavItem  text={'Landing'} href={"/"}/>
                 <NavItem text={'My notes'} href={"/notes"}/>
                 <NavItem text={'Settings'} href={"/settings"}/>
                 <NavItem text={'About'} href={"/about"}/>

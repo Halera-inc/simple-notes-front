@@ -1,11 +1,11 @@
 import type {NextPage} from 'next'
-import styles from '../src/styles/Home.module.css'
+import s from '../src/styles/Home.module.css'
 import MainContainer from "../src/components/MainContainer";
 
 const Home: NextPage = () => {
     return (
         <MainContainer>
-            <div className={styles.container}>
+            <div className={s.container}>
                 <h1>HOME PAGE</h1>
             </div>
         </MainContainer>
