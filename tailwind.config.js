@@ -20,7 +20,9 @@ module.exports = {
                 "green": "#D6EDD9",
                 "green-dark": "#5E9C80",
                 "gray": "#E5E5E5",
-                "red": "#F06464"
+                "red": "#F06464",
+                "red-light":"#FFF4F4",
+
             },
             fontFamily: {
                 'sans': ['Montserrat', 'sans-serif']
