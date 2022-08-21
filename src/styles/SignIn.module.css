@@ -8,7 +8,8 @@
     padding: 73px 52px 23px 52px;
     text-align: center;
 }
-.wrapperTitle{
+
+.wrapperTitle {
     position: relative;
 }
 
@@ -24,10 +25,12 @@
     text-blue-dark
 
 }
-.arrowIcon{
+
+.arrowIcon {
     position: absolute;
     left: 0;
-    top:0;
+    top: 0;
+    cursor: pointer;
 }
 
 .cardC {
@@ -45,8 +48,8 @@
     height: 60px !important;
     margin-bottom: 55px;
     font-size: 25px !important;
-    line-height: 30px!important;
-    text-transform: capitalize!important;
+    line-height: 30px !important;
+    text-transform: capitalize !important;
     @apply
     btn
     btn-outline
@@ -55,28 +58,31 @@
     bg-white
 
 }
-.btnB:hover{
+
+.btnB:hover {
     @apply
     bg-blue-dark
     outline-none
     border-blue-dark
 }
 
-.formControl{
+.formControl {
     @apply
     form-control
     w-full
 }
-.label{
+
+.label {
 
     @apply
     w-full
     flex
     justify-center
 }
-.inputI{
+
+.inputI {
     height: 60px !important;
-    margin-left:27px;
+    margin-left: 27px;
     width: 428px;
     @apply
     input
@@ -89,13 +95,23 @@
 }
 
 
-.one{
+.one {
     margin-bottom: 30px;
 }
-.two{
+
+.two {
     margin-bottom: 56px;
+    position: relative;
 }
-.text{
+
+.errorText {
+    color: red;
+    position: absolute;
+    bottom:-65%;
+    left:27%;
+}
+
+.text {
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
@@ -103,12 +119,13 @@
     @apply
     text-blue-dark
 }
-.errorInput{
+
+.errorInput {
     background-color: #FFF4F4 !important;
     height: 60px !important;
-    margin-left:27px;
+    margin-left: 27px;
     width: 428px;
-    border-color:#F06464 !important;
+    border-color: #F06464 !important;
     @apply
     input
     input-bordered
