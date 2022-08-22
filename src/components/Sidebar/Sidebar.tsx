@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, useRef, useState} from 'react';
 import s from '../../styles/Sidebar.module.css'
 import LoginIcon from "../../assets/images/LoginIcon";
 import NotesIcon from "../../assets/images/NotesIcon";
@@ -7,10 +7,46 @@ import SunnyIcon from "../../assets/images/SunnyIcon";
 import PlusIcon from "../../assets/images/PlusIcon";
 import PencilIcon from "../../assets/images/PencilIcon";
 import SidebarItem from "./SidebarItem";
+import ModalWindow from "../ModalWindow";
 
 const Sidebar = () => {
+
+    const modalAddBtnRef = useRef<HTMLLabelElement>(null)
+    const [newNoteTitle, setNewNoteTitle] = useState('')
+    const [newNoteText, setNewNoteText] = useState('')
+
+    const onAddNoteClickHandler = () => {
+        modalAddBtnRef.current && modalAddBtnRef.current.click()
+    }
+    const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setNewNoteTitle(e.currentTarget.value)
+    }
+    const onContentChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setNewNoteText(e.currentTarget.value)
+    }
+    const onConfirmClickHandler = () => {  // todo need to fix with appAPI
+        alert(`Save in Add mode. Title: ${newNoteTitle}. Text: ${newNoteText}`)
+        setNewNoteTitle('')
+        setNewNoteText('')
+    }
+    const onDiscardClickHandler = () => {  // todo need to fix with appAPI
+        alert('Cancel in Add mode') //need to fix
+        setNewNoteTitle('')
+        setNewNoteText('')
+    }
+
+
     return (
         <div className={s.sidebarWrapper}>
+            <label ref={modalAddBtnRef} htmlFor='my-modal-add-note' className="btn modal-button hidden">open
+                modal</label>
+            <ModalWindow titleNode={newNoteTitle}
+                         textNode={newNoteText}
+                         typeNode={'create'}
+                         onTitleChange={onTitleChangeHandler}
+                         onTextChange={onContentChangeHandler}
+                         onConfirm={onConfirmClickHandler}
+                         onDiscard={onDiscardClickHandler}/>
             <div className={s.upBox}>
                 <span className={s.whiteBg}>
                     <PencilIcon width={50} fill={'none'} stroke={'#5590C1'}/>
@@ -19,7 +55,8 @@ const Sidebar = () => {
             <div className={s.middleBox}>
                 <SidebarItem tooltipInfo={'Create note'}
                              link={'/notes'}
-                             icon={<PlusIcon width={50} fill={'#5590C1'}/>}/>
+                             icon={<PlusIcon width={50} fill={'#5590C1'}
+                                             onClick={onAddNoteClickHandler}/>}/>
                 <SidebarItem tooltipInfo={'My notes'}
                              link={'/notes'}
                              icon={<NotesIcon width={50} fill={'#5590C1'}/>}/>
