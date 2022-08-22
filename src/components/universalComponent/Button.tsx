@@ -1,9 +1,12 @@
 import React from 'react';
+import s from "src/styles/landingStyle/Header.module.css";
 
-const Button = () => {
+const Button = (props: { title: string,onChangeParams?:()=>void }) => {
     return (
         <div>
-            <button>+</button>
+            <button className={s.button}
+                    onClick={props.onChangeParams}
+            >{props.title}</button>
         </div>
     );
 };

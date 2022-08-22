@@ -1,0 +1,23 @@
+.mainBlockContainer{
+    width: 1920px;
+    height:960px;
+    @apply
+    flex
+}
+.mainBlock{
+@apply
+    flex
+}
+.block{
+    padding-left: 108px;
+    padding-top: 112px;
+
+}
+
+.title {
+    width: 500px;
+    height: 500px;
+    font-size: 40px;
+    white-space: pre-line;
+    font-weight: bold;
+}
