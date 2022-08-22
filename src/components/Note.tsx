@@ -4,7 +4,6 @@ import DeleteIcon from "../assets/images/DeleteIcon";
 import ModalWindow from "./ModalWindow";
 import {useState} from "react";
 
-
 type ModalWindowType = 'edit' | 'create'
 type NotePropsType = {
     title: string | null
@@ -16,14 +15,12 @@ const Note = ({color, title, text}: NotePropsType) => {
 
     const [modalType, setModalType] = useState<ModalWindowType>('edit')
 
-
     if (color === 'blue') color = "#5590C1"
     if (color === 'green') color = "#5E9C80"
     if (color === 'violet') color = "#866FA7"
     if (color === 'mustard') color = "#C6B05D"
     if (color === 'dark') color = "#444343"
     if (color === 'default') color = "#4e5458"
-
 
     const onAddNoteClickHandler = () => { // todo: need to fix
         setModalType("create")
@@ -35,7 +32,6 @@ const Note = ({color, title, text}: NotePropsType) => {
         let btn = document.getElementById('show-modal-btn')
         btn && btn.click()
     }
-
 
     return (
         <>
@@ -51,7 +47,7 @@ const Note = ({color, title, text}: NotePropsType) => {
                     <DeleteIcon/>
                 </div>
             </div>
-            <button className='btn mx-8 my-8' onClick={onAddNoteClickHandler}>Add Note</button>
+            {/*<button className='btn mx-8 my-8' onClick={onAddNoteClickHandler}>Add Note</button>*/}
         </>
     )
 }
