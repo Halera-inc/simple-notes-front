@@ -1,23 +1,35 @@
-.mainBlockContainer{
+.mainBlockContainer {
     width: 1920px;
-    height:960px;
+    height: 960px;
+    @apply
+    flex
+    justify-around
+}
+
+.mainBlock {
     @apply
     flex
 }
-.mainBlock{
-@apply
-    flex
-}
-.block{
-    padding-left: 108px;
+
+.block {
     padding-top: 112px;
+    @apply
+    flex
+    flex-col
+
 
 }
 
 .title {
     width: 500px;
     height: 500px;
-    font-size: 40px;
+    font-size: 90px;
     white-space: pre-line;
     font-weight: bold;
+
+}
+
+.btn {
+    position: relative;
+    bottom: 80px
 }

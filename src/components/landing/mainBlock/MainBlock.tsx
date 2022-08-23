@@ -11,11 +11,14 @@ const MainBlock = () => {
             <div className={s.mainBlock}>
                 <div className={s.block}>
                     <h1 className={s.title}>{'Just.\nSimple.\nNotes.'}</h1>
-                    <Button title='Start now' onChangeParams={()=>alert("all right")} />
+                    <div className={s.btn}>
+                        <Button title='Start now' onChangeParams={() => alert("all right")}/>
+                    </div>
                     <Footer/>
                 </div>
+                <div className='relative left-40'>
                 <SapienMainBlockIcon/>
-
+                </div>
             </div>
 
         </div>
