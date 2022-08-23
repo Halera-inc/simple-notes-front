@@ -37,7 +37,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({modalType, titleNode, text
                             <h3 className="font-bold text-lg">Edit your note!</h3>
                             <input type="text" className="my-2.5 rounded min-w-full px-1" value={editTitle}
                                    onChange={onTitleChangeHandler}/>
-                            <textarea className="my-2.5 rounded min-w-full px-1" rows={10} value={editContent}
+                            <textarea className="my-2.5 rounded min-w-full px-1 bg" rows={10} value={editContent}
                                       onChange={onContentChangeHandler}></textarea>
                             <div className="modal-action">
                                 <label htmlFor="my-modal" className="btn" onClick={onConfirmClickHandler}>Save</label>
