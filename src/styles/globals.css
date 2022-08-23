@@ -20,6 +20,7 @@ html body #__next {
     font-style: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: 'Montserrat';
     src: url('../assets/fonts/Montserrat-Medium.eot');
@@ -38,6 +39,7 @@ html body #__next {
     padding: 0;
     box-sizing: border-box;
     font-family: Montserrat, sans-serif;
+
 }
 
 

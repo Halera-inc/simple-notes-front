@@ -2,10 +2,10 @@
     border: 1px solid;
     padding: 25px;
     min-width: 250px;
+    margin: 15px;
     @apply
     w-96
     shadow-lg
-
 }
 
 .cardTitle{

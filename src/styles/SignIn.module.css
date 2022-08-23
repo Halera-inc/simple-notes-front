@@ -1,0 +1,141 @@
+.wrapperCard {
+    @apply
+    flex
+    justify-center
+}
+
+.cardBody {
+    padding: 73px 52px 23px 52px;
+    text-align: center;
+}
+
+.wrapperTitle {
+    position: relative;
+}
+
+.cardTitle {
+    font-weight: 600;
+    font-size: 50px !important;
+    line-height: 61px;
+    margin-bottom: 73px;
+    @apply
+    card-title
+    flex
+    justify-center
+    text-blue-dark
+
+}
+
+.arrowIcon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.cardC {
+    border: 1px solid #5590C1;
+    @apply
+    bg-blue
+    card
+    shadow-xl
+    rounded-none
+
+}
+
+.btnB {
+    width: 200px;
+    height: 60px !important;
+    margin-bottom: 55px;
+    font-size: 25px !important;
+    line-height: 30px !important;
+    text-transform: capitalize !important;
+    @apply
+    btn
+    btn-outline
+    text-blue-dark
+    rounded-none
+    bg-white
+
+}
+
+.btnB:hover {
+    @apply
+    bg-blue-dark
+    outline-none
+    border-blue-dark
+}
+
+.formControl {
+    @apply
+    form-control
+    w-full
+}
+
+.label {
+
+    @apply
+    w-full
+    flex
+    justify-center
+}
+
+.inputI {
+    height: 60px !important;
+    margin-left: 27px;
+    width: 428px;
+    @apply
+    input
+    input-bordered
+    input-info
+    placeholder:text-blue-dark
+    rounded-none
+    text-blue-dark
+    text-xl
+}
+
+
+.one {
+    margin-bottom: 30px;
+}
+
+.two {
+    margin-bottom: 56px;
+    position: relative;
+}
+
+.errorText {
+    color: red;
+    position: absolute;
+    bottom:-65%;
+    left:27%;
+}
+
+.text {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 18px;
+    padding-bottom: 15px;
+    @apply
+    text-blue-dark
+}
+
+.errorInput {
+    background-color: #FFF4F4 !important;
+    height: 60px !important;
+    margin-left: 27px;
+    width: 428px;
+    border-color: #F06464 !important;
+    @apply
+    input
+    input-bordered
+    input-info
+    placeholder:text-red
+    rounded-none
+    text-red
+    text-xl
+}
+
+
+
+
