@@ -6,12 +6,13 @@ type PropsType = {
     icon: ReactNode
     tooltipInfo?: string
     link?: string
+    active?: boolean
 }
 
-const SidebarItem = ({icon, tooltipInfo, link}: PropsType) => {
+const SidebarItem = ({icon, tooltipInfo, link, active}: PropsType) => {
     return (
         <Link href={link ? link : '#'}>
-            <div className={`tooltip tooltip-right ${s.wrapper}`}
+            <div className={`tooltip tooltip-right ${s.wrapper} ${active ? 'bg-white' : 'none'}`}
                  data-tip={tooltipInfo ? tooltipInfo : 'Other'}>
                 {icon}
             </div>
