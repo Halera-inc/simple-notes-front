@@ -18,6 +18,10 @@
     flex
     w-72
     justify-evenly
+}
+
+.icons:hover {
+    cursor: pointer;
 
 }
 
