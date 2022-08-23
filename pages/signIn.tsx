@@ -70,7 +70,7 @@ const SignIn = () => {
                             <div className={`${s.formControl} ${s.two}`}>
                                 <label className={s.label}>
                                     <KeyIcon width={'3em'} height={'3em'} color={isLogin ?'#5590C1':'#F06464'}/>
-                                    <input type="text" id='password' placeholder="password"
+                                    <input type="password" id='password' placeholder="password"
                                            className={isLogin ? s.inputI: s.errorInput}
                                            {...formik.getFieldProps('password')}/>
                                 </label>

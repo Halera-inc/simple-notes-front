@@ -1,8 +1,16 @@
 import MainContainer from "../src/components/MainContainer";
 import {useFormik} from "formik";
+import s from "../src/styles/SignIn.module.css";
+import Link from "next/link";
+import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
+import UserIcon from "../src/assets/images/UserIcon";
+import KeyIcon from "../src/assets/images/KeyIcon";
+import React, {useState} from "react";
 
 
 const Registration = () => {
+    const [isLogin,setIsLogin]=useState(true);
+
     type FormikErrorType = {
         username?: string
         password?: string
@@ -42,35 +50,48 @@ const Registration = () => {
     })
     return (
         <MainContainer>
-            <div className={'flex justify-center'}>
-            <div className="card w-96 bg-base-100 shadow-xl ">
-                <div className="card-body">
-                    <h2 className="card-title">Registration</h2>
-                    <div className="form-control">
-                        <label className="label">
-                            <input type="text" id='username'  placeholder="username"
-                                   className="input input-bordered input-info w-full max-w-xs"/>
-                        </label>
-                    </div>
+            <div className={s.wrapperCard}>
+                <div className={s.cardC}>
+                    <div className={s.cardBody}>
+                        <div className={s.wrapperTitle}>
+                            <h2 className={s.cardTitle}> Sign In</h2>
+                            <div className={s.arrowIcon}>
+                                <Link href={"/"}>
+                                    <ArrowBackIcon width={'2.5em'} height={'2.5em'} color={'#5590C1'}/>
+                                </Link>
+                            </div>
+                        </div>
+                        <form onSubmit={formik.handleSubmit}>
+                            <div className={`${s.formControl} ${s.one}`}>
+                                <label className={s.label}>
+                                    <UserIcon width={'3em'} height={'3em'} color={isLogin ?'#5590C1':'#F06464'}/>
+                                    <input type="text" id='username' placeholder="username"
+                                           className={isLogin ? s.inputI: s.errorInput}
+                                           {...formik.getFieldProps('username')}/>
+                                </label>
+                                {formik.touched.username && formik.errors.username}
 
-                    <div className="form-control">
-                        <label className="label">
-                            <input type="text" id='password'  placeholder="password"
-                                   className="input input-bordered input-info w-full max-w-xs"/>
-                        </label>
-                    </div>
+                            </div>
 
-                    <div className="form-control">
-                        <label className="label">
-                            <input type="text" id='password2'  placeholder="confirm password"
-                                   className="input input-bordered input-info w-full max-w-xs"/>
-                        </label>
-                    </div>
-                    <div className="card-actions justify-center">
-                        <button className="btn btn-outline btn-info">Registration</button>
+                            <div className={`${s.formControl} ${s.two}`}>
+                                <label className={s.label}>
+                                    <KeyIcon width={'3em'} height={'3em'} color={isLogin ?'#5590C1':'#F06464'}/>
+                                    <input type="text" id='password' placeholder="password"
+                                           className={isLogin ? s.inputI: s.errorInput}
+                                           {...formik.getFieldProps('password')}/>
+                                </label>
+                                {!isLogin ?
+                                    <div className={s.errorText}>Incorrect login or password!</div>: null}
+                            </div>
+
+                            <div className="card-actions justify-center">
+                                <button type={'submit'} className={s.btnB}>Login</button>
+                            </div>
+                        </form>
+                        <p className={s.text}>Registration</p>
+                        <p className={s.text}>Reset password</p>
                     </div>
                 </div>
-            </div>
             </div>
         </MainContainer>
     );

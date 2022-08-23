@@ -1,7 +1,9 @@
 .wrapperCard {
+    margin-top: 15%;
     @apply
     flex
     justify-center
+
 }
 
 .cardBody {
