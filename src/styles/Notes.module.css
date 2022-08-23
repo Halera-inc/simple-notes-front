@@ -1,6 +1,18 @@
-.notesBlock {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.notesWrapper {
+    padding-left: 100px;
+}
 
+.notesBlock {
+    margin-left: 25px;
+    gap: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+@media screen and (max-width: 991px) {
+    .notesBlock {
+        justify-content: center;
+    }
 }

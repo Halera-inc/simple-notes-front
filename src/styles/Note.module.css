@@ -1,6 +1,5 @@
-.card{
-    border: 3px solid;
-    border-radius: 20px;
+.card {
+    border: 1px solid;
     padding: 25px;
     min-width: 250px;
     margin: 15px;
@@ -9,21 +8,21 @@
     shadow-lg
 }
 
-.cardTitle{
+.card:hover {
+    cursor: pointer;
+}
+
+.cardTitle {
     margin-bottom: 15px;
     @apply
     card-title
 }
 
-.cardAction{
-    margin-top:15px;
+.cardAction {
+    margin-top: 15px;
     outline: none;
-    border:none;
+    border: none;
     @apply
     card-actions
     justify-between
-}
-
-.drrrr {
-
 }

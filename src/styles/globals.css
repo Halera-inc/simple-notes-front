@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html body #__next {
+    height: 100%;
+}
+
+
 @font-face {
     font-family: 'Montserrat';
     src: url('../assets/fonts/Montserrat-Bold.eot');
@@ -36,3 +41,5 @@
     font-family: Montserrat, sans-serif;
 
 }
+
+
