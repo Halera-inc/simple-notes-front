@@ -18,7 +18,7 @@ const Note = ({color, title, text, edit}: NotePropsType) => {
         <>
             <div className={s.card} style={colorizedColor} onClick={()=>edit(title,text)}>
                 <h2 className={s.cardTitle}>{title}</h2>
-                <p>{text}</p>
+                <p className={s.text}>{text}</p>
                 <div className={s.cardAction}>
                     <EditIcon fill={colorizedColor.color}/>
                     <DeleteIcon fill={colorizedColor.color}/>
