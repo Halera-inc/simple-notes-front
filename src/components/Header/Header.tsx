@@ -1,7 +1,6 @@
 import SearchIcon from "../../assets/images/SearchIcon";
 import UserCircleIcon from "../../assets/images/UserCircleIcon";
 import {useState} from "react";
-import DropDown from "./DropDown";
 
 
 const Header = () => {
