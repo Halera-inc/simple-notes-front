@@ -8,7 +8,7 @@ import KeyIcon from "../src/assets/images/KeyIcon";
 import React, {useState} from "react";
 
 
-const Registration = () => {
+export const Registration = () => {
     const [isLogin,setIsLogin]=useState(true);
 
     type FormikErrorType = {
@@ -97,4 +97,3 @@ const Registration = () => {
     );
 };
 
-export default Registration;

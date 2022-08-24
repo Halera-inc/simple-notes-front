@@ -42,6 +42,11 @@ const SignIn = () => {
             formik.resetForm();
         },
     })
+
+    const resetHandler=()=>{
+        setIsLogin(true)
+        formik.resetForm();
+    }
     return (
         <MainContainer>
             <div className={s.wrapperCard}>
@@ -82,8 +87,8 @@ const SignIn = () => {
                                 <button type={'submit'} className={s.btnB}>Login</button>
                             </div>
                         </form>
-                        <p className={s.text}>Registration</p>
-                        <p className={s.text}>Reset password</p>
+                        <Link href={"/registration"}><p className={s.text}>Registration</p></Link>
+                        <p onClick={resetHandler} className={s.text}>Reset password</p>
                     </div>
                 </div>
             </div>
