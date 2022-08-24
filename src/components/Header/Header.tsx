@@ -1,6 +1,7 @@
 import SearchIcon from "../../assets/images/SearchIcon";
 import UserCircleIcon from "../../assets/images/UserCircleIcon";
 import {useState} from "react";
+import DropDown from "./DropDown";
 
 
 const Header = () => {
@@ -12,7 +13,7 @@ const Header = () => {
 
     return (
         <div className='bg-orange-500 flex justify-between items-center h-14'>
-            <p className='px-6 text-xl'>Header</p>
+            <p className='px-32 text-xl'>Header</p>
             <div className='flex justify-around w-96 items-center'>
                 <SearchIcon width={'1.5em'} height={'1.5em'}/>
                 <UserCircleIcon width={'3em'} height={'3em'}/>

@@ -1,5 +1,6 @@
 import NavItem from "./NavItem";
 import {ReactNode} from "react";
+import Header from "./Header/Header";
 
 type MainContainerTypeProps = {
     children: ReactNode
@@ -10,7 +11,8 @@ const MainContainer = (props: MainContainerTypeProps) => {
 
     return (
         <>
-            <div className="navbar fixed left-50 bottom-5 border-2 border-red flex justify-center">
+            <Header/>
+            <div className="navbar absolute left-50 bottom-0 border-2 border-red flex justify-center">
                 <h1><b>DEV MENU:</b></h1>
                 <NavItem  text={'Landing'} href={"/"}/>
                 <NavItem text={'My notes'} href={"/notes"}/>

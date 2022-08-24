@@ -50,7 +50,6 @@ const Notes = () => {
                          onConfirm={onConfirmClickHandler}
                          onDiscard={onDiscardClickHandler}/>
             <div className={s.notesWrapper}>
-                 <MyNotesUpperBar title={'My notes'} nameUser={"User's name"}/>
                 <div className={s.notesBlock}>
                     {notes.map((n) =>
                         <Note key={n.id}
