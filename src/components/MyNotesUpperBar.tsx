@@ -1,5 +1,5 @@
 import React from 'react';
-import s from '../styles/MyNotes.module.css'
+import s from '../styles/MyNotesUpperBar.module.css'
 import SearchIcon from "src/assets/images/SearchIcon";
 import UserCircleIcon from "src/assets/images/UserCircleIcon";
 import ChevronDownIcon from "src/assets/images/ChevronDownIcon";
