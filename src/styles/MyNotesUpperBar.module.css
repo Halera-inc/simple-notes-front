@@ -8,8 +8,6 @@
 .title {
     margin: 10px;
     font-size: xx-large;
-    @apply
-    w-72
 }
 
 .icons {
