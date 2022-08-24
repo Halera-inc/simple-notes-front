@@ -2,21 +2,29 @@
     padding: 20px;
     @apply
     flex
+    justify-between
 }
-.title{
-margin: 10px;
+
+.title {
+    margin: 10px;
     font-size: xx-large;
     @apply
     w-72
 }
-.icons{
+
+.icons {
     margin: 10px;
     @apply
     flex
     w-72
     justify-evenly
+}
+
+.icons:hover {
+    cursor: pointer;
 
 }
-.user{
+
+.user {
     margin: 10px;
 }

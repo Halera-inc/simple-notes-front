@@ -1,9 +1,13 @@
 .sidebarWrapper {
     display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
     flex-direction: column;
     height: 100vh;
     background: #E5F1FD;
-    width: 140px;
+    width: 100px;
 }
 .whiteBg {
     display: flex;

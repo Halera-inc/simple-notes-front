@@ -1,0 +1,49 @@
+.header {
+    margin: 10px;
+    width: 1920px;
+    height: 120px;
+    @apply
+    flex
+    justify-around
+
+}
+
+.title {
+    margin: 20px;
+    width: 1100px;
+    height: 120px;
+    font-size: 35px;
+    font-weight: bold;
+    position: relative;
+    left: 80px;
+
+
+}
+
+.buttons {
+    margin: 10px;
+    width: 400px;
+    height: 120px;
+    @apply
+    flex
+    justify-evenly
+
+}
+
+.about {
+    margin-top: 20px;
+    width: 158px;
+    height: 60px;
+    color: #5590C1;
+    font-size: 25px;
+
+}
+
+.button {
+    width: 158px;
+    height: 62px;
+    background-color: #E5F1FD;
+    border: 1px solid #5590C1;
+    color: #5590C1;
+    font-size: 25px;
+}
