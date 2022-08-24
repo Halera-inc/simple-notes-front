@@ -1,6 +1,7 @@
 import s from './../styles/Note.module.css'
 import EditIcon from "../assets/images/EditIcon";
 import DeleteIcon from "../assets/images/DeleteIcon";
+import colorizeNote from "../utils/colorizeNote";
 
 
 type NotePropsType = {
@@ -11,15 +12,16 @@ type NotePropsType = {
 }
 
 const Note = ({color, title, text, edit}: NotePropsType) => {
-
+    console.log(color)
+    const colorizedColor = colorizeNote(color)
     return (
         <>
-            <div className={s.card} onClick={()=>edit(title,text)}>
+            <div className={s.card} style={colorizedColor} onClick={()=>edit(title,text)}>
                 <h2 className={s.cardTitle}>{title}</h2>
                 <p>{text}</p>
                 <div className={s.cardAction}>
-                    <EditIcon/>
-                    <DeleteIcon/>
+                    <EditIcon fill={colorizedColor.color}/>
+                    <DeleteIcon fill={colorizedColor.color}/>
                 </div>
             </div>
         </>

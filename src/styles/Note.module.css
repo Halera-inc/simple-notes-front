@@ -3,13 +3,12 @@
     padding: 25px;
     min-width: 250px;
     margin: 15px;
-    @apply
-    w-96
-    shadow-lg
+    @apply w-96 shadow-lg
 }
 
 .card:hover {
     cursor: pointer;
+    outline: 1px solid;
 }
 
 .cardTitle {
