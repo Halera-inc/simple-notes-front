@@ -36,7 +36,15 @@ export const notesAPI = {
     },
     updateTask(todoId: string, taskId: string) {
         return instance.put<AxiosResponse<ResponseType<{ item: TaskType }>>>(`#/${todoId}/#/${taskId}`);
-    }
+    },
+
+    //for Users
+    getAllUsers(){
+        return instance.get(`users`)
+    },
+    getUser(id: number){
+        return instance.get(`users/${id}`)
+    },
 }
 
 // Types

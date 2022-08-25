@@ -9,7 +9,6 @@ type DropDownPropsType = {
     isCollapsed: boolean
     setIsCollapsed: (status: boolean) => void
     dropItems: Array<string>
-    collapsed: () => void
 }
 
 const DropDown: React.FC<DropDownPropsType> = ({isCollapsed, setIsCollapsed, dropItems}) => {
