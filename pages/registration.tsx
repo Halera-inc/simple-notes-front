@@ -5,58 +5,81 @@ import Link from "next/link";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import UserIcon from "../src/assets/images/UserIcon";
 import KeyIcon from "../src/assets/images/KeyIcon";
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
+import countryList from "react-select-country-list";
+import ListIcon from "../src/assets/images/ListIcon";
+import CountryIcon from "../src/assets/images/CountryIcon";
 
 
 const Registration = () => {
-    const [isLogin,setIsLogin]=useState(true);
+
+    const options = useMemo(() => countryList().getData(), [])
+
+    const [isLogin, setIsLogin] = useState(true);
 
     type FormikErrorType = {
         username?: string
+        email?: string
+        country?: string
         password?: string
         password2?: string
 
     }
     const formik = useFormik({
-    initialValues: {
-        username: '',
-        password: '',
-        password2: '',
+        initialValues: {
+            username: '',
+            email: '',
+            country: '',
+            password: '',
+            password2: '',
 
-    },
-    validate: (values) => {
-        const errors: FormikErrorType = {};
-        if (!values.username) {
-            errors.username = 'Required';
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.username)) {
-            errors.username = 'Invalid email address';
-        }
-        if (!values.password) {
-            errors.password = 'Required';
-        } else if (values.password.length <= 7) {
-            errors.password = 'Password must be more than 7 characters...'
-        }
-        if (!values.password2) {
-            errors.password2 = 'Required';
-        } else if (values.password !== values.password2) { //сдесь изменения
-            errors.password2 = 'The password and confirmation password do not match'
-        }
-        return errors;
-    },
+        },
+
+
+        validate: (values) => {
+            const errors: FormikErrorType = {};
+            if (!values.username) {
+                errors.username = 'Required';
+            }
+
+            if (!values.email) {
+                errors.email = 'Required';
+            } else if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                errors.email = 'Invalid email address';
+            }
+            if (!values.country) {
+                errors.country = 'Required';
+            }
+
+
+            if (!values.password) {
+                errors.password = 'Required';
+            } else if (/[A-Za-z0-9]{8,}/.test(values.password)) {
+                errors.password = 'Invalid password';
+            }
+            if (!values.password2) {
+                errors.password2 = 'Required';
+            } else if (values.password !== values.password2) { //сдесь изменения
+                errors.password2 = 'The password and confirmation password do not match'
+            }
+            return errors;
+        },
         onSubmit: values => {
             // dispatch(setRegistrTC(values));
+            alert(JSON.stringify(values));
+            setIsLogin(false)
             formik.resetForm();
         },
     })
     return (
         <MainContainer>
-            <div className={s.wrapperCard}>
+            <div className={s.wrapperRegistrationCard}>
                 <div className={s.cardC}>
                     <div className={s.cardBody}>
                         <div className={s.wrapperTitle}>
-                            <h2 className={s.cardTitle}> Sign In</h2>
+                            <h2 className={s.cardTitle}> Registration</h2>
                             <div className={s.arrowIcon}>
-                                <Link href={"/"}>
+                                <Link href={"/signIn"}>
                                     <ArrowBackIcon width={'2.5em'} height={'2.5em'} color={'#5590C1'}/>
                                 </Link>
                             </div>
@@ -64,32 +87,90 @@ const Registration = () => {
                         <form onSubmit={formik.handleSubmit}>
                             <div className={`${s.formControl} ${s.one}`}>
                                 <label className={s.label}>
-                                    <UserIcon width={'3em'} height={'3em'} color={isLogin ?'#5590C1':'#F06464'}/>
+                                    <UserIcon width={'3em'} height={'3em'} color=
+                                        {formik.errors.username && formik.touched.username
+                                            ? '#F06464'
+                                            : '#5590C1'}
+                                    />
                                     <input type="text" id='username' placeholder="username"
-                                           className={isLogin ? s.inputI: s.errorInput}
+                                           className={formik.touched.username && formik.errors.username  ? s.errorInput : s.inputI}
                                            {...formik.getFieldProps('username')}/>
                                 </label>
-                                {formik.touched.username && formik.errors.username}
+                                {formik.touched.username && formik.errors.username ?
+                                    <div className={s.errorTextRegistration}>{formik.errors.username}</div>:  ''}
+                            </div>
 
+                            <div className={`${s.formControl} ${s.one}`}>
+                                <label className={s.label}>
+                                    <ListIcon width={'3em'} height={'3em'} color={formik.errors.email && formik.touched.email
+                                        ? '#F06464'
+                                        : '#5590C1'}/>
+                                    <input type="text" id='email' placeholder="email"
+                                           className={formik.touched.email && formik.errors.email  ? s.errorInput : s.inputI}
+                                           {...formik.getFieldProps('email')}/>
+                                </label>
+                                {formik.touched.email && formik.errors.email ?
+                                    <div className={s.errorTextRegistration}>{formik.errors.email}</div>:  ''}
+                            </div>
+
+                            <div className={`${s.formControl} ${s.one}`}>
+                                <label className={s.label}>
+                                    <CountryIcon width={'3em'} height={'3em'} color={formik.errors.country && formik.touched.country
+                                        ? '#F06464'
+                                        : '#5590C1'}/>
+                                    <select id='country'
+                                            onBlur={formik.handleBlur}
+                                            onChange={formik.handleChange}
+                                            value={formik.values.country}
+                                            className={formik.touched.country && formik.errors.country  ? s.errorInput : s.inputI}>
+                                        <option defaultValue='country'>сountry</option>
+                                        {options.map(m => {
+                                            return (
+                                                <option key={m.value} value={m.label}>
+                                                    {m.label}
+                                                </option>
+                                            )
+                                        })}
+                                    </select>
+                                </label>
+                                {formik.touched.country && formik.errors.country ?
+                                    <div className={s.errorTextRegistration}>{formik.errors.country}</div>:  ''}
+                            </div>
+
+                            <div className={`${s.formControl} ${s.one}`}>
+                                <label className={s.label}>
+                                    <KeyIcon width={'3em'} height={'3em'} color={formik.errors.password && formik.touched.password
+                                        ? '#F06464'
+                                        : '#5590C1'}/>
+                                    <input type="password" id='password' placeholder="password"
+                                           className={formik.touched.password && formik.errors.password  ? s.errorInput : s.inputI}
+                                           {...formik.getFieldProps('password')}/>
+                                </label>
+                                {formik.touched.password && formik.errors.password ?
+                                    <div className={s.errorTextRegistration}>{formik.errors.password}</div>:  ''}
                             </div>
 
                             <div className={`${s.formControl} ${s.two}`}>
                                 <label className={s.label}>
-                                    <KeyIcon width={'3em'} height={'3em'} color={isLogin ?'#5590C1':'#F06464'}/>
-                                    <input type="text" id='password' placeholder="password"
-                                           className={isLogin ? s.inputI: s.errorInput}
-                                           {...formik.getFieldProps('password')}/>
+                                    <KeyIcon width={'3em'} height={'3em'} color={formik.errors.password2 && formik.touched.password2
+                                        ? '#F06464'
+                                        : '#5590C1'}/>
+                                    <input type="password" id='password2' placeholder="confirm password"
+                                           className={formik.touched.password2 && formik.errors.password2 ? s.errorInput : s.inputI}
+                                           {...formik.getFieldProps('password2')}/>
                                 </label>
-                                {!isLogin ?
-                                    <div className={s.errorText}>Incorrect login or password!</div>: null}
+                                {formik.touched.password2 && formik.errors.password2 ?
+                                    <div className={s.errorTextRegistration}>{formik.errors.password2}</div>:  ''}
                             </div>
 
                             <div className="card-actions justify-center">
                                 <button type={'submit'} className={s.btnB}>Login</button>
                             </div>
                         </form>
-                        <p className={s.text}>Registration</p>
-                        <p className={s.text}>Reset password</p>
+                        <Link href={"/signIn"}>
+                            <p className={s.text}>SignIn</p>
+                        </Link>
+
                     </div>
                 </div>
             </div>

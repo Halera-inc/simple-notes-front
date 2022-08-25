@@ -5,9 +5,15 @@
     justify-center
 
 }
+.wrapperRegistrationCard{
+    margin-top: 5%;
+    @apply
+    flex
+    justify-center
+}
 
 .cardBody {
-    padding: 73px 52px 23px 52px;
+    padding: 73px 52px 31px 52px;
     text-align: center;
 }
 
@@ -69,17 +75,18 @@
 }
 
 .formControl {
+    position: relative;
     @apply
     form-control
     w-full
 }
 
 .label {
-
     @apply
     w-full
     flex
     justify-center
+    items-center
 }
 
 .inputI {
@@ -102,7 +109,7 @@
 }
 
 .two {
-    margin-bottom: 56px;
+    margin-bottom: 88px;
     position: relative;
 }
 
@@ -112,12 +119,18 @@
     bottom:-65%;
     left:27%;
 }
+.errorTextRegistration{
+    color: red;
+    position: absolute;
+    bottom: -40%;
+    left: 45%;
+}
 
 .text {
     font-weight: 600;
     font-size: 15px;
     line-height: 18px;
-    padding-bottom: 15px;
+    cursor: pointer;
     @apply
     text-blue-dark
 }
