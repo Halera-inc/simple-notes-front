@@ -15,7 +15,7 @@ export const notesAPI = {
         return instance.get(`notes`);
     },
     createNote(title: string | null, notetext: string | null) {
-        return instance.post< AxiosResponse<ResponseType<{ item: NoteTextType }>>>('notes', {
+        return instance.post<{ title: string | null, text: string | null }, AxiosResponse<ResponseType<{ item: NoteTextType }>>>('notes', {
             title,
             notetext
         });
@@ -35,7 +35,7 @@ export const notesAPI = {
         return instance.delete<ResponseType>(`users/${id}`);
     },
     createUsers(username: string, email: string, country: string, password: string) {
-        return instance.post< AxiosResponse<ResponseType<{ item: UserType }>>>
+        return instance.post<{ username: string, email: string, country: string, password: string }, AxiosResponse<ResponseType<{ item: UserType }>>>
         ('users', {username,email,country,password});
     },
     updateUsers(username: string, email: string, country: string) {
