@@ -1,21 +1,27 @@
 .card {
+    display: flex;
+    flex-direction: column;
     border: 1px solid;
     padding: 25px;
     min-width: 250px;
-    margin: 15px;
-    @apply
-    w-96
-    shadow-lg
+    max-width: 380px;
+    width: 100%;
+    min-height: 250px;
+    @apply shadow-lg
 }
 
 .card:hover {
     cursor: pointer;
+    outline: 1px solid;
 }
 
 .cardTitle {
     margin-bottom: 15px;
     @apply
     card-title
+}
+.text {
+    flex-grow: 1;
 }
 
 .cardAction {

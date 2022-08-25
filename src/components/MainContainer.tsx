@@ -10,8 +10,7 @@ const MainContainer = (props: MainContainerTypeProps) => {
 
     return (
         <>
-            {/*<div className="navbar absolute left-50 bottom-0 border-2 border-red flex justify-center">*/}
-            <div style={{display: 'none'}}>
+            <div className="navbar fixed left-50 bottom-5 border-2 border-red flex justify-center">
                 <h1><b>DEV MENU:</b></h1>
                 <NavItem  text={'Landing'} href={"/"}/>
                 <NavItem text={'My notes'} href={"/notes"}/>
