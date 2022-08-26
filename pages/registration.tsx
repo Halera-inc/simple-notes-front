@@ -14,7 +14,6 @@ import CountryIcon from "../src/assets/images/CountryIcon";
 const Registration = () => {
 
     const options = useMemo(() => countryList().getData(), [])
-
     const [isLogin, setIsLogin] = useState(true);
 
     type FormikErrorType = {
@@ -178,7 +177,5 @@ const Registration = () => {
     );
 };
 
-
-
-
 export default Registration;
+
