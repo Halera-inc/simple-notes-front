@@ -8,5 +8,4 @@ const NavItem = (props: { text: string, href: string }) => {
         </Link>
     )
 }
-
 export default NavItem;

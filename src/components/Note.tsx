@@ -12,7 +12,6 @@ type NotePropsType = {
 }
 
 const Note = ({color, title, text, edit}: NotePropsType) => {
-    console.log(color)
     const colorizedColor = colorizeNote(color)
     return (
         <>

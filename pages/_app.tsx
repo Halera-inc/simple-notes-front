@@ -1,5 +1,4 @@
 import '../src/styles/globals.css'
-import s from '../src/styles/App.module.css'
 import type {AppProps} from 'next/app'
 import {store} from '../src/bll/store'
 import {Provider} from 'react-redux'
@@ -22,7 +21,6 @@ function MyApp({Component, pageProps}: AppProps) {
                     : <Sidebar/>}
                 <Component {...pageProps} />
             </div>
-
         </Provider>
     )
 }
