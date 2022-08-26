@@ -24,17 +24,7 @@ const SignIn = () => {
 
 
         },
-        // validate: (values) => {
-        //     const errors: FormikErrorType = {};
-        //     if (!values.username) {
-        //         errors.username='  ';
-        //
-        //     }
-        //     if (!values.password) {
-        //         errors.password = '   ';
-        //     }
-        //     return errors;
-        // },
+
         onSubmit: values => {
             // dispatch(setRegistrTC(values));
             alert(JSON.stringify(values));
