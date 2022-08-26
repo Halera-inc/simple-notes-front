@@ -1,8 +1,21 @@
-.wrapperCard {
-    margin-top: 15%;
+
+.singnInBlock{
+    height: 100vh;
     @apply
     flex
     justify-center
+    items-center
+
+
+
+
+}
+.wrapperCard {
+    text-align: center;
+    @apply
+    flex
+    justify-center
+
 
 }
 .wrapperRegistrationCard{

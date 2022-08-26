@@ -1,3 +1,10 @@
-.footer{
-    padding-top: 50px;
+.footer {
+max-width: 200px;
+
+}
+
+.text {
+    font-size: 20px;
+    line-height: 24px;
+    color: #C8C8C8;
 }

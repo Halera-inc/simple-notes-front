@@ -1,4 +1,9 @@
-.header {
-    width: 1920px;
-    height: 1080px;
+.landing {
+    max-width: 1720px;
+    margin:0 auto;
+    height: 100vh;
+
+
+
+
 }
