@@ -5,6 +5,14 @@
 
 html body #__next {
     height: 100%;
+
+
+}
+
+body{
+    overflow: hidden;
+
+
 }
 
 
@@ -35,10 +43,13 @@ html body #__next {
 }
 
 * {
+    border: 1px solid red;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Montserrat, sans-serif;
+
+
 
 }
 
