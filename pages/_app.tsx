@@ -12,7 +12,7 @@ function MyApp({Component, pageProps}: AppProps) {
 
     return (
         <Provider store={store}>
-            <div className={s.appWrapper}>
+            <div >
                 {router.pathname === '/'
                 || router.pathname === '/signIn'
                 || router.pathname === '/registration'
