@@ -7,7 +7,7 @@ import s from 'src/styles/landingStyle/LandingPage.module.css'
 const LandingPage = () => {
     return (
         <div className={s.header}>
-            <Header title='Simple Notes'/>
+            {/*<Header title='Simple Notes'/>*/}
             <MainBlock/>
         </div>
     );

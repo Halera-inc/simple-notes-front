@@ -2,7 +2,6 @@ import {ChangeEvent, useEffect, useRef, useState} from 'react'
 import {getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note";
-import MyNotesUpperBar from "../src/components/MyNotesUpperBar";
 import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";

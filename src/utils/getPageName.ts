@@ -6,7 +6,7 @@ export enum APP_ROOTS {
     ABOUT_PAGE = '/about',
     NOT_FOUND_PAGE = '/404',
     MY_NOTES_PAGE = '/notes',
-    SETTINGS_PAGE = 'settings',
+    SETTINGS_PAGE = '/settings',
 }
 
 

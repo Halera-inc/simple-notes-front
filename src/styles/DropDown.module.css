@@ -1,5 +1,4 @@
 .container {
-
 }
 
 .button {
@@ -36,7 +35,7 @@
     bg-base-100
     rounded-b-xl
     w-52
-    mt-4
+    mt-[50px]
     absolute
     top-10
     right-5
