@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 
 type ModalWindowType = 'edit' | 'create'
 type ModalWindowPropsType = {

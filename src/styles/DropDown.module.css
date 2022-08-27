@@ -1,0 +1,53 @@
+.container {
+}
+
+.button {
+    @apply
+    btn
+    btn-ghost
+    rounded-btn
+}
+
+.dropMenuUl {
+    transition: all 0.5s;
+    @apply
+    menu
+    dropdown-content
+    p-2
+    shadow
+    bg-base-100
+    rounded-box
+    w-52
+    mt-4
+    absolute
+    top-10
+    right-5
+    opacity-0
+}
+
+.dropMenuUlActive {
+    transition: all 0.5s;
+    @apply
+    menu
+    dropdown-content
+    p-2
+    shadow
+    bg-base-100
+    rounded-b-xl
+    w-52
+    mt-[50px]
+    absolute
+    top-10
+    right-5
+    opacity-100
+}
+
+.dropMenuUlLi {
+    @apply
+    transition
+    duration-300
+}
+
+.dropMenuUlLi :hover{
+    background-color: #5590C1;
+}

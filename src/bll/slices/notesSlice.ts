@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from 'axios'
 import {notesAPI, NoteTextType, NoteTodoType} from 'src/api/notes-api'
 
@@ -27,12 +27,17 @@ export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
 
     const initialState = {
         notes: [] as Array<NoteTextType>,
+        createNoteModal: false
     }
 
     export const notesSlice = createSlice({
         name: 'notes',
         initialState,
-        reducers: {},
+        reducers: {
+            setCreateNoteModalShow(state, action: PayloadAction<{isModalShow:boolean}>){
+                state.createNoteModal = action.payload.isModalShow
+            }
+        },
         extraReducers: (builder) => {
             builder
                 .addCase(getNotes.pending, (state) => {
@@ -44,6 +49,6 @@ export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
         }
     })
 
-// export const {} = notesSlice.actions
+export const {setCreateNoteModalShow} = notesSlice.actions
 
     export default notesSlice.reducer
