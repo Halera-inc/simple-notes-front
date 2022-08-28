@@ -23,24 +23,31 @@ export const notesAPI = {
     deleteNote(id: string) {
         return instance.delete<ResponseType>(`notes/${id}`);
     },
-    updateNote(id: string, title: string, color: ColorType) {
-        return instance.put(`notes/${id}`, {title,color});
+    updateNote(id: string, title: string, noteColor: string) {
+        return instance.put(`notes/${id}`, {title, noteColor});
+    },
+
+    //for Tasks
+    getTasks(todoId: string) {
+        return instance.get<NoteTodoType>(`#/${todoId}/#`);
+    },
+    deleteTask(todoId: string, taskId: string) {
+        return instance.delete<ResponseType>(`#/${todoId}/#/${taskId}`);
+    },
+    createTask(todoId: string, title: string) {
+        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TaskType }>>>(`#/${todoId}/#`, {title});
+    },
+    updateTask(todoId: string, taskId: string) {
+        return instance.put<AxiosResponse<ResponseType<{ item: TaskType }>>>(`#/${todoId}/#/${taskId}`);
     },
 
     //for Users
-    getUsers() {
-        return instance.get<UserType>(`users`);
+    getAllUsers(){
+        return instance.get(`users`)
     },
-    deleteUsers(id: string) {
-        return instance.delete<ResponseType>(`users/${id}`);
+    getUser(id: number){
+        return instance.get(`users/${id}`)
     },
-    createUsers(username: string, email: string, country: string, password: string) {
-        return instance.post<{ username: string, email: string, country: string, password: string }, AxiosResponse<ResponseType<{ item: UserType }>>>
-        ('users', {username,email,country,password});
-    },
-    updateUsers(username: string, email: string, country: string) {
-        return instance.put<AxiosResponse<ResponseType<{ item: UserType }>>>(`users`,{username,email,country});
-    }
 }
 
 // Types
@@ -70,14 +77,14 @@ export type SettingsType = {
 
 // N O T E S
 
-// export type NoteTodoType = {
-//     id: number,
-//     notemode: NoteViewType
-//     title: string | null,
-//     // todos: Array<TaskType | null>
-//     dateOfCreate: Date,
-//     color: string
-// }
+export type NoteTodoType = {
+    id: number,
+    notemode: NoteViewType
+    title: string | null,
+    todos: Array<TaskType | null>
+    dateOfCreate: Date,
+    color: string
+}
 export type NoteTextType = {
     id: number,
     notemode: NoteViewType
@@ -86,19 +93,18 @@ export type NoteTextType = {
     dateOfCreate: Date,
     color: string
 }
-// export type TaskType = {
-//     idTask: string,
-//     taskTitle: string,
-//     isDone: boolean
-// }
+export type TaskType = {
+    idTask: string,
+    taskTitle: string,
+    isDone: boolean
+}
 export type NoteViewType = 'NoteText' | 'NoteTodo'
 
-export type ColorType = {
-    default: string
-    blue: string
-    green: string
-    violet: string
-    mustard: string
-    dark: string
-}
-
+// export type ColorType = {
+//     default: string
+//     blue: string
+//     green: string
+//     violet: string
+//     mustard: string
+//     dark: string
+// }

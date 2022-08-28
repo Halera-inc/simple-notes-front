@@ -75,7 +75,8 @@ const Sidebar = () => {
                              link={'/'}
                              icon={<SunnyIcon width={50} fill={'#5590C1'}/>}/>
                 <SidebarItem tooltipInfo={'Exit'}
-                             link={'/'}
+                             redActive={true}
+                             link={'/#'}
                              icon={<LoginIcon width={50} fill={'#5590C1'}/>}/>
             </div>
             <div className={'bg'}></div>
