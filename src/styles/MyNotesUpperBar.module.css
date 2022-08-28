@@ -6,8 +6,12 @@
 }
 
 .title {
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 43px;
+    color: #212121;
     margin: 10px;
-    font-size: xx-large;
+
 }
 
 .icons {
