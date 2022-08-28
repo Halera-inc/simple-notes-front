@@ -19,6 +19,7 @@ function MyApp({Component, pageProps}: AppProps) {
                 || router.pathname === '/registration'
                 || router.pathname === '/about'
                 || router.pathname === '/404'
+
                     ? null
                     : <Sidebar/>}
                 <div className='flex flex-col'>

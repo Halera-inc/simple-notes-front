@@ -1,0 +1,72 @@
+.wrapperSettings {
+    padding: 0 40px;
+    padding-left: 140px;
+    height: 100vh;
+
+}
+
+.header {
+    @apply
+    flex
+    justify-between
+
+}
+
+.title {
+    padding: 39px 0;
+    line-height: 42px;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.wrapperMaimSettings {
+    @apply
+    flex
+    justify-between
+}
+
+.myProfile {
+    gap: 17px;
+    @apply
+    flex
+    justify-between
+
+}
+
+.editWrapper {
+    height: 200px;
+    @apply
+    flex
+    flex-col
+    justify-between
+
+   
+}
+
+.imgProfile {
+    width: 200px;
+    height: 200px;
+}
+
+.myName {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 30px;
+}
+
+.reg {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #7D7D7D;
+
+}
+
+ul.editData li {
+    margin-bottom: 3px;
+}
+
+.button {
+
+
+}
