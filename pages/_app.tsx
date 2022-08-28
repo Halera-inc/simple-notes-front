@@ -8,17 +8,17 @@ import {useRouter} from "next/router";
 function MyApp({Component, pageProps}: AppProps) {
 
 
-
     const router = useRouter()
 
     return (
         <Provider store={store}>
-            <div >
+            <div>
                 {router.pathname === '/'
                 || router.pathname === '/signIn'
                 || router.pathname === '/registration'
                 || router.pathname === '/about'
                 || router.pathname === '/404'
+
                     ? null
                     : <Sidebar/>}
                 <div className='flex flex-col'>

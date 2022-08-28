@@ -5,6 +5,15 @@ import Button from "src/components/universalComponent/Button";
 
 
 const MainBlock = () => {
+
+    const buttonTitle={
+        paddingTop: '12px',
+        paddingBottom: '12px',
+        paddingLeft: '37px',
+        paddingRight: '37px',
+        fontSize: '25px',
+    }
+
     return (
         <div className={s.mainBlockContainer}>
             <div className={s.blockTitle}>
@@ -14,7 +23,7 @@ const MainBlock = () => {
                     <p>Notes.</p>
                 </h1>
 
-                <Button title='Start now' onChangeParams={() => alert("all right")}/>
+                <Button style={buttonTitle} title='Start now' onChangeParams={() => alert("all right")}/>
             </div>
 
             <div className={s.imgTitle}>

@@ -9,7 +9,6 @@ type MainContainerTypeProps = {
 
 export const headerRoots = [APP_ROOTS.HOME_PAGE, APP_ROOTS.MY_NOTES_PAGE, APP_ROOTS.SETTINGS_PAGE]
 
-
 const MainContainer = (props: MainContainerTypeProps) => {
 
     const currentRoute = useRouter().pathname as APP_ROOTS
