@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "src/styles/landingStyle/Header.module.css";
 
-const Button = (props: { title: string,onChangeParams?:()=>void ,style:any}) => {
+const Button = (props: { title: string,onChangeParams?:()=>void ,style?:any}) => {
     return (
         <div>
             <button className={s.button} style={props.style}
