@@ -93,26 +93,24 @@ const Registration = () => {
                                             : '#5590C1'}
                                     />
                                     <input type="text" id='username' placeholder="username"
-                                           className={formik.touched.username && formik.errors.username  ? s.errorInput : s.inputI}
+                                           className={formik.touched.username && formik.errors.username ? s.errorInput : s.inputI}
                                            {...formik.getFieldProps('username')}/>
                                 </label>
                                 {formik.touched.username && formik.errors.username ?
-                                    <div className={s.errorTextRegistration}>{formik.errors.username}</div>:  ''}
+                                    <div className={s.errorTextRegistration}>{formik.errors.username}</div> : ''}
                             </div>
-
                             <div className={`${s.formControl} ${s.one}`}>
                                 <label className={s.label}>
                                     <ListIcon width={'3em'} height={'3em'} color={formik.errors.email && formik.touched.email
                                         ? '#F06464'
                                         : '#5590C1'}/>
                                     <input type="text" id='email' placeholder="email"
-                                           className={formik.touched.email && formik.errors.email  ? s.errorInput : s.inputI}
+                                           className={formik.touched.email && formik.errors.email ? s.errorInput : s.inputI}
                                            {...formik.getFieldProps('email')}/>
                                 </label>
                                 {formik.touched.email && formik.errors.email ?
-                                    <div className={s.errorTextRegistration}>{formik.errors.email}</div>:  ''}
+                                    <div className={s.errorTextRegistration}>{formik.errors.email}</div> : ''}
                             </div>
-
                             <div className={`${s.formControl} ${s.one}`}>
                                 <label className={s.label}>
                                     <CountryIcon width={'3em'} height={'3em'} color={formik.errors.country && formik.touched.country
@@ -122,7 +120,7 @@ const Registration = () => {
                                             onBlur={formik.handleBlur}
                                             onChange={formik.handleChange}
                                             value={formik.values.country}
-                                            className={formik.touched.country && formik.errors.country  ? s.errorInput : s.inputI}>
+                                            className={formik.touched.country && formik.errors.country ? s.errorInput : s.inputI}>
                                         <option defaultValue='country'>сountry</option>
                                         {options.map(m => {
                                             return (
@@ -134,22 +132,20 @@ const Registration = () => {
                                     </select>
                                 </label>
                                 {formik.touched.country && formik.errors.country ?
-                                    <div className={s.errorTextRegistration}>{formik.errors.country}</div>:  ''}
+                                    <div className={s.errorTextRegistration}>{formik.errors.country}</div> : ''}
                             </div>
-
                             <div className={`${s.formControl} ${s.one}`}>
                                 <label className={s.label}>
                                     <KeyIcon width={'3em'} height={'3em'} color={formik.errors.password && formik.touched.password
                                         ? '#F06464'
                                         : '#5590C1'}/>
                                     <input type="password" id='password' placeholder="password"
-                                           className={formik.touched.password && formik.errors.password  ? s.errorInput : s.inputI}
+                                           className={formik.touched.password && formik.errors.password ? s.errorInput : s.inputI}
                                            {...formik.getFieldProps('password')}/>
                                 </label>
                                 {formik.touched.password && formik.errors.password ?
-                                    <div className={s.errorTextRegistration}>{formik.errors.password}</div>:  ''}
+                                    <div className={s.errorTextRegistration}>{formik.errors.password}</div> : ''}
                             </div>
-
                             <div className={`${s.formControl} ${s.two}`}>
                                 <label className={s.label}>
                                     <KeyIcon width={'3em'} height={'3em'} color={formik.errors.password2 && formik.touched.password2
@@ -160,7 +156,7 @@ const Registration = () => {
                                            {...formik.getFieldProps('password2')}/>
                                 </label>
                                 {formik.touched.password2 && formik.errors.password2 ?
-                                    <div className={s.errorTextRegistration}>{formik.errors.password2}</div>:  ''}
+                                    <div className={s.errorTextRegistration}>{formik.errors.password2}</div> : ''}
                             </div>
 
                             <div className="card-actions justify-center">
@@ -170,7 +166,6 @@ const Registration = () => {
                         <Link href={"/signIn"}>
                             <p className={s.text}>SignIn</p>
                         </Link>
-
                     </div>
                 </div>
             </div>
