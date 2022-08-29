@@ -1,22 +1,7 @@
 .wrapperSettings {
-    padding: 0 40px;
-    padding-left: 140px;
+    padding: 130px 40px 0  140px;
     height: 100vh;
 
-}
-
-.header {
-    @apply
-    flex
-    justify-between
-
-}
-
-.title {
-    padding: 39px 0;
-    line-height: 42px;
-    font-size: 35px;
-    font-weight: bold;
 }
 
 .wrapperMaimSettings {
@@ -24,9 +9,16 @@
     flex
     justify-between
 }
+.leftArea{
+    @apply
+    flex
+    flex-col
+}
 
 .myProfile {
     gap: 17px;
+    margin-bottom: 75px;
+    padding-right: 150px;
     @apply
     flex
     justify-between
@@ -64,9 +56,94 @@
 
 ul.editData li {
     margin-bottom: 3px;
-}
-
-.button {
-
 
 }
+
+.edit{
+    text-align: right;
+}
+
+ul.editMyProfile li{
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 27px;
+    color: #212121;
+    margin-bottom: 17px;
+    @apply
+    flex
+    justify-between
+    items-center
+
+}
+ul.editMyProfile input{
+    width: 412px;
+    height: 60px;
+    @apply
+    input
+    input-bordered
+    placeholder-current
+    placeholder-black
+    w-full
+    text-lg
+    font-thin
+    max-w-xs
+    rounded-none
+}
+
+
+.otherSettings{
+padding-right: 250px;
+}
+
+.other{
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 49px;
+    margin-bottom: 27px;
+}
+
+.otherWrapper{
+    width: 623px;
+}
+
+.collapseContent{
+    margin-top: 25px;
+    padding: 0 15px 0 0;
+    margin-bottom: -10px;
+
+}
+
+
+ul.collapseContent li{
+    @apply
+    flex
+    pb-5
+    justify-between
+    items-center
+
+}
+ul.collapseContent li p{
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #5590C1;
+
+}
+
+
+.inputI {
+    width: 400px;
+    height: 60px !important;
+    @apply
+    input
+    input-bordered
+    placeholder-current
+    placeholder-black
+    input-info
+    rounded-none
+    text-blue-dark
+    text-lg
+    font-thin
+}
+
+
