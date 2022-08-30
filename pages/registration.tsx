@@ -32,7 +32,6 @@ const Registration = () => {
             country: '',
             password: '',
             password2: '',
-
         },
 
 
@@ -50,8 +49,6 @@ const Registration = () => {
             if (!values.country) {
                 errors.country = 'Required';
             }
-
-
             if (!values.password) {
                 errors.password = 'Required';
             } else if (/[A-Za-z0-9]{8,}/.test(values.password)) {
