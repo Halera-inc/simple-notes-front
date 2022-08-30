@@ -1,8 +1,20 @@
-.wrapperCard {
-    margin-top: 15%;
+.singnInBlock{
+    height: 100vh;
     @apply
     flex
     justify-center
+    items-center
+
+
+
+
+}
+.wrapperCard {
+    text-align: center;
+    @apply
+    flex
+    justify-center
+
 
 }
 .wrapperRegistrationCard{
@@ -10,7 +22,9 @@
     @apply
     flex
     justify-center
+    items-center
 }
+
 
 .cardBody {
     padding: 73px 52px 23px 52px;
@@ -131,10 +145,10 @@
     font-size: 15px;
     line-height: 18px;
     cursor: pointer;
+    margin-bottom: 15px;
     @apply
     text-blue-dark
 }
-
 .errorInput {
     background-color: #FFF4F4 !important;
     height: 60px !important;
