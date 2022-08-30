@@ -1,4 +1,3 @@
-
 const colorizeNote = (color: string) => {
     if (color === 'blue') return  {color: "#5590C1", borderColor: "#5590C1", backgroundColor: "#E5F1FD"}
     if (color === 'green') return  {color: "#5E9C80", borderColor: "#5E9C80", backgroundColor: "#D6EDD9"}
