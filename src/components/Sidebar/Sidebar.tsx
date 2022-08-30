@@ -9,6 +9,8 @@ import PencilIcon from "../../assets/images/PencilIcon";
 import SidebarItem from "./SidebarItem";
 import {useRouter} from "next/router";
 import ModalWindow from "../ModalWindow";
+import {useTheme} from "next-themes";
+import MoonIcon from "src/assets/images/MoonIcon";
 
 const Sidebar = () => {
 
@@ -38,6 +40,11 @@ const Sidebar = () => {
         setNewNoteTitle('')
         setNewNoteText('')
     }
+
+    const {systemTheme, theme, setTheme} = useTheme();
+
+
+    const currentTheme = theme === "system" ? systemTheme : theme;
 
 
     return (
@@ -71,9 +78,19 @@ const Sidebar = () => {
                              icon={<SettingIcon width={50} fill={'#5590C1'}/>}/>
             </div>
             <div className={s.bottomBox}>
-                <SidebarItem tooltipInfo={'Change theme'}
-                             link={'/'}
-                             icon={<SunnyIcon width={50} fill={'#5590C1'}/>}/>
+                {currentTheme === 'dark' &&
+                <SidebarItem tooltipInfo={'Light Side'}
+                             icon={<SunnyIcon onClick={() => {
+                                 setTheme('light')
+                             }} width={50} fill={'#5590C1'}/>}/>
+                }
+                {currentTheme !== 'dark' &&
+                <SidebarItem tooltipInfo={'Dark Side'}
+                             icon={<MoonIcon onClick={() => {
+                                 setTheme('dark')
+                             }} width={50} fill={'#5590C1'}/>}/>
+                }
+
                 <SidebarItem tooltipInfo={'Exit'}
                              redActive={true}
                              link={'/#'}
