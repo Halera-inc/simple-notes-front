@@ -21,7 +21,7 @@ const SidebarItem = ({icon, tooltipInfo, link, active, redActive}: PropsType) =>
                  data-tip={tooltipInfo ? tooltipInfo : 'Other'}
                  onMouseEnter={() => setHover(true)}
                  onMouseLeave={() => setHover(false)}
-                 style={hover && redActive ? {backgroundColor: '#ffcdd7'} : {}}>
+                 style={hover && redActive ? {backgroundColor: '#ffeeee'} : {}}>
                 {icon}
             </div>
         </Link>

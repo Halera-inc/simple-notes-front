@@ -35,10 +35,8 @@ const Header = () => {
                             </p>
                             <div className='flex justify-between w-[340px] items-center mr-[74px]'>
                                 <SearchIcon width={'40px'} height={'40px'} fill={'#212121'}/>
-                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
                                 <p className='text-lg'>{userName}</p>
-                                <DropDown isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}
-                                          dropItems={liArray}/>
+                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
                             </div>
                         </div>
                         : <div className='flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]'>
