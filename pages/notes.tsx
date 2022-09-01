@@ -1,7 +1,7 @@
 import {ChangeEvent, useEffect, useRef, useState} from 'react'
 import {getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
-import Note from "../src/components/Note";
+import Note, {colorizedColorType} from "../src/components/Note";
 import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
@@ -11,17 +11,19 @@ const Notes = () => {
     const dispatch = useAppDispatch()
     const notes = useAppSelector(state => state.notes.notes)
     const [modalTitle, setModalTitle] = useState('')
+    const [modalColor, setModalColor] = useState<colorizedColorType>( {})
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
 
     useEffect(() => {
         dispatch(getNotes())
-    }, [dispatch])
+    }, [dispatch],)
 
 
-    const onCardClickHandler = (title: string | null, text: string | null) => {
+    const onCardClickHandler = (title: string | null, text: string | null, colorizedColor: colorizedColorType) => {
         title && setModalTitle(title)
         text && setModalText(text)
+        setModalColor(colorizedColor)
         modalBtnRef.current && modalBtnRef.current.click()
     }
     const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,8 +43,10 @@ const Notes = () => {
         <MainContainer>
             <label ref={modalBtnRef} htmlFor='my-modal' className="btn modal-button hidden">open
                 modal</label>
+
             <ModalWindow titleNode={modalTitle}
                          textNode={modalText}
+                         colorNote={modalColor}
                          typeNode={'edit'}
                          onTitleChange={onTitleChangeHandler}
                          onTextChange={onContentChangeHandler}

@@ -14,6 +14,7 @@ import CountryIcon from "../src/assets/images/CountryIcon";
 const Registration = () => {
 
     const options = useMemo(() => countryList().getData(), [])
+
     const [isLogin, setIsLogin] = useState(true);
 
     type FormikErrorType = {
@@ -72,99 +73,110 @@ const Registration = () => {
     })
     return (
         <MainContainer>
-            <div className={s.wrapperRegistrationCard}>
-                <div className={s.cardC}>
-                    <div className={s.cardBody}>
-                        <div className={s.wrapperTitle}>
-                            <h2 className={s.cardTitle}> Registration</h2>
-                            <div className={s.arrowIcon}>
-                                <Link href={"/signIn"}>
-                                    <ArrowBackIcon width={'2.5em'} height={'2.5em'} color={'#5590C1'}/>
-                                </Link>
+            <div className={s.singnInBlock}>
+                <div className={s.wrapperRegistrationCard}>
+                    <div className={s.cardC}>
+                        <div className={s.cardBody}>
+                            <div className={s.wrapperTitle}>
+                                <h2 className={s.cardTitle}> Registration</h2>
+                                <div className={s.arrowIcon}>
+                                    <Link href={"/signIn"}>
+                                        <ArrowBackIcon width={'2.5em'} height={'2.5em'} color={'#5590C1'}/>
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
-                        <form onSubmit={formik.handleSubmit}>
-                            <div className={`${s.formControl} ${s.one}`}>
-                                <label className={s.label}>
-                                    <UserIcon width={'3em'} height={'3em'} color=
-                                        {formik.errors.username && formik.touched.username
-                                            ? '#F06464'
-                                            : '#5590C1'}
-                                    />
-                                    <input type="text" id='username' placeholder="username"
-                                           className={formik.touched.username && formik.errors.username ? s.errorInput : s.inputI}
-                                           {...formik.getFieldProps('username')}/>
-                                </label>
-                                {formik.touched.username && formik.errors.username ?
-                                    <div className={s.errorTextRegistration}>{formik.errors.username}</div> : ''}
-                            </div>
-                            <div className={`${s.formControl} ${s.one}`}>
-                                <label className={s.label}>
-                                    <ListIcon width={'3em'} height={'3em'} color={formik.errors.email && formik.touched.email
-                                        ? '#F06464'
-                                        : '#5590C1'}/>
-                                    <input type="text" id='email' placeholder="email"
-                                           className={formik.touched.email && formik.errors.email ? s.errorInput : s.inputI}
-                                           {...formik.getFieldProps('email')}/>
-                                </label>
-                                {formik.touched.email && formik.errors.email ?
-                                    <div className={s.errorTextRegistration}>{formik.errors.email}</div> : ''}
-                            </div>
-                            <div className={`${s.formControl} ${s.one}`}>
-                                <label className={s.label}>
-                                    <CountryIcon width={'3em'} height={'3em'} color={formik.errors.country && formik.touched.country
-                                        ? '#F06464'
-                                        : '#5590C1'}/>
-                                    <select id='country'
-                                            onBlur={formik.handleBlur}
-                                            onChange={formik.handleChange}
-                                            value={formik.values.country}
-                                            className={formik.touched.country && formik.errors.country ? s.errorInput : s.inputI}>
-                                        <option defaultValue='country'>сountry</option>
-                                        {options.map(m => {
-                                            return (
-                                                <option key={m.value} value={m.label}>
-                                                    {m.label}
-                                                </option>
-                                            )
-                                        })}
-                                    </select>
-                                </label>
-                                {formik.touched.country && formik.errors.country ?
-                                    <div className={s.errorTextRegistration}>{formik.errors.country}</div> : ''}
-                            </div>
-                            <div className={`${s.formControl} ${s.one}`}>
-                                <label className={s.label}>
-                                    <KeyIcon width={'3em'} height={'3em'} color={formik.errors.password && formik.touched.password
-                                        ? '#F06464'
-                                        : '#5590C1'}/>
-                                    <input type="password" id='password' placeholder="password"
-                                           className={formik.touched.password && formik.errors.password ? s.errorInput : s.inputI}
-                                           {...formik.getFieldProps('password')}/>
-                                </label>
-                                {formik.touched.password && formik.errors.password ?
-                                    <div className={s.errorTextRegistration}>{formik.errors.password}</div> : ''}
-                            </div>
-                            <div className={`${s.formControl} ${s.two}`}>
-                                <label className={s.label}>
-                                    <KeyIcon width={'3em'} height={'3em'} color={formik.errors.password2 && formik.touched.password2
-                                        ? '#F06464'
-                                        : '#5590C1'}/>
-                                    <input type="password" id='password2' placeholder="confirm password"
-                                           className={formik.touched.password2 && formik.errors.password2 ? s.errorInput : s.inputI}
-                                           {...formik.getFieldProps('password2')}/>
-                                </label>
-                                {formik.touched.password2 && formik.errors.password2 ?
-                                    <div className={s.errorTextRegistration}>{formik.errors.password2}</div> : ''}
-                            </div>
+                            <form onSubmit={formik.handleSubmit}>
+                                <div className={`${s.formControl} ${s.one}`}>
+                                    <label className={s.label}>
+                                        <UserIcon width={'3em'} height={'3em'} color=
+                                            {formik.errors.username && formik.touched.username
+                                                ? '#F06464'
+                                                : '#5590C1'}
+                                        />
+                                        <input type="text" id='username' placeholder="username"
+                                               className={formik.touched.username && formik.errors.username ? s.errorInput : s.inputI}
+                                               {...formik.getFieldProps('username')}/>
+                                    </label>
+                                    {formik.touched.username && formik.errors.username ?
+                                        <div className={s.errorTextRegistration}>{formik.errors.username}</div> : ''}
+                                </div>
 
-                            <div className="card-actions justify-center">
-                                <button type={'submit'} className={s.btnB}>Login</button>
-                            </div>
-                        </form>
-                        <Link href={"/signIn"}>
-                            <p className={s.text}>SignIn</p>
-                        </Link>
+                                <div className={`${s.formControl} ${s.one}`}>
+                                    <label className={s.label}>
+                                        <ListIcon width={'3em'} height={'3em'}
+                                                  color={formik.errors.email && formik.touched.email
+                                                      ? '#F06464'
+                                                      : '#5590C1'}/>
+                                        <input type="text" id='email' placeholder="email"
+                                               className={formik.touched.email && formik.errors.email ? s.errorInput : s.inputI}
+                                               {...formik.getFieldProps('email')}/>
+                                    </label>
+                                    {formik.touched.email && formik.errors.email ?
+                                        <div className={s.errorTextRegistration}>{formik.errors.email}</div> : ''}
+                                </div>
+
+                                <div className={`${s.formControl} ${s.one}`}>
+                                    <label className={s.label}>
+                                        <CountryIcon width={'3em'} height={'3em'}
+                                                     color={formik.errors.country && formik.touched.country
+                                                         ? '#F06464'
+                                                         : '#5590C1'}/>
+                                        <select id='country'
+                                                onBlur={formik.handleBlur}
+                                                onChange={formik.handleChange}
+                                                value={formik.values.country}
+                                                className={formik.touched.country && formik.errors.country ? s.errorInput : s.inputI}>
+                                            <option defaultValue='country'>сountry</option>
+                                            {options.map(m => {
+                                                return (
+                                                    <option key={m.value} value={m.label}>
+                                                        {m.label}
+                                                    </option>
+                                                )
+                                            })}
+                                        </select>
+                                    </label>
+                                    {formik.touched.country && formik.errors.country ?
+                                        <div className={s.errorTextRegistration}>{formik.errors.country}</div> : ''}
+                                </div>
+
+                                <div className={`${s.formControl} ${s.one}`}>
+                                    <label className={s.label}>
+                                        <KeyIcon width={'3em'} height={'3em'}
+                                                 color={formik.errors.password && formik.touched.password
+                                                     ? '#F06464'
+                                                     : '#5590C1'}/>
+                                        <input type="password" id='password' placeholder="password"
+                                               className={formik.touched.password && formik.errors.password ? s.errorInput : s.inputI}
+                                               {...formik.getFieldProps('password')}/>
+                                    </label>
+                                    {formik.touched.password && formik.errors.password ?
+                                        <div className={s.errorTextRegistration}>{formik.errors.password}</div> : ''}
+                                </div>
+
+                                <div className={`${s.formControl} ${s.two}`}>
+                                    <label className={s.label}>
+                                        <KeyIcon width={'3em'} height={'3em'}
+                                                 color={formik.errors.password2 && formik.touched.password2
+                                                     ? '#F06464'
+                                                     : '#5590C1'}/>
+                                        <input type="password" id='password2' placeholder="confirm password"
+                                               className={formik.touched.password2 && formik.errors.password2 ? s.errorInput : s.inputI}
+                                               {...formik.getFieldProps('password2')}/>
+                                    </label>
+                                    {formik.touched.password2 && formik.errors.password2 ?
+                                        <div className={s.errorTextRegistration}>{formik.errors.password2}</div> : ''}
+                                </div>
+
+                                <div className="card-actions justify-center">
+                                    <button type={'submit'} className={s.btnB}>Login</button>
+                                </div>
+                            </form>
+                            <Link href={"/signIn"}>
+                                <p className={s.text}>Sign In</p>
+                            </Link>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -173,4 +185,3 @@ const Registration = () => {
 };
 
 export default Registration;
-
