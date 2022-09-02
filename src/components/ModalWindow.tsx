@@ -29,10 +29,11 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
                     <div className={s.modalBox} style={colorNote}>
                         <div className={s.topArea}>
                             <h3 className={s.titleModal} style={colorNote}>Edit your note!</h3>
-                            <input type="text" className={s.cardTitle}  style={colorNote} value={titleNode}
+                            <input type="text" className={s.cardTitle} style={colorNote} value={titleNode}
                                    onChange={onTitleChange}/>
                             <textarea className={s.textTextArea}
-                                      rows={10} value={textNode}
+                                      maxLength={450}
+                                      rows={15} value={textNode}
                                       style={colorNote}
                                       onChange={onTextChange}/>
                         </div>
@@ -50,23 +51,24 @@ const ModalWindow: React.FC<ModalWindowPropsType> = ({
             <>
                 <input type="checkbox" id='my-modal-add-note' className="modal-toggle"/>
                 <div className="modal backdrop-blur-sm">
-                    <div className={s.modalBox} style={colorNote}>
+                    <div className={s.modalBox} >
                         <div className={s.topArea}>
                             <h3 className={s.titleModal} style={colorNote}>Create new note!</h3>
-                            <input type="text" className= {s.cardTitle} style={colorNote}
+                            <input type="text" className={s.cardTitle} style={colorNote}
                                    placeholder={'Add new title here...'}
                                    value={titleNode} onChange={onTitleChange}/>
                             <textarea className={s.textTextArea}
                                       style={colorNote}
-                                      rows={10}
+                                      rows={15}
+                                      maxLength={450}
                                       value={textNode}
                                       placeholder={'Add note content here...'}
                                       onChange={onTextChange}/>
                         </div>
-                        <div className="modal-action">
+                        <div className={s.modalAction}>
                             <label htmlFor='my-modal-add-note' className={s.modalSave}
                                    onClick={onConfirm}>Save</label>
-                            {/*<EditIcon width={'2.5em'} height={'2.5em'} fill={colorNote.color}/>*/}
+                            <EditIcon width={'2.5em'} height={'2.5em'} fill={"#5590C1"}/>
                             <label htmlFor='my-modal-add-note' className={s.modalCancel}
                                    onClick={onDiscard}>Cancel</label>
                         </div>
