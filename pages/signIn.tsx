@@ -6,29 +6,32 @@ import UserIcon from "../src/assets/images/UserIcon";
 import KeyIcon from "../src/assets/images/KeyIcon";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
+import {useAppDispatch} from "../src/utils/hooks";
+import {loginUser} from "../src/bll/slices/authSlice";
 
 const SignIn = () => {
 
     const [isLogin, setIsLogin] = useState(true);
+    const dispatch = useAppDispatch()
 
     type FormikErrorType = {
-        username?: string
+        email?: string
         password?: string
 
 
     }
     const formik = useFormik({
         initialValues: {
-            username: '',
+            email: '',
             password: '',
 
 
         },
 
         onSubmit: values => {
-            // dispatch(setRegistrTC(values));
-            alert(JSON.stringify(values));
-            setIsLogin(false);
+            console.log(values.email, values.password)
+            dispatch(loginUser({email: values.email, password: values.password}));
+            setIsLogin(true);
             formik.resetForm();
         },
     })
@@ -55,11 +58,11 @@ const SignIn = () => {
                                 <div className={`${s.formControl} ${s.one}`}>
                                     <label className={s.label}>
                                         <UserIcon width={'3em'} height={'3em'} color={isLogin ? '#5590C1' : '#F06464'}/>
-                                        <input type="text" id='username' placeholder="username"
+                                        <input type="text" id='email' placeholder="email"
                                                className={isLogin ? s.inputI : s.errorInput}
-                                               {...formik.getFieldProps('username')}/>
+                                               {...formik.getFieldProps('email')}/>
                                     </label>
-                                    {formik.touched.username && formik.errors.username}
+                                    {formik.touched.email && formik.errors.email}
 
                                 </div>
 

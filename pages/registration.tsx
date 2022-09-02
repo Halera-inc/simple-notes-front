@@ -9,6 +9,8 @@ import React, {useMemo, useState} from "react";
 import countryList from "react-select-country-list";
 import ListIcon from "../src/assets/images/ListIcon";
 import CountryIcon from "../src/assets/images/CountryIcon";
+import {useAppDispatch} from "../src/utils/hooks";
+import {registerUser} from "../src/bll/slices/authSlice";
 
 
 const Registration = () => {
@@ -16,7 +18,7 @@ const Registration = () => {
     const options = useMemo(() => countryList().getData(), [])
 
     const [isLogin, setIsLogin] = useState(true);
-
+    const dispatch = useAppDispatch()
     type FormikErrorType = {
         username?: string
         email?: string
@@ -43,7 +45,7 @@ const Registration = () => {
 
             if (!values.email) {
                 errors.email = 'Required';
-            } else if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address';
             }
             if (!values.country) {
@@ -62,7 +64,7 @@ const Registration = () => {
             return errors;
         },
         onSubmit: values => {
-            // dispatch(setRegistrTC(values));
+            dispatch(registerUser({email: values.email, password: values.password, country: values.country }));
             alert(JSON.stringify(values));
             setIsLogin(false)
             formik.resetForm();
@@ -166,11 +168,11 @@ const Registration = () => {
                                 </div>
 
                                 <div className="card-actions justify-center">
-                                    <button type={'submit'} className={s.btnB}>Login</button>
+                                    <button type={'submit'} className={s.btnB}>Signin</button>
                                 </div>
                             </form>
                             <Link href={"/signIn"}>
-                                <p className={s.text}>Sign In</p>
+                                <p className={s.text}>Log in</p>
                             </Link>
 
                         </div>

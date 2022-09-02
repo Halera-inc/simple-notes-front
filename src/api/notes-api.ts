@@ -1,104 +1,111 @@
 import axios, {AxiosResponse} from 'axios'
+import config from "tailwindcss/defaultConfig";
+
+enum BASE_URLS {
+    LOCAL = 'http://localhost:5050',
+    HEROKU = 'https://simple-notes-back.herokuapp.com/'
+}
 
 const instance = axios.create({
-    baseURL: 'https://simple-notes-back.herokuapp.com/',
+    baseURL: BASE_URLS.HEROKU,
     withCredentials: false,
-    headers: {
-        'API-KEY': '#'
-    }
 })
-
-
+if (typeof window !== 'undefined') {
+    instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
+}
 export const notesAPI = {
     //for Notes
     getNotes() {
         return instance.get(`notes`);
     },
-    createNote(title: string | null, notetext: string | null) {
-        return instance.post<{ title: string | null, text: string | null }, AxiosResponse<ResponseType<{ item: NoteTextType }>>>('notes', {
+    getNote(id: string) {
+        return instance.get(`notes/${id}`);
+    },
+    createNote(title?: string, note_text?: string, color?: string, note_mode?: string) {
+        return instance.post('notes', {
             title,
-            notetext
+            note_text,
+            color,
+            note_mode,
         });
     },
     deleteNote(id: string) {
-        return instance.delete<ResponseType>(`notes/${id}`);
+        return instance.delete(`notes/${id}`);
     },
-    updateNote(id: string, title: string, noteColor: string) {
-        return instance.put(`notes/${id}`, {title, noteColor});
-    },
-
-    //for Tasks
-    getTasks(todoId: string) {
-        return instance.get<NoteTodoType>(`#/${todoId}/#`);
-    },
-    deleteTask(todoId: string, taskId: string) {
-        return instance.delete<ResponseType>(`#/${todoId}/#/${taskId}`);
-    },
-    createTask(todoId: string, title: string) {
-        return instance.post<{ title: string }, AxiosResponse<ResponseType<{ item: TaskType }>>>(`#/${todoId}/#`, {title});
-    },
-    updateTask(todoId: string, taskId: string) {
-        return instance.put<AxiosResponse<ResponseType<{ item: TaskType }>>>(`#/${todoId}/#/${taskId}`);
-    },
-
-    //for Users
-    getAllUsers(){
-        return instance.get(`users`)
-    },
-    getUser(id: number){
-        return instance.get(`users/${id}`)
-    },
+    updateNote(id: string, title?: string, note_text?: string, color?: string, note_mode?: string) {
+        return instance.put(`notes/${id}`, {
+            title,
+            note_text,
+            color,
+            note_mode,
+        });
+    }
 }
+//for Auth
+export const authAPI = {
+    me() {
+        return instance.get('auth/me')
+    },
+    register(email: string, password: string, country?: string, username?: string) {
+        return instance.post(`auth/registration`, {email, password, country, username})
+    },
+    login(email: string, password: string) {
+        return instance.post(`auth/login`, {email, password})
+    },
+
+}
+
 
 // Types
 
 export type ResponseType<D = {}> = {
-    resultCode: number
+    status: number
     messages: Array<string>
-    fieldsErrors: Array<string>
     data: D
 }
 
 // U S E R
 
 export type UserType = {
-    id: number,
-    name: string,
+    _id: string,
+    username?: string,
     email: string,
     password: string,
-    dateToRegistration: Date,
-    avatar: string,
-    settings: SettingsType,
+    createdAt: Date,
+    updatedAt?: Date
+    settings?: SettingsType,
+    country?: string
 }
 export type SettingsType = {
-    darkMode: boolean,
-    lineMode: boolean,
+    darkMode?: boolean,
+    themecolor?: string,
 }
 
 // N O T E S
 
 export type NoteTodoType = {
     id: number,
-    notemode: NoteViewType
+    note_mode: NoteViewType
     title: string | null,
     todos: Array<TaskType | null>
     dateOfCreate: Date,
     color: string
 }
 export type NoteTextType = {
-    id: number,
-    notemode: NoteViewType
-    title: string | null,
-    notetext: string | null,
-    dateOfCreate: Date,
-    color: string
+    _id: number,
+    note_mode?: NoteViewType
+    title?: string,
+    note_text?: string,
+    createdAt?: Date,
+    color?: string,
+    user?: string
 }
 export type TaskType = {
     idTask: string,
     taskTitle: string,
     isDone: boolean
 }
-export type NoteViewType = 'NoteText' | 'NoteTodo'
+export type NoteViewType = 'note_text' | 'note_todo'
 
 // export type ColorType = {
 //     default: string

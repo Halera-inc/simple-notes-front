@@ -1,12 +1,15 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import profileReducer from './slices/profileSlice'
 import notesReducer from './slices/notesSlice'
+import authReducer from "./slices/authSlice";
+import appReducer from "./slices/appSlice";
 
 
 export const rootReducer = combineReducers({
     profile: profileReducer,
     notes: notesReducer,
-    // app: appReducer,
+    auth: authReducer,
+    app: appReducer
 })
 
 

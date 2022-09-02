@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button";
+import {authAPI} from "../../api/notes-api";
 
 
 const MainBlockSettings = () => {
@@ -30,7 +31,7 @@ const MainBlockSettings = () => {
 
     }
     const [edit, setEdit] = useState(false);
-    const editProfileHandler = () => {
+    const editProfileHandler =  () => {
         setEdit(!edit);
     }
 
