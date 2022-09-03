@@ -13,7 +13,7 @@ type NotePropsType = {
     title?: string
     note_text?: string
     color?: string
-    edit: (title: string, note_text: string) => void
+    edit: (title: string, note_text: string,colorizedColor:colorizedColorType) => void
 }
 
 const Note = ({title = '', note_text = '', color, edit}: NotePropsType) => {

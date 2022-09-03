@@ -53,7 +53,7 @@ const Registration = () => {
             }
             if (!values.password) {
                 errors.password = 'Required';
-            } else if (/[A-Za-z0-9]{8,}/.test(values.password)) {
+            } else if (/[A-Za-z0-9]{30}/.test(values.password)) {
                 errors.password = 'Invalid password';
             }
             if (!values.password2) {
