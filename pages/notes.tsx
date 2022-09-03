@@ -1,5 +1,5 @@
 import {ChangeEvent, useEffect, useRef, useState} from 'react'
-import {getNotes} from 'src/bll/slices/notesSlice';
+import {createNote, getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note, {colorizedColorType} from "../src/components/Note";
 import s from "../src/styles/Notes.module.css"
@@ -17,13 +17,13 @@ const Notes = () => {
 
     useEffect(() => {
         dispatch(getNotes())
-    }, [dispatch],)
+    }, [dispatch])
 
 
-    const onCardClickHandler = (title: string | null, text: string | null, colorizedColor: colorizedColorType) => {
+    const onCardClickHandler = (title: string,note_text: string, colorizedColor: colorizedColorType) => {
         title && setModalTitle(title)
-        text && setModalText(text)
         setModalColor(colorizedColor)
+        note_text && setModalText(note_text)
         modalBtnRef.current && modalBtnRef.current.click()
     }
     const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +41,8 @@ const Notes = () => {
 
     return (
         <MainContainer>
-            <label ref={modalBtnRef} htmlFor='my-modal' className="btn modal-button hidden">open
+            <label ref={modalBtnRef} htmlFor='my-modal'
+                   className="btn modal-button hidden">open
                 modal</label>
 
             <ModalWindow titleNode={modalTitle}
@@ -55,9 +56,9 @@ const Notes = () => {
             <div className={s.notesWrapper}>
                 <div className={s.notesBlock}>
                     {notes.map((n) =>
-                        <Note key={n.id}
+                        <Note key={n._id}
                               title={n.title}
-                              text={n.notetext}
+                              note_text={n.note_text}
                               color={n.color}
                               edit={onCardClickHandler}/>
                     )}

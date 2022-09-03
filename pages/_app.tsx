@@ -4,6 +4,7 @@ import {store} from '../src/bll/store'
 import {Provider} from 'react-redux'
 import Sidebar from "../src/components/Sidebar/Sidebar";
 import {useRouter} from "next/router";
+import {ThemeProvider} from "next-themes";
 
 function MyApp({Component, pageProps}: AppProps) {
 
@@ -11,6 +12,7 @@ function MyApp({Component, pageProps}: AppProps) {
     const router = useRouter()
 
     return (
+        <ThemeProvider enableSystem={true} attribute="class">
         <Provider store={store}>
             <div>
                 {router.pathname === '/'
@@ -21,12 +23,13 @@ function MyApp({Component, pageProps}: AppProps) {
 
                     ? null
                     : <Sidebar/>}
-                <div className='flex flex-col'>
+                <div className='flex flex-col bg-white dark:bg-black'>
                     <Component {...pageProps} />
                 </div>
 
             </div>
         </Provider>
+        </ThemeProvider>
     )
 }
 

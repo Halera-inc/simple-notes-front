@@ -10,19 +10,19 @@ export type colorizedColorType = {
 }
 
 type NotePropsType = {
-    title: string | null
-    text: string | null
-    color: string
-    edit: (title: string | null, text: string | null, colorizedColor: colorizedColorType ) => void
+    title?: string
+    note_text?: string
+    color?: string
+    edit: (title: string, note_text: string) => void
 }
 
-const Note = ({color, title, text, edit}: NotePropsType) => {
+const Note = ({title = '', note_text = '', color, edit}: NotePropsType) => {
     const colorizedColor = colorizeNote(color)
     return (
         <>
-            <div className={s.card} style={colorizedColor} onClick={() => edit(title, text, colorizedColor)}>
+            <div className={s.card} style={colorizedColor} onClick={() => edit(title, note_text, colorizedColor)}>
                 <h2 className={s.cardTitle}>{title}</h2>
-                <p className={s.text}>{text}</p>
+                <p className={s.text}>{note_text}</p>
                 <div className={s.cardAction}>
                     <EditIcon width={'1.5em'} height={'1.5em'} fill={colorizedColor.color}/>
                     <DeleteIcon fill={colorizedColor.color}/>

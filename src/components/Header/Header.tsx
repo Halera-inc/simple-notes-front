@@ -29,17 +29,14 @@ const Header = () => {
             {router.pathname !== '/'
                 ? <div>
                     {isAuth
-                        ? <div
-                            className='backdrop-blur-md bg-white/70 absolute w-screen w-100 justify-space flex justify-between items-center ml-[-15px] h-[100px] mb-[35px]'>
-                            <p className=' text-[35px] m-0 font-bold ml-[143px]'>
+                        ? <div className='backdrop-blur-md bg-white/70 absolute w-screen w-100 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
+                            <p className='text-[35px] font-bold ml-[128px]'>
                                 {pageName}
                             </p>
                             <div className='flex justify-between w-[340px] items-center mr-[74px]'>
                                 <SearchIcon width={'40px'} height={'40px'} fill={'#212121'}/>
-                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
                                 <p className='text-lg'>{userName}</p>
-                                <DropDown isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed}
-                                          dropItems={liArray}/>
+                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
                             </div>
                         </div>
                         : <div className='flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]'>

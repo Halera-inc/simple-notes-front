@@ -1,22 +1,19 @@
+.singnInBlock {
 .singnInBlock{
     height: 100vh;
     @apply
     flex
     justify-center
     items-center
-
-
-
-
 }
+
 .wrapperCard {
     text-align: center;
     @apply
     flex
     justify-center
-
-
 }
+
 .wrapperRegistrationCard{
     @apply
     flex
@@ -128,10 +125,11 @@
 .errorText {
     color: red;
     position: absolute;
-    bottom:-65%;
-    left:27%;
+    bottom: -65%;
+    left: 27%;
 }
-.errorTextRegistration{
+
+.errorTextRegistration {
     color: red;
     position: absolute;
     bottom: -40%;

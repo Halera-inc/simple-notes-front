@@ -1,24 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// ЗАГАТОВКА НА БУДУЩЕЕ
+import { NullableType } from "../store";
 
-// import { NullableType } from "../store";
-//
-//
-// const initialState = {
-//     appError: '' as NullableType<string>,
-//     appIsInitialize: false,
-//     isAppFetching: false
-// };
-//
-//
-// export const appSlice = createSlice({
-//     name: 'notes',
-//     initialState,
-//     reducers: {},
-//     extraReducers: {}
-// })
-//
-// // export const {} = notesSlice.actions
-//
-// export default appSlice.reducer
+
+const initialState = {
+    appError: '' as NullableType<string>,
+    appIsInitialize: false,
+    isAppFetching: false
+};
+
+
+export const appSlice = createSlice({
+    name: 'notes',
+    initialState,
+    reducers: {},
+    extraReducers: {}
+})
+
+// export const {} = notesSlice.actions
+
+export default appSlice.reducer

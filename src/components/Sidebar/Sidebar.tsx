@@ -9,11 +9,15 @@ import PencilIcon from "../../assets/images/PencilIcon";
 import SidebarItem from "./SidebarItem";
 import {useRouter} from "next/router";
 import ModalWindow from "../ModalWindow";
+import {useTheme} from "next-themes";
+import MoonIcon from "src/assets/images/MoonIcon";
+import {createNote} from "../../bll/slices/notesSlice";
+import {useAppDispatch} from "../../utils/hooks";
 
 const Sidebar = () => {
 
     const router = useRouter()
-
+    const dispatch = useAppDispatch()
 
     const modalAddBtnRef = useRef<HTMLLabelElement>(null)
     const [newNoteTitle, setNewNoteTitle] = useState('')
@@ -29,7 +33,7 @@ const Sidebar = () => {
         setNewNoteText(e.currentTarget.value)
     }
     const onConfirmClickHandler = () => {  // todo need to fix with appAPI
-        alert(`Save in Add mode. Title: ${newNoteTitle}. Text: ${newNoteText}`)
+        dispatch(createNote({title: newNoteTitle, note_text: newNoteText}))
         setNewNoteTitle('')
         setNewNoteText('')
     }
@@ -39,10 +43,16 @@ const Sidebar = () => {
         setNewNoteText('')
     }
 
+    const {systemTheme, theme, setTheme} = useTheme();
+
+
+    const currentTheme = theme === "system" ? systemTheme : theme;
+
 
     return (
         <div className={s.sidebarWrapper}>
-            <label ref={modalAddBtnRef} htmlFor='my-modal-add-note' className="btn modal-button hidden">open
+            <label ref={modalAddBtnRef} htmlFor='my-modal-add-note'
+                   className="btn modal-button hidden">open
                 modal</label>
             <ModalWindow titleNode={newNoteTitle}
                          textNode={newNoteText}
@@ -71,9 +81,19 @@ const Sidebar = () => {
                              icon={<SettingIcon width={50} fill={'#5590C1'}/>}/>
             </div>
             <div className={s.bottomBox}>
-                <SidebarItem tooltipInfo={'Change theme'}
-                             link={'/'}
-                             icon={<SunnyIcon width={50} fill={'#5590C1'}/>}/>
+                {currentTheme === 'dark' &&
+                <SidebarItem tooltipInfo={'Light Side'}
+                             icon={<SunnyIcon onClick={() => {
+                                 setTheme('light')
+                             }} width={50} fill={'#5590C1'}/>}/>
+                }
+                {currentTheme !== 'dark' &&
+                <SidebarItem tooltipInfo={'Dark Side'}
+                             icon={<MoonIcon onClick={() => {
+                                 setTheme('dark')
+                             }} width={50} fill={'#5590C1'}/>}/>
+                }
+
                 <SidebarItem tooltipInfo={'Exit'}
                              redActive={true}
                              link={'/#'}
