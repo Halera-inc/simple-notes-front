@@ -5,8 +5,14 @@ import {Provider} from 'react-redux'
 import Sidebar from "../src/components/Sidebar/Sidebar";
 import {useRouter} from "next/router";
 import {ThemeProvider} from "next-themes";
+import {useEffect} from "react";
+import {authAPI, notesAPI} from "../src/api/notes-api";
 
 function MyApp({Component, pageProps}: AppProps) {
+
+    useEffect(()=>{
+
+    },[])
 
 
     const router = useRouter()

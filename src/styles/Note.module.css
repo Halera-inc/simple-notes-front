@@ -28,6 +28,7 @@
     margin-top: 15px;
     outline: none;
     border: none;
+    position: relative;
     @apply
     card-actions
     justify-between
