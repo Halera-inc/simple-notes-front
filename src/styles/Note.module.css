@@ -7,10 +7,12 @@
     max-width: 380px;
     width: 100%;
     min-height: 250px;
+    transition: 0.15s ease-in-out;
     @apply shadow-lg
 }
 
 .card:hover {
+    scale: 1.010;
     cursor: pointer;
     outline: 1px solid;
 }
@@ -20,6 +22,7 @@
     @apply
     card-title
 }
+
 .text {
     flex-grow: 1;
 }
