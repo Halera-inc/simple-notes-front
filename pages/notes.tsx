@@ -43,6 +43,7 @@ const Notes = () => {
             <ModalWindow titleNode={modalTitle}
                          textNode={modalText}
                          typeNode={'edit'}
+                         colorNote={{}}
                          onTitleChange={onTitleChangeHandler}
                          onTextChange={onContentChangeHandler}
                          onConfirm={onConfirmClickHandler}

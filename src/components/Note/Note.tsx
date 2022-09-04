@@ -39,7 +39,7 @@ const Note = ({title = '', note_text = '', color, edit, noteId}: NotePropsType) 
                 <h2 className={s.cardTitle}>{title}</h2>
                 <p className={s.text}>{note_text}</p>
                 <div className={s.cardAction}>
-                    <EditIcon fill={colorizedColor.color} onClick={onColorChangeButtonClickHandler}/>
+                    <EditIcon height={27} width={27} fill={colorizedColor.color} onClick={onColorChangeButtonClickHandler}/>
                     <DeleteIcon fill={colorizedColor.color} onClick={onDeleteButtonClickHandler}/>
                     <ColorizedBar noteId={noteId} showColorBar={showColorBar} setShowColorBar={setShowColorBar} currentColor={color}/>
                 </div>
