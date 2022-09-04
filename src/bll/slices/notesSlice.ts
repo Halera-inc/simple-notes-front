@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from 'axios'
 import {notesAPI, NoteTextType, NoteTodoType} from 'src/api/notes-api'
-import config from "tailwindcss/defaultConfig";
+
 
 export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
     try {

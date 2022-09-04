@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button";
 import {authAPI} from "../../api/notes-api";
+import {useAppDispatch, useAppSelector} from "src/utils/hooks";
+import {Me} from "src/bll/slices/authSlice";
 
 
 const MainBlockSettings = () => {
@@ -27,11 +29,18 @@ const MainBlockSettings = () => {
         paddingLeft: '37px',
         paddingRight: '37px',
         fontSize: '22px',
-        backgroundColor:'#ffffff',
+        backgroundColor: '#ffffff',
 
     }
+    const user = useAppSelector(state => state.profile.user)
+    const dispatch = useAppDispatch()
+    useEffect(() => {
+
+        dispatch(Me())
+    }, [dispatch])
+
     const [edit, setEdit] = useState(false);
-    const editProfileHandler =  () => {
+    const editProfileHandler = () => {
         setEdit(!edit);
     }
 
@@ -42,10 +51,9 @@ const MainBlockSettings = () => {
                     <img className={s.imgProfile}/>
                     <div className={s.editWrapper}>
                         <ul className={s.editData}>
-                            <li className={s.myName}>Ivanov Ivan</li>
-                            <li className={s.reg}>Registered in 13 Juli 2022</li>
-                            <li className={s.reg}><b>ID:</b> 1234</li>
-                            <li className={s.reg}><b>Notes:</b> 5</li>
+                            <li className={s.myName}>{user.email}</li>
+                            <li className={s.reg}> {user.createdAt}</li>
+                            <li className={s.reg}>{user.country}</li>
                         </ul>
                         <Button title={'Edit'} onChangeParams={editProfileHandler} style={buttonProfile}/>
                     </div>
@@ -124,7 +132,7 @@ const MainBlockSettings = () => {
                                 </li>
                                 <li>
                                     <div></div>
-                                    <Button  title={'Save'} style={buttonSettingsSave}/>
+                                    <Button title={'Save'} style={buttonSettingsSave}/>
                                 </li>
                             </ul>
 
