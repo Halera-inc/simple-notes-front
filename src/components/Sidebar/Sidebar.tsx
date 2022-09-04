@@ -45,9 +45,7 @@ const Sidebar = () => {
 
     const {systemTheme, theme, setTheme} = useTheme();
 
-
     const currentTheme = theme === "system" ? systemTheme : theme;
-
 
     return (
         <div className={s.sidebarWrapper}>
@@ -56,6 +54,7 @@ const Sidebar = () => {
                 modal</label>
             <ModalWindow titleNode={newNoteTitle}
                          textNode={newNoteText}
+                         colorNote={{}}
                          typeNode={'create'}
                          onTitleChange={onTitleChangeHandler}
                          onTextChange={onContentChangeHandler}

@@ -55,7 +55,7 @@ const Notes = () => {
                          onDiscard={onDiscardClickHandler}/>
             <div className={s.notesWrapper}>
                 <div className={s.notesBlock}>
-                    {notes.map((n) =>
+                    {notes && notes.map((n) =>
                         <Note key={n._id}
                               title={n.title}
                               note_text={n.note_text}
