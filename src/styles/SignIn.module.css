@@ -1,4 +1,5 @@
-.singnInBlock {
+
+.singnInBlock{
     height: 100vh;
     @apply
     flex
@@ -13,13 +14,12 @@
     justify-center
 }
 
-.wrapperRegistrationCard {
+.wrapperRegistrationCard{
     @apply
     flex
     justify-center
     items-center
 }
-
 
 .cardBody {
     padding: 73px 52px 23px 52px;

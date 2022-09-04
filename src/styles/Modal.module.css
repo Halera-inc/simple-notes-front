@@ -1,0 +1,77 @@
+.modalBox {
+    width: 650px;
+    height: 800px;
+    padding: 50px 50px 30px 50px;
+    @apply
+    flex
+    flex-col
+    justify-between
+    rounded-none
+    border-blue-dark
+    border-2
+    bg-blue
+
+}
+
+.modalAction {
+    @apply
+    flex
+    justify-between
+    modal-action
+}
+
+.titleModal {
+    font-weight: 700;
+    font-size: 33px;
+    line-height: 40px;
+    margin-bottom: 40px;
+    @apply
+    text-blue-dark
+}
+
+.cardTitle {
+    outline:none;
+    font-size: 30px !important;
+    margin-bottom: 15px;
+    background-color: transparent;
+    @apply
+    card-title
+    text-blue-dark
+}
+
+.textTextArea{
+    outline:none;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 30px;
+    overflow: hidden;
+    resize:none;
+    @apply
+    my-2.5
+    rounded
+    min-w-full
+    px-1
+    bg-transparent
+    text-blue-dark
+
+}
+
+
+.modalCancel {
+    padding: 7px 37px;
+    font-size: 15px;
+    background-color: #FFF4F4;
+    color:#F06464;
+    border: 1px solid #F06464;
+    cursor: pointer;
+}
+.modalSave{
+    padding: 7px 37px;
+    font-size: 15px;
+    background-color:#D6EDD9;
+    color: #5E9C80;
+    border: 1px solid #5E9C80;
+    cursor: pointer;
+}
+
+

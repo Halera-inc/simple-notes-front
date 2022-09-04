@@ -3,22 +3,28 @@ import EditIcon from "../assets/images/EditIcon";
 import DeleteIcon from "../assets/images/DeleteIcon";
 import colorizeNote from "../utils/colorizeNote";
 
+export type colorizedColorType = {
+    color?: string,
+    borderColor?: string,
+    backgroundColor?: string,
+}
+
 type NotePropsType = {
     title?: string
     note_text?: string
     color?: string
-    edit: (title: string, note_text: string) => void
+    edit: (title: string, note_text: string,colorizedColor:colorizedColorType) => void
 }
 
 const Note = ({title = '', note_text = '', color, edit}: NotePropsType) => {
     const colorizedColor = colorizeNote(color)
     return (
         <>
-            <div className={s.card} style={colorizedColor} onClick={() => edit(title, note_text)}>
+            <div className={s.card} style={colorizedColor} onClick={() => edit(title, note_text, colorizedColor)}>
                 <h2 className={s.cardTitle}>{title}</h2>
                 <p className={s.text}>{note_text}</p>
                 <div className={s.cardAction}>
-                    <EditIcon fill={colorizedColor.color}/>
+                    <EditIcon width={'1.5em'} height={'1.5em'} fill={colorizedColor.color}/>
                     <DeleteIcon fill={colorizedColor.color}/>
                 </div>
             </div>

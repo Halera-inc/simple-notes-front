@@ -1,7 +1,7 @@
 import {ChangeEvent, useEffect, useRef, useState} from 'react'
 import {createNote, getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
-import Note from "../src/components/Note";
+import Note, {colorizedColorType} from "../src/components/Note";
 import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
@@ -11,15 +11,18 @@ const Notes = () => {
     const dispatch = useAppDispatch()
     const notes = useAppSelector(state => state.notes.notes)
     const [modalTitle, setModalTitle] = useState('')
+    const [modalColor, setModalColor] = useState<colorizedColorType>( {})
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
-    console.log(notes)
+
     useEffect(() => {
         dispatch(getNotes())
     }, [dispatch])
 
-    const onCardClickHandler = (title: string, note_text: string) => {
+
+    const onCardClickHandler = (title: string,note_text: string, colorizedColor: colorizedColorType) => {
         title && setModalTitle(title)
+        setModalColor(colorizedColor)
         note_text && setModalText(note_text)
         modalBtnRef.current && modalBtnRef.current.click()
     }
@@ -41,8 +44,10 @@ const Notes = () => {
             <label ref={modalBtnRef} htmlFor='my-modal'
                    className="btn modal-button hidden">open
                 modal</label>
+
             <ModalWindow titleNode={modalTitle}
                          textNode={modalText}
+                         colorNote={modalColor}
                          typeNode={'edit'}
                          onTitleChange={onTitleChangeHandler}
                          onTextChange={onContentChangeHandler}
