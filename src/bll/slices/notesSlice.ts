@@ -1,12 +1,11 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from 'axios'
-import {notesAPI, NoteTextType, NoteTodoType} from 'src/api/notes-api'
-import config from "tailwindcss/defaultConfig";
+import {ColorSamplesType, notesAPI, NoteTextType, NoteViewType} from 'src/api/notes-api'
 
 export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
     try {
         const res = await notesAPI.getNotes()
-        console.log(res)
+        // console.log(res)
         const notes = res.data
         return notes
     } catch (error) {
@@ -34,14 +33,39 @@ export const createNote = createAsyncThunk('notes/createNote', async (params: Po
     }}
 )
 
+export const deleteNote = createAsyncThunk('notes/deleteNote', async (param: { noteId: string }, thunkAPI) => {
+    try {
+        const res = await notesAPI.deleteNote(param.noteId)
+        if (res.status === 200) {
+            console.log(res)
+            return {noteId: param.noteId}
+        } else {
+            return thunkAPI.rejectWithValue(null)
+        }
 
-    // export const editNote = createAsyncThunk('notes/editNote', async (params) => {
-    //     try {
-    //
-    //     } catch (error) {
-    //
-    //     }
-    // })
+    } catch (error) {
+        console.log(error)
+        return thunkAPI.rejectWithValue(null)
+    }
+})
+
+
+    export const editNote = createAsyncThunk('notes/editNote',
+        async (params: {id: string, title?: string, note_text?: string, color?: ColorSamplesType, note_mode?: NoteViewType}, thunkAPI) => {
+        try {
+            const res = await notesAPI.updateNote(params.id, params.title,
+                params.note_text, params.color, params.note_mode)
+            console.log(res)
+            if (res.status === 200) {
+                return {noteId: params.id,newColor: params.color, newTitle: params.title, newText: params.note_text, newMode: params.note_mode}
+            } else {
+                return thunkAPI.rejectWithValue(null)
+            }
+        } catch (error) {
+            console.log(error)
+            return thunkAPI.rejectWithValue(null)
+        }
+    })
 
     const initialState = {
         notes: [] as Array<NoteTextType>,
@@ -68,6 +92,23 @@ export const createNote = createAsyncThunk('notes/createNote', async (params: Po
                 .addCase(createNote.fulfilled, (state, action) => {
                     state.notes.push(action.payload)
                 })
+                .addCase(deleteNote.fulfilled, (state, action) => {
+                    state.notes.splice(state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId), 1);
+                })
+                .addCase(editNote.fulfilled, (state, action)=>{
+                    if (action.payload && action.payload.newTitle){
+                        state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].title = action.payload.newTitle
+                    }
+                    if (action.payload && action.payload.newText){
+                        state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].note_text = action.payload.newText
+                    }
+                    if (action.payload && action.payload.newColor){
+                        state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].color = action.payload.newColor
+                    }
+                    if (action.payload && action.payload.newMode){
+                        state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].note_mode = action.payload.newMode
+                    }
+                })
         }
     })
 
@@ -81,6 +122,6 @@ export const {setCreateNoteModalShow} = notesSlice.actions
 type PostNoteParamsType = {
     title?: string
     note_text?: string
-    color?: string
+    color?: ColorSamplesType
     note_mode?: string
 }

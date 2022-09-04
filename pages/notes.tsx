@@ -1,7 +1,7 @@
 import {ChangeEvent, useEffect, useRef, useState} from 'react'
-import {createNote, getNotes} from 'src/bll/slices/notesSlice';
+import {getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
-import Note from "../src/components/Note";
+import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
@@ -33,7 +33,6 @@ const Notes = () => {
         alert(`Save in Edit mode. Title: ${modalTitle}. Text: ${modalText}`)  // todo need to fix with appAPI
     }
     const onDiscardClickHandler = () => {
-        alert('Cancel in Edit mode') // todo need to fix with appAPI
     }
 
     return (
@@ -55,6 +54,7 @@ const Notes = () => {
                               title={n.title}
                               note_text={n.note_text}
                               color={n.color}
+                              noteId={n._id}
                               edit={onCardClickHandler}/>
                     )}
                 </div>
