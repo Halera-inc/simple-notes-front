@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button";
-import {authAPI} from "../../api/notes-api";
 
 
 const MainBlockSettings = () => {
@@ -34,6 +33,7 @@ const MainBlockSettings = () => {
     const editProfileHandler =  () => {
         setEdit(!edit);
     }
+
 
     return (
         <div className={s.wrapperMaimSettings}>
@@ -71,10 +71,23 @@ const MainBlockSettings = () => {
                 <h3 className={s.other}>Other settings</h3>
 
                 <div className={s.otherWrapper}>
+                    {/*<div className="collapse">*/}
+                    {/*    <input type="checkbox" />*/}
+                    {/*    <div className="collapse-title text-xl font-medium">*/}
+                    {/*        Click me to show/hide content*/}
+                    {/*    </div>*/}
+                    {/*    <div className="collapse-content">*/}
+                    {/*        <p>hello</p>*/}
+                    {/*        <input autoFocus type="password" id='password'*/}
+                    {/*               className={s.inputI}/>*/}
+
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
                     <div tabIndex={1}
                          className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-xl mb-5 pl-3">
+                        <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
                             Settings One
                         </div>
@@ -82,8 +95,10 @@ const MainBlockSettings = () => {
                             <p>Settings One</p>
                         </div>
                     </div>
+
                     <div tabIndex={2} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-xl mb-5 pl-3">
+                        <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
                             Settings Two
                         </div>
@@ -91,8 +106,10 @@ const MainBlockSettings = () => {
                             <p>Settings Two</p>
                         </div>
                     </div>
+
                     <div tabIndex={3} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-base  mb-5 pl-3">
+                        <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
                             Setting Three
                         </div>
@@ -100,8 +117,11 @@ const MainBlockSettings = () => {
                             <p>Setting Three</p>
                         </div>
                     </div>
-                    <div tabIndex={4} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
+
+                    <div tabIndex={4}
+                         className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-xl pl-3">
+                        <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
                             Change password
                         </div>
@@ -123,18 +143,14 @@ const MainBlockSettings = () => {
                                            className={s.inputI}/>
                                 </li>
                                 <li>
-                                    <div></div>
                                     <Button  title={'Save'} style={buttonSettingsSave}/>
                                 </li>
                             </ul>
-
-
                         </div>
                     </div>
+
                 </div>
             </div>
-
-
         </div>
     );
 };
