@@ -55,6 +55,7 @@ const Sidebar = () => {
             <ModalWindow titleNode={newNoteTitle}
                          textNode={newNoteText}
                          colorNote={{}}
+                         modalId={''}
                          typeNode={'create'}
                          onTitleChange={onTitleChangeHandler}
                          onTextChange={onContentChangeHandler}
@@ -68,7 +69,8 @@ const Sidebar = () => {
             <div className={s.middleBox}>
                 <SidebarItem tooltipInfo={'Create note'}
                              link={'/notes'}
-                             icon={<PlusIcon width={50} fill={'#5590C1'}
+                             icon={<PlusIcon width={50}
+                                             fill={'#5590C1'}
                                              onClick={onAddNoteClickHandler}/>}/>
                 <SidebarItem tooltipInfo={'My notes'}
                              active={router.pathname === '/notes'}
@@ -81,18 +83,15 @@ const Sidebar = () => {
             </div>
             <div className={s.bottomBox}>
                 {currentTheme === 'dark' &&
-                <SidebarItem tooltipInfo={'Light Side'}
-                             icon={<SunnyIcon onClick={() => {
-                                 setTheme('light')
-                             }} width={50} fill={'#5590C1'}/>}/>
-                }
+                    <SidebarItem tooltipInfo={'Light Side'}
+                                 icon={<SunnyIcon onClick={() => {
+                                     setTheme('light')
+                                 }} width={50} fill={'#5590C1'}/>}/>}
                 {currentTheme !== 'dark' &&
-                <SidebarItem tooltipInfo={'Dark Side'}
-                             icon={<MoonIcon onClick={() => {
-                                 setTheme('dark')
-                             }} width={50} fill={'#5590C1'}/>}/>
-                }
-
+                    <SidebarItem tooltipInfo={'Dark Side'}
+                                 icon={<MoonIcon onClick={() => {
+                                     setTheme('dark')
+                                 }} width={50} fill={'#5590C1'}/>}/>}
                 <SidebarItem tooltipInfo={'Exit'}
                              redActive={true}
                              link={'/#'}

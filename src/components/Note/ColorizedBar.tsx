@@ -9,14 +9,17 @@ type ColorizedBarPropsType = {
     showColorBar: boolean
     setShowColorBar: (newStatus: boolean) => void
     currentColor: string
-    modalStyle?:{ marginBottom:string, marginLeft:string}
-
+    modalStyle?: { marginBottom: string, marginLeft: string }
 }
 
-const ColorizedBar: React.FC<ColorizedBarPropsType> = ({noteId, showColorBar, setShowColorBar,
-                                                           currentColor,modalStyle}) => {
-
-
+const ColorizedBar: React.FC<ColorizedBarPropsType> = (
+    {
+        noteId,
+        showColorBar,
+        setShowColorBar,
+        currentColor,
+        modalStyle
+    }) => {
 
     const colorSamples: ColorSamplesType[] = ["blue", "green", "violet", "mustard"]
     const dispatch = useAppDispatch()
@@ -28,26 +31,25 @@ const ColorizedBar: React.FC<ColorizedBarPropsType> = ({noteId, showColorBar, se
     }
 
     return (
-        <div style={modalStyle} className={`absolute flex duration-300 ${showColorBar ? 'bottom-[40px]' : 'opacity-0 bottom-[30px]'}`}
+        <div style={modalStyle} className={`cursor-pointer absolute flex duration-300 ${showColorBar ? 'bottom-[40px]' : 'opacity-0 bottom-[30px]'}`}
              onClick={(event) => {
                  event.stopPropagation()
              }}>
             {colorSamples.map((c, k) => {
-                const divClassName = `bg-[${colorizeNote(c).color}] w-[30px] h-[30px] border-[1px] mr-[10px]`
+                const divClassName = `bg-[${colorizeNote(c).color}] hover:scale-125 transition w-[30px] h-[30px] border-[1px] mr-[10px]`
                 return (
                     <div key={k}>
                         <div className={divClassName} onClick={() => onColorClick(c)}></div>
                     </div>
-
                 )
             })}
 
             {/*Далее цвета не сделаны через map, т.к. в первом случае при применении данный цвет меняется на противоположный согласно настройкам темы,*/}
             {/*во втором случае, для отображения цвета использован код цвета "backgroundColor", а не "color"*/}
 
-            <div className='bg-[#212121] w-[30px] h-[30px] border-[1px] mr-[10px]'
+            <div className='bg-[#212121] w-[30px] h-[30px] border-[1px] mr-[10px] hover:scale-125 transition'
                  onClick={() => onColorClick('dark')}></div>
-            <div className='bg-[#E5E5E5] w-[30px] h-[30px] border-[1px] mr-[10px]'
+            <div className='bg-[#E5E5E5] w-[30px] h-[30px] border-[1px] mr-[10px] hover:scale-125 transition'
                  onClick={() => onColorClick('default')}></div>
             {/*<div className={`absolute flex bottom-[40px]`}>*/}
             {/*    <div className='bg-[#5590C1] w-[30px] h-[30px] mr-[10px] border-[1px]'></div>*/}

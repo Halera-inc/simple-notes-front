@@ -31,7 +31,7 @@
 }
 
 .cardTitle {
-    outline:none;
+    outline: none;
     font-size: 30px !important;
     margin-bottom: 15px;
     background-color: transparent;
@@ -40,36 +40,40 @@
     text-blue-dark
 }
 
-.textTextArea{
-    outline:none;
+.textTextArea {
+    outline: none;
     font-weight: 500;
     font-size: 25px;
     line-height: 30px;
     overflow: auto;
-    resize:none;
+    resize: none;
+    height: 100%;
     @apply
-    my-2.5
+    mt-2.5
     rounded
     min-w-full
-    px-1
     bg-transparent
     text-blue-dark
 
 }
 
-
 .modalCancel {
+    display: flex;
+    align-items: center;
     padding: 7px 37px;
     font-size: 15px;
     background-color: #FFF4F4;
-    color:#F06464;
+    color: #F06464;
     border: 1px solid #F06464;
     cursor: pointer;
 }
-.modalSave{
+
+.modalSave {
+    display: flex;
+    align-items: center;
     padding: 7px 37px;
     font-size: 15px;
-    background-color:#D6EDD9;
+    background-color: #D6EDD9;
     color: #5E9C80;
     border: 1px solid #5E9C80;
     cursor: pointer;
