@@ -5,12 +5,16 @@ import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
+import {colorizedColorType} from "../src/components/Note";
+import {ColorSamplesType} from "../src/api/notes-api";
 
 const Notes = () => {
 
     const dispatch = useAppDispatch()
     const notes = useAppSelector(state => state.notes.notes)
     const [modalTitle, setModalTitle] = useState('')
+    const [modalColor, setModalColor] = useState<colorizedColorType>( {})
+    const [modalId, setModalId] = useState( '');
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
     console.log(notes)
@@ -18,9 +22,11 @@ const Notes = () => {
         dispatch(getNotes())
     }, [dispatch])
 
-    const onCardClickHandler = (title: string, note_text: string) => {
+    const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType,color:ColorSamplesType,noteId:string) => {
         title && setModalTitle(title)
         note_text && setModalText(note_text)
+        setModalColor(colorizedColor)
+        setModalId(noteId);
         modalBtnRef.current && modalBtnRef.current.click()
     }
     const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +49,8 @@ const Notes = () => {
             <ModalWindow titleNode={modalTitle}
                          textNode={modalText}
                          typeNode={'edit'}
-                         colorNote={{}}
+                         colorNote={modalColor}
+                         modalId={modalId}
                          onTitleChange={onTitleChangeHandler}
                          onTextChange={onContentChangeHandler}
                          onConfirm={onConfirmClickHandler}

@@ -8,6 +8,7 @@ type NotePropsType = {
     note_text?: string
     color?: string
     edit: (title: string, note_text: string) => void
+
 }
 export type colorizedColorType = {
     color?: string,
