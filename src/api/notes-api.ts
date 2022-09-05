@@ -20,7 +20,7 @@ export const notesAPI = {
     getNote(id: string) {
         return instance.get(`notes/${id}`);
     },
-    createNote(title?: string, note_text?: string, color?: string, note_mode?: string) {
+    createNote(title?: string, note_text?: string, color = 'blue', note_mode?: string) {
         return instance.post('notes', {
             title,
             note_text,

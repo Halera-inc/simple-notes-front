@@ -87,7 +87,6 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                         <div className={s.modalAction}>
                             <label htmlFor='my-modal-add-note' className={s.modalSave}
                                    onClick={props.onConfirm}>Save</label>
-                            <EditIcon className={'cursor-pointer'} width={'2.5em'} height={'2.5em'} fill={"#5590C1"}/>
                             <label htmlFor='my-modal-add-note' className={s.modalCancel}
                                    onClick={props.onDiscard}>Cancel</label>
                         </div>
