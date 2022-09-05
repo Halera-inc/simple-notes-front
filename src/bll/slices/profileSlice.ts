@@ -3,25 +3,24 @@ import {SettingsType, UserType} from "../../api/notes-api";
 import {loginUser, me} from "./authSlice";
 
 
-
 const initialState = {
-    user: {
-
-    } as UserType,
+    user: {} as UserType,
 }
 
 export const profileSlice = createSlice({
     name: 'profile',
     initialState,
-    reducers: {
-
-    },
-    extraReducers:  (builder) => {
+    reducers: {},
+    extraReducers: (builder) => {
         builder
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.user = action.payload
             })
-            }
+            .addCase(me.fulfilled, (state, action) => {
+                state.user = action.payload
+            })
+    }
+
 })
 
 // export const {} = profileSlice.actions
