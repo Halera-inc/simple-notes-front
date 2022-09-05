@@ -1,6 +1,6 @@
 import React from 'react';
-import { ColorSamplesType } from 'src/api/notes-api';
-import { editNote } from 'src/bll/slices/notesSlice';
+import {ColorSamplesType} from 'src/api/notes-api';
+import {editNote} from 'src/bll/slices/notesSlice';
 import colorizeNote from 'src/utils/colorizeNote';
 import {useAppDispatch} from 'src/utils/hooks';
 
@@ -8,22 +8,30 @@ type ColorizedBarPropsType = {
     noteId: string
     showColorBar: boolean
     setShowColorBar: (newStatus: boolean) => void
-    currentColor: ColorSamplesType
+    currentColor: string
+    modalStyle?:{ marginBottom:string, marginLeft:string}
+
 }
 
-const ColorizedBar: React.FC<ColorizedBarPropsType> = ({noteId, showColorBar, setShowColorBar, currentColor}) => {
+const ColorizedBar: React.FC<ColorizedBarPropsType> = ({noteId, showColorBar, setShowColorBar,
+                                                           currentColor,modalStyle}) => {
+
+
 
     const colorSamples: ColorSamplesType[] = ["blue", "green", "violet", "mustard"]
     const dispatch = useAppDispatch()
     const onColorClick = (color: ColorSamplesType) => {
-        if (color !== currentColor){
+        if (color !== currentColor) {
             dispatch(editNote({id: noteId, color: color}))
             setShowColorBar(!showColorBar)
         }
     }
 
     return (
-        <div className={`absolute flex duration-300 ${showColorBar ? 'bottom-[40px]' : 'opacity-0 bottom-[30px]'}`} onClick={(event)=>{event.stopPropagation()}}>
+        <div style={modalStyle} className={`absolute flex duration-300 ${showColorBar ? 'bottom-[40px]' : 'opacity-0 bottom-[30px]'}`}
+             onClick={(event) => {
+                 event.stopPropagation()
+             }}>
             {colorSamples.map((c, k) => {
                 const divClassName = `bg-[${colorizeNote(c).color}] w-[30px] h-[30px] border-[1px] mr-[10px]`
                 return (
