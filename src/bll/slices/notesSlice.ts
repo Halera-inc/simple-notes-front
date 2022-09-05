@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from 'axios'
 import {ColorSamplesType, notesAPI, NoteTextType, NoteViewType} from 'src/api/notes-api'
 
-export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
+export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) => {
     try {
         const res = await notesAPI.getNotes()
         // console.log(res)
@@ -15,6 +15,7 @@ export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
             // } else (dispatch(setAppError(error.message + '. More details in the console')))
             console.log({...error});
         }
+        return thunkAPI.rejectWithValue([])
     }}
 )
 export const createNote = createAsyncThunk('notes/createNote', async (params: PostNoteParamsType,thunkAPI) => {

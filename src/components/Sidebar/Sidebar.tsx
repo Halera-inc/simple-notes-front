@@ -13,6 +13,7 @@ import {useTheme} from "next-themes";
 import MoonIcon from "src/assets/images/MoonIcon";
 import {createNote} from "../../bll/slices/notesSlice";
 import {useAppDispatch} from "../../utils/hooks";
+import {setIsLoggedIn} from "../../bll/slices/authSlice";
 
 const Sidebar = () => {
 
@@ -46,6 +47,12 @@ const Sidebar = () => {
     const {systemTheme, theme, setTheme} = useTheme();
 
     const currentTheme = theme === "system" ? systemTheme : theme;
+
+    const onLogoutClickHandle = () => {
+        localStorage.removeItem('access_token')
+        dispatch(setIsLoggedIn(false))
+
+    }
 
     return (
         <div className={s.sidebarWrapper}>
@@ -93,10 +100,10 @@ const Sidebar = () => {
                              }} width={50} fill={'#5590C1'}/>}/>
                 }
 
-                <SidebarItem tooltipInfo={'Exit'}
+                <SidebarItem tooltipInfo={'Log out'}
                              redActive={true}
                              link={'/#'}
-                             icon={<LoginIcon width={50} fill={'#5590C1'}/>}/>
+                             icon={<LoginIcon width={50} fill={'#5590C1'} onClick={onLogoutClickHandle}/>}/>
             </div>
             <div className={'bg'}></div>
         </div>

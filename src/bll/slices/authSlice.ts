@@ -1,22 +1,17 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {NullableType} from "../store";
 import {authAPI} from "../../api/notes-api";
+import {router} from "next/client";
 
 export const registerUser = createAsyncThunk(
     "auth/register",
     async (params: RegisterParamsType, thunkAPI) => {
         try {
-            console.log(params)
             const response = await authAPI.register(params.email, params.password, params.country)
-            console.log("response", response)
-            if (response.status === 200) {
-                return response.data.message
-            } else {
-                return thunkAPI.rejectWithValue(response)
-            }
+            return response.data.message
         } catch (e) {
             console.log("Error", e)
-            thunkAPI.rejectWithValue(e)
+            return thunkAPI.rejectWithValue(e)
         }
     }
 )
@@ -25,16 +20,11 @@ export const loginUser = createAsyncThunk(
     async (params: LoginParamsType, thunkAPI) => {
         try {
             const response = await authAPI.login(params.email, params.password)
-            console.log("response", response)
-            if (response.status === 200) {
-                localStorage.setItem("access_token", response.data.token)
-                return response
-            } else {
-                return thunkAPI.rejectWithValue(response)
-            }
+            localStorage.setItem("access_token", response.data.token)
+            return response.data.user
         } catch (e) {
             console.log("Error", e)
-            thunkAPI.rejectWithValue(e)
+            return thunkAPI.rejectWithValue(e)
         }
     }
 )
@@ -42,30 +32,50 @@ export const loginUser = createAsyncThunk(
 export const me = createAsyncThunk(
     "auth/me",
     async (_, thunkAPI) => {
-
         try {
             const response = await authAPI.me()
             console.log(response.data)
             return response.data
         } catch (e) {
             console.log("Error", e)
-            thunkAPI.rejectWithValue(e)
+            return thunkAPI.rejectWithValue(e)
         }
     }
 )
 
-
-const initialState = {};
-
+const initialState = {isLoggedIn: false};
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
-    extraReducers: {}
+    reducers: {
+        setIsLoggedIn(state, action: PayloadAction<boolean>) {
+            state.isLoggedIn = action.payload
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(me.fulfilled, (state) => {
+                state.isLoggedIn = true
+            })
+            .addCase(loginUser.fulfilled, (state) => {
+                state.isLoggedIn = true
+            })
+
+        // .addCase(loginUser.fulfilled, (state) => {
+        //     state.isLoggedIn = true
+        // })
+        // .addCase(me.rejected, (state) => {
+        //     state.isLoggedIn = false
+        // })
+        // .addCase(loginUser.rejected, (state) => {
+        //     state.isLoggedIn = false
+        // })
+    }
+
 })
 
-// export const {} = notesSlice.actions
+export const {setIsLoggedIn} = authSlice.actions
 
 export default authSlice.reducer
 

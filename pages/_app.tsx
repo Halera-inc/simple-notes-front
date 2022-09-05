@@ -22,7 +22,7 @@ function MyApp({Component, pageProps}: AppProps) {
         <Provider store={store}>
             <div>
                 {router.pathname === '/'
-                || router.pathname === '/signIn'
+                || router.pathname === '/login'
                 || router.pathname === '/registration'
                 || router.pathname === '/about'
                 || router.pathname === '/404'

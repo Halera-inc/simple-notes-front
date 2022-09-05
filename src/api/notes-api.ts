@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from 'axios'
+import axios from 'axios'
 
 enum BASE_URLS {
     LOCAL = 'http://localhost:5050',
@@ -6,12 +6,19 @@ enum BASE_URLS {
 }
 
 const instance = axios.create({
-    baseURL: BASE_URLS.HEROKU,
+    baseURL: BASE_URLS.LOCAL,
     withCredentials: false,
 })
 if (typeof window !== 'undefined') {
-    instance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
+    instance.interceptors.request.use((config) => {
+        if (config.headers === undefined) {
+            config.headers = {};
+        }
+        config.headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
+        return config
+    })
 }
+
 export const notesAPI = {
     //for Notes
     getNotes() {
@@ -105,7 +112,13 @@ export type TaskType = {
     isDone: boolean
 }
 export type NoteViewType = 'note_text' | 'note_todo'
-export type ColorSamplesType = "blue" | "green" | "violet" | "mustard" | "dark" | "default"
+export type ColorSamplesType =
+    "blue"
+    | "green"
+    | "violet"
+    | "mustard"
+    | "dark"
+    | "default"
 
 // export type ColorType = {
 //     default: string

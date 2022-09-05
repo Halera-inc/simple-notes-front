@@ -35,6 +35,7 @@ const Notes = () => {
     const onDiscardClickHandler = () => {
     }
 
+
     return (
         <MainContainer>
             <label ref={modalBtnRef} htmlFor='my-modal'
