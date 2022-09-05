@@ -12,7 +12,7 @@ const Header = () => {
 
     const liArray = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7'] //todo must be replace with value from profile slice
     const [isCollapsed, setIsCollapsed] = useState(false)
-    const userName = useAppSelector(state => state.profile.user.username)
+    const userName = useAppSelector(state => state.profile.user.email)
     const pageName = getPageName(useRouter().pathname as APP_ROOTS)
     const isAuth = true                                   //todo must be replace with value from profile slice
     const router = useRouter()

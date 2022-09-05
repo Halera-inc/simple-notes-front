@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from 'axios'
-import {ColorSamplesType, notesAPI, NoteTextType, NoteViewType} from 'src/api/notes-api'
+import {notesAPI, NoteTextType, NoteTodoType} from 'src/api/notes-api'
 
 export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
     try {

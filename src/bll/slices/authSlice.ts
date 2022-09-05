@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAction, createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {NullableType} from "../store";
 import {authAPI} from "../../api/notes-api";
 
@@ -39,7 +39,7 @@ export const loginUser = createAsyncThunk(
     }
 )
 
-export const me = createAsyncThunk(
+export const Me = createAsyncThunk(
     "auth/me",
     async (_, thunkAPI) => {
 
@@ -63,6 +63,11 @@ export const authSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {}
+        //  ( builder) =>
+        // builder
+        //  .addCase(Me.fulfilled,(state,action)=>{
+        //      state.user = action.payload
+        //  })
 })
 
 // export const {} = notesSlice.actions
