@@ -70,9 +70,6 @@ export const authSlice = createSlice({
             .addCase(loginUser.fulfilled, (state) => {
                 state.isLoggedIn = true
             })
-    }
-
-})
 
 export const {setIsLoggedIn, setIsInitialized} = authSlice.actions
 

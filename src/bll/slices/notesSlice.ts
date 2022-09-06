@@ -2,10 +2,9 @@ import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from 'axios'
 import {ColorSamplesType, notesAPI, NoteTextType, NoteTodoType, NoteViewType} from 'src/api/notes-api'
 
-export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
+export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) => {
         try {
             const res = await notesAPI.getNotes()
-            // console.log(res)
             const notes = res.data
             return notes
         } catch (error) {
@@ -15,6 +14,7 @@ export const getNotes = createAsyncThunk('notes/getNotes', async (thunkAPI) => {
                 // } else (dispatch(setAppError(error.message + '. More details in the console')))
                 console.log({...error});
             }
+            return thunkAPI.rejectWithValue([])
         }
     }
 )
@@ -38,13 +38,7 @@ export const createNote = createAsyncThunk('notes/createNote', async (params: Po
 export const deleteNote = createAsyncThunk('notes/deleteNote', async (param: { noteId: string }, thunkAPI) => {
     try {
         const res = await notesAPI.deleteNote(param.noteId)
-        if (res.status === 200) {
-            console.log(res)
-            return {noteId: param.noteId}
-        } else {
-            return thunkAPI.rejectWithValue(null)
-        }
-
+        return {noteId: param.noteId}
     } catch (error) {
         console.log(error)
         return thunkAPI.rejectWithValue(null)
@@ -56,12 +50,7 @@ export const editNote = createAsyncThunk('notes/editNote',
         try {
             const res = await notesAPI.updateNote(params.id, params.title,
                 params.note_text, params.color, params.note_mode)
-            console.log(res)
-            if (res.status === 200) {
                 return {noteId: params.id, newColor: params.color, newTitle: params.title, newText: params.note_text, newMode: params.note_mode}
-            } else {
-                return thunkAPI.rejectWithValue(null)
-            }
         } catch (error) {
             console.log(error)
             return thunkAPI.rejectWithValue(null)
@@ -114,6 +103,7 @@ export const notesSlice = createSlice({
 })
 
 export const {setCreateNoteModalShow} = notesSlice.actions
+
 export default notesSlice.reducer
 
 // T Y P E S

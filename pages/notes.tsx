@@ -5,11 +5,15 @@ import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
+import {useRouter} from "next/router";
+import {initializeApp} from "../src/bll/slices/authSlice";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
 
 const Notes = () => {
 
+    const router = useRouter()
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
     const notes = useAppSelector(state => state.notes.notes)
     const [modalTitle, setModalTitle] = useState('')
@@ -18,9 +22,18 @@ const Notes = () => {
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
     console.log(notes)
+    console.log('notes rendering')
+
+    const effectRan = useRef(false)
+
     useEffect(() => {
-        dispatch(getNotes())
-    }, [dispatch])
+        if (!effectRan.current) {
+            dispatch(getNotes())
+            return () => {
+                effectRan.current = true
+            }
+        }
+    }, [])
 
     const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType,color:ColorSamplesType,noteId:string) => {
         title && setModalTitle(title)
@@ -40,6 +53,8 @@ const Notes = () => {
     }
     const onDiscardClickHandler = () => {
     }
+
+    typeof window !== 'undefined' && !isLoggedIn && router.push('/')
 
     return (
         <MainContainer>
