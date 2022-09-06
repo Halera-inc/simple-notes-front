@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {SettingsType, UserType} from "../../api/notes-api";
-import {loginUser, me} from "./authSlice";
+import {loginUser, initializeApp} from "./authSlice";
 
 
 const initialState = {
@@ -16,7 +16,7 @@ export const profileSlice = createSlice({
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.user = action.payload
             })
-            .addCase(me.fulfilled, (state, action) => {
+            .addCase(initializeApp.fulfilled, (state, action) => {
                 state.user = action.payload
             })
     }

@@ -1,7 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {NullableType} from "../store";
 import {authAPI} from "../../api/notes-api";
-import {router} from "next/client";
 
 export const registerUser = createAsyncThunk(
     "auth/register",
@@ -29,7 +27,7 @@ export const loginUser = createAsyncThunk(
     }
 )
 
-export const me = createAsyncThunk(
+export const initializeApp = createAsyncThunk(
     "auth/me",
     async (_, thunkAPI) => {
         try {
@@ -43,7 +41,10 @@ export const me = createAsyncThunk(
     }
 )
 
-const initialState = {isLoggedIn: false};
+const initialState = {
+    isLoggedIn: false,
+    isInitialized: false,
+};
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -52,11 +53,19 @@ export const authSlice = createSlice({
         setIsLoggedIn(state, action: PayloadAction<boolean>) {
             state.isLoggedIn = action.payload
         },
+        setIsInitialized(state, action: PayloadAction<boolean>) {
+            state.isInitialized = action.payload
+        },
     },
     extraReducers: (builder) => {
         builder
-            .addCase(me.fulfilled, (state) => {
+            .addCase(initializeApp.fulfilled, (state) => {
                 state.isLoggedIn = true
+                state.isInitialized = true
+            })
+            .addCase(initializeApp.rejected, (state) => {
+                state.isLoggedIn = false
+                state.isInitialized = true
             })
             .addCase(loginUser.fulfilled, (state) => {
                 state.isLoggedIn = true
@@ -75,7 +84,7 @@ export const authSlice = createSlice({
 
 })
 
-export const {setIsLoggedIn} = authSlice.actions
+export const {setIsLoggedIn, setIsInitialized} = authSlice.actions
 
 export default authSlice.reducer
 

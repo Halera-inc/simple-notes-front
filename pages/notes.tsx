@@ -6,6 +6,7 @@ import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
 import {useRouter} from "next/router";
+import {initializeApp} from "../src/bll/slices/authSlice";
 
 const Notes = () => {
 
@@ -17,9 +18,18 @@ const Notes = () => {
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
     console.log(notes)
+    console.log('notes rendering')
+
+    const effectRan = useRef(false)
+
     useEffect(() => {
-        dispatch(getNotes())
-    }, [dispatch])
+        if (!effectRan.current) {
+            dispatch(getNotes())
+            return () => {
+                effectRan.current = true
+            }
+        }
+    }, [])
 
     const onCardClickHandler = (title: string, note_text: string) => {
         title && setModalTitle(title)

@@ -1,18 +1,24 @@
 import {useRouter} from "next/router";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../utils/hooks";
-import {me} from "../bll/slices/authSlice";
+import {initializeApp} from "../bll/slices/authSlice";
 import Sidebar from "./Sidebar/Sidebar";
 
 export const RouteGuard = ({children}: any) => {
 
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const effectRan = useRef(false)
+    const {isLoggedIn, isInitialized} = useAppSelector(state => state.auth)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(me())
+        if (!effectRan.current) {
+            dispatch(initializeApp())
+        }
+        return () => {
+            effectRan.current = true
+        }
     }, [])
-
+    if (!isInitialized) return <div>InitializePreloader</div>
     return <div>
         {isLoggedIn && <Sidebar/>}
         <div className='flex flex-col bg-white dark:bg-black'>
