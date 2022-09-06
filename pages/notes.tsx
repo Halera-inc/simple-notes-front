@@ -5,9 +5,12 @@ import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
+import {useRouter} from "next/router";
 
 const Notes = () => {
 
+    const router = useRouter()
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
     const notes = useAppSelector(state => state.notes.notes)
     const [modalTitle, setModalTitle] = useState('')
@@ -35,6 +38,7 @@ const Notes = () => {
     const onDiscardClickHandler = () => {
     }
 
+    typeof window !== 'undefined' && !isLoggedIn && router.push('/')
 
     return (
         <MainContainer>

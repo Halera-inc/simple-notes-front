@@ -12,13 +12,9 @@ import {useRouter} from "next/router";
 
 const Login = () => {
 
+    const router = useRouter()
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
-    const router = useRouter()
-
-    useEffect(() => {
-        isLoggedIn && router.push('/notes')
-    }, [isLoggedIn])
 
     type FormikErrorType = {
         email?: string
@@ -42,6 +38,9 @@ const Login = () => {
     const resetHandler = () => {
         formik.resetForm();
     }
+
+    typeof window !== 'undefined' && isLoggedIn && router.push('/notes')
+
     return (
         <MainContainer>
             <div className={s.singnInBlock}>

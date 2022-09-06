@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from 'src/styles/landingStyle/Header.module.css'
 import Button from "src/components/universalComponent/Button";
-import ButtonIcon from "src/assets/images/ButtonIcon";
+import {useRouter} from "next/router";
 
 
 const Header = (props: { title: string }) => {
-    const [login, setLogin] = useState<boolean>(false)
+
+    const router = useRouter()
+
     const onChangeLogin = () => {
-        setLogin(!login)
+        typeof window !== 'undefined' && router.push('/login')
     }
 
     return (
@@ -16,10 +18,10 @@ const Header = (props: { title: string }) => {
             <div className={s.wrapperBtn}>
                 <a href={'/about'} className={s.about}>About</a>
                 <div className={s.btn}>
-                    {login && <Button title='Login' onChangeParams={onChangeLogin}/>}
-                    {!login && <div className={s.btnIcon}>
-                        <ButtonIcon onClick={onChangeLogin}/>
-                    </div>}
+                    {/*<Button title='Login' onChangeParams={onChangeLogin}/>*/}
+                    <div className={s.btnIcon}>
+                        <Button title='Login' onChangeParams={onChangeLogin}/>
+                    </div>
                 </div>
             </div>
         </div>

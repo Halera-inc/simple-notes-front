@@ -1,10 +1,12 @@
 import type {NextPage} from 'next'
-import s from '../src/styles/Home.module.css'
 import MainContainer from "../src/components/MainContainer";
 import LandingPage from "src/components/landing/LandingPage";
-import {useTheme} from "next-themes";
+import {useRouter} from "next/router";
+import {useAppSelector} from "../src/utils/hooks";
 
 const Home: NextPage = () => {
+    const router = useRouter()
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     // const { systemTheme, theme, setTheme } = useTheme();
     //
     // // toggle responsible for changing the theme
@@ -27,10 +29,13 @@ const Home: NextPage = () => {
     //         > Light </button>
     //     );
     // };
+
+    typeof window !== 'undefined' && isLoggedIn && router.push('/notes')
+
     return (
 
-        <MainContainer  >
-            <div className="bg-white dark:bg-black" >
+        <MainContainer>
+            <div className="bg-white dark:bg-black">
                 <LandingPage/>
             </div>
         </MainContainer>
