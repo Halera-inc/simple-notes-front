@@ -70,18 +70,18 @@ export const authSlice = createSlice({
             .addCase(loginUser.fulfilled, (state) => {
                 state.isLoggedIn = true
             })
-
+    }})
 export const {setIsLoggedIn, setIsInitialized} = authSlice.actions
 
 export default authSlice.reducer
 
 // Types for thunk
 
-type LoginParamsType = {
+export type LoginParamsType = {
     email: string
     password: string
 }
-type RegisterParamsType = {
+export type RegisterParamsType = {
     email: string
     password: string
     country: string
