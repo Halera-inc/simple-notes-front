@@ -1,5 +1,6 @@
 import React from 'react';
 import s from "src/styles/landingStyle/Header.module.css";
+import {PutUserParamsType} from "src/bll/slices/profileSlice";
 
 const Button = (props: { title: string,onChangeParams?:()=>void ,style?:any}) => {
     return (

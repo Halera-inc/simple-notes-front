@@ -60,7 +60,7 @@ const Registration = () => {
             if (!values.password2) {
                 errors.password2 = 'Required';
             } else if (values.password !== values.password2) { //сдесь изменения
-                errors.password2 = 'The password and confirmation password do not match'
+                errors.password2 = 'Invalid password'
             }
             return errors;
         },
@@ -77,6 +77,9 @@ const Registration = () => {
     })
 
     typeof window !== 'undefined' && isLoggedIn && router.push('/notes')
+    const defferentClass=formik.errors.password2 ==='Invalid password'
+        ? <div className={s.errorTextInvalid}>{formik.errors.password2}</div>
+            :  <div className={s.errorTextRegistration}>{formik.errors.password2}</div>
 
 
     return (
@@ -181,9 +184,7 @@ const Registration = () => {
                                                className={formik.touched.password2 && formik.errors.password2 ? s.errorInput : s.inputI}
                                                {...formik.getFieldProps('password2')}/>
                                     </label>
-                                    {formik.touched.password2 && formik.errors.password2 ?
-                                        <div
-                                            className={s.errorTextRegistration}>{formik.errors.password2}</div> : ''}
+                                    {formik.touched.password2 && formik.errors.password2 ? defferentClass :" "}
                                 </div>
 
                                 <div className="card-actions justify-center">

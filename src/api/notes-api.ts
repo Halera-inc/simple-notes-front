@@ -6,7 +6,7 @@ enum BASE_URLS {
 }
 
 const instance = axios.create({
-    baseURL: BASE_URLS.LOCAL,
+    baseURL: BASE_URLS.HEROKU,
     withCredentials: false,
 })
 if (typeof window !== 'undefined') {
@@ -61,6 +61,12 @@ export const authAPI = {
 
 }
 
+//for User
+export const userAPI = {
+    updateUser(username?: string, email?: string, country?: string) {
+        return instance.put(`user`, {username,  country})
+    }
+}
 
 // Types
 
