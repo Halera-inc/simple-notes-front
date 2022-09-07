@@ -1,9 +1,8 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {notesAPI, SettingsType} from "../../api/notes-api";
+import {notesAPI, SettingsType, userAPI} from "../../api/notes-api";
 import axios from "axios";
 import {Me} from "src/bll/slices/authSlice";
 import {notesSlice} from "src/bll/slices/notesSlice";
-
 
 
 type UserType = {   //tmp type for develop //todo must be replace with original UserType when server API works
@@ -29,7 +28,21 @@ const initialState = {
     } as UserType,
 }
 
-// export const loginTC = createAsyncThunk('profileSlice/login', async (params: {})=>{})
+export const updateUserData = createAsyncThunk('profileSlice/updateUserData',
+    async (params: PutUserParamsType) => {
+        try {
+            const res = await userAPI.updateUser(params.username, params.country)
+            const newUserData = res.data
+            return newUserData
+        } catch (error) {
+            const data = error
+            if (axios.isAxiosError(error) && data) {
+                // dispatch(setAppError(data.error || 'Some error occurred'));
+                // } else (dispatch(setAppError(error.message + '. More details in the console')))
+
+            }
+        }
+    })
 
 export const profileSlice = createSlice({
     name: 'user',
@@ -37,17 +50,29 @@ export const profileSlice = createSlice({
     reducers: {
         // setUserData(state, action: PayloadAction<{ user: UserType }>) {
         //     state.user = action.payload.user
-       // }
+        // }
     },
-    extraReducers:  (builder)=> {
+    extraReducers: (builder) => {
         builder
+            .addCase(Me.pending, (state) => {
+                // setIsAppFetching(true)
+            })
             .addCase(Me.fulfilled, (state, action) => {
                 state.user = action.payload
 
             })
+            .addCase(updateUserData.fulfilled, (state, action) => {
+                state.user = action.payload
+            })
+
     }
 })
 //export const { setUserData} = profileSlice.actions
 // export const {} = profileSlice.actions
 
+export type PutUserParamsType = {
+    username?: string
+    email?: string
+    country?: string
+}
 export default profileSlice.reducer

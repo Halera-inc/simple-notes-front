@@ -1,10 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button";
 import {authAPI} from "../../api/notes-api";
 import {useAppDispatch, useAppSelector} from "src/utils/hooks";
 import {Me} from "src/bll/slices/authSlice";
+import {PutUserParamsType, updateUserData} from "src/bll/slices/profileSlice";
+import InputForm from "src/components/Settings/inputform/InputForm";
 
+export const buttonEditSave = {
+    paddingTop: '7px',
+    paddingBottom: '7px',
+    paddingLeft: '37px',
+    paddingRight: '37px',
+    fontSize: '25px',
+
+}
 
 const MainBlockSettings = () => {
     const buttonProfile = {
@@ -15,14 +25,7 @@ const MainBlockSettings = () => {
         fontSize: '15px',
     }
 
-    const buttonEditSave = {
-        paddingTop: '7px',
-        paddingBottom: '7px',
-        paddingLeft: '37px',
-        paddingRight: '37px',
-        fontSize: '25px',
 
-    }
     const buttonSettingsSave = {
         paddingTop: '7px',
         paddingBottom: '7px',
@@ -40,9 +43,11 @@ const MainBlockSettings = () => {
     }, [dispatch])
 
     const [edit, setEdit] = useState(false);
+
     const editProfileHandler = () => {
         setEdit(!edit);
     }
+
 
     return (
         <div className={s.wrapperMaimSettings}>
@@ -59,19 +64,8 @@ const MainBlockSettings = () => {
                     </div>
                 </div>
                 {edit ?
-                    <div className={s.edit}>
-                        <ul className={s.editMyProfile}>
-                            <li>Username: <input type="text" placeholder="Ivanov Ivan"
-                                                 className={s.inf}/></li>
-                            <li>Email: <input type="text" placeholder="marginadegames@gmail.com"
-                                              className={s.inf}/></li>
-                            <li>Country: <input type="text" placeholder=" Belarus"
-                                                className={s.inf}/>
-                            </li>
-                        </ul>
-                        <Button title={'Save'} style={buttonEditSave}/>
-                    </div>
-                    : ""}
+                    <InputForm/> : ""
+                }
 
             </div>
 

@@ -13,7 +13,7 @@ const Header = () => {
 
     const liArray = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7'] //todo must be replace with value from profile slice
     const [isCollapsed, setIsCollapsed] = useState(false)
-    const userName = useAppSelector(state => state.profile.user.email)
+    const userName = useAppSelector(state => state.profile.user)
     const pageName = getPageName(useRouter().pathname as APP_ROOTS)
     const isAuth = true                                   //todo must be replace with value from profile slice
     const router = useRouter()
@@ -35,7 +35,7 @@ const Header = () => {
                             </p>
                             <div className='flex justify-between w-[340px] items-center mr-[74px]'>
                                 <SearchIcon width={'40px'} height={'40px'} fill={'#212121'}/>
-                                <p className='text-lg'>{userName}</p>
+                                <p className='text-lg'>{userName.username}</p>
                                 <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
                             </div>
                         </div>

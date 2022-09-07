@@ -55,6 +55,12 @@ export const authAPI = {
 
 }
 
+//for User
+export const userAPI = {
+    updateUser(username?: string, email?: string, country?: string) {
+        return instance.put(`user`, {username,  country})
+    }
+}
 
 // Types
 
