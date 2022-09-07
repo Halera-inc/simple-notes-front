@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button";
-import {authAPI} from "../../api/notes-api";
-import {useAppDispatch, useAppSelector} from "src/utils/hooks";
-import {Me} from "src/bll/slices/authSlice";
+import {useAppSelector} from "src/utils/hooks";
 
 
 const MainBlockSettings = () => {
@@ -33,11 +31,6 @@ const MainBlockSettings = () => {
 
     }
     const user = useAppSelector(state => state.profile.user)
-    const dispatch = useAppDispatch()
-    useEffect(() => {
-
-        dispatch(Me())
-    }, [dispatch])
 
     const [edit, setEdit] = useState(false);
     const editProfileHandler = () => {
