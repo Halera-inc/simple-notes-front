@@ -1,4 +1,5 @@
-.singnInBlock {
+
+.singnInBlock{
     height: 100vh;
     @apply
     flex
@@ -13,13 +14,12 @@
     justify-center
 }
 
-.wrapperRegistrationCard {
+.wrapperRegistrationCard{
     @apply
     flex
     justify-center
     items-center
 }
-
 
 .cardBody {
     padding: 73px 52px 23px 52px;
@@ -132,8 +132,15 @@
 .errorTextRegistration {
     color: red;
     position: absolute;
-    bottom: -40%;
-    left: 45%;
+    bottom: -45%;
+    left: 43%;
+}
+
+.errorTextInvalid{
+    color: red;
+    position: absolute;
+    bottom: -48%;
+    left: 36%;
 }
 
 .text {

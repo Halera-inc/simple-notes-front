@@ -1,5 +1,5 @@
 .wrapperSettings {
-    padding: 130px 40px 0  140px;
+    padding: 130px 40px 0 140px;
     height: 100vh;
 
 }
@@ -9,7 +9,8 @@
     flex
     justify-between
 }
-.leftArea{
+
+.leftArea {
     @apply
     flex
     flex-col
@@ -32,7 +33,7 @@
     flex-col
     justify-between
 
-   
+
 }
 
 .imgProfile {
@@ -59,11 +60,11 @@ ul.editData li {
 
 }
 
-.edit{
+.edit {
     text-align: right;
 }
 
-ul.editMyProfile li{
+ul.editMyProfile li {
     font-weight: 700;
     font-size: 22px;
     line-height: 27px;
@@ -75,7 +76,8 @@ ul.editMyProfile li{
     items-center
 
 }
-ul.editMyProfile input{
+
+ul.editMyProfile input {
     width: 412px;
     height: 60px;
     @apply
@@ -91,22 +93,22 @@ ul.editMyProfile input{
 }
 
 
-.otherSettings{
-padding-right: 250px;
+.otherSettings {
+    padding-right: 250px;
 }
 
-.other{
+.other {
     font-weight: 700;
     font-size: 40px;
     line-height: 49px;
     margin-bottom: 27px;
 }
 
-.otherWrapper{
+.otherWrapper {
     width: 623px;
 }
 
-.collapseContent{
+.collapseContent {
     margin-top: 25px;
     padding: 0 15px 0 0;
     margin-bottom: -10px;
@@ -114,7 +116,7 @@ padding-right: 250px;
 }
 
 
-ul.collapseContent li{
+ul.collapseContent li {
     @apply
     flex
     pb-5
@@ -122,14 +124,14 @@ ul.collapseContent li{
     items-center
 
 }
-ul.collapseContent li p{
+
+ul.collapseContent li p {
     font-weight: 500;
     font-size: 15px;
     line-height: 18px;
     color: #5590C1;
 
 }
-
 
 .inputI {
     width: 400px;

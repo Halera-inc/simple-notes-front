@@ -8,6 +8,12 @@ type NotePropsType = {
     note_text?: string
     color?: string
     edit: (title: string, note_text: string) => void
+
+}
+export type colorizedColorType = {
+    color?: string,
+    borderColor?: string,
+    backgroundColor?: string,
 }
 
 const Note = ({title = '', note_text = '', color, edit}: NotePropsType) => {

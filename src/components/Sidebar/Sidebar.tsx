@@ -13,6 +13,7 @@ import {useTheme} from "next-themes";
 import MoonIcon from "src/assets/images/MoonIcon";
 import {createNote} from "../../bll/slices/notesSlice";
 import {useAppDispatch} from "../../utils/hooks";
+import {setIsLoggedIn} from "../../bll/slices/authSlice";
 
 const Sidebar = () => {
 
@@ -45,9 +46,13 @@ const Sidebar = () => {
 
     const {systemTheme, theme, setTheme} = useTheme();
 
-
     const currentTheme = theme === "system" ? systemTheme : theme;
 
+    const onLogoutClickHandle = () => {
+        localStorage.removeItem('access_token')
+        dispatch(setIsLoggedIn(false))
+
+    }
 
     return (
         <div className={s.sidebarWrapper}>
@@ -56,6 +61,8 @@ const Sidebar = () => {
                 modal</label>
             <ModalWindow titleNode={newNoteTitle}
                          textNode={newNoteText}
+                         colorNote={{}}
+                         modalId={''}
                          typeNode={'create'}
                          onTitleChange={onTitleChangeHandler}
                          onTextChange={onContentChangeHandler}
@@ -69,7 +76,8 @@ const Sidebar = () => {
             <div className={s.middleBox}>
                 <SidebarItem tooltipInfo={'Create note'}
                              link={'/notes'}
-                             icon={<PlusIcon width={50} fill={'#5590C1'}
+                             icon={<PlusIcon width={50}
+                                             fill={'#5590C1'}
                                              onClick={onAddNoteClickHandler}/>}/>
                 <SidebarItem tooltipInfo={'My notes'}
                              active={router.pathname === '/notes'}
@@ -82,11 +90,10 @@ const Sidebar = () => {
             </div>
             <div className={s.bottomBox}>
                 {currentTheme === 'dark' &&
-                <SidebarItem tooltipInfo={'Light Side'}
-                             icon={<SunnyIcon onClick={() => {
-                                 setTheme('light')
-                             }} width={50} fill={'#5590C1'}/>}/>
-                }
+                    <SidebarItem tooltipInfo={'Light Side'}
+                                 icon={<SunnyIcon onClick={() => {
+                                     setTheme('light')
+                                 }} width={50} fill={'#5590C1'}/>}/>}
                 {currentTheme !== 'dark' &&
                 <SidebarItem tooltipInfo={'Dark Side'}
                              icon={<MoonIcon onClick={() => {
@@ -94,10 +101,10 @@ const Sidebar = () => {
                              }} width={50} fill={'#5590C1'}/>}/>
                 }
 
-                <SidebarItem tooltipInfo={'Exit'}
+                <SidebarItem tooltipInfo={'Log out'}
                              redActive={true}
                              link={'/#'}
-                             icon={<LoginIcon width={50} fill={'#5590C1'}/>}/>
+                             icon={<LoginIcon width={50} fill={'#5590C1'} onClick={onLogoutClickHandle}/>}/>
             </div>
             <div className={'bg'}></div>
         </div>
