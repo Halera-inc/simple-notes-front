@@ -6,7 +6,7 @@ enum BASE_URLS {
 }
 
 const instance = axios.create({
-    baseURL: BASE_URLS.LOCAL,
+    baseURL: BASE_URLS.HEROKU,
     withCredentials: false,
 })
 if (typeof window !== 'undefined') {
