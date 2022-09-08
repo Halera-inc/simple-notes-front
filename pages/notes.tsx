@@ -1,5 +1,5 @@
 import {ChangeEvent, useEffect, useRef, useState} from 'react'
-import {getNotes} from 'src/bll/slices/notesSlice';
+import {editNote, getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
@@ -48,8 +48,8 @@ const Notes = () => {
     const onContentChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setModalText(e.currentTarget.value)
     }
-    const onConfirmClickHandler = () => {
-        alert(`Save in Edit mode. Title: ${modalTitle}. Text: ${modalText}`)  // todo need to fix with appAPI
+    const onConfirmClickHandler = (id:string,title:string,note_text:string) => {
+      dispatch(editNote({id,title,note_text})) // todo need to fix with appAPI
     }
     const onDiscardClickHandler = () => {
     }

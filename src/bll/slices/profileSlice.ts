@@ -18,7 +18,20 @@ type UserType = {   //tmp type for develop //todo must be replace with original 
 const initialState = {
     user: {} as UserType,
 }
-
+// export  const getUser = createAsyncThunk('profileSlice/getUser',
+//     async ()=>{
+//     try{
+//         const res = await  userAPI.getUser()
+//         const user = res.data
+//         return user
+//     }catch (error){
+//         const data = error
+//         if(axios.isAxiosError(error) && data){
+//
+//         }
+//     }
+//     }
+//     )
 export const updateUserData = createAsyncThunk('profileSlice/updateUserData',
     async (params: PutUserParamsType) => {
         try {

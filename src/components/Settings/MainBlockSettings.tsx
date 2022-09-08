@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button";
-import {useAppSelector} from "src/utils/hooks";
+
+import {useAppDispatch, useAppSelector} from "src/utils/hooks";
+
 import InputForm from "src/components/Settings/inputform/InputForm";
 
 export const buttonEditSave = {
@@ -10,6 +12,7 @@ export const buttonEditSave = {
     paddingLeft: '37px',
     paddingRight: '37px',
     fontSize: '25px',
+
 }
 
 const MainBlockSettings = () => {
@@ -21,14 +24,7 @@ const MainBlockSettings = () => {
         fontSize: '15px',
     }
 
-    const buttonEditSave = {
-        paddingTop: '7px',
-        paddingBottom: '7px',
-        paddingLeft: '37px',
-        paddingRight: '37px',
-        fontSize: '25px',
 
-    }
     const buttonSettingsSave = {
         paddingTop: '7px',
         paddingBottom: '7px',
@@ -72,10 +68,9 @@ const MainBlockSettings = () => {
 
                 <div className={s.otherWrapper}>
 
-                    <div tabIndex={1}
+                    <div tabIndex='1'
                          className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-xl mb-5 pl-3">
-                        <input type="checkbox"/>
                         <div className="collapse-title text-xl font-medium">
                             Settings One
                         </div>
@@ -83,10 +78,8 @@ const MainBlockSettings = () => {
                             <p>Settings One</p>
                         </div>
                     </div>
-
-                    <div tabIndex={2} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
+                    <div tabIndex='2' className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-xl mb-5 pl-3">
-                        <input type="checkbox"/>
                         <div className="collapse-title text-xl font-medium">
                             Settings Two
                         </div>
@@ -94,10 +87,8 @@ const MainBlockSettings = () => {
                             <p>Settings Two</p>
                         </div>
                     </div>
-
-                    <div tabIndex={3} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
+                    <div tabIndex="3" className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-base  mb-5 pl-3">
-                        <input type="checkbox"/>
                         <div className="collapse-title text-xl font-medium">
                             Setting Three
                         </div>
@@ -105,28 +96,25 @@ const MainBlockSettings = () => {
                             <p>Setting Three</p>
                         </div>
                     </div>
-
-                    <div tabIndex={4}
-                         className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
+                    <div tabIndex="4" className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-xl pl-3">
-                        <input type="checkbox"/>
                         <div className="collapse-title text-xl font-medium">
                             Change password
                         </div>
                         <div className={"collapse-content text-right "}>
                             <ul className={s.collapseContent}>
                                 <li>
-                                    <p>Current password</p>
+                                    <p>Current passwrod</p>
                                     <input type="password" id='password'
                                            className={s.inputI}/>
                                 </li>
                                 <li>
-                                    <p>New password </p>
+                                    <p>New passwrod </p>
                                     <input type="password" id='password'
                                            className={s.inputI}/>
                                 </li>
                                 <li>
-                                    <p>Repeat password</p>
+                                    <p>Repeat passwrod</p>
                                     <input type="password" id='password'
                                            className={s.inputI}/>
                                 </li>
@@ -135,11 +123,14 @@ const MainBlockSettings = () => {
                                     <Button title={'Save'} style={buttonSettingsSave}/>
                                 </li>
                             </ul>
+
+
                         </div>
                     </div>
-
                 </div>
             </div>
+
+
         </div>
     );
 };
