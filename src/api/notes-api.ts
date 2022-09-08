@@ -1,23 +1,13 @@
 import axios from 'axios'
 
 enum BASE_URLS {
-    LOCAL = 'http://localhost:5050',
+    LOCAL = 'http://localhost:3000',
     HEROKU = 'https://simple-notes-back.herokuapp.com/'
 }
 
 const instance = axios.create({
-    baseURL: BASE_URLS.HEROKU,
-    withCredentials: false,
+    baseURL: BASE_URLS.LOCAL,
 })
-if (typeof window !== 'undefined') {
-    instance.interceptors.request.use((config) => {
-        if (config.headers === undefined) {
-            config.headers = {};
-        }
-        config.headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
-        return config
-    })
-}
 
 export const notesAPI = {
     //for Notes
