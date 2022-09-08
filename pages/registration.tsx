@@ -54,8 +54,9 @@ const Registration = () => {
             }
             if (!values.password) {
                 errors.password = 'Required';
-            } else if (/[A-Za-z0-9]{30}/.test(values.password)) {
-                errors.password = 'Invalid password';
+                // /^(?=.[A-Z].[A-Z])(?=.[0-9].[0-9])(?=.[a-z].[a-z].*[a-z]).{8,}$/      /[A-Za-z0-9]{8,}/
+            } else if (!/^(?=.[0-9].[0-9]).{8,}$/.test(values.password)) {
+                errors.password = "Password must be 8 numbers or more";
             }
             if (!values.password2) {
                 errors.password2 = 'Required';
@@ -77,9 +78,12 @@ const Registration = () => {
     })
 
     typeof window !== 'undefined' && isLoggedIn && router.push('/notes')
-    const defferentClass=formik.errors.password2 ==='Invalid password'
+    const defferentPassword2Class=formik.errors.password2 ==='Invalid password'
         ? <div className={s.errorTextInvalid}>{formik.errors.password2}</div>
             :  <div className={s.errorTextRegistration}>{formik.errors.password2}</div>
+    const defferentPasswordClass=formik.errors.password ==="Password must be 8 numbers or more"
+        ? <div className={s.errorTextMust}>{formik.errors.password}</div>
+        :  <div className={s.errorTextRegistration}>{formik.errors.password}</div>
 
 
     return (
@@ -168,9 +172,7 @@ const Registration = () => {
                                                className={formik.touched.password && formik.errors.password ? s.errorInput : s.inputI}
                                                {...formik.getFieldProps('password')}/>
                                     </label>
-                                    {formik.touched.password && formik.errors.password ?
-                                        <div
-                                            className={s.errorTextRegistration}>{formik.errors.password}</div> : ''}
+                                    {formik.touched.password && formik.errors.password ? defferentPasswordClass : ''}
                                 </div>
 
                                 <div className={`${s.formControl} ${s.two}`}>
@@ -184,7 +186,7 @@ const Registration = () => {
                                                className={formik.touched.password2 && formik.errors.password2 ? s.errorInput : s.inputI}
                                                {...formik.getFieldProps('password2')}/>
                                     </label>
-                                    {formik.touched.password2 && formik.errors.password2 ? defferentClass :" "}
+                                    {formik.touched.password2 && formik.errors.password2 ? defferentPassword2Class :" "}
                                 </div>
 
                                 <div className="card-actions justify-center">

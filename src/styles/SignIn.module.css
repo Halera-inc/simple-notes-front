@@ -142,6 +142,12 @@
     bottom: -48%;
     left: 36%;
 }
+.errorTextMust{
+    color: red;
+    position: absolute;
+    bottom: -46%;
+    left: 27%;
+}
 
 .text {
     font-weight: 600;

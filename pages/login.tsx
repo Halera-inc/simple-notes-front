@@ -29,7 +29,6 @@ const Login = () => {
 
         },
         onSubmit: values => {
-            console.log(values.email, values.password)
             dispatch(loginUser({email: values.email, password: values.password}));
             formik.resetForm();
         },
