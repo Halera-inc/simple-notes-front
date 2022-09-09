@@ -1,0 +1,28 @@
+.login_button {
+    width: 70px;
+    height: 25px;
+    background-color: #E5F1FD;
+    border: 1px solid #5590C1;
+    color: #5590C1;
+    font-size: 12px;
+}
+
+.mainBlock_button {
+    width: 200px;
+    height: 60px;
+    background-color: #E5F1FD;
+    border: 1px solid #5590C1;
+    color: #5590C1;
+    font-size: 25px;
+}
+
+@media screen and (max-width: 640px) {
+    .mainBlock_button {
+        width: 80px;
+        height: 25px;
+        background-color: #E5F1FD;
+        border: 1px solid #5590C1;
+        color: #5590C1;
+        font-size: 12px;
+    }
+}

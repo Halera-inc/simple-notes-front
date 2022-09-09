@@ -1,11 +1,11 @@
 import React from 'react';
-import s from "src/styles/landingStyle/Header.module.css";
-import {PutUserParamsType} from "src/bll/slices/profileSlice";
+import s from "./Button.module.css";
 
-const Button = (props: { title: string,onChangeParams?:()=>void ,style?:any}) => {
+const Button = (props: { title: string, onChangeParams?: () => void, style?: any }) => {
+
     return (
         <div>
-            <button className={s.button} style={props.style}
+            <button className={s[props.style]}
                     onClick={props.onChangeParams}
             >{props.title}</button>
         </div>

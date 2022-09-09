@@ -1,16 +1,7 @@
 import React, {useState} from 'react';
 import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button";
-import {useAppSelector} from "src/utils/hooks";
-import InputForm from "src/components/Settings/inputform/InputForm";
 
-export const buttonEditSave = {
-    paddingTop: '7px',
-    paddingBottom: '7px',
-    paddingLeft: '37px',
-    paddingRight: '37px',
-    fontSize: '25px',
-}
 
 const MainBlockSettings = () => {
     const buttonProfile = {
@@ -35,14 +26,11 @@ const MainBlockSettings = () => {
         paddingLeft: '37px',
         paddingRight: '37px',
         fontSize: '22px',
-        backgroundColor: '#ffffff',
+        backgroundColor:'#ffffff',
 
     }
-    const user = useAppSelector(state => state.profile.user)
-
     const [edit, setEdit] = useState(false);
-
-    const editProfileHandler = () => {
+    const editProfileHandler =  () => {
         setEdit(!edit);
     }
 
@@ -54,16 +42,28 @@ const MainBlockSettings = () => {
                     <img className={s.imgProfile}/>
                     <div className={s.editWrapper}>
                         <ul className={s.editData}>
-                            <li className={s.myName}>{user.email}</li>
-                            <li className={s.reg}> {user.createdAt}</li>
-                            <li className={s.reg}>{user.country}</li>
+                            <li className={s.myName}>Ivanov Ivan</li>
+                            <li className={s.reg}>Registered in 13 Juli 2022</li>
+                            <li className={s.reg}><b>ID:</b> 1234</li>
+                            <li className={s.reg}><b>Notes:</b> 5</li>
                         </ul>
                         <Button title={'Edit'} onChangeParams={editProfileHandler} style={buttonProfile}/>
                     </div>
                 </div>
                 {edit ?
-                    <InputForm/> : ""
-                }
+                    <div className={s.edit}>
+                        <ul className={s.editMyProfile}>
+                            <li>Username: <input type="text" placeholder="Ivanov Ivan"
+                                                 className={s.inf}/></li>
+                            <li>Email: <input type="text" placeholder="marginadegames@gmail.com"
+                                              className={s.inf}/></li>
+                            <li>Country: <input type="text" placeholder=" Belarus"
+                                                className={s.inf}/>
+                            </li>
+                        </ul>
+                        <Button title={'Save'} style={buttonEditSave}/>
+                    </div>
+                    : ""}
 
             </div>
 
@@ -71,11 +71,23 @@ const MainBlockSettings = () => {
                 <h3 className={s.other}>Other settings</h3>
 
                 <div className={s.otherWrapper}>
+                    {/*<div className="collapse">*/}
+                    {/*    <input type="checkbox" />*/}
+                    {/*    <div className="collapse-title text-xl font-medium">*/}
+                    {/*        Click me to show/hide content*/}
+                    {/*    </div>*/}
+                    {/*    <div className="collapse-content">*/}
+                    {/*        <p>hello</p>*/}
+                    {/*        <input autoFocus type="password" id='password'*/}
+                    {/*               className={s.inputI}/>*/}
+
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
                     <div tabIndex={1}
                          className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-xl mb-5 pl-3">
-                        <input type="checkbox"/>
+                        <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
                             Settings One
                         </div>
@@ -86,7 +98,7 @@ const MainBlockSettings = () => {
 
                     <div tabIndex={2} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-xl mb-5 pl-3">
-                        <input type="checkbox"/>
+                        <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
                             Settings Two
                         </div>
@@ -97,7 +109,7 @@ const MainBlockSettings = () => {
 
                     <div tabIndex={3} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-base  mb-5 pl-3">
-                        <input type="checkbox"/>
+                        <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
                             Setting Three
                         </div>
@@ -109,7 +121,7 @@ const MainBlockSettings = () => {
                     <div tabIndex={4}
                          className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
                 rounded-none text-blue-dark  text-xl pl-3">
-                        <input type="checkbox"/>
+                        <input type="checkbox" />
                         <div className="collapse-title text-xl font-medium">
                             Change password
                         </div>
@@ -131,8 +143,7 @@ const MainBlockSettings = () => {
                                            className={s.inputI}/>
                                 </li>
                                 <li>
-                                    <div></div>
-                                    <Button title={'Save'} style={buttonSettingsSave}/>
+                                    <Button  title={'Save'} style={buttonSettingsSave}/>
                                 </li>
                             </ul>
                         </div>

@@ -1,10 +1,28 @@
-.footer {
-max-width: 200px;
 
+.footer {
+    opacity: 0.8;
+    margin-bottom: 150px;
+    position: relative;
+    bottom: 50px;
 }
 
 .text {
     font-size: 20px;
     line-height: 24px;
     color: #C8C8C8;
+}
+
+
+@media screen and (max-width: 640px) {
+    .footer {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 50px;
+        position: unset;
+    }
+
+    .text {
+        margin-right: 2rem;
+        font-size: 15px;
+    }
 }

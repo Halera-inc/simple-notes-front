@@ -8,10 +8,13 @@ import Footer from "./footer/Footer";
 const LandingPage = () => {
     return (
         <div className={s.landing}>
-            <Header title='Simple Notes'/>
-            <MainBlock/>
+            <div>
+                <Header title='Simple Notes'/>
+                <MainBlock/>
+            </div>
             <Footer/>
         </div>
+
     );
 };
 

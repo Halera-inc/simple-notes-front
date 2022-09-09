@@ -1,9 +1,22 @@
+
 .landing {
     max-width: 1720px;
-    margin:0 auto;
+    margin: 50px 0 50px 50px;
     height: 100vh;
-
-
-
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
 }
+
+
+@media screen and (max-width: 640px) {
+    .landing {
+        margin: 2rem 0 2rem 2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}
+
