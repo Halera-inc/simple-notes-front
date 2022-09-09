@@ -21,7 +21,6 @@ const MainBlockSettings = () => {
         fontSize: '15px',
     }
 
-
     const buttonSettingsSave = {
         paddingTop: '7px',
         paddingBottom: '7px',
@@ -29,8 +28,8 @@ const MainBlockSettings = () => {
         paddingRight: '37px',
         fontSize: '22px',
         backgroundColor: '#ffffff',
-
     }
+
     const user = useAppSelector(state => state.profile.user)
 
     const [edit, setEdit] = useState(false);
@@ -39,12 +38,11 @@ const MainBlockSettings = () => {
         setEdit(!edit);
     }
 
-
     return (
         <div className={s.wrapperMaimSettings}>
             <div className={s.leftArea}>
                 <div className={s.myProfile}>
-                    <img className={s.imgProfile}/>
+                    <img className={s.imgProfile} alt={s.imgProfile}/>
                     <div className={s.editWrapper}>
                         <ul className={s.editData}>
                             <li className={s.myName}>{user.email}</li>
@@ -54,20 +52,13 @@ const MainBlockSettings = () => {
                         <Button title={'Edit'} callback={editProfileHandler} style={buttonProfile}/>
                     </div>
                 </div>
-                {edit ?
-                    <InputForm/> : ""
-                }
-
+                {edit ? <InputForm/> : ''}
             </div>
-
             <div className={s.otherSettings}>
                 <h3 className={s.other}>Other settings</h3>
-
                 <div className={s.otherWrapper}>
-
                     <div tabIndex={1}
-                         className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
-                rounded-none text-blue-dark  text-xl mb-5 pl-3">
+                         className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark rounded-none text-blue-dark  text-xl mb-5 pl-3">
                         <input type="checkbox"/>
                         <div className="collapse-title text-xl font-medium">
                             Settings One
@@ -76,9 +67,7 @@ const MainBlockSettings = () => {
                             <p>Settings One</p>
                         </div>
                     </div>
-
-                    <div tabIndex={2} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
-                rounded-none text-blue-dark  text-xl mb-5 pl-3">
+                    <div tabIndex={2} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark rounded-none text-blue-dark  text-xl mb-5 pl-3">
                         <input type="checkbox"/>
                         <div className="collapse-title text-xl font-medium">
                             Settings Two
@@ -87,9 +76,7 @@ const MainBlockSettings = () => {
                             <p>Settings Two</p>
                         </div>
                     </div>
-
-                    <div tabIndex={3} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
-                rounded-none text-blue-dark  text-base  mb-5 pl-3">
+                    <div tabIndex={3} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark rounded-none text-blue-dark  text-base  mb-5 pl-3">
                         <input type="checkbox"/>
                         <div className="collapse-title text-xl font-medium">
                             Setting Three
@@ -98,10 +85,8 @@ const MainBlockSettings = () => {
                             <p>Setting Three</p>
                         </div>
                     </div>
-
                     <div tabIndex={4}
-                         className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark
-                rounded-none text-blue-dark  text-xl pl-3">
+                         className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark rounded-none text-blue-dark  text-xl pl-3">
                         <input type="checkbox"/>
                         <div className="collapse-title text-xl font-medium">
                             Change password
@@ -124,13 +109,11 @@ const MainBlockSettings = () => {
                                            className={s.inputI}/>
                                 </li>
                                 <li>
-                                    <div></div>
                                     <Button title={'Save'} style={buttonSettingsSave}/>
                                 </li>
                             </ul>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
