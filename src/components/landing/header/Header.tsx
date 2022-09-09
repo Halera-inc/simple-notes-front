@@ -6,6 +6,14 @@ import {useRouter} from "next/router";
 
 const Header = (props: { title: string }) => {
 
+    const buttonLogin = {
+        paddingTop: '10px',
+        paddingBottom: '10px',
+        paddingLeft: '35px',
+        paddingRight: '35px',
+        fontSize: '25px',
+    }
+
     const router = useRouter()
 
     const onChangeLogin = () => {
@@ -18,9 +26,8 @@ const Header = (props: { title: string }) => {
             <div className={s.wrapperBtn}>
                 <a href={'/about'} className={s.about}>About</a>
                 <div className={s.btn}>
-                    {/*<Button title='Login' onChangeParams={onChangeLogin}/>*/}
                     <div className={s.btnIcon}>
-                        <Button title='Login' onChangeParams={onChangeLogin}/>
+                        <Button title='Login' style={buttonLogin} onChangeParams={onChangeLogin}/>
                     </div>
                 </div>
             </div>
