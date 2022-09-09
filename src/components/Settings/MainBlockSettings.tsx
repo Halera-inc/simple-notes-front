@@ -21,14 +21,7 @@ const MainBlockSettings = () => {
         fontSize: '15px',
     }
 
-    const buttonEditSave = {
-        paddingTop: '7px',
-        paddingBottom: '7px',
-        paddingLeft: '37px',
-        paddingRight: '37px',
-        fontSize: '25px',
 
-    }
     const buttonSettingsSave = {
         paddingTop: '7px',
         paddingBottom: '7px',
@@ -58,7 +51,7 @@ const MainBlockSettings = () => {
                             <li className={s.reg}> {user.createdAt}</li>
                             <li className={s.reg}>{user.country}</li>
                         </ul>
-                        <Button title={'Edit'} onChangeParams={editProfileHandler} style={buttonProfile}/>
+                        <Button title={'Edit'} callback={editProfileHandler} style={buttonProfile}/>
                     </div>
                 </div>
                 {edit ?
