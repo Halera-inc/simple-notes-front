@@ -17,8 +17,8 @@ const Notes = () => {
     const dispatch = useAppDispatch()
     const notes = useAppSelector(state => state.notes.notes)
     const [modalTitle, setModalTitle] = useState('')
-    const [modalColor, setModalColor] = useState<colorizedColorType>( {})
-    const [modalId, setModalId] = useState( '');
+    const [modalColor, setModalColor] = useState<colorizedColorType>({})
+    const [modalId, setModalId] = useState('');
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
 
@@ -33,7 +33,7 @@ const Notes = () => {
         }
     }, [dispatch])
 
-    const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType,color:ColorSamplesType,noteId:string) => {
+    const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => {
         title && setModalTitle(title)
         note_text && setModalText(note_text)
         setModalColor(colorizedColor)
@@ -46,8 +46,8 @@ const Notes = () => {
     const onContentChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setModalText(e.currentTarget.value)
     }
-    const onConfirmClickHandler = (id:string,title:string,note_text:string) => {
-      dispatch(editNote({id,title,note_text})) // todo need to fix with appAPI
+    const onConfirmClickHandler = (id: string, title: string, note_text: string) => {
+        dispatch(editNote({id, title, note_text})) // todo need to fix with appAPI
     }
     const onDiscardClickHandler = () => {
     }
@@ -56,9 +56,11 @@ const Notes = () => {
 
     return (
         <MainContainer>
-            <label ref={modalBtnRef} htmlFor='my-modal'
-                   className="btn modal-button hidden">open
-                modal</label>
+            <label ref={modalBtnRef}
+                   htmlFor='my-modal'
+                   className="btn modal-button hidden">
+                open modal
+            </label>
             <ModalWindow titleNode={modalTitle}
                          textNode={modalText}
                          typeNode={'edit'}
