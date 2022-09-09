@@ -21,8 +21,6 @@ const Notes = () => {
     const [modalId, setModalId] = useState( '');
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
-    console.log(notes)
-    console.log('notes rendering')
 
     const effectRan = useRef(false)
 
@@ -33,7 +31,7 @@ const Notes = () => {
                 effectRan.current = true
             }
         }
-    }, [])
+    }, [dispatch])
 
     const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType,color:ColorSamplesType,noteId:string) => {
         title && setModalTitle(title)

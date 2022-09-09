@@ -5,11 +5,10 @@ import {useAppSelector} from "../../utils/hooks";
 import {useRouter} from "next/router";
 import {APP_ROOTS, getPageName} from "../../utils/getPageName";
 import ButtonIcon from "../../assets/images/ButtonIcon";
-import Button from "../universalComponent/Button";
+import Button from "../universalComponent/Button/Button";
 
 
 const Header = () => {
-
     const liArray = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7'] //todo must be replace with value from profile slice
     const [isCollapsed, setIsCollapsed] = useState(false)
     const userName = useAppSelector(state => state.profile.user)
@@ -21,7 +20,7 @@ const Header = () => {
     const onChangeLogin = () => {
         setLogin(!login)
     }
-
+    console.log(userName)
 
     return (
         <>

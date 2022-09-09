@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "src/styles/Settings.module.css";
-import Button from "src/components/universalComponent/Button";
+import Button from "src/components/universalComponent/Button/Button";
 import {useAppDispatch, useAppSelector} from "src/utils/hooks";
 import {PutUserParamsType, updateUserData} from "src/bll/slices/profileSlice";
 import {SubmitHandler, useForm} from "react-hook-form";

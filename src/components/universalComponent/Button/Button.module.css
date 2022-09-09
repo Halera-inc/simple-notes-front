@@ -1,0 +1,17 @@
+.button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 8px 18px;
+    margin: 7px;
+    background-color: #E5F1FD;
+    border: 1px solid #5590C1;
+    color: #5590C1;
+    cursor: pointer;
+}
+
+.button div {
+    height: 100%;
+    margin: 0 5px;
+}
