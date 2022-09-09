@@ -27,7 +27,7 @@ const MainBlock = () => {
                 <Button icon={<ArrowBackIcon style={{rotate: '180deg'}}/>}
                         style={buttonTitle}
                         title='Start now'
-                        link={'/about'}/>
+                        link={'/login'}/>
             </div>
             <div className={s.imgTitle}>
                 <SapienMainBlockIcon/>
