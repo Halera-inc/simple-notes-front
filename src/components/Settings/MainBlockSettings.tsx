@@ -3,6 +3,7 @@ import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button";
 import {useAppSelector} from "src/utils/hooks";
 import InputForm from "src/components/Settings/inputform/InputForm";
+import {getSession} from "next-auth/react";
 
 export const buttonEditSave = {
     paddingTop: '7px',
@@ -12,7 +13,7 @@ export const buttonEditSave = {
     fontSize: '25px',
 }
 
-const MainBlockSettings = () => {
+const MainBlockSettings = ({session}: any) => {
     const buttonProfile = {
         paddingTop: '7px',
         paddingBottom: '7px',
@@ -51,12 +52,12 @@ const MainBlockSettings = () => {
         <div className={s.wrapperMaimSettings}>
             <div className={s.leftArea}>
                 <div className={s.myProfile}>
-                    <img className={s.imgProfile}/>
+                    <img className={s.imgProfile} src={session?.user?.image}/>
                     <div className={s.editWrapper}>
                         <ul className={s.editData}>
-                            <li className={s.myName}>{user.email}</li>
+                            <li className={s.myName}>{session?.user?.email}</li>
                             <li className={s.reg}> {user.createdAt}</li>
-                            <li className={s.reg}>{user.country}</li>
+                            <li className={s.reg}>{session?.user?.country}</li>
                         </ul>
                         <Button title={'Edit'} onChangeParams={editProfileHandler} style={buttonProfile}/>
                     </div>
@@ -145,3 +146,11 @@ const MainBlockSettings = () => {
 };
 
 export default MainBlockSettings;
+
+export  const getServerSideProps = async (context: any) => {
+    const session = await  getSession(context);
+
+    return {
+        props: {session}
+    }
+}

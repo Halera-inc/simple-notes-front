@@ -7,6 +7,12 @@
     items-center
 }
 
+.providerButton {
+    margin-bottom: 30px;
+    width: 80%;
+    align-self: center;
+}
+
 .wrapperCard {
     text-align: center;
     @apply

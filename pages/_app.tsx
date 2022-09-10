@@ -4,6 +4,7 @@ import {store} from '../src/bll/store'
 import {Provider} from 'react-redux'
 import {ThemeProvider} from "next-themes";
 import {SessionProvider} from "next-auth/react"
+import Sidebar from "../src/components/Sidebar/Sidebar";
 
 
 function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {
@@ -12,6 +13,7 @@ function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {
         <SessionProvider session={session}>
             <ThemeProvider enableSystem={true} attribute="class">
                 <Provider store={store}>
+                        <Sidebar/>
                         <Component {...pageProps} />
                 </Provider>
             </ThemeProvider>

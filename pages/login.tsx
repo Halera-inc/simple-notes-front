@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import MainContainer from "../src/components/MainContainer";
 import {useFormik} from "formik";
 import s from './../src/styles/SignIn.module.css'
@@ -6,40 +6,74 @@ import UserIcon from "../src/assets/images/UserIcon";
 import KeyIcon from "../src/assets/images/KeyIcon";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
-import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
-import {loginUser} from "../src/bll/slices/authSlice";
+import {useAppDispatch} from "../src/utils/hooks";
 import {useRouter} from "next/router";
+import {getProviders, getSession, signIn, useSession} from "next-auth/react";
 
-const Login = () => {
 
+const Login = ({providers}: any) => {
+    console.log(providers)
+    const {data: session} = useSession();
     const router = useRouter()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
 
     type FormikErrorType = {
         email?: string
         password?: string
-
     }
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
-
-
         },
-        onSubmit: values => {
-            console.log(values.email, values.password)
-            dispatch(loginUser({email: values.email, password: values.password}));
+        onSubmit: async values => {
+            const res: any = await signIn("credentials", {
+                redirect: false,
+                email: values.email,
+                password: values.password,
+                callbackUrl: `${window.location.origin}`,
+            })
+            res.error ? console.log(res.error) : redirectToHome();
             formik.resetForm();
         },
     })
+
+    const redirectToHome = () => {
+        const {pathname} = router;
+        if (pathname === "/login") {
+            typeof window !== 'undefined' && router.push("/notes");
+        }
+    };
 
     const resetHandler = () => {
         formik.resetForm();
     }
 
-    typeof window !== 'undefined' && isLoggedIn && router.push('/notes')
+
+    const ProvidersButtons = ({providers}: any) => (
+        <div className="flex flex-col w-full">
+            {Object.values(providers).map(
+                (provider: any) =>
+                    provider.name !== "Credentials" && (
+                        <div className={s.providerButton} key={provider.name}>
+                            <button
+                                onClick={async () => {
+                                debugger
+                                    await signIn(provider.id, {
+                                        callbackUrl: `http://localhost:3000/notes`,
+                                    });
+                                }}
+                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            >
+                                <span
+                                    className="absolute inset-y-0 left-0 flex items-center pl-3">
+                                </span>{`Sign in with ${provider.name}`}
+                            </button>
+                        </div>
+                    )
+            )}
+        </div>
+    );
 
     return (
         <MainContainer>
@@ -56,13 +90,22 @@ const Login = () => {
                                     </Link>
                                 </div>
                             </div>
+
+                            <ProvidersButtons providers={providers}/>
+
+                            <div
+                                className="flex items-center mb-8 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
+                            >
+                                <p className="text-center font-semibold mx-4 mb-0">Or</p>
+                            </div>
+
                             <form onSubmit={formik.handleSubmit}>
                                 <div className={`${s.formControl} ${s.one}`}>
                                     <label className={s.label}>
                                         <UserIcon width={'3em'} height={'3em'}
-                                                  color={isLoggedIn ? '#5590C1' : '#F06464'}/>
+                                                  color={session ? '#5590C1' : '#F06464'}/>
                                         <input type="text" id='email' placeholder="email"
-                                               className={isLoggedIn ? s.inputI : s.errorInput}
+                                               className={session ? s.inputI : s.errorInput}
                                                {...formik.getFieldProps('email')}/>
                                     </label>
                                     {formik.touched.email && formik.errors.email}
@@ -72,13 +115,13 @@ const Login = () => {
                                 <div className={`${s.formControl} ${s.two}`}>
                                     <label className={s.label}>
                                         <KeyIcon width={'3em'} height={'3em'}
-                                                 color={isLoggedIn ? '#5590C1' : '#F06464'}/>
+                                                 color={session ? '#5590C1' : '#F06464'}/>
                                         <input type="password" id='password'
                                                placeholder="password"
-                                               className={isLoggedIn ? s.inputI : s.errorInput}
+                                               className={session ? s.inputI : s.errorInput}
                                                {...formik.getFieldProps('password')}/>
                                     </label>
-                                    {!isLoggedIn ?
+                                    {!session ?
                                         <div className={s.errorText}>Incorrect login or
                                             password!</div> : null}
                                 </div>
@@ -88,7 +131,7 @@ const Login = () => {
                                     </button>
                                 </div>
                             </form>
-                            <Link href={"/registration"}><p
+                            <Link href={"/register"}><p
                                 className={s.text}>Registration</p></Link>
                             <p onClick={resetHandler} className={s.text}>Reset
                                 password</p>
@@ -97,9 +140,17 @@ const Login = () => {
                 </div>
             </div>
         </MainContainer>
-
     )
-        ;
 };
 
 export default Login;
+
+export async function getServerSideProps({context}: any) {
+    return {
+        props: {
+            session: await getSession(context),
+            providers: await getProviders(),
+        },
+    };
+}
+

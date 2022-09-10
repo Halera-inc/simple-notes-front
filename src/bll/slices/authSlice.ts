@@ -5,27 +5,15 @@ export const registerUser = createAsyncThunk(
     "auth/register",
     async (params: RegisterParamsType, thunkAPI) => {
         try {
-            const response = await authAPI.register(params.email, params.password, params.country)
+            const response = await authAPI.register(params.email, params.password, params.country, params.username)
+
             return response.data.message
         } catch (e) {
             console.log("Error", e)
             return thunkAPI.rejectWithValue(e)
         }
     }
-)
-export const loginUser = createAsyncThunk(
-    "auth/login",
-    async (params: LoginParamsType, thunkAPI) => {
-        try {
-            const response = await authAPI.login(params.email, params.password)
-            localStorage.setItem("access_token", response.data.token)
-            return response.data.user
-        } catch (e) {
-            console.log("Error", e)
-            return thunkAPI.rejectWithValue(e)
-        }
-    }
-)
+ )
 
 export const initializeApp = createAsyncThunk(
     "auth/me",
@@ -58,19 +46,19 @@ export const authSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder
-            .addCase(initializeApp.fulfilled, (state) => {
-                state.isLoggedIn = true
-                state.isInitialized = true
-            })
-            .addCase(initializeApp.rejected, (state) => {
-                state.isLoggedIn = false
-                state.isInitialized = true
-            })
-            .addCase(loginUser.fulfilled, (state) => {
-                state.isLoggedIn = true
-            })
-    }})
+        // builder
+    //         .addCase(initializeApp.fulfilled, (state) => {
+    //             state.isLoggedIn = true
+    //             state.isInitialized = true
+    //         })
+    //         .addCase(initializeApp.rejected, (state) => {
+    //             state.isLoggedIn = false
+    //             state.isInitialized = true
+    //         })
+    //         .addCase(loginUser.fulfilled, (state) => {
+    //             state.isLoggedIn = true
+    //         })
+     }})
 export const {setIsLoggedIn, setIsInitialized} = authSlice.actions
 
 export default authSlice.reducer
@@ -85,4 +73,5 @@ export type RegisterParamsType = {
     email: string
     password: string
     country: string
+    username: string
 }

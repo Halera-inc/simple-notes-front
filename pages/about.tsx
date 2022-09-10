@@ -6,9 +6,7 @@ import {useAppSelector} from "../src/utils/hooks";
 const About = () => {
 
     const router = useRouter()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
 
-    typeof window !== 'undefined' && isLoggedIn && router.push('/notes')
     return (
         <MainContainer>
             <div>

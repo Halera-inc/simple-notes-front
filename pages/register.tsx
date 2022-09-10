@@ -12,13 +12,14 @@ import CountryIcon from "../src/assets/images/CountryIcon";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {registerUser} from "../src/bll/slices/authSlice";
 import {useRouter} from "next/router";
+import {authAPI} from "../src/api/notes-api";
+import {signIn} from "next-auth/react";
 
 
-const Registration = () => {
+const Register = () => {
 
     const options = useMemo(() => countryList().getData(), [])
     const router = useRouter()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
     type FormikErrorType = {
         username?: string
@@ -36,7 +37,6 @@ const Registration = () => {
             password: '',
             password2: '',
         },
-
 
         validate: (values) => {
             const errors: FormikErrorType = {};
@@ -64,22 +64,34 @@ const Registration = () => {
             }
             return errors;
         },
-        onSubmit: values => {
-            dispatch(registerUser({
-                email: values.email,
-                password: values.password,
-                country: values.country
-            }));
-            alert(JSON.stringify(values));
-            typeof window !== 'undefined' && router.push('/login')
-            formik.resetForm();
+        onSubmit: async values => {
+            const res: any = await authAPI.register(values.email, values.password, values.country, values.username)
+                .then(async () => {
+                    const res: any = await signIn("credentials", {
+                        redirect: false,
+                        email: values.email,
+                        password: values.password,
+                        callbackUrl: `${window.location.origin}`,
+                    })
+                    res.error ? console.log(res.error) : redirectToHome();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            console.log(res);
         },
     })
 
-    typeof window !== 'undefined' && isLoggedIn && router.push('/notes')
-    const defferentClass=formik.errors.password2 ==='Invalid password'
+    const redirectToHome = () => {
+        const {pathname} = router;
+        if (pathname === "/register") {
+            typeof window !== 'undefined' && router.push("/notes");
+        }
+    };
+
+    const defferentClass = formik.errors.password2 === 'Invalid password'
         ? <div className={s.errorTextInvalid}>{formik.errors.password2}</div>
-            :  <div className={s.errorTextRegistration}>{formik.errors.password2}</div>
+        : <div className={s.errorTextRegistration}>{formik.errors.password2}</div>
 
 
     return (
@@ -91,7 +103,7 @@ const Registration = () => {
                             <div className={s.wrapperTitle}>
                                 <h2 className={s.cardTitle}> Registration</h2>
                                 <div className={s.arrowIcon}>
-                                    <Link href={"/signIn"}>
+                                    <Link href={"/login"}>
                                         <ArrowBackIcon width={'2.5em'} height={'2.5em'}
                                                        color={'#5590C1'}/>
                                     </Link>
@@ -184,7 +196,7 @@ const Registration = () => {
                                                className={formik.touched.password2 && formik.errors.password2 ? s.errorInput : s.inputI}
                                                {...formik.getFieldProps('password2')}/>
                                     </label>
-                                    {formik.touched.password2 && formik.errors.password2 ? defferentClass :" "}
+                                    {formik.touched.password2 && formik.errors.password2 ? defferentClass : " "}
                                 </div>
 
                                 <div className="card-actions justify-center">
@@ -204,4 +216,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default Register;

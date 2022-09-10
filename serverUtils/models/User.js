@@ -8,13 +8,11 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         lowercase: true,
-        minLength: 5,
         trim: true,
         unique: true,
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     country: {type: String},
-    password: {type: String, required: true, trim: true, minLength: 3},
+    password: {type: String, required: true, trim: true},
     createdAt: {type: Date, default: () => Date.now(), immutable: true},
     updatedAt: {type: Date, default: () => Date.now()},
     settings: {
@@ -27,6 +25,7 @@ const UserSchema = new Schema({
             default: 'default'
         }
     },
+    image: String
 })
 
 const User = mongoose.models.User || mongoose.model('User', UserSchema)

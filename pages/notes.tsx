@@ -9,11 +9,11 @@ import {useRouter} from "next/router";
 import {initializeApp} from "../src/bll/slices/authSlice";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
+import {getSession} from "next-auth/react";
 
 const Notes = () => {
 
     const router = useRouter()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
     const notes = useAppSelector(state => state.notes.notes)
     const [modalTitle, setModalTitle] = useState('')
@@ -21,7 +21,6 @@ const Notes = () => {
     const [modalId, setModalId] = useState( '');
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
-    console.log(notes)
     console.log('notes rendering')
 
     const effectRan = useRef(false)
@@ -53,8 +52,6 @@ const Notes = () => {
     }
     const onDiscardClickHandler = () => {
     }
-
-    typeof window !== 'undefined' && !isLoggedIn && router.push('/')
 
     return (
         <MainContainer>
@@ -88,3 +85,17 @@ const Notes = () => {
 
 export default Notes
 
+
+export  const getServerSideProps = async (context: any) => {
+    const session = await  getSession(context);
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/login'
+            }
+        }
+    }
+    return {
+        props: {session}
+    }
+}
