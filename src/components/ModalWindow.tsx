@@ -6,7 +6,7 @@ import ColorizedBar from "./Note/ColorizedBar";
 import colorizeNote from "../utils/colorizeNote";
 import {RootState} from "../bll/store";
 import {useSelector} from "react-redux";
-import {useAppSelector} from "src/utils/hooks";
+
 
 type ModalWindowType = 'edit' | 'create'
 type ModalWindowPropsType = {
@@ -15,7 +15,7 @@ type ModalWindowPropsType = {
     typeNode: ModalWindowType
     onTitleChange: (e: ChangeEvent<HTMLInputElement>) => void
     onTextChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    onConfirm: (id:string,title:string,note_text:string) => void
+    onConfirm: (id: string, title: string, note_text: string) => void
     onDiscard: () => void
     colorNote: colorizedColorType
     modalId: string
@@ -55,7 +55,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                       onChange={props.onTextChange}/>
                         </div>
                         <div className={s.modalAction}>
-                            <label htmlFor="my-modal" className={s.modalCancel} onClick={()=>alert('back')}>Cancel</label>
+                            <label htmlFor="my-modal" className={s.modalCancel}>Cancel</label>
                             <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
                                       onClick={onColorChangeButtonClickHandler}/>
                             <ColorizedBar modalStyle={modalStyle}
@@ -64,7 +64,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                           setShowColorBar={setShowColorBar}
                                           currentColor={colorizedColor.color}/>
                             <label htmlFor="my-modal" className={s.modalSave}
-                                   onClick={()=>props.onConfirm(props.modalId,props.titleNode,props.textNode)}>Save</label>
+                                   onClick={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}>Save</label>
                         </div>
                     </div>
                 </div>
@@ -90,9 +90,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                         </div>
                         <div className={s.modalAction}>
                             <label htmlFor='my-modal-add-note' className={s.modalSave}
-                                   onClick={()=>props.onConfirm(props.modalId,props.titleNode,props.textNode)}>Save</label>
-                            <label htmlFor='my-modal-add-note' className={s.modalCancel}
-                                   onClick={props.onDiscard}>Cancel</label>
+                                   onClick={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}>Save</label>
+                            <label htmlFor='my-modal-add-note' className={s.modalCancel}>Cancel</label>
                         </div>
                     </div>
                 </div>
