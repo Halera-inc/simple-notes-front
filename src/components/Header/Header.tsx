@@ -20,7 +20,6 @@ const Header = () => {
     const onChangeLogin = () => {
         setLogin(!login)
     }
-    console.log(userName)
 
     return (
         <>

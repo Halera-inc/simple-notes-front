@@ -22,7 +22,6 @@ const InputForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-
             <div className={s.edit}>
                 <ul className={s.editMyProfile}>
                     <label>
