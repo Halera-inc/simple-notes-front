@@ -25,8 +25,8 @@ const Header = () => {
                 ? <div>
                     {isAuth
                         ? <div
-                            className='z-50 backdrop-blur-md bg-white/70 absolute w-screen w-100 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
-                            <p className='text-[35px] font-bold ml-[128px] text-black'>
+                            className='z-50 backdrop-blur-md bg-white/70 absolute w-screen w-180 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
+                            <p className='text-[35px] font-bold ml-[128px] text-black '>
                                 {pageName}
                             </p>
                             <div className='flex justify-between w-[540px] items-center mr-[74px]'>

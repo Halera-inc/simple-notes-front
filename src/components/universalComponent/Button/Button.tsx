@@ -5,13 +5,14 @@ import {Property} from "csstype";
 
 type colorsButtonType = 'RED' | 'GREEN' | 'DEFAULT'
 type PropsType = {
-    title: string
+    title?: string
     callback?: (params: any) => void
     style?: CSSProperties | undefined
     link?: string
     icon?: JSX.Element
     color?: colorsButtonType
     htmlFor?: string
+    className?: string
 }
 
 const Button = (props: PropsType) => {
@@ -64,6 +65,7 @@ const Button = (props: PropsType) => {
         return (
             <Link href={props.link ? props.link : ''}>
                 <label id={'linkButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
+                       className={props.className}
                        onClick={callback}
                        onMouseEnter={() => setIsHover(true)}
                        onMouseLeave={() => setIsHover(false)}
@@ -79,6 +81,7 @@ const Button = (props: PropsType) => {
         return (
             <label id={'defaultButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
                    onClick={callback}
+                   className={props.className}
                    onMouseEnter={() => setIsHover(true)}
                    onMouseLeave={() => setIsHover(false)}
                    style={!isHover
