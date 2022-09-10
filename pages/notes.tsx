@@ -50,6 +50,7 @@ const Notes = () => {
         dispatch(editNote({id, title, note_text})) // todo need to fix with appAPI
     }
     const onDiscardClickHandler = () => {
+
     }
 
     typeof window !== 'undefined' && !isLoggedIn && router.push('/')

@@ -1,5 +1,6 @@
+import SearchIcon from "../../assets/images/SearchIcon";
 import UserCircleIcon from "../../assets/images/UserCircleIcon";
-import React from "react";
+import React, {useState} from "react";
 import {useAppSelector} from "../../utils/hooks";
 import {useRouter} from "next/router";
 import {APP_ROOTS, getPageName} from "../../utils/getPageName";
@@ -13,8 +14,10 @@ const Header = () => {
     const pageName = getPageName(useRouter().pathname as APP_ROOTS)
     const isAuth = useAppSelector(state => state.auth.isLoggedIn)
     const router = useRouter()
-
-    console.log(userName)
+    const [login, setLogin] = useState<boolean>(false)
+    const onChangeLogin = () => {
+        setLogin(!login)
+    }
 
     return (
         <>
@@ -48,8 +51,11 @@ const Header = () => {
                 </div>
                 : null
             }
+
         </>
     )
+
+
 }
 
 export default Header;

@@ -11,7 +11,6 @@
     border-2
     bg-blue
     relative
-
 }
 
 .modalAction {
@@ -54,29 +53,4 @@
     min-w-full
     bg-transparent
     text-blue-dark
-
 }
-
-.modalCancel {
-    display: flex;
-    align-items: center;
-    padding: 7px 37px;
-    font-size: 15px;
-    background-color: #FFF4F4;
-    color: #F06464;
-    border: 1px solid #F06464;
-    cursor: pointer;
-}
-
-.modalSave {
-    display: flex;
-    align-items: center;
-    padding: 7px 37px;
-    font-size: 15px;
-    background-color: #D6EDD9;
-    color: #5E9C80;
-    border: 1px solid #5E9C80;
-    cursor: pointer;
-}
-
-
