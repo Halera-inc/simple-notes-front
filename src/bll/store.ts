@@ -4,7 +4,6 @@ import notesReducer from './slices/notesSlice'
 import authReducer from "./slices/authSlice";
 import appReducer from "./slices/appSlice";
 
-
 export const rootReducer = combineReducers({
     profile: profileReducer,
     notes: notesReducer,
@@ -12,20 +11,12 @@ export const rootReducer = combineReducers({
     app: appReducer
 })
 
-
-
 export const store = configureStore({
     reducer: rootReducer,
-
-
-
 })
-
-
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-
 export type NullableType<T> = null | T
 
 
