@@ -94,7 +94,7 @@ export type UserType = {
     country?: string
 }
 export type SettingsType = {
-    darkMode?: boolean,
+    darkmode?: boolean,
     themecolor?: string,
 }
 

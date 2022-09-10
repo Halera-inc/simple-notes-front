@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from 'axios'
-import {ColorSamplesType, notesAPI, NoteTextType, NoteTodoType, NoteViewType} from 'src/api/notes-api'
+import {ColorSamplesType, notesAPI, NoteTextType, NoteViewType} from 'src/api/notes-api'
 
 export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) => {
         try {
@@ -57,9 +57,11 @@ export const editNote = createAsyncThunk('notes/editNote',
         }
     })
 
+
 const initialState = {
     notes: [] as Array<NoteTextType>,
-    createNoteModal: false
+    createNoteModal: false,
+    searchParams: ''
 }
 
 export const notesSlice = createSlice({
@@ -68,6 +70,12 @@ export const notesSlice = createSlice({
     reducers: {
         setCreateNoteModalShow(state, action: PayloadAction<{ isModalShow: boolean }>) {
             state.createNoteModal = action.payload.isModalShow
+        },
+        setSearchParams(state, action: PayloadAction<{newValue: string}>){
+            if (action.payload.newValue.length >= 2 || action.payload.newValue === '') {
+                state.searchParams = action.payload.newValue.trim()
+            }
+
         }
     },
     extraReducers: (builder) => {
@@ -102,7 +110,7 @@ export const notesSlice = createSlice({
     }
 })
 
-export const {setCreateNoteModalShow} = notesSlice.actions
+export const {setCreateNoteModalShow, setSearchParams} = notesSlice.actions
 
 export default notesSlice.reducer
 
