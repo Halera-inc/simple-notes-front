@@ -42,7 +42,7 @@ const Header = () => {
                             <div className='flex justify-between w-64 items-center mr-[100px]'>
                                 <a href={'/about'} className='text-blue-dark text-[25px] mr-[90px]'>About</a>
                                 {login && <div>
-                                    <Button title='Logout' onChangeParams={onChangeLogin}/>
+                                    <Button title='Logout' callback={onChangeLogin}/>
                                 </div>}
                                 {!login && <div className="flex mr-[45px]">
                                     <ButtonIcon onClick={onChangeLogin}/>
