@@ -6,6 +6,8 @@
 .btn {
     @apply rounded-none
 }
+
+
 /* custom colors*/
 :root {
     --bg-black: #212121;
@@ -27,6 +29,10 @@
 
 html body #__next {
     height: 100%;
+
+}
+textarea {
+    padding: 0 20px 0 0;
 }
 
 body {
@@ -67,4 +73,38 @@ body {
     font-family: Montserrat, sans-serif;
 }
 
+::-webkit-scrollbar { /* 1 - скроллбар */
+    z-index: 100;
+    width: 15px;
+    height: 15px;
+    background-color: var(--blue);
+    border: 1px solid var(--blue-dark);
+    @apply
+    z-50
+}
 
+::-webkit-scrollbar-button { /* 2 - кнопка */
+    display: none;
+}
+
+::-webkit-scrollbar-track { /* 3 - трек */
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-track-piece { /* 4 - видимая часть трека */
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb { /* 5 - ползунок */
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: var(--blue-dark);
+}
+
+::-webkit-scrollbar-corner { /* 6 - уголок */
+    cursor: pointer;
+}
+
+::-webkit-resizer { /* 7 - изменение размеров */
+    cursor: pointer;
+}
