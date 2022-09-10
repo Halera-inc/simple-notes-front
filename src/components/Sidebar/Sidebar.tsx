@@ -39,7 +39,6 @@ const Sidebar = () => {
         setNewNoteText('')
     }
     const onDiscardClickHandler = () => {  // todo need to fix with appAPI
-        alert('Cancel in Add mode') //need to fix
         setNewNoteTitle('')
         setNewNoteText('')
     }

@@ -6,7 +6,6 @@ import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
 import {useRouter} from "next/router";
-import {initializeApp} from "../src/bll/slices/authSlice";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
 
@@ -50,6 +49,7 @@ const Notes = () => {
         dispatch(editNote({id, title, note_text})) // todo need to fix with appAPI
     }
     const onDiscardClickHandler = () => {
+
     }
 
     typeof window !== 'undefined' && !isLoggedIn && router.push('/')
