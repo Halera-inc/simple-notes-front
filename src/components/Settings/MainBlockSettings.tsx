@@ -3,8 +3,10 @@ import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button/Button";
 import {useAppSelector} from "src/utils/hooks";
 import InputForm from "src/components/Settings/inputform/InputForm";
+import {CSSProperties} from "styled-components";
 
-export const buttonEditSave = {
+
+export const buttonEditSave: CSSProperties = {
     paddingTop: '7px',
     paddingBottom: '7px',
     paddingLeft: '37px',
@@ -13,7 +15,7 @@ export const buttonEditSave = {
 }
 
 const MainBlockSettings = () => {
-    const buttonProfile = {
+    const buttonProfile: CSSProperties = {
         paddingTop: '7px',
         paddingBottom: '7px',
         paddingLeft: '30px',
@@ -21,7 +23,7 @@ const MainBlockSettings = () => {
         fontSize: '15px',
     }
 
-    const buttonSettingsSave = {
+    const buttonSettingsSave: CSSProperties = {
         paddingTop: '7px',
         paddingBottom: '7px',
         paddingLeft: '37px',
