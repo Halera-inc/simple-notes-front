@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import MainContainer from "../src/components/MainContainer";
 import {useFormik} from "formik";
 import s from './../src/styles/SignIn.module.css'
@@ -9,11 +9,12 @@ import Link from "next/link";
 import {useAppDispatch} from "../src/utils/hooks";
 import {useRouter} from "next/router";
 import {getProviders, getSession, signIn, useSession} from "next-auth/react";
+import {GetServerSideProps, GetServerSidePropsContext} from "next";
 
 
-const Login = ({providers}: any) => {
-    console.log(providers)
-    const {data: session} = useSession();
+const Login = ({providers, session}: any) => {
+    // console.log(providers)
+    // console.log(session)
     const router = useRouter()
     const dispatch = useAppDispatch()
 
@@ -58,10 +59,8 @@ const Login = ({providers}: any) => {
                         <div className={s.providerButton} key={provider.name}>
                             <button
                                 onClick={async () => {
-                                debugger
-                                    await signIn(provider.id, {
-                                        callbackUrl: `http://localhost:3000/notes`,
-                                    });
+                                    await signIn(provider.id,
+                                    );
                                 }}
                                 className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
@@ -145,12 +144,20 @@ const Login = ({providers}: any) => {
 
 export default Login;
 
-export async function getServerSideProps({context}: any) {
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const session = await getSession(context);
+    console.log(session)
+    if (session) {
+        return {
+            redirect: {destination: '/notes'},
+            props: {}
+        }
+    }
     return {
         props: {
-            session: await getSession(context),
             providers: await getProviders(),
-        },
-    };
+            session
+        }
+    }
 }
 

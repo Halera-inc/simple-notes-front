@@ -1,4 +1,4 @@
-import dbConnect from "../../serverUtils/mongoDB";
+import dbConnect from "../../serverUtils/dbConnect";
 
 export default async function handler(req, res) {
     const {method} = req

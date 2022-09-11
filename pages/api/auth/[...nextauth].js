@@ -34,7 +34,7 @@ export const authOptions = {
                 },
             },
             async authorize(credentials) {
-                console.log(credentials)
+                // console.log(credentials)
                 await dbConnect();
 
                 // Find user with the email
@@ -73,12 +73,8 @@ export const authOptions = {
     },
     pages: {
         signIn: '/login',
-
     },
     debug: process.env.NODE_ENV === 'development',
-    callback: {
-    signIn: '/notes'
-    }
 }
 
 export default NextAuth(authOptions)

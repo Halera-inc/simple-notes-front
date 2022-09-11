@@ -1,5 +1,5 @@
 import Note from "../../../serverUtils/models/Note";
-import dbConnect from "../../../serverUtils/mongoDB";
+import dbConnect from "../../../serverUtils/dbConnect";
 
 export default async function handler(req, res) {
     const {
@@ -41,7 +41,7 @@ export default async function handler(req, res) {
             break
         case 'DELETE':
             try {
-                const targetId = req.params.id
+                const targetId = req.query.id
                 const verifyNote = await Note.findById(targetId)
                 if (!verifyNote) return res.status(400).json({message: "There is no requested Note with this id"})
                 await Note.findByIdAndDelete(targetId)

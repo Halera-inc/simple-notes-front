@@ -6,9 +6,11 @@ import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
 import {useRouter} from "next/router";
-import {initializeApp} from "../src/bll/slices/authSlice";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
+import {unstable_getServerSession} from "next-auth";
+import authOptions from './api/auth/[...nextauth]'
+import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import {getSession} from "next-auth/react";
 
 const Notes = () => {
@@ -17,8 +19,8 @@ const Notes = () => {
     const dispatch = useAppDispatch()
     const notes = useAppSelector(state => state.notes.notes)
     const [modalTitle, setModalTitle] = useState('')
-    const [modalColor, setModalColor] = useState<colorizedColorType>( {})
-    const [modalId, setModalId] = useState( '');
+    const [modalColor, setModalColor] = useState<colorizedColorType>({})
+    const [modalId, setModalId] = useState('');
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
     console.log('notes rendering')
@@ -34,7 +36,7 @@ const Notes = () => {
         }
     }, [])
 
-    const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType,color:ColorSamplesType,noteId:string) => {
+    const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => {
         title && setModalTitle(title)
         note_text && setModalText(note_text)
         setModalColor(colorizedColor)
@@ -85,17 +87,24 @@ const Notes = () => {
 
 export default Notes
 
-
-export  const getServerSideProps = async (context: any) => {
-    const session = await  getSession(context);
+//
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const session = await getSession(context);
+    console.log(session)
     if (!session) {
         return {
-            redirect: {
-                destination: '/login'
-            }
+            redirect: {destination: '/login', permanent: false},
+            props: {}
         }
     }
     return {
         props: {session}
     }
 }
+
+// export const getZapdosAuthSession = async (ctx: {
+//     req: GetServerSidePropsContext["req"];
+//     res: GetServerSidePropsContext["res"];
+// }) => {
+//     return await unstable_getServerSession(ctx.req, ctx.res, authOptions)
+// }

@@ -6,7 +6,7 @@ export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) =
         try {
             const res = await notesAPI.getNotes()
             const notes = res.data
-            return notes
+            return notes.notes
         } catch (error) {
             const data = error
             if (axios.isAxiosError(error) && data) {
@@ -21,9 +21,9 @@ export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) =
 export const createNote = createAsyncThunk('notes/createNote', async (params: PostNoteParamsType, thunkAPI) => {
         try {
             const res = await notesAPI.createNote(params.title, params.note_text, params.color, params.note_mode)
-            console.log(res.data)
-            const note = res.data
-            return note
+            const newNote = res.data.newNote
+            console.log(newNote)
+            return newNote
         } catch (error) {
             const data = error
             if (axios.isAxiosError(error) && data) {
