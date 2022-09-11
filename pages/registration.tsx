@@ -70,7 +70,6 @@ const Registration = () => {
                 password: values.password,
                 country: values.country
             }));
-            alert(JSON.stringify(values));
             typeof window !== 'undefined' && router.push('/login')
             formik.resetForm();
         },
