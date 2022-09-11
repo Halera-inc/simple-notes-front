@@ -5,13 +5,14 @@ import Link from "next/link";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import UserIcon from "../src/assets/images/UserIcon";
 import KeyIcon from "../src/assets/images/KeyIcon";
-import React, {useMemo, useState} from "react";
+import React, {useMemo} from "react";
 import countryList from "react-select-country-list";
 import ListIcon from "../src/assets/images/ListIcon";
 import CountryIcon from "../src/assets/images/CountryIcon";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {registerUser} from "../src/bll/slices/authSlice";
 import {useRouter} from "next/router";
+import InfoIcon from "../src/assets/images/InfoIcon";
 
 
 const Registration = () => {
@@ -54,9 +55,9 @@ const Registration = () => {
             }
             if (!values.password) {
                 errors.password = 'Required';
-                // /^(?=.[A-Z].[A-Z])(?=.[0-9].[0-9])(?=.[a-z].[a-z].*[a-z]).{8,}$/      /[A-Za-z0-9]{8,}/
-            } else if (!/^(?=.[0-9].[0-9]).{8,}$/.test(values.password)) {
-                errors.password = "Password must be 8 numbers or more";
+                // !/^[A-Za-z0-9]{8,}$/
+            } else if (!/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g.test(values.password)) {
+                errors.password ='Invalid password'
             }
             if (!values.password2) {
                 errors.password2 = 'Required';
@@ -78,12 +79,12 @@ const Registration = () => {
     })
 
     typeof window !== 'undefined' && isLoggedIn && router.push('/notes')
-    const defferentPassword2Class=formik.errors.password2 ==='Invalid password'
+    const defferentPassword2Class = formik.errors.password2 === 'Invalid password'
         ? <div className={s.errorTextInvalid}>{formik.errors.password2}</div>
-            :  <div className={s.errorTextRegistration}>{formik.errors.password2}</div>
-    const defferentPasswordClass=formik.errors.password ==="Password must be 8 numbers or more"
-        ? <div className={s.errorTextMust}>{formik.errors.password}</div>
-        :  <div className={s.errorTextRegistration}>{formik.errors.password}</div>
+        : <div className={s.errorTextRegistration}>{formik.errors.password2}</div>
+    const defferentPasswordClass = formik.errors.password === 'Invalid password'
+        ? <div className={s.errorTextInvalid}>{formik.errors.password}</div>
+        : <div className={s.errorTextRegistration}>{formik.errors.password}</div>
 
 
     return (
@@ -140,16 +141,20 @@ const Registration = () => {
                                                      color={formik.errors.country && formik.touched.country
                                                          ? '#F06464'
                                                          : '#5590C1'}/>
+                                        {!formik.errors.country || !formik.touched.country ? <span className={s.array}>
+
+                                        </span> : <span className={s.arrayError}>
+
+                                        </span>}
                                         <select id='country'
                                                 onBlur={formik.handleBlur}
                                                 onChange={formik.handleChange}
                                                 value={formik.values.country}
                                                 className={formik.touched.country && formik.errors.country ? s.errorInput : s.inputI}>
-                                            <option defaultValue='country'>сountry
-                                            </option>
+                                            <option  defaultValue='country'>сountry </option>
                                             {options.map(m => {
                                                 return (
-                                                    <option key={m.value} value={m.label}>
+                                                    <option className={s.option} key={m.value} value={m.label}>
                                                         {m.label}
                                                     </option>
                                                 )
@@ -167,10 +172,12 @@ const Registration = () => {
                                                  color={formik.errors.password && formik.touched.password
                                                      ? '#F06464'
                                                      : '#5590C1'}/>
+
                                         <input type="password" id='password'
                                                placeholder="password"
-                                               className={formik.touched.password && formik.errors.password ? s.errorInput : s.inputI}
-                                               {...formik.getFieldProps('password')}/>
+                                               className=
+                                                   {formik.touched.password && formik.errors.password ? s.errorInput : s.inputI}
+                                               {...formik.getFieldProps('password')} />
                                     </label>
                                     {formik.touched.password && formik.errors.password ? defferentPasswordClass : ''}
                                 </div>
@@ -186,7 +193,7 @@ const Registration = () => {
                                                className={formik.touched.password2 && formik.errors.password2 ? s.errorInput : s.inputI}
                                                {...formik.getFieldProps('password2')}/>
                                     </label>
-                                    {formik.touched.password2 && formik.errors.password2 ? defferentPassword2Class :" "}
+                                    {formik.touched.password2 && formik.errors.password2 ? defferentPassword2Class : " "}
                                 </div>
 
                                 <div className="card-actions justify-center">
@@ -200,7 +207,16 @@ const Registration = () => {
 
                         </div>
                     </div>
+                   <div className={s.infoIcon}>
+                    <InfoIcon  width={'2em'} height={'2em'} color='#5590C1'/>
+                   </div>
+                    <span className={s.tooltip}><p>  <b>The password must contain:</b> <br/>
+                    • at least 8 characters
+                    <br />
+                    • numbers <br />
+                    • upper and lower case</p></span>
                 </div>
+
             </div>
         </MainContainer>
     );
