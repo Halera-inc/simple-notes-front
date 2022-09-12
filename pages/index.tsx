@@ -13,13 +13,11 @@ const Home: NextPage = () => {
     typeof window !== 'undefined' && isLoggedIn && router.push('/notes')
 
     return (
-
         <MainContainer>
             <div className="bg-white dark:bg-black">
                 <LandingPage/>
             </div>
         </MainContainer>
-
     )
 }
 

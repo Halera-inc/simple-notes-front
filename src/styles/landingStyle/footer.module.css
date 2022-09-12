@@ -1,8 +1,13 @@
 .footer {
-max-width: 200px;
-
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    max-width: 200px;
+    height: 10vh;
 }
-
+.footer a {
+    cursor: pointer;
+}
 .text {
     font-size: 20px;
     line-height: 24px;

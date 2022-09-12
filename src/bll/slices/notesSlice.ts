@@ -1,15 +1,13 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from 'axios'
-import {ColorSamplesType, notesAPI, NoteTextType, NoteTodoType, NoteViewType} from 'src/api/notes-api'
+import {ColorSamplesType, notesAPI, NoteTextType, NoteViewType} from 'src/api/notes-api'
 
 export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) => {
         try {
             const res = await notesAPI.getNotes()
-            const notes = res.data
-            return notes
+            return res.data
         } catch (error) {
-            const data = error
-            if (axios.isAxiosError(error) && data) {
+            if (axios.isAxiosError(error) && error) {
                 // dispatch(setAppError(data.error || 'Some error occurred'));
                 // } else (dispatch(setAppError(error.message + '. More details in the console')))
                 console.log({...error});
@@ -21,12 +19,9 @@ export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) =
 export const createNote = createAsyncThunk('notes/createNote', async (params: PostNoteParamsType, thunkAPI) => {
         try {
             const res = await notesAPI.createNote(params.title, params.note_text, params.color, params.note_mode)
-            console.log(res.data)
-            const note = res.data
-            return note
+            return res.data
         } catch (error) {
-            const data = error
-            if (axios.isAxiosError(error) && data) {
+            if (axios.isAxiosError(error) && error) {
                 // dispatch(setAppError(data.error || 'Some error occurred'));
                 // } else (dispatch(setAppError(error.message + '. More details in the console')))
                 console.log({...error});
@@ -50,16 +45,18 @@ export const editNote = createAsyncThunk('notes/editNote',
         try {
             const res = await notesAPI.updateNote(params.id, params.title,
                 params.note_text, params.color, params.note_mode)
-                return {noteId: params.id, newColor: params.color, newTitle: params.title, newText: params.note_text, newMode: params.note_mode}
+            return {noteId: params.id, newColor: params.color, newTitle: params.title, newText: params.note_text, newMode: params.note_mode}
         } catch (error) {
             console.log(error)
             return thunkAPI.rejectWithValue(null)
         }
     })
 
+
 const initialState = {
     notes: [] as Array<NoteTextType>,
-    createNoteModal: false
+    createNoteModal: false,
+    searchParams: ''
 }
 
 export const notesSlice = createSlice({
@@ -68,6 +65,12 @@ export const notesSlice = createSlice({
     reducers: {
         setCreateNoteModalShow(state, action: PayloadAction<{ isModalShow: boolean }>) {
             state.createNoteModal = action.payload.isModalShow
+        },
+        setSearchParams(state, action: PayloadAction<{newValue: string}>){
+            if (action.payload.newValue.length >= 2 || action.payload.newValue === '') {
+                state.searchParams = action.payload.newValue.trim()
+            }
+
         }
     },
     extraReducers: (builder) => {
@@ -102,7 +105,7 @@ export const notesSlice = createSlice({
     }
 })
 
-export const {setCreateNoteModalShow} = notesSlice.actions
+export const {setCreateNoteModalShow, setSearchParams} = notesSlice.actions
 
 export default notesSlice.reducer
 

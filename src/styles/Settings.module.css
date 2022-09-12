@@ -27,18 +27,14 @@
 }
 
 .editWrapper {
-    height: 200px;
-    @apply
-    flex
-    flex-col
-    justify-between
-
-
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.imgProfile {
-    width: 200px;
-    height: 200px;
+.imgProfileWrapper {
+    border: 1px solid #5590C1;
 }
 
 .myName {

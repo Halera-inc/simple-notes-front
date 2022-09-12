@@ -1,9 +1,5 @@
 .landing {
-    max-width: 1720px;
-    margin:0 auto;
+    position: relative;
+    padding: 0 100px;
     height: 100vh;
-
-
-
-
 }

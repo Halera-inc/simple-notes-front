@@ -1,7 +1,7 @@
 .modalBox {
     width: 650px;
     height: 800px;
-    padding: 50px 50px 30px 50px;
+    padding: 50px 25px 30px 50px;
     @apply
     flex
     flex-col
@@ -11,7 +11,6 @@
     border-2
     bg-blue
     relative
-
 }
 
 .modalAction {
@@ -43,40 +42,15 @@
 .textTextArea {
     outline: none;
     font-weight: 500;
-    font-size: 25px;
-    line-height: 30px;
+    font-size: 17px;
+    line-height: 28px;
     overflow: auto;
     resize: none;
-    height: 100%;
+    height: 110%;
     @apply
     mt-2.5
     rounded
     min-w-full
     bg-transparent
     text-blue-dark
-
 }
-
-.modalCancel {
-    display: flex;
-    align-items: center;
-    padding: 7px 37px;
-    font-size: 15px;
-    background-color: #FFF4F4;
-    color: #F06464;
-    border: 1px solid #F06464;
-    cursor: pointer;
-}
-
-.modalSave {
-    display: flex;
-    align-items: center;
-    padding: 7px 37px;
-    font-size: 15px;
-    background-color: #D6EDD9;
-    color: #5E9C80;
-    border: 1px solid #5E9C80;
-    cursor: pointer;
-}
-
-
