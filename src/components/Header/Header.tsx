@@ -1,4 +1,3 @@
-import SearchIcon from "../../assets/images/SearchIcon";
 import UserCircleIcon from "../../assets/images/UserCircleIcon";
 import React, {useState} from "react";
 import {useAppSelector} from "../../utils/hooks";
@@ -14,18 +13,17 @@ const Header = () => {
     const userName = useAppSelector(state => state.profile.user)
     const {data: session} = useSession()
     const pageName = getPageName(useRouter().pathname as APP_ROOTS)
-    const isAuth = useAppSelector(state => state.auth.isLoggedIn)
     const router = useRouter()
     const [login, setLogin] = useState<boolean>(false)
     const onChangeLogin = () => {
-        setLogin(!login)
     }
+
 
     return (
         <>
             {router.pathname !== '/'
                 ? <div>
-                    {isAuth
+                    {session
                         ? <div
                             className='z-20 backdrop-blur-md bg-white/70 absolute w-screen w-180 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
                             <p className='text-[35px] font-bold ml-[128px] text-black '>

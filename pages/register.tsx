@@ -9,8 +9,7 @@ import React, {useMemo} from "react";
 import countryList from "react-select-country-list";
 import ListIcon from "../src/assets/images/ListIcon";
 import CountryIcon from "../src/assets/images/CountryIcon";
-import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
-import {registerUser} from "../src/bll/slices/authSlice";
+import {useAppDispatch} from "../src/utils/hooks";
 import {useRouter} from "next/router";
 import {authAPI} from "../src/api/notes-api";
 import {signIn} from "next-auth/react";
@@ -21,7 +20,6 @@ const Register = () => {
 
     const options = useMemo(() => countryList().getData(), [])
     const router = useRouter()
-    const dispatch = useAppDispatch()
     type FormikErrorType = {
         username?: string
         email?: string
@@ -57,7 +55,7 @@ const Register = () => {
                 errors.password = 'Required';
                 // !/^[A-Za-z0-9]{8,}$/
             } else if (!/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g.test(values.password)) {
-                errors.password ='Invalid password'
+                errors.password = 'Invalid password'
             }
             if (!values.password2) {
                 errors.password2 = 'Required';
@@ -154,7 +152,8 @@ const Register = () => {
                                                      color={formik.errors.country && formik.touched.country
                                                          ? '#F06464'
                                                          : '#5590C1'}/>
-                                        {!formik.errors.country || !formik.touched.country ? <span className={s.array}>
+                                        {!formik.errors.country || !formik.touched.country ?
+                                            <span className={s.array}>
 
                                         </span> : <span className={s.arrayError}>
 
@@ -164,10 +163,12 @@ const Register = () => {
                                                 onChange={formik.handleChange}
                                                 value={formik.values.country}
                                                 className={formik.touched.country && formik.errors.country ? s.errorInput : s.inputI}>
-                                            <option  defaultValue='country'>сountry </option>
+                                            <option defaultValue='country'>сountry
+                                            </option>
                                             {options.map(m => {
                                                 return (
-                                                    <option className={s.option} key={m.value} value={m.label}>
+                                                    <option className={s.option}
+                                                            key={m.value} value={m.label}>
                                                         {m.label}
                                                     </option>
                                                 )
@@ -220,13 +221,14 @@ const Register = () => {
 
                         </div>
                     </div>
-                   <div className={s.infoIcon}>
-                    <InfoIcon  width={'2em'} height={'2em'} color='#5590C1'/>
-                   </div>
-                    <span className={s.tooltip}><p>  <b>The password must contain:</b> <br/>
+                    <div className={s.infoIcon}>
+                        <InfoIcon width={'2em'} height={'2em'} color='#5590C1'/>
+                    </div>
+                    <span
+                        className={s.tooltip}><p>  <b>The password must contain:</b> <br/>
                     • at least 8 characters
-                    <br />
-                    • numbers <br />
+                    <br/>
+                    • numbers <br/>
                     • upper and lower case</p></span>
                 </div>
 

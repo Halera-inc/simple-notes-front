@@ -3,9 +3,8 @@ import type {AppProps} from 'next/app'
 import {store} from '../src/bll/store'
 import {Provider} from 'react-redux'
 import {ThemeProvider} from "next-themes";
-import {getSession, SessionProvider} from "next-auth/react"
 import Sidebar from "../src/components/Sidebar/Sidebar";
-import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import {SessionProvider} from 'next-auth/react';
 
 
 function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {

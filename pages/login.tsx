@@ -7,9 +7,9 @@ import KeyIcon from "../src/assets/images/KeyIcon";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
-import {loginUser, notErrorlogin} from "../src/bll/slices/authSlice";
+import {notErrorlogin} from "../src/bll/slices/authSlice";
 import {useRouter} from "next/router";
-import {getProviders, getSession, signIn, useSession} from "next-auth/react";
+import {getProviders, getSession, signIn} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 
 

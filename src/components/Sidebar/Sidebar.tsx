@@ -13,7 +13,6 @@ import {useTheme} from "next-themes";
 import MoonIcon from "src/assets/images/MoonIcon";
 import {createNote} from "../../bll/slices/notesSlice";
 import {useAppDispatch} from "../../utils/hooks";
-import {setIsLoggedIn} from "../../bll/slices/authSlice";
 import {signOut} from "next-auth/react";
 
 const Sidebar = () => {

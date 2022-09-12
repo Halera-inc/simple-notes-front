@@ -1,5 +1,4 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {SettingsType, userAPI} from "../../api/notes-api";
 import {userAPI} from "../../api/notes-api";
 import axios from "axios";
 import {UserType} from "../../utils/types";
