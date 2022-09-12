@@ -6,8 +6,7 @@ import ColorizedBar from "./Note/ColorizedBar";
 import colorizeNote from "../utils/colorizeNote";
 import {RootState} from "../bll/store";
 import {useSelector} from "react-redux";
-import {useAppDispatch, useAppSelector} from "src/utils/hooks";
-import {setCreateNoteModalShow} from "src/bll/slices/notesSlice";
+
 
 
 type ModalWindowType = 'edit' | 'create'
@@ -48,6 +47,10 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
 
 
     }
+    const onBlurHandler=()=>{
+        editNotesHandler()
+        modalBtnRef.current && modalBtnRef.current.click()
+    }
     const onColorChangeButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
         setShowColorBar(!showColorBar)
         e.stopPropagation()
@@ -59,9 +62,9 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
     if (props.typeNode === 'edit') {
         return (
             <>
-                <input type="checkbox" id='my-modal' className="modal-toggle"/>
-                <div className="modal backdrop-blur-sm">
-                    <div className={s.modalBox} style={colorizedColor}>
+                <input type="checkbox" id='my-modal' className="modal-toggle" />
+                <div className="modal backdrop-blur-sm" onBlur={onBlurHandler}>
+                    <div className={s.modalBox} style={colorizedColor} >
                         <div className={s.topArea}>
                             <input type="text" className={s.cardTitle} style={colorizedColor} value={props.titleNode}
                                    onChange={props.onTitleChange}/>
