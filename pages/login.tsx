@@ -7,13 +7,14 @@ import KeyIcon from "../src/assets/images/KeyIcon";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
-import {loginUser} from "../src/bll/slices/authSlice";
+import {loginUser, notErrorlogin} from "../src/bll/slices/authSlice";
 import {useRouter} from "next/router";
 
 const Login = () => {
 
     const router = useRouter()
     const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const notError = useAppSelector(state => state.auth.notErrorlogin)
     const dispatch = useAppDispatch()
 
     type FormikErrorType = {
@@ -36,6 +37,7 @@ const Login = () => {
     })
 
     const resetHandler = () => {
+        dispatch(notErrorlogin(true));
         formik.resetForm();
     }
 
@@ -60,9 +62,9 @@ const Login = () => {
                                 <div className={`${s.formControl} ${s.one}`}>
                                     <label className={s.label}>
                                         <UserIcon width={'3em'} height={'3em'}
-                                                  color={isLoggedIn ? '#5590C1' : '#F06464'}/>
+                                                  color={notError ? '#5590C1' : '#F06464'}/>
                                         <input type="text" id='email' placeholder="email"
-                                               className={isLoggedIn ? s.inputI : s.errorInput}
+                                               className={notError ? s.inputI : s.errorInput}
                                                {...formik.getFieldProps('email')}/>
                                     </label>
                                     {formik.touched.email && formik.errors.email}
@@ -72,13 +74,13 @@ const Login = () => {
                                 <div className={`${s.formControl} ${s.two}`}>
                                     <label className={s.label}>
                                         <KeyIcon width={'3em'} height={'3em'}
-                                                 color={isLoggedIn ? '#5590C1' : '#F06464'}/>
+                                                 color={notError ? '#5590C1' : '#F06464'}/>
                                         <input type="password" id='password'
                                                placeholder="password"
-                                               className={isLoggedIn ? s.inputI : s.errorInput}
+                                               className={notError ? s.inputI : s.errorInput}
                                                {...formik.getFieldProps('password')}/>
                                     </label>
-                                    {!isLoggedIn ?
+                                    {!notError ?
                                         <div className={s.errorText}>Incorrect login or
                                             password!</div> : null}
                                 </div>
