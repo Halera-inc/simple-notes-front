@@ -88,29 +88,6 @@
 
 }
 
-.btnB {
-    width: 200px;
-    height: 60px !important;
-    margin-bottom: 55px;
-    font-size: 25px !important;
-    line-height: 30px !important;
-    text-transform: capitalize !important;
-    @apply
-    btn
-    btn-outline
-    text-blue-dark
-    rounded-none
-    bg-white
-
-}
-
-.btnB:hover {
-    @apply
-    bg-blue-dark
-    outline-none
-    border-blue-dark
-}
-
 .formControl {
     position: relative;
     @apply
