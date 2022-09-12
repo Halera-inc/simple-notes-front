@@ -13,6 +13,7 @@ import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {registerUser} from "../src/bll/slices/authSlice";
 import {useRouter} from "next/router";
 import InfoIcon from "../src/assets/images/InfoIcon";
+import Button from "../src/components/universalComponent/Button/Button";
 
 
 const Registration = () => {
@@ -44,7 +45,6 @@ const Registration = () => {
             if (!values.username) {
                 errors.username = 'Required';
             }
-
             if (!values.email) {
                 errors.email = 'Required';
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -54,10 +54,8 @@ const Registration = () => {
                 errors.country = 'Required';
             }
             if (!values.password) {
-                errors.password = 'Required';
-                // !/^[A-Za-z0-9]{8,}$/
             } else if (!/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g.test(values.password)) {
-                errors.password ='Invalid password'
+                errors.password = 'Invalid password'
             }
             if (!values.password2) {
                 errors.password2 = 'Required';
@@ -95,7 +93,7 @@ const Registration = () => {
                             <div className={s.wrapperTitle}>
                                 <h2 className={s.cardTitle}> Registration</h2>
                                 <div className={s.arrowIcon}>
-                                    <Link href={"/signIn"}>
+                                    <Link href={"/login"}>
                                         <ArrowBackIcon width={'2.5em'} height={'2.5em'}
                                                        color={'#5590C1'}/>
                                     </Link>
@@ -150,7 +148,7 @@ const Registration = () => {
                                                 onChange={formik.handleChange}
                                                 value={formik.values.country}
                                                 className={formik.touched.country && formik.errors.country ? s.errorInput : s.inputI}>
-                                            <option  defaultValue='country'>сountry </option>
+                                            <option defaultValue='country'>сountry</option>
                                             {options.map(m => {
                                                 return (
                                                     <option className={s.option} key={m.value} value={m.label}>
@@ -194,10 +192,16 @@ const Registration = () => {
                                     </label>
                                     {formik.touched.password2 && formik.errors.password2 ? defferentPassword2Class : " "}
                                 </div>
-
                                 <div className="card-actions justify-center">
-                                    <button type={'submit'} className={s.btnB}>SignUp
-                                    </button>
+                                    <Button type={'submit'}
+                                            title={'SignUp'}
+                                            style={{
+                                                width: 200,
+                                                height: 60,
+                                                margin: '0 0 60px 0',
+                                                fontSize: 18,
+                                                backgroundColor: "white"
+                                            }}/>
                                 </div>
                             </form>
                             <Link href={"/login"}>
@@ -206,13 +210,13 @@ const Registration = () => {
 
                         </div>
                     </div>
-                   <div className={s.infoIcon}>
-                    <InfoIcon  width={'2em'} height={'2em'} color='#5590C1'/>
-                   </div>
+                    <div className={s.infoIcon}>
+                        <InfoIcon width={'2em'} height={'2em'} color='#5590C1'/>
+                    </div>
                     <span className={s.tooltip}><p>  <b>The password must contain:</b> <br/>
                     • at least 8 characters
-                    <br />
-                    • numbers <br />
+                    <br/>
+                    • numbers <br/>
                     • upper and lower case</p></span>
                 </div>
 

@@ -94,10 +94,8 @@ const Sidebar = () => {
                                      setTheme('light')
                                  }} width={50} fill={'#5590C1'}/>}/>}
                 {currentTheme !== 'dark' &&
-                <SidebarItem tooltipInfo={'Dark Side'}
-                             icon={<MoonIcon onClick={() => {
-                                 setTheme('dark')
-                             }} width={50} fill={'#5590C1'}/>}/>
+                    <SidebarItem tooltipInfo={'Dark Side'}
+                                 icon={<MoonIcon onClick={() => {setTheme('dark')}} width={50} fill={'#5590C1'}/>}/>
                 }
 
                 <SidebarItem tooltipInfo={'Log out'}

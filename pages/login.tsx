@@ -7,14 +7,17 @@ import KeyIcon from "../src/assets/images/KeyIcon";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
-import {loginUser, notErrorlogin} from "../src/bll/slices/authSlice";
+import {loginUser, notErrorLogin} from "../src/bll/slices/authSlice";
 import {useRouter} from "next/router";
+import Button from "../src/components/universalComponent/Button/Button";
+import {Spinner} from "../src/components/Spinner";
 
 const Login = () => {
 
     const router = useRouter()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const notError = useAppSelector(state => state.auth.notErrorlogin)
+    const isLoggedIn = useAppSelector<boolean>(state => state.auth.isLoggedIn)
+    const isInitialized = useAppSelector<boolean>(state => state.auth.isInitialized)
+    const notError = useAppSelector<boolean>(state => state.auth.notErrorLogin)
     const dispatch = useAppDispatch()
 
     type FormikErrorType = {
@@ -36,7 +39,7 @@ const Login = () => {
     })
 
     const resetHandler = () => {
-        dispatch(notErrorlogin(true));
+        dispatch(notErrorLogin(true));
         formik.resetForm();
     }
 
@@ -85,14 +88,24 @@ const Login = () => {
                                 </div>
 
                                 <div className="card-actions justify-center">
-                                    <button type={'submit'} className={s.btnB}>Login
-                                    </button>
+                                    <Button title={'Login'}
+                                            type={'submit'}
+                                            style={{
+                                                backgroundColor: "white",
+                                                width: 200,
+                                                height: 60,
+                                                margin: '0 0 60px 0',
+                                                fontSize: 20
+                                            }}/>
+                                    {!isInitialized && <Spinner size={'60px'}
+                                                                style={{fill: 'blue'}}
+                                                                className={'absolute right-32'}/>}
                                 </div>
                             </form>
-                            <Link href={"/registration"}><p
-                                className={s.text}>Registration</p></Link>
-                            <p onClick={resetHandler} className={s.text}>Reset
-                                password</p>
+                            <Link href={"/registration"}>
+                                <p className={s.text}>Registration</p>
+                            </Link>
+                            <p onClick={resetHandler} className={s.text}>Reset password</p>
                         </div>
                     </div>
                 </div>

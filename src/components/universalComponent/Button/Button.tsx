@@ -13,6 +13,7 @@ type PropsType = {
     color?: colorsButtonType
     htmlFor?: string
     className?: string
+    type?: "button" | "reset" | "submit" | undefined
 }
 
 const Button = (props: PropsType) => {
@@ -64,32 +65,42 @@ const Button = (props: PropsType) => {
     if (props.link) {
         return (
             <Link href={props.link ? props.link : ''}>
-                <label id={'linkButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
-                       className={props.className}
-                       onClick={callback}
-                       onMouseEnter={() => setIsHover(true)}
-                       onMouseLeave={() => setIsHover(false)}
-                       style={!isHover
-                           ? {...customStyles, ...props.style,}
-                           : {...customStyles, ...props.style, ...isHoveredCustomStyles}}>
-                    {props.icon && <div style={{margin: '0 5px'}}>{props.icon}</div>}
-                    <div style={{margin: '0 5px'}}>{props.title}</div>
-                </label>
+                <button type={props.type ? props.type : 'button'}
+                        className={props.className}
+                        onClick={callback}
+                        onMouseEnter={() => setIsHover(true)}
+                        onMouseLeave={() => setIsHover(false)}
+                        style={!isHover
+                            ? {...customStyles, ...props.style,}
+                            : {...customStyles, ...props.style, ...isHoveredCustomStyles}}>
+                    <label id={'linkButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
+                           style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", cursor: "pointer"}}>
+                        {props.icon && <div style={{margin: '0 5px'}}>
+                            {props.icon}
+                        </div>}
+                        <div style={{margin: '0 5px'}}>{props.title}</div>
+                    </label>
+                </button>
             </Link>
         )
     } else {
         return (
-            <label id={'defaultButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
-                   onClick={callback}
-                   className={props.className}
-                   onMouseEnter={() => setIsHover(true)}
-                   onMouseLeave={() => setIsHover(false)}
-                   style={!isHover
-                       ? {...customStyles, ...props.style,}
-                       : {...customStyles, ...props.style, ...isHoveredCustomStyles}}>
-                {props.icon && <div style={{margin: '0 5px'}}>{props.icon}</div>}
-                <div style={{margin: '0 5px'}}>{props.title}</div>
-            </label>
+            <button type={props.type ? props.type : 'button'}
+                    className={props.className}
+                    onClick={callback}
+                    onMouseEnter={() => setIsHover(true)}
+                    onMouseLeave={() => setIsHover(false)}
+                    style={!isHover
+                        ? {...customStyles, ...props.style,}
+                        : {...customStyles, ...props.style, ...isHoveredCustomStyles}}>
+                <label id={'defaultButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
+                       style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", cursor: "pointer"}}>
+                    {props.icon && <div style={{margin: '0 5px'}}>{props.icon}</div>}
+                    <div style={{margin: '0 5px'}}>
+                        {props.title}
+                    </div>
+                </label>
+            </button>
         )
     }
 
