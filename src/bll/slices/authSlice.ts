@@ -18,10 +18,13 @@ export const loginUser = createAsyncThunk(
     async (params: LoginParamsType, thunkAPI) => {
         try {
             const response = await authAPI.login(params.email, params.password)
-            localStorage.setItem("access_token", response.data.token)
+            localStorage.setItem("access_token", response.data.token);
             return response.data.user
+
+
         } catch (e) {
             console.log("Error", e)
+            notErrorlogin(false)
             return thunkAPI.rejectWithValue(e)
         }
     }
@@ -44,6 +47,7 @@ export const initializeApp = createAsyncThunk(
 const initialState = {
     isLoggedIn: false,
     isInitialized: false,
+    notErrorlogin:true,
 };
 
 export const authSlice = createSlice({
@@ -55,6 +59,9 @@ export const authSlice = createSlice({
         },
         setIsInitialized(state, action: PayloadAction<boolean>) {
             state.isInitialized = action.payload
+        },
+        notErrorlogin(state, action: PayloadAction<boolean>) {
+            state.notErrorlogin= action.payload
         },
     },
     extraReducers: (builder) => {
@@ -69,9 +76,13 @@ export const authSlice = createSlice({
             })
             .addCase(loginUser.fulfilled, (state) => {
                 state.isLoggedIn = true
+                state.notErrorlogin=true
+            })
+            .addCase(loginUser.rejected, (state) => {
+                state.notErrorlogin=false
             })
     }})
-export const {setIsLoggedIn, setIsInitialized} = authSlice.actions
+export const {setIsLoggedIn, setIsInitialized, notErrorlogin} = authSlice.actions
 
 export default authSlice.reducer
 
