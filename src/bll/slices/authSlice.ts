@@ -20,6 +20,8 @@ export const loginUser = createAsyncThunk(
             const response = await authAPI.login(params.email, params.password)
             localStorage.setItem("access_token", response.data.token);
             return response.data.user
+
+
         } catch (e) {
             console.log("Error", e)
             notErrorlogin(false)
