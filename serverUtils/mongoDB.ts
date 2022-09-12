@@ -1,13 +1,13 @@
 import {MongoClient} from "mongodb"
 
-if (!process.env.MONGODB_URI) {
+if (!process.env.MONGO_URL) {
     throw new Error("Please add your Mongo URI to .env.local")
 }
-const uri: string = process.env.MONGODB_URI
+const uri: string = process.env.MONGO_URL
 let client: MongoClient
 let clientPromise: Promise<MongoClient>
 
-if (process.env.MONGODB_URI === "development") {
+if (process.env.MONGO_URL === "development") {
     // In development mode, use a global variable so that the value
     // is preserved across module reloads caused by HMR (Hot Module Replacement).
 

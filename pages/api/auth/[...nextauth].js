@@ -62,7 +62,7 @@ export const authOptions = {
             },
         }),
     ],
-    database: process.env.MONGODB_URI,
+    database: process.env.MONGO_URL,
     adapter: MongoDBAdapter(clientPromise),
     secret: process.env.NEXTAUTH_SECRET,
     session: {
