@@ -9,19 +9,18 @@ import React, {useMemo} from "react";
 import countryList from "react-select-country-list";
 import ListIcon from "../src/assets/images/ListIcon";
 import CountryIcon from "../src/assets/images/CountryIcon";
-import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
-import {registerUser} from "../src/bll/slices/authSlice";
+import {useAppDispatch} from "../src/utils/hooks";
 import {useRouter} from "next/router";
+import {authAPI} from "../src/api/notes-api";
+import {signIn} from "next-auth/react";
 import InfoIcon from "../src/assets/images/InfoIcon";
 import Button from "../src/components/universalComponent/Button/Button";
 
 
-const Registration = () => {
+const Register = () => {
 
     const options = useMemo(() => countryList().getData(), [])
     const router = useRouter()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
-    const dispatch = useAppDispatch()
     type FormikErrorType = {
         username?: string
         email?: string
@@ -38,7 +37,6 @@ const Registration = () => {
             password: '',
             password2: '',
         },
-
 
         validate: (values) => {
             const errors: FormikErrorType = {};
@@ -64,18 +62,32 @@ const Registration = () => {
             }
             return errors;
         },
-        onSubmit: values => {
-            dispatch(registerUser({
-                email: values.email,
-                password: values.password,
-                country: values.country
-            }));
-            typeof window !== 'undefined' && router.push('/login')
-            formik.resetForm();
+        onSubmit: async values => {
+            const res: any = await authAPI.register(values.email, values.password, values.country, values.username)
+                .then(async () => {
+                    const res: any = await signIn("credentials", {
+                        redirect: false,
+                        email: values.email,
+                        password: values.password,
+                        callbackUrl: `${window.location.origin}`,
+                    })
+                    res.error ? console.log(res.error) : redirectToHome();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            console.log(res);
         },
     })
 
-    typeof window !== 'undefined' && isLoggedIn && router.push('/notes')
+    const redirectToHome = () => {
+        const {pathname} = router;
+        if (pathname === "/register") {
+            typeof window !== 'undefined' && router.push("/notes");
+        }
+    };
+
+    const defferentClass = formik.errors.password2 === 'Invalid password'
     const defferentPassword2Class = formik.errors.password2 === 'Invalid password'
         ? <div className={s.errorTextInvalid}>{formik.errors.password2}</div>
         : <div className={s.errorTextRegistration}>{formik.errors.password2}</div>
@@ -138,7 +150,8 @@ const Registration = () => {
                                                      color={formik.errors.country && formik.touched.country
                                                          ? '#F06464'
                                                          : '#5590C1'}/>
-                                        {!formik.errors.country || !formik.touched.country ? <span className={s.array}>
+                                        {!formik.errors.country || !formik.touched.country ?
+                                            <span className={s.array}>
 
                                         </span> : <span className={s.arrayError}>
 
@@ -148,10 +161,12 @@ const Registration = () => {
                                                 onChange={formik.handleChange}
                                                 value={formik.values.country}
                                                 className={formik.touched.country && formik.errors.country ? s.errorInput : s.inputI}>
-                                            <option defaultValue='country'>сountry</option>
+                                            <option defaultValue='country'>сountry
+                                            </option>
                                             {options.map(m => {
                                                 return (
-                                                    <option className={s.option} key={m.value} value={m.label}>
+                                                    <option className={s.option}
+                                                            key={m.value} value={m.label}>
                                                         {m.label}
                                                     </option>
                                                 )
@@ -213,7 +228,8 @@ const Registration = () => {
                     <div className={s.infoIcon}>
                         <InfoIcon width={'2em'} height={'2em'} color='#5590C1'/>
                     </div>
-                    <span className={s.tooltip}><p>  <b>The password must contain:</b> <br/>
+                    <span
+                        className={s.tooltip}><p>  <b>The password must contain:</b> <br/>
                     • at least 8 characters
                     <br/>
                     • numbers <br/>
@@ -225,4 +241,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default Register;

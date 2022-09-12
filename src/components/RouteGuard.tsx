@@ -7,7 +7,7 @@ import {Spinner} from "./Spinner";
 
 export const RouteGuard = ({children}: any) => {
 
-    const effectRan = useRef(false)
+
     const {isLoggedIn, isInitialized} = useAppSelector(state => state.auth)
     const dispatch = useAppDispatch()
 
