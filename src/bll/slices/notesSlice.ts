@@ -1,6 +1,12 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from 'axios'
-import {ColorSamplesType, notesAPI, NoteTextType, NoteTodoType, NoteViewType} from 'src/api/notes-api'
+import {
+    ColorSamplesType,
+    notesAPI,
+    NoteTextType,
+    NoteTodoType,
+    NoteViewType
+} from 'src/api/notes-api'
 
 export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) => {
         try {
@@ -50,7 +56,13 @@ export const editNote = createAsyncThunk('notes/editNote',
         try {
             const res = await notesAPI.updateNote(params.id, params.title,
                 params.note_text, params.color, params.note_mode)
-                return {noteId: params.id, newColor: params.color, newTitle: params.title, newText: params.note_text, newMode: params.note_mode}
+            return {
+                noteId: params.id,
+                newColor: params.color,
+                newTitle: params.title,
+                newText: params.note_text,
+                newMode: params.note_mode
+            }
         } catch (error) {
             console.log(error)
             return thunkAPI.rejectWithValue(null)
@@ -72,10 +84,6 @@ export const notesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getNotes.pending, (state) => {
-                //пока ничего isFetching = true
-
-            })
             .addCase(getNotes.fulfilled, (state, action) => {
                 state.notes = action.payload
             })

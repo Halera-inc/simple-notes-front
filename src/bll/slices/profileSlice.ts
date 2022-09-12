@@ -1,6 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import {SettingsType, userAPI} from "../../api/notes-api";
-import {initializeApp} from "./authSlice";
 import axios from "axios";
 
 
@@ -40,9 +39,6 @@ export const profileSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(initializeApp.fulfilled, (state, action) => {
-                state.user = action.payload
-            })
             .addCase(updateUserData.fulfilled, (state, action) => {
                 state.user = action.payload
             })

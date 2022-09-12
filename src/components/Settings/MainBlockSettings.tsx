@@ -3,7 +3,7 @@ import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button";
 import {useAppSelector} from "src/utils/hooks";
 import InputForm from "src/components/Settings/inputform/InputForm";
-import {getSession, useSession} from "next-auth/react";
+import {useSession} from "next-auth/react";
 
 export const buttonEditSave = {
     paddingTop: '7px',

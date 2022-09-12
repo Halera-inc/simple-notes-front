@@ -5,7 +5,6 @@ import { NullableType } from "../store";
 
 const initialState = {
     appError: '' as NullableType<string>,
-    appIsInitialize: false,
     isAppFetching: false
 };
 

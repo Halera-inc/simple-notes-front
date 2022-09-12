@@ -1,11 +1,14 @@
 import Note from "../../../serverUtils/models/Note";
 import dbConnect from "../../../serverUtils/dbConnect";
+import {getSession} from "next-auth/react";
 
 export default async function handler(req, res) {
     const {
         query: {targetId},
         method,
     } = req
+    const session = await getSession({ req });
+    const {user} = session
 
     await dbConnect()
 
