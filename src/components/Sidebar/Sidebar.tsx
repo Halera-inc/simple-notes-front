@@ -54,7 +54,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className={s.sidebarWrapper} >
+        <div className={s.sidebarWrapper}>
             <label ref={modalAddBtnRef} htmlFor='my-modal-add-note'
                    className="btn modal-button hidden">open
                 modal</label>
