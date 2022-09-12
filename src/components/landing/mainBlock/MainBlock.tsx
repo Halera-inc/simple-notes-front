@@ -1,12 +1,13 @@
 import React from 'react';
 import s from 'src/styles/landingStyle/MainBlock.module.css'
 import SapienMainBlockIcon from "src/assets/images/SapienMainBlockIcon";
-import Button from "src/components/universalComponent/Button";
+import Button from "src/components/universalComponent/Button/Button";
+import ArrowBackIcon from "../../../assets/images/ArrowBackIcon";
 
 
 const MainBlock = () => {
 
-    const buttonTitle={
+    const buttonTitle = {
         paddingTop: '12px',
         paddingBottom: '12px',
         paddingLeft: '37px',
@@ -23,12 +24,15 @@ const MainBlock = () => {
                     <p>Notes.</p>
                 </h1>
 
-                <Button style={buttonTitle} title='Start now' onChangeParams={() => alert("all right")}/>
+                <Button icon={<ArrowBackIcon style={{rotate: '180deg'}}/>}
+                        style={buttonTitle}
+                        title='Start now'
+                        link={'/login'}/>
+            </div>
+            <div className={s.imgTitle}>
+                <SapienMainBlockIcon/>
             </div>
 
-            <div className={s.imgTitle}>
-                <SapienMainBlockIcon />
-            </div>
         </div>
 
     );

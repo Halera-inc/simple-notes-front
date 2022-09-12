@@ -1,10 +1,9 @@
 import React from 'react';
 import s from "src/styles/Settings.module.css";
-import Button from "src/components/universalComponent/Button";
+import Button from "src/components/universalComponent/Button/Button";
 import {useAppDispatch, useAppSelector} from "src/utils/hooks";
-import {PutUserParamsType, updateUserData} from "src/bll/slices/profileSlice";
+import {updateUserData} from "src/bll/slices/profileSlice";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {buttonEditSave} from "src/components/Settings/MainBlockSettings";
 
 const InputForm = () => {
     const dispatch = useAppDispatch()
@@ -16,11 +15,13 @@ const InputForm = () => {
             country: userData.country
         }
     })
-    const onSubmit: SubmitHandler<{ username: string, email: string, country: string }> = (values) =>
+
+    const onSubmit: SubmitHandler<{ username: string, email: string, country: string }> = (values) => {
         dispatch(updateUserData(values))
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-
             <div className={s.edit}>
                 <ul className={s.editMyProfile}>
                     <label>
@@ -45,9 +46,7 @@ const InputForm = () => {
                     </label>
                 </ul>
 
-                <Button title={'Save'}
-                        style={buttonEditSave}
-                />
+                <Button title={'Save'} callback={onSubmit}/>
             </div>
         </form>
     );

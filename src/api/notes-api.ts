@@ -53,10 +53,15 @@ export const authAPI = {
 }
 
 //for User
+
 export const userAPI = {
+    getUser(){
+        return instance.get(`user`)
+    },
     updateUser(username?: string, email?: string, country?: string) {
         return instance.put(`api/user`, {username,  country})
     }
+
 }
 
 // Types
@@ -81,7 +86,7 @@ export type UserType = {
     image: string
 }
 export type SettingsType = {
-    darkMode?: boolean,
+    darkmode?: boolean,
     themecolor?: string,
 }
 

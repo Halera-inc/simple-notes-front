@@ -5,8 +5,7 @@ export const registerUser = createAsyncThunk(
     "auth/register",
     async (params: RegisterParamsType, thunkAPI) => {
         try {
-            const response = await authAPI.register(params.email, params.password, params.country, params.username)
-
+            const response = await authAPI.register(params.email, params.password, params.country)
             return response.data.message
         } catch (e) {
             console.log("Error", e)
@@ -30,29 +29,25 @@ export const registerUser = createAsyncThunk(
 // )
 
 const initialState = {
+    notErrorlogin:true,
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-
+    notErrorlogin(state, action: PayloadAction<boolean>) {
+            state.notErrorlogin= action.payload
+        },
     },
     extraReducers: (builder) => {
-        // builder
-    //         .addCase(initializeApp.fulfilled, (state) => {
-    //             state.isLoggedIn = true
-    //             state.isInitialized = true
-    //         })
-    //         .addCase(initializeApp.rejected, (state) => {
-    //             state.isLoggedIn = false
-    //             state.isInitialized = true
-    //         })
-    //         .addCase(loginUser.fulfilled, (state) => {
-    //             state.isLoggedIn = true
-    //         })
+        builder
+    .addCase(loginUser.fulfilled, (state) => {
+                state.isLoggedIn = true
+                state.notErrorlogin=true
+            })
      }})
-// export const {} = authSlice.actions
+export const {notErrorlogin} = authSlice.actions
 
 export default authSlice.reducer
 

@@ -6,7 +6,8 @@ import UserIcon from "../src/assets/images/UserIcon";
 import KeyIcon from "../src/assets/images/KeyIcon";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
-import {useAppDispatch} from "../src/utils/hooks";
+import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
+import {loginUser, notErrorlogin} from "../src/bll/slices/authSlice";
 import {useRouter} from "next/router";
 import {getProviders, getSession, signIn, useSession} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
@@ -16,6 +17,7 @@ const Login = ({providers, session}: any) => {
     // console.log(providers)
     // console.log(session)
     const router = useRouter()
+    const notError = useAppSelector(state => state.auth.notErrorlogin)
     const dispatch = useAppDispatch()
 
     type FormikErrorType = {
@@ -47,6 +49,7 @@ const Login = ({providers, session}: any) => {
     };
 
     const resetHandler = () => {
+        dispatch(notErrorlogin(true));
         formik.resetForm();
     }
 
@@ -99,9 +102,9 @@ const Login = ({providers, session}: any) => {
                                 <div className={`${s.formControl} ${s.one}`}>
                                     <label className={s.label}>
                                         <UserIcon width={'3em'} height={'3em'}
-                                                  color={session ? '#5590C1' : '#F06464'}/>
+                                                  color={notError ? '#5590C1' : '#F06464'}/>
                                         <input type="text" id='email' placeholder="email"
-                                               className={session ? s.inputI : s.errorInput}
+                                               className={notError ? s.inputI : s.errorInput}
                                                {...formik.getFieldProps('email')}/>
                                     </label>
                                     {formik.touched.email && formik.errors.email}
@@ -111,13 +114,13 @@ const Login = ({providers, session}: any) => {
                                 <div className={`${s.formControl} ${s.two}`}>
                                     <label className={s.label}>
                                         <KeyIcon width={'3em'} height={'3em'}
-                                                 color={session ? '#5590C1' : '#F06464'}/>
+                                                 color={notError ? '#5590C1' : '#F06464'}/>
                                         <input type="password" id='password'
                                                placeholder="password"
-                                               className={session ? s.inputI : s.errorInput}
+                                               className={notError ? s.inputI : s.errorInput}
                                                {...formik.getFieldProps('password')}/>
                                     </label>
-                                    {!session ?
+                                    {!notError ?
                                         <div className={s.errorText}>Incorrect login or
                                             password!</div> : null}
                                 </div>

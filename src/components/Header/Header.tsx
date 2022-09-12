@@ -5,25 +5,21 @@ import {useAppSelector} from "../../utils/hooks";
 import {useRouter} from "next/router";
 import {APP_ROOTS, getPageName} from "../../utils/getPageName";
 import ButtonIcon from "../../assets/images/ButtonIcon";
-import Button from "../universalComponent/Button";
 import {useSession} from "next-auth/react";
+import Button from "../universalComponent/Button/Button";
+import SearchModule from "./SearchModule";
 
 
 const Header = () => {
-
-    const liArray = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7'] //todo must be replace with value from profile slice
-    const [isCollapsed, setIsCollapsed] = useState(false)
     const userName = useAppSelector(state => state.profile.user)
     const {data: session} = useSession()
     const pageName = getPageName(useRouter().pathname as APP_ROOTS)
-    const isAuth = true                                   //todo must be replace with value from profile slice
+    const isAuth = useAppSelector(state => state.auth.isLoggedIn)
     const router = useRouter()
-    //for login button todo must be refactoring after API make
     const [login, setLogin] = useState<boolean>(false)
     const onChangeLogin = () => {
         setLogin(!login)
     }
-
 
     return (
         <>
@@ -31,33 +27,25 @@ const Header = () => {
                 ? <div>
                     {isAuth
                         ? <div
-                            className='z-50 backdrop-blur-md bg-white/70 absolute w-screen w-100 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
-                            <p className='text-[35px] font-bold ml-[128px]'>
+                            className='z-20 backdrop-blur-md bg-white/70 absolute w-screen w-180 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
+                            <p className='text-[35px] font-bold ml-[128px] text-black '>
                                 {pageName}
                             </p>
-                            <div
-                                className='flex justify-between w-[340px] items-center mr-[74px]'>
-                                <SearchIcon width={'40px'} height={'40px'}
-                                            fill={'#212121'}/>
-                                <p className='text-lg'>{session?.user?.name}</p>
-                                <UserCircleIcon width={'3em'} height={'3em'}
-                                                fill={'#212121'}/>
+                            <div className='flex justify-between w-[540px] items-center mr-[74px]'>
+                                <SearchModule/>
+                                <p className='text-lg text-black'>{session?.user?.name}</p>
+                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
                             </div>
                         </div>
-                        : <div
-                            className='z-50 flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]'>
-                            <p className='px-32 text-[35px] font-bold ml-[75px]'>Simple
-                                Notes</p>
-                            <div
-                                className='flex justify-between w-64 items-center mr-[100px]'>
-                                <a href={'/about'}
-                                   className='text-blue-dark text-[25px] mr-[90px]'>About</a>
-                                {login && <div>
-                                    <Button title='Logout'
-                                            onChangeParams={onChangeLogin}/>
+                        : <div className='z-50 flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]'>
+                            <p className='px-32 text-[35px] font-bold ml-[75px]'>Simple Notes</p>
+                            <div className='flex justify-between w-64 items-center mr-[100px]'>
+                                <a href={'/about'} className='text-blue-dark text-[25px] mr-[90px]'>About</a>
+                                {session && <div>
+                                    <Button title='Logout'/>
                                 </div>}
-                                {!login && <div className="flex mr-[45px]">
-                                    <ButtonIcon onClick={onChangeLogin}/>
+                                {!session && <div className="flex mr-[45px]">
+                                    <ButtonIcon/>
                                 </div>}
                             </div>
                         </div>
