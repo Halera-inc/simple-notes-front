@@ -1,7 +1,6 @@
 import MainContainer from "../src/components/MainContainer";
 import MainBlockSettings from "../src/components/Settings/MainBlockSettings";
 import s from "../src/styles/Settings.module.css";
-import {useRouter} from "next/router";
 import {getSession} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 

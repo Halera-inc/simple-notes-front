@@ -15,15 +15,15 @@ export const registerUser = createAsyncThunk(
  )
 
 const initialState = {
-    notErrorlogin:true,
+    notErrorLogin:true,
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-    notErrorlogin(state, action: PayloadAction<boolean>) {
-            state.notErrorlogin= action.payload
+    notErrorLogin(state, action: PayloadAction<boolean>) {
+            state.notErrorLogin= action.payload
         },
     },
     extraReducers: (builder) => {
@@ -33,7 +33,7 @@ export const authSlice = createSlice({
     //             state.notErrorlogin=true
     //         })
      }})
-export const {notErrorlogin} = authSlice.actions
+export const {notErrorLogin} = authSlice.actions
 
 export default authSlice.reducer
 

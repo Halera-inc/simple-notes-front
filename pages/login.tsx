@@ -7,19 +7,18 @@ import KeyIcon from "../src/assets/images/KeyIcon";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
-import {notErrorlogin} from "../src/bll/slices/authSlice";
 import {useRouter} from "next/router";
 import {getProviders, getSession, signIn} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import Button from "../src/components/universalComponent/Button/Button";
-import {Spinner} from "../src/components/Spinner";
+import {notErrorLogin} from 'src/bll/slices/authSlice';
 
 
 const Login = ({providers, session}: any) => {
     // console.log(providers)
     // console.log(session)
     const router = useRouter()
-    const notError = useAppSelector(state => state.auth.notErrorlogin)
+    const notError = useAppSelector(state => state.auth.notErrorLogin)
     const dispatch = useAppDispatch()
 
     type FormikErrorType = {
@@ -137,9 +136,10 @@ const Login = ({providers, session}: any) => {
                                                 margin: '0 0 60px 0',
                                                 fontSize: 20
                                             }}/>
-                                    {!isInitialized && <Spinner size={'60px'}
-                                                                style={{fill: 'blue'}}
-                                                                className={'absolute right-32'}/>}
+                                     {/*Надо доработать, isInitialized опять нет (Ваня)*/}
+                                    {/*{!isInitialized && <Spinner size={'60px'}*/}
+                                    {/*                            style={{fill: 'blue'}}*/}
+                                    {/*                            className={'absolute right-32'}/>}*/}
                                 </div>
                             </form>
                             <Link href={"/register"}><p
