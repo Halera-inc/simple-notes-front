@@ -8,7 +8,7 @@ import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {useRouter} from "next/router";
-import {getProviders, getSession, signIn} from "next-auth/react";
+import {getProviders, getSession, signIn, useSession} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import Button from "../src/components/universalComponent/Button/Button";
 import {notErrorLogin} from 'src/bll/slices/authSlice';

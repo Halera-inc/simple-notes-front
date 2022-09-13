@@ -33,7 +33,7 @@ const MainBlockSettings = () => {
                         <ul className={s.editData}>
                             <li className={s.myName}>{session?.user?.email}</li>
                             <li className={s.reg}> {user.createdAt}</li>
-                            <li className={s.reg}>{user?.country}</li>
+                            {/*<li className={s.reg}>{user?.country}</li>*/}
                         </ul>
                         <Button title={'Edit'}
                                 callback={editProfileHandler}

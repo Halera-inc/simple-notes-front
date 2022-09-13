@@ -1,19 +1,21 @@
 import dbConnect from "../../serverUtils/dbConnect";
+import {getSession} from "next-auth/react";
 
 export default async function handler(req, res) {
     const {method} = req
     await dbConnect()
+      const session = await getSession({ req });
+    const {user} = session
 
     switch (method) {
         case 'PUT':
             try {
                 const {username, email, country} = req.body
-                console.log(req.user.id)
                 const candidate = await User.findOne({email})
                 if (candidate) {
                     return res.status(400).json({message: 'An account is already registered with your email address'})
                 }
-                const updatedUser = await User.updateOne({_id: req.user.id}, {
+                const updatedUser = await User.updateOne({_id: user.id}, {
                     $set: {
                         username,
                         email,
