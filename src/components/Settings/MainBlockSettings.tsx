@@ -22,10 +22,8 @@ const MainBlockSettings = () => {
             <div className={s.leftArea}>
                 <div className={s.myProfile}>
                     {/*<div className={s.imgProfileWrapper}>*/}
-                    {/*    <img alt={'avatar'} src={`${session?.user?.image}`}/>*/}
-                    <div className={s.img}></div>
-                    {/*вместо img поставила временный квадрат*!/*
-                        {/*Пока убрал Image так как не знаю как правильно прописывать в next.config.js (Ваня)*/}
+                        <img alt={'avatar'} src={`${session?.user?.image}`}/>
+                    {/*Пока убрал Image так как не знаю как правильно прописывать в next.config.js (Ваня)*/}
                         {/*<Image src={`${session?.user?.image}`}*/}
                         {/*       width={200}*/}
                         {/*       height={200}*/}
