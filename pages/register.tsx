@@ -5,11 +5,10 @@ import Link from "next/link";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import UserIcon from "../src/assets/images/UserIcon";
 import KeyIcon from "../src/assets/images/KeyIcon";
-import React, {useMemo} from "react";
+import React, {useMemo, useState} from "react";
 import countryList from "react-select-country-list";
 import ListIcon from "../src/assets/images/ListIcon";
 import CountryIcon from "../src/assets/images/CountryIcon";
-import {useAppDispatch} from "../src/utils/hooks";
 import {useRouter} from "next/router";
 import {authAPI} from "../src/api/notes-api";
 import {signIn} from "next-auth/react";
@@ -18,7 +17,7 @@ import Button from "../src/components/universalComponent/Button/Button";
 
 
 const Register = () => {
-
+    const [info, setInfo] = useState(false)
     const options = useMemo(() => countryList().getData(), [])
     const router = useRouter()
     type FormikErrorType = {
@@ -52,6 +51,7 @@ const Register = () => {
                 errors.country = 'Required';
             }
             if (!values.password) {
+                errors.password = 'Required';
             } else if (!/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g.test(values.password)) {
                 errors.password = 'Invalid password'
             }
@@ -192,6 +192,10 @@ const Register = () => {
                                                {...formik.getFieldProps('password')} />
                                     </label>
                                     {formik.touched.password && formik.errors.password ? defferentPasswordClass : ''}
+                                    <div className={s.infoIcon} onClick={()=>setInfo(!info) }>
+                                        <InfoIcon width={'2em'}  height={'2em'} color='#5590C1'/>
+                                    </div>
+
                                 </div>
 
                                 <div className={`${s.formControl} ${s.two}`}>
@@ -225,20 +229,31 @@ const Register = () => {
 
                         </div>
                     </div>
-                    <div className={s.infoIcon}>
-                        <InfoIcon width={'2em'} height={'2em'} color='#5590C1'/>
-                    </div>
-                    <span
-                        className={s.tooltip}><p>  <b>The password must contain:</b> <br/>
-                    • at least 8 characters
-                    <br/>
-                    • numbers <br/>
-                    • upper and lower case</p></span>
-                </div>
+                    {info ?
+                        <span
+                            className={s.tooltipHover}><p>
+                                        <b>The password must contain:</b>
+                                        <br/>
+                                        • at least 8 characters
+                                        <br/>
+                                        • numbers <br/>
+                                        • upper and lower case</p>
+                        </span>
+                        :
+                        <span
+                            className={s.tooltip}><p>
+                                        <b>The password must contain:</b>
+                                        <br/>
+                                        • at least 8 characters
+                                        <br/>
+                                        • numbers <br/>
+                                        • upper and lower case</p>
+                        </span>}
+                        </div>
 
-            </div>
-        </MainContainer>
-    );
-};
+                        </div>
+                        </MainContainer>
+                        );
+                    };
 
-export default Register;
+                    export default Register;
