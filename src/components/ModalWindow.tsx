@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useRef, useState} from 'react';
 import s from '../styles/Modal.module.css'
 import EditIcon from "../assets/images/EditIcon";
 import {colorizedColorType} from "./Note";
@@ -28,13 +28,24 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
     }
 
     const [showColorBar, setShowColorBar] = useState(false)
+const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
     const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
-
     const onColorChangeButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
         setShowColorBar(!showColorBar)
         e.stopPropagation()
     }
+    const editNoteHandler = () => {
+        props.onConfirm(props.modalId, props.titleNode, props.textNode)
+
+    }
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if ((e.ctrlKey || e.key === 'Meta') && e.key === "Enter") {
+            editNoteHandler()
+            modalCloseBtnRef.current && modalCloseBtnRef.current.click()
+        }
+    }
+
 
     if (props.typeNode === 'edit') {
         return (
@@ -49,7 +60,9 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                       maxLength={2000}
                                       rows={15} value={props.textNode}
                                       style={colorizedColor}
-                                      onChange={props.onTextChange}/>
+                                      onChange={props.onTextChange}
+                                      onKeyDown={onKeyPressHandler}
+                            />
                         </div>
                         <div className={s.modalAction}>
                             <Button title={'Cancel'}
@@ -63,10 +76,13 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                           showColorBar={showColorBar}
                                           setShowColorBar={setShowColorBar}
                                           currentColor={colorizedColor.color}/>
+                            <label ref={modalCloseBtnRef} htmlFor="my-modal" className={s.modalSave} >
                             <Button title={'Save'}
                                     htmlFor={'my-modal'}
                                     color={'GREEN'}
-                                    callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}/>
+                                    callback={editNoteHandler}
+                            />
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -98,7 +114,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                             <Button title={'Save'}
                                     color={'GREEN'}
                                     htmlFor={'my-modal-add-note'}
-                                    callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}/>
+                                    callback={editNoteHandler}/>
                         </div>
                     </div>
                 </div>
