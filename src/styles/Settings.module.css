@@ -1,7 +1,12 @@
 .wrapperSettings {
-    padding: 130px 40px 0 140px;
+    padding: 130px 0px 100px 140px;
     height: 100vh;
-
+    /*width: min-content;*/
+    gap: 25px;
+    display: flex;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    overflow-x: auto;
 }
 
 .wrapperMaimSettings {
@@ -142,6 +147,12 @@ ul.collapseContent li p {
     text-blue-dark
     text-lg
     font-thin
+}
+
+.img{
+    width: 200px;
+    height: 200px;
+    background:red;
 }
 
 
