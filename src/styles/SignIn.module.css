@@ -1,10 +1,17 @@
 
-.singnInBlock{
+.singnInBlock {
     height: 100vh;
+    position: relative;
     @apply
     flex
     justify-center
     items-center
+}
+
+.providerButton {
+    margin-bottom: 30px;
+    width: 80%;
+    align-self: center;
 }
 
 .wrapperCard {
@@ -14,14 +21,21 @@
     justify-center
 }
 
-.wrapperRegistrationCard{
-    @apply
-    flex
-    justify-center
-    items-center
+.wrapperRegistrationCard {
+
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+
+    /*@apply*/
+    /*flex*/
+    /*justify-center*/
+    /*items-center*/
 }
 
 .cardBody {
+
     padding: 73px 52px 23px 52px;
     text-align: center;
 }
@@ -50,6 +64,26 @@
     cursor: pointer;
 }
 
+.array {
+    background: url('../assets/down-arrow.png') #fff no-repeat center center / 20px 20px;
+    width: 56px;
+    position: absolute;
+    height: calc(100% - 4px);
+    right: 3px;
+    pointer-events: none;
+
+}
+
+.arrayError {
+    background: url('../assets/down-arrow-red.png') #FFF4F4 no-repeat center center / 20px 20px;
+    width: 56px;
+    position: absolute;
+    height: calc(100% - 4px);
+    right: 3px;
+    pointer-events: none;
+
+}
+
 .cardC {
     border: 1px solid #5590C1;
     @apply
@@ -58,29 +92,6 @@
     shadow-xl
     rounded-none
 
-}
-
-.btnB {
-    width: 200px;
-    height: 60px !important;
-    margin-bottom: 55px;
-    font-size: 25px !important;
-    line-height: 30px !important;
-    text-transform: capitalize !important;
-    @apply
-    btn
-    btn-outline
-    text-blue-dark
-    rounded-none
-    bg-white
-
-}
-
-.btnB:hover {
-    @apply
-    bg-blue-dark
-    outline-none
-    border-blue-dark
 }
 
 .formControl {
@@ -96,12 +107,16 @@
     flex
     justify-center
     items-center
+
 }
+
 
 .inputI {
     height: 60px !important;
     margin-left: 27px;
     width: 428px;
+    background: white !important;
+    word-break: break-all !important;
     @apply
     input
     input-bordered
@@ -110,8 +125,15 @@
     rounded-none
     text-blue-dark
     text-xl
+
 }
 
+.option {
+    width: 100%;
+    font-size: 15px;
+    word-break: break-all !important;
+
+}
 
 .one {
     margin-bottom: 30px;
@@ -136,11 +158,18 @@
     left: 43%;
 }
 
-.errorTextInvalid{
+.errorTextInvalid {
     color: red;
     position: absolute;
-    bottom: -48%;
+    bottom: -45%;
     left: 36%;
+}
+
+.errorTextMust {
+    color: red;
+    position: absolute;
+    bottom: -46%;
+    left: 27%;
 }
 
 .text {
@@ -159,6 +188,7 @@
     margin-left: 27px;
     width: 428px;
     border-color: #F06464 !important;
+    word-break: break-all;
     @apply
     input
     input-bordered
@@ -167,6 +197,75 @@
     rounded-none
     text-red
     text-xl
+}
+
+.infoIcon {
+    display: block;
+    position: absolute;
+    right: -8%;
+    top: 27%;
+    cursor: pointer;
+}
+
+
+
+.tooltip {
+    display: block;
+    position: absolute;
+    right: -45%;
+    top: 53%;
+    background: #fff;
+    border: 1px solid #5590C1;
+    opacity: 0;
+    transform: translate(-45%, -22%) scale(0.75);
+    transform-origin: right center;
+    padding: 10px 30px;
+    text-align: center;
+    color: #5590C1;
+    transition: 0.15s ease-in-out;
+    pointer-events: none;
+}
+.tooltipHover p,
+.tooltip p {
+    text-align: left;
+}
+
+.tooltipHover {
+    display: block;
+    position: absolute;
+    right: -45%;
+    top: 53%;
+    background: #fff;
+    border: 1px solid #5590C1;
+    opacity: 1;
+    transform: translate(17%, -20%) scale(1);
+    transform-origin: right center;
+    padding: 10px 30px;
+    text-align: center;
+    color: #5590C1;
+    transition: 0.15s ease-in-out;
+}
+
+.tooltipError {
+    opacity: 1;
+    transform: translate(0%, -30%) scale(1);
+    pointer-events: none;
+}
+
+/*//стрелочка*/
+.tooltipHover:after,
+.tooltip:after {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-right: 7px solid #5590C1;
+    position: absolute;
+    bottom: 0;
+    left: -3%;
+    transform: translate(-38%, -343%);
 }
 
 

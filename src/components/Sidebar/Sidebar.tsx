@@ -13,7 +13,7 @@ import {useTheme} from "next-themes";
 import MoonIcon from "src/assets/images/MoonIcon";
 import {createNote} from "../../bll/slices/notesSlice";
 import {useAppDispatch} from "../../utils/hooks";
-import {setIsLoggedIn} from "../../bll/slices/authSlice";
+import {signOut} from "next-auth/react";
 
 const Sidebar = () => {
 
@@ -48,12 +48,13 @@ const Sidebar = () => {
     const currentTheme = theme === "system" ? systemTheme : theme;
 
     const onLogoutClickHandle = () => {
-        localStorage.removeItem('access_token')
-        dispatch(setIsLoggedIn(false))
-
+        signOut()
     }
+    const {pathname} = useRouter();
 
-    return (
+    const pagesWithNavbar = ["/notes", "/settings"];
+    const renderNavbar = pagesWithNavbar.includes(pathname);
+    return renderNavbar ? (
         <div className={s.sidebarWrapper}>
             <label ref={modalAddBtnRef} htmlFor='my-modal-add-note'
                    className="btn modal-button hidden">open
@@ -89,25 +90,24 @@ const Sidebar = () => {
             </div>
             <div className={s.bottomBox}>
                 {currentTheme === 'dark' &&
-                    <SidebarItem tooltipInfo={'Light Side'}
-                                 icon={<SunnyIcon onClick={() => {
-                                     setTheme('light')
-                                 }} width={50} fill={'#5590C1'}/>}/>}
+                <SidebarItem tooltipInfo={'Light Side'}
+                             icon={<SunnyIcon onClick={() => {
+                                 setTheme('light')
+                             }} width={50} fill={'#5590C1'}/>}/>}
                 {currentTheme !== 'dark' &&
-                <SidebarItem tooltipInfo={'Dark Side'}
-                             icon={<MoonIcon onClick={() => {
-                                 setTheme('dark')
-                             }} width={50} fill={'#5590C1'}/>}/>
+                    <SidebarItem tooltipInfo={'Dark Side'}
+                                 icon={<MoonIcon onClick={() => {setTheme('dark')}} width={50} fill={'#5590C1'}/>}/>
                 }
 
                 <SidebarItem tooltipInfo={'Log out'}
                              redActive={true}
                              link={'/#'}
-                             icon={<LoginIcon width={50} fill={'#5590C1'} onClick={onLogoutClickHandle}/>}/>
+                             icon={<LoginIcon width={50} fill={'#5590C1'}
+                                              onClick={onLogoutClickHandle}/>}/>
             </div>
             <div className={'bg'}></div>
         </div>
-    );
+    ) : null
 };
 
 export default Sidebar;

@@ -1,34 +1,25 @@
 import axios from 'axios'
 
 enum BASE_URLS {
-    LOCAL = 'http://localhost:5050',
+    LOCAL = 'http://localhost:3000',
     HEROKU = 'https://simple-notes-back.herokuapp.com/'
 }
 
 const instance = axios.create({
-    baseURL: BASE_URLS.HEROKU,
-    withCredentials: false,
+    baseURL: BASE_URLS.LOCAL,
+    withCredentials: true
 })
-if (typeof window !== 'undefined') {
-    instance.interceptors.request.use((config) => {
-        if (config.headers === undefined) {
-            config.headers = {};
-        }
-        config.headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
-        return config
-    })
-}
 
 export const notesAPI = {
     //for Notes
     getNotes() {
-        return instance.get(`notes`);
+        return instance.get(`api/notes`);
     },
     getNote(id: string) {
-        return instance.get(`notes/${id}`);
+        return instance.get(`api/notes/${id}`);
     },
     createNote(title?: string, note_text?: string, color = 'blue', note_mode?: string) {
-        return instance.post('notes', {
+        return instance.post('api/notes', {
             title,
             note_text,
             color,
@@ -36,10 +27,10 @@ export const notesAPI = {
         });
     },
     deleteNote(id: string) {
-        return instance.delete(`notes/${id}`);
+        return instance.delete(`api/notes/${id}`);
     },
     updateNote(id: string, title?: string, note_text?: string, color?: string, note_mode?: NoteViewType) {
-        return instance.put(`notes/${id}`, {
+        return instance.put(`api/notes/${id}`, {
             title,
             note_text,
             color,
@@ -50,14 +41,14 @@ export const notesAPI = {
 //for Auth
 export const authAPI = {
     me() {
-        return instance.get('auth/me')
+        return instance.get('api/auth/me')
     },
     register(email: string, password: string, country?: string, username?: string) {
-        return instance.post(`auth/registration`, {email, password, country, username})
+        return instance.post(`api/register`, {email, password, country, username})
     },
-    login(email: string, password: string) {
-        return instance.post(`auth/login`, {email, password})
-    },
+    // login(email: string, password: string) {
+    //     return instance.post(`auth/login`, {email, password})
+    // },
 
 }
 
@@ -68,7 +59,7 @@ export const userAPI = {
         return instance.get(`user`)
     },
     updateUser(username?: string, email?: string, country?: string) {
-        return instance.put(`user`, {username,  country})
+        return instance.put(`api/user`, {username,  country})
     }
 
 }
@@ -92,6 +83,7 @@ export type UserType = {
     updatedAt?: Date
     settings?: SettingsType,
     country?: string
+    image: string
 }
 export type SettingsType = {
     darkmode?: boolean,

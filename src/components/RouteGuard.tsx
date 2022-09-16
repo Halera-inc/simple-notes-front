@@ -3,10 +3,11 @@ import {useEffect, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../utils/hooks";
 import {initializeApp} from "../bll/slices/authSlice";
 import Sidebar from "./Sidebar/Sidebar";
+import {Spinner} from "./Spinner";
 
 export const RouteGuard = ({children}: any) => {
 
-    const effectRan = useRef(false)
+
     const {isLoggedIn, isInitialized} = useAppSelector(state => state.auth)
     const dispatch = useAppDispatch()
 
@@ -17,12 +18,32 @@ export const RouteGuard = ({children}: any) => {
         return () => {
             effectRan.current = true
         }
-    }, [])
-    if (!isInitialized) return <div>InitializePreloader</div>
-    return <div>
-        {isLoggedIn && <Sidebar/>}
-        <div className='flex flex-col bg-white dark:bg-black'>
-            {children}
-        </div>
-    </div>
+    }, [dispatch])
+
+
+    return (
+        <>
+            {!isInitialized
+                ?
+                <div style={{
+                    width: "100%",
+                    height: '100vh',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: "center"
+                }}>
+                    <Spinner size={'300px'}/>
+                </div>
+                :
+                <div>
+                    {isLoggedIn && <Sidebar/>}
+                    <div className='flex flex-col bg-white dark:bg-black'>
+                        {children}
+                    </div>
+                </div>
+            }
+        </>
+    )
+
+
 }

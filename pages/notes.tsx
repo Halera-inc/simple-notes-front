@@ -8,11 +8,14 @@ import ModalWindow from "../src/components/ModalWindow";
 import {useRouter} from "next/router";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
+import {unstable_getServerSession} from "next-auth";
+import authOptions from './api/auth/[...nextauth]'
+import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import {getSession} from "next-auth/react";
 
 const Notes = () => {
 
     const router = useRouter()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
     const notes = useAppSelector(state => state.notes.notes)
     const searchParams = useAppSelector(state => state.notes.searchParams)
@@ -53,8 +56,6 @@ const Notes = () => {
 
     }
 
-    typeof window !== 'undefined' && !isLoggedIn && router.push('/')
-
     return (
         <MainContainer>
             <label ref={modalBtnRef}
@@ -89,3 +90,25 @@ const Notes = () => {
 }
 
 export default Notes
+
+//
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const session = await getSession(context);
+    console.log(session)
+    if (!session) {
+        return {
+            redirect: {destination: '/login', permanent: false},
+            props: {}
+        }
+    }
+    return {
+        props: {session}
+    }
+}
+
+// export const getZapdosAuthSession = async (ctx: {
+//     req: GetServerSidePropsContext["req"];
+//     res: GetServerSidePropsContext["res"];
+// }) => {
+//     return await unstable_getServerSession(ctx.req, ctx.res, authOptions)
+// }

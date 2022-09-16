@@ -5,11 +5,10 @@ import {ColorSamplesType, notesAPI, NoteTextType, NoteViewType} from 'src/api/no
 export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) => {
         try {
             const res = await notesAPI.getNotes()
-            return res.data
+            const notes = res.data
+            return notes.notes
         } catch (error) {
             if (axios.isAxiosError(error) && error) {
-                // dispatch(setAppError(data.error || 'Some error occurred'));
-                // } else (dispatch(setAppError(error.message + '. More details in the console')))
                 console.log({...error});
             }
             return thunkAPI.rejectWithValue([])
@@ -19,11 +18,11 @@ export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) =
 export const createNote = createAsyncThunk('notes/createNote', async (params: PostNoteParamsType, thunkAPI) => {
         try {
             const res = await notesAPI.createNote(params.title, params.note_text, params.color, params.note_mode)
-            return res.data
+            const newNote = res.data.newNote
+            console.log(newNote)
+            return newNote
         } catch (error) {
             if (axios.isAxiosError(error) && error) {
-                // dispatch(setAppError(data.error || 'Some error occurred'));
-                // } else (dispatch(setAppError(error.message + '. More details in the console')))
                 console.log({...error});
             }
         }
@@ -52,7 +51,6 @@ export const editNote = createAsyncThunk('notes/editNote',
         }
     })
 
-
 const initialState = {
     notes: [] as Array<NoteTextType>,
     createNoteModal: false,
@@ -75,10 +73,6 @@ export const notesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getNotes.pending, (state) => {
-                //пока ничего isFetching = true
-
-            })
             .addCase(getNotes.fulfilled, (state, action) => {
                 state.notes = action.payload
             })
