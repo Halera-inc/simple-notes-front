@@ -23,7 +23,7 @@ const MainBlockSettings = () => {
                 <div className={s.myProfile}>
                     {/*<div className={s.imgProfileWrapper}>*/}
                         <img alt={'avatar'} src={`${session?.user?.image}`}/>
-                        {/*Пока убрал Image так как не знаю как правильно прописывать в next.config.js (Ваня)*/}
+                    {/*Пока убрал Image так как не знаю как правильно прописывать в next.config.js (Ваня)*/}
                         {/*<Image src={`${session?.user?.image}`}*/}
                         {/*       width={200}*/}
                         {/*       height={200}*/}
@@ -32,8 +32,7 @@ const MainBlockSettings = () => {
                     <div className={s.editWrapper}>
                         <ul className={s.editData}>
                             <li className={s.myName}>{session?.user?.email}</li>
-                            <li className={s.reg}> {user.createdAt}</li>
-                            {/*<li className={s.reg}>{user?.country}</li>*/}
+                            <li className={s.reg}> {session?.user?.name}</li>
                         </ul>
                         <Button title={'Edit'}
                                 callback={editProfileHandler}
