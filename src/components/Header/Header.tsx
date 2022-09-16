@@ -25,7 +25,7 @@ const Header = () => {
                 ? <div>
                     {session
                         ? <div
-                            className='z-20 backdrop-blur-md bg-white/70 absolute w-screen w-180 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
+                            className='right-0 top-0 backdrop-blur-md bg-white/70 fixed w-screen w-180 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
                             <p className='text-[35px] font-bold ml-[128px] text-black '>
                                 {pageName}
                             </p>
