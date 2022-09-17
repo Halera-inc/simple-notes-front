@@ -21,6 +21,7 @@
     gap: 17px;
     margin-bottom: 75px;
     padding-right: 150px;
+    width: max-content;
     @apply
     flex
     justify-between
@@ -115,6 +116,10 @@ ul.editMyProfile input {
     margin-bottom: -10px;
 
 }
+.collapseContent p {
+    margin-right: 10px;
+
+}
 
 
 ul.collapseContent li {
@@ -184,6 +189,10 @@ ul.collapseContent li p {
     }
     .editWrapper {
         height: 150px;
+    }
+    .otherWrapper {
+        width: 300px;
+        margin-bottom: 100px;
     }
 
 }
