@@ -22,12 +22,15 @@ type ModalWindowPropsType = {
 }
 
 const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType) => {
+
+
     const modalStyle = {
         marginBottom: '9%',
         marginLeft: '25%'
     }
 
     const [showColorBar, setShowColorBar] = useState(false)
+    const [saveClickRequire, setSaveClickRequire] = useState(false)
     const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
 
@@ -35,6 +38,13 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
         setShowColorBar(!showColorBar)
         e.stopPropagation()
     }
+
+    function onKeyPressHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T) {
+        if (e.key === 'Enter' && (e.ctrlKey)) {
+            setSaveClickRequire(true)
+        }
+    }
+
 
     if (props.typeNode === 'edit') {
         return (
@@ -44,18 +54,21 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                     <div className={s.modalBox} style={colorizedColor}>
                         <div className={s.topArea}>
                             <input type="text" className={s.cardTitle} style={colorizedColor} value={props.titleNode}
-                                   onChange={props.onTitleChange}/>
+                                   onChange={props.onTitleChange} onKeyPress={onKeyPressHandler}/>
                             <textarea className={s.textTextArea}
                                       maxLength={2000}
                                       rows={15} value={props.textNode}
                                       style={colorizedColor}
-                                      onChange={props.onTextChange}/>
+                                      onChange={props.onTextChange}
+                                      onKeyPress={onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                            />
                         </div>
                         <div className={s.modalAction}>
                             <Button title={'Cancel'}
                                     htmlFor={'my-modal'}
                                     color={'RED'}
-                                    callback={() => props.onDiscard()}/>
+                                    callback={() => props.onDiscard()}
+                            />
                             <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
                                       onClick={onColorChangeButtonClickHandler}/>
                             <ColorizedBar modalStyle={modalStyle}
@@ -66,7 +79,10 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                             <Button title={'Save'}
                                     htmlFor={'my-modal'}
                                     color={'GREEN'}
-                                    callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}/>
+                                    callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}
+                                    require={saveClickRequire}
+                                    setRequire={setSaveClickRequire}
+                            />
                         </div>
                     </div>
                 </div>
@@ -81,24 +97,32 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                         <div className={s.topArea}>
                             <input type="text" className={s.cardTitle} style={props.colorNote}
                                    placeholder={'Add new title'}
-                                   value={props.titleNode} onChange={props.onTitleChange}/>
+                                   value={props.titleNode} onChange={props.onTitleChange}
+                                   onKeyPress={onKeyPressHandler}
+                            />
                             <textarea className={s.textTextArea}
                                       style={props.colorNote}
                                       rows={15}
                                       maxLength={450}
                                       value={props.textNode}
                                       placeholder={'Add text'}
-                                      onChange={props.onTextChange}/>
+                                      onChange={props.onTextChange}
+                                      onKeyPress={onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                            />
                         </div>
                         <div className={s.modalAction}>
                             <Button title={'Cancel'}
                                     color={'RED'}
                                     htmlFor={'my-modal-add-note'}
-                                    callback={() => props.onDiscard()}/>
+                                    callback={() => props.onDiscard()}
+                            />
                             <Button title={'Save'}
                                     color={'GREEN'}
                                     htmlFor={'my-modal-add-note'}
-                                    callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}/>
+                                    callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}
+                                    require={saveClickRequire}
+                                    setRequire={setSaveClickRequire}
+                            />
                         </div>
                     </div>
                 </div>

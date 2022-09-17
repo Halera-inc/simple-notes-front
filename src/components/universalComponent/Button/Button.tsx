@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {CSSProperties} from "styled-components";
 import Link from "next/link";
-import {Property} from "csstype";
 
 type colorsButtonType = 'RED' | 'GREEN' | 'DEFAULT'
 type PropsType = {
@@ -14,15 +13,24 @@ type PropsType = {
     htmlFor?: string
     className?: string
     type?: "button" | "reset" | "submit" | undefined
+    require?: boolean
+    setRequire?: (newValue: boolean)=>void
 }
 
 const Button = (props: PropsType) => {
-
+    const saveBtnRef = useRef<HTMLLabelElement>(null)
     const [isHover, setIsHover] = useState<boolean>(false)
 
     const callback = (params: any) => {
         props.callback && props.callback(params)
     }
+
+    useEffect(()=>{
+        if (props.require){
+            saveBtnRef.current && saveBtnRef.current.click()
+            props.setRequire && props.setRequire(false)
+        }
+    }, [props.require])
 
     const returnColors = (color: colorsButtonType) => {
         if (color === 'RED') {
@@ -93,7 +101,7 @@ const Button = (props: PropsType) => {
                     style={!isHover
                         ? {...customStyles, ...props.style,}
                         : {...customStyles, ...props.style, ...isHoveredCustomStyles}}>
-                <label id={'defaultButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
+                <label id={'defaultButton'} htmlFor={props.htmlFor ? props.htmlFor : ''} ref={saveBtnRef}
                        style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", cursor: "pointer"}}>
                     {props.icon && <div style={{margin: '0 5px'}}>{props.icon}</div>}
                     <div style={{margin: '0 5px'}}>

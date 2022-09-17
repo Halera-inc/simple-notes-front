@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useRef, useState} from 'react'
+import React, {ChangeEvent, useEffect, useRef, useState} from 'react'
 import {editNote, getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note/Note";
@@ -8,8 +8,6 @@ import ModalWindow from "../src/components/ModalWindow";
 import {useRouter} from "next/router";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
-import {unstable_getServerSession} from "next-auth";
-import authOptions from './api/auth/[...nextauth]'
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import {getSession} from "next-auth/react";
 
@@ -55,6 +53,7 @@ const Notes = () => {
     const onDiscardClickHandler = () => {
 
     }
+
 
     return (
         <MainContainer>
