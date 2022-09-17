@@ -1,6 +1,5 @@
 .notesWrapper {
     padding-left: 100px;
-    height: 100vh;
 }
 
 .notesBlock {
@@ -8,9 +7,9 @@
     display: flex;
     align-content: flex-start;
     flex-wrap: wrap;
-    overflow-y: auto;
     padding: 115px 0 30px 30px;
     height: 100vh;
+
 }
 
 @media screen and (max-width: 991px) {

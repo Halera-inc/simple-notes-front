@@ -30,13 +30,14 @@
 html body #__next {
     height: 100%;
 
+
 }
 textarea {
     padding: 0 20px 0 0;
 }
 
 body {
-    overflow: hidden;
+   overflow-x:hidden;
 }
 
 @font-face {
