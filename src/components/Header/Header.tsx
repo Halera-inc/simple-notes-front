@@ -6,6 +6,7 @@ import {useRouter} from "next/router";
 import {APP_ROOTS, getPageName} from "../../utils/getPageName";
 import ButtonIcon from "../../assets/images/ButtonIcon";
 import Button from "../universalComponent/Button";
+import s from "./Header.module.css";
 
 
 const Header = () => {
@@ -26,19 +27,25 @@ const Header = () => {
     return (
         <>
             {router.pathname !== '/'
-                ? <div>
+                ?
+                <div>
                     {isAuth
-                        ? <div className='z-50 backdrop-blur-md bg-white/70 absolute w-screen w-100 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
-                            <p className='text-[35px] font-bold ml-[128px]'>
+                        ? <div className={s.header_wrapper}>
+                            <h1 className={s.header_title}>
                                 {pageName}
-                            </p>
-                            <div className='flex justify-between w-[340px] items-center mr-[74px]'>
+                            </h1>
+                            <div className={s.header_icon_wrapper}>
                                 <SearchIcon width={'40px'} height={'40px'} fill={'#212121'}/>
-                                <p className='text-lg'>{userName.username}</p>
-                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
+                                <span>
+                                    <p className='text-lg'>{userName.username}</p>
+                                    <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
+                                </span>
                             </div>
                         </div>
-                        : <div className='z-50 flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]'>
+                        :
+                        //Для чего этот header???
+                        <div
+                            className={`z-50 flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]`}>
                             <p className='px-32 text-[35px] font-bold ml-[75px]'>Simple Notes</p>
                             <div className='flex justify-between w-64 items-center mr-[100px]'>
                                 <a href={'/about'} className='text-blue-dark text-[25px] mr-[90px]'>About</a>

@@ -1,10 +1,10 @@
 import React from 'react';
-import s from 'src/styles/landingStyle/Header.module.css'
+import s from 'src/components/landing/header/LandingHeader.module.css'
 import Button from "src/components/universalComponent/Button";
 import {useRouter} from "next/router";
 
 
-const Header = (props: { title: string }) => {
+const LandingHeader = (props: { title: string }) => {
 
     const router = useRouter()
 
@@ -28,4 +28,4 @@ const Header = (props: { title: string }) => {
     );
 };
 
-export default Header;
+export default LandingHeader;
