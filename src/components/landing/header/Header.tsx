@@ -10,6 +10,7 @@ const Header = (props: { title: string }) => {
     const router = useRouter()
     const onChangeLogin = () => {
         typeof window !== 'undefined' && router.push('/login')
+
     }
 
     return (
