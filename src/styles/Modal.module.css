@@ -78,5 +78,12 @@
     border: 1px solid #5E9C80;
     cursor: pointer;
 }
+@media screen and  (max-width: 640px) {
+    .modalBox {
+        width: 90%;
+        height: 80%;
+        padding: 20px 20px;
+    }
+}
 
 
