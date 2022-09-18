@@ -54,21 +54,23 @@ const Login = ({providers, session}: any) => {
         formik.resetForm();
     }
 
-
     const ProvidersButtons = ({providers}: any) => (
         <div className="flex flex-col w-full">
             {Object.values(providers).map(
                 (provider: any) =>
                     provider.name !== "Credentials" && (
                         <div className={s.providerButton} key={provider.name}>
-                            <button
-                                onClick={() => signIn(provider.id)                                }
-                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                                <span
-                                    className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                </span>{`Sign in with ${provider.name}`}
-                            </button>
+                            <Button
+                                title={`Sign in with ${provider.name}`}
+                                callback={() => signIn(provider.id)}
+                                style={{
+                                    backgroundColor: "white",
+                                    width: 428,
+                                    height: 60,
+                                    margin: '0 0 10px 0',
+                                    fontSize: 20
+                                }}/>
+                            {/*className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"*/}
                         </div>
                     )
             )}
@@ -94,9 +96,9 @@ const Login = ({providers, session}: any) => {
                             <ProvidersButtons providers={providers}/>
 
                             <div
-                                className="flex items-center mb-8 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
+                                className="flex items-center text-blue-dark mb-8 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
                             >
-                                <p className="text-center font-semibold mx-4 mb-0">Or</p>
+                                <p className=" text-blue-dark text-center font-semibold mx-4 mb-0">Or</p>
                             </div>
 
                             <form onSubmit={formik.handleSubmit}>
@@ -136,7 +138,7 @@ const Login = ({providers, session}: any) => {
                                                 margin: '0 0 60px 0',
                                                 fontSize: 20
                                             }}/>
-                                     {/*Надо доработать, isInitialized опять нет (Ваня)*/}
+                                    {/*Надо доработать, isInitialized опять нет (Ваня)*/}
                                     {/*{!isInitialized && <Spinner size={'60px'}*/}
                                     {/*                            style={{fill: 'blue'}}*/}
                                     {/*                            className={'absolute right-32'}/>}*/}
