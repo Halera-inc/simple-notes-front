@@ -26,6 +26,26 @@
     padding-right: 40px;
     cursor: pointer;
 }
+@media screen and (max-width: 640px) {
+    .header {
+        margin: 0 20px;
+    }
+    .header p {
+        display: none;
+        width: 100%;
+
+    }
+    .title {
+        padding: 0;
+        line-height: 36px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+    .wrapperBtn {
+        transform: translateX(7px);
+    }
+
+}
 
 
 

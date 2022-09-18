@@ -2,7 +2,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    max-width: 200px;
+    /*max-width: 200px;*/
     height: 10vh;
 }
 .footer a {
@@ -12,4 +12,9 @@
     font-size: 20px;
     line-height: 24px;
     color: #C8C8C8;
+}
+@media screen and (max-width: 640px){
+    .footer {
+        justify-content: center;
+    }
 }
