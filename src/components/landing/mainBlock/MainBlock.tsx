@@ -32,7 +32,6 @@ const MainBlock = () => {
             <div className={s.imgTitle}>
                 <SapienMainBlockIcon width={744} height={744} z-0/>
             </div>
-
         </div>
 
     );
