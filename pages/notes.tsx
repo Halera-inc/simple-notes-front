@@ -8,8 +8,6 @@ import ModalWindow from "../src/components/ModalWindow";
 import {useRouter} from "next/router";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
-import {unstable_getServerSession} from "next-auth";
-import authOptions from './api/auth/[...nextauth]'
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import {getSession} from "next-auth/react";
 
@@ -74,7 +72,7 @@ const Notes = () => {
                          onDiscard={onDiscardClickHandler}/>
             <div className={s.notesWrapper}>
                 <div className={s.notesBlock}>
-                    {notes && notes.filter(n=>n.title && n.title.toLowerCase().includes(searchParams.toLowerCase())
+                    {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase())
                         || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase())).map((n) =>
                         <Note key={n._id}
                               title={n.title}
