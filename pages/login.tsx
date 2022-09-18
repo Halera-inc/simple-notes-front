@@ -31,23 +31,20 @@ const Login = ({providers, session}: any) => {
             password: '',
         },
         onSubmit: async values => {
-            try {
-                const res: any = await signIn("credentials", {
-                    redirect: false,
-                    email: values.email,
-                    password: values.password,
-                    callbackUrl: `${window.location.origin}`,
-
-                })
+            // @ts-ignore
+            const {error} = signIn("credentials", {
+                redirect: false,
+                email: values.email,
+                password: values.password,
+                callbackUrl: `${window.location.origin}`,
+            })
+            if (error) {
                 redirectToHome()
                 dispatch(isThereErrorOnLogin(false))
-            } catch (e) {
-                console.log(e)
+            } else {
                 dispatch(isThereErrorOnLogin(true))
-            } finally {
-                formik.resetForm();
-
             }
+            formik.resetForm();
         },
     })
 
