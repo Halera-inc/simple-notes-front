@@ -8,7 +8,6 @@
     display: flex;
     align-content: flex-start;
     flex-wrap: wrap;
-    overflow-y: auto;
     padding: 115px 0 30px 30px;
     height: 100vh;
 }

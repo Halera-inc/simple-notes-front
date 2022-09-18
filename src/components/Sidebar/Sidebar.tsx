@@ -37,6 +37,7 @@ const Sidebar = () => {
         dispatch(createNote({title: newNoteTitle, note_text: newNoteText}))
         setNewNoteTitle('')
         setNewNoteText('')
+
     }
     const onDiscardClickHandler = () => {  // todo need to fix with appAPI
         setNewNoteTitle('')
