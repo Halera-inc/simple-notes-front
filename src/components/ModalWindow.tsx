@@ -28,7 +28,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
     }
 
     const [showColorBar, setShowColorBar] = useState(false)
-const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
+    const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
     const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
     const onColorChangeButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -55,7 +55,10 @@ const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
                     <div className={s.modalBox} style={colorizedColor}>
                         <div className={s.topArea}>
                             <input type="text" className={s.cardTitle} style={colorizedColor} value={props.titleNode}
-                                   onChange={props.onTitleChange}/>
+                                   onChange={props.onTitleChange}
+                                   maxLength={30}
+
+                            />
                             <textarea className={s.textTextArea}
                                       maxLength={2000}
                                       rows={15} value={props.textNode}
@@ -76,12 +79,12 @@ const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
                                           showColorBar={showColorBar}
                                           setShowColorBar={setShowColorBar}
                                           currentColor={colorizedColor.color}/>
-                            <label ref={modalCloseBtnRef} htmlFor="my-modal" className={s.modalSave} >
-                            <Button title={'Save'}
-                                    htmlFor={'my-modal'}
-                                    color={'GREEN'}
-                                    callback={editNoteHandler}
-                            />
+                            <label ref={modalCloseBtnRef} htmlFor="my-modal" className={s.modalSave}>
+                                <Button title={'Save'}
+                                        htmlFor={'my-modal'}
+                                        color={'GREEN'}
+                                        callback={editNoteHandler}
+                                />
                             </label>
                         </div>
                     </div>
@@ -97,7 +100,9 @@ const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
                         <div className={s.topArea}>
                             <input type="text" className={s.cardTitle} style={props.colorNote}
                                    placeholder={'Add new title'}
-                                   value={props.titleNode} onChange={props.onTitleChange}/>
+                                   value={props.titleNode} onChange={props.onTitleChange}
+                                   maxLength={30}
+                            />
                             <textarea className={s.textTextArea}
                                       style={props.colorNote}
                                       rows={15}
