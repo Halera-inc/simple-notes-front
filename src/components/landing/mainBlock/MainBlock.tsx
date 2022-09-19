@@ -30,7 +30,7 @@ const MainBlock = () => {
                         link={'/login'}/>
             </div>
             <div className={s.imgTitle}>
-                <SapienMainBlockIcon/>
+                <SapienMainBlockIcon width={744} height={744} z-0/>
             </div>
 
         </div>

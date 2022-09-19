@@ -35,6 +35,7 @@
 }
 
 .imgTitle {
+    z-index: 0;
     padding-top: 78px;
     padding-right: 110px;
 
