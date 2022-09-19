@@ -10,6 +10,7 @@ type ColorizedBarPropsType = {
     setShowColorBar: (newStatus: boolean) => void
     currentColor: string
     modalStyle?: { marginBottom: string, marginLeft: string }
+    setShowColor?:any
 }
 
 const ColorizedBar: React.FC<ColorizedBarPropsType> = (

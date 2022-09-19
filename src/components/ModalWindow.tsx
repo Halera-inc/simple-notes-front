@@ -28,9 +28,13 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
     }
 
     const [showColorBar, setShowColorBar] = useState(false)
-const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
+    const [showColor, setShowColor] = useState('blue')
+
+    const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
     const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
+    const colorizedColorAdd = colorizeNote(showColor)
+
     const onColorChangeButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
         setShowColorBar(!showColorBar)
         e.stopPropagation()
@@ -72,16 +76,17 @@ const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
                             <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
                                       onClick={onColorChangeButtonClickHandler}/>
                             <ColorizedBar modalStyle={modalStyle}
+                                          setShowColor={setShowColor}
                                           noteId={props.modalId}
                                           showColorBar={showColorBar}
                                           setShowColorBar={setShowColorBar}
                                           currentColor={colorizedColor.color}/>
-                            <label ref={modalCloseBtnRef} htmlFor="my-modal" className={s.modalSave} >
-                            <Button title={'Save'}
-                                    htmlFor={'my-modal'}
-                                    color={'GREEN'}
-                                    callback={editNoteHandler}
-                            />
+                            <label ref={modalCloseBtnRef} htmlFor="my-modal" className={s.modalSave}>
+                                <Button title={'Save'}
+                                        htmlFor={'my-modal'}
+                                        color={'GREEN'}
+                                        callback={editNoteHandler}
+                                />
                             </label>
                         </div>
                     </div>
@@ -101,7 +106,7 @@ const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
                             <textarea className={s.textTextArea}
                                       style={props.colorNote}
                                       rows={15}
-                                      maxLength={450}
+                                      maxLength={2000}
                                       value={props.textNode}
                                       placeholder={'Add text'}
                                       onChange={props.onTextChange}/>
@@ -111,6 +116,14 @@ const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
                                     color={'RED'}
                                     htmlFor={'my-modal-add-note'}
                                     callback={() => props.onDiscard()}/>
+                            <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColorAdd.color}
+                                      onClick={onColorChangeButtonClickHandler}/>
+                            <ColorizedBar modalStyle={modalStyle}
+                                          noteId={props.modalId}
+                                          setShowColor={setShowColor}
+                                          showColorBar={showColorBar}
+                                          setShowColorBar={setShowColorBar}
+                                          currentColor={colorizedColor.color}/>
                             <Button title={'Save'}
                                     color={'GREEN'}
                                     htmlFor={'my-modal-add-note'}
