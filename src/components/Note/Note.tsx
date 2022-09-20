@@ -17,9 +17,17 @@ type NotePropsType = {
     color: ColorSamplesType
     noteId: string
     edit: (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => void
+    createdAt?: Date
 }
 
-const Note = ({title = '', note_text = '', color, edit, noteId}: NotePropsType) => {
+const Note = ({
+                  title = '',
+                  note_text = '',
+                  color,
+                  edit,
+                  noteId,
+                  createdAt
+              }: NotePropsType) => {
     const dispatch = useAppDispatch()
     const colorizedColor = colorizeNote(color)
     const [showColorBar, setShowColorBar] = useState(false)
@@ -34,15 +42,25 @@ const Note = ({title = '', note_text = '', color, edit, noteId}: NotePropsType) 
         e.stopPropagation()
     }
 
+    const str = `${createdAt}`;
+    const localDate = new Date(str).toLocaleDateString('ru-RU')
+
     return (
-        <div className={s.card} style={colorizedColor} onClick={() => edit(title, note_text, colorizedColor, color, noteId)}>
-            <h2 className={s.cardTitle}>{title}</h2>
+        <div className={s.card} style={colorizedColor}
+             onClick={() => edit(title, note_text, colorizedColor, color, noteId)}>
+            <div className={s.title_date_space}>
+                <h2 className={s.cardTitle}>{title}</h2>
+                <p>{localDate}</p>
+            </div>
             <p className={s.text}>{cropText(note_text)}</p>
             <div className={s.cardAction}>
-                <EditIcon height={27} width={27} fill={colorizedColor.color} onClick={onColorChangeButtonClickHandler}/>
-                <small style={{margin: '5px 0 0 0' }}>{note_text?.length}</small>
-                <DeleteIcon fill={colorizedColor.color} onClick={onDeleteButtonClickHandler}/>
-                <ColorizedBar noteId={noteId} showColorBar={showColorBar} setShowColorBar={setShowColorBar} currentColor={color}/>
+                <EditIcon height={27} width={27} fill={colorizedColor.color}
+                          onClick={onColorChangeButtonClickHandler}/>
+                <small style={{margin: '5px 0 0 0'}}>{note_text?.length}</small>
+                <DeleteIcon fill={colorizedColor.color}
+                            onClick={onDeleteButtonClickHandler}/>
+                <ColorizedBar noteId={noteId} showColorBar={showColorBar}
+                              setShowColorBar={setShowColorBar} currentColor={color}/>
             </div>
         </div>
     )
