@@ -1,5 +1,5 @@
 .wrapperSettings {
-    padding: 130px 0px 100px 140px;
+    padding: 130px 0 100px 140px;
     height: 100vh;
     /*width: min-content;*/
     gap: 25px;
@@ -16,6 +16,7 @@
 }
 
 .leftArea {
+    width: 30%;
     @apply
     flex
     flex-col
@@ -24,7 +25,7 @@
 .myProfile {
     gap: 17px;
     margin-bottom: 75px;
-    padding-right: 150px;
+    padding-right: 50px;
     @apply
     flex
     justify-between
@@ -95,7 +96,7 @@ ul.editMyProfile input {
 
 
 .otherSettings {
-    padding-right: 250px;
+    /*padding-right: 250px;*/
 }
 
 .other {
