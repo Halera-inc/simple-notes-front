@@ -22,8 +22,6 @@ type ModalWindowPropsType = {
 }
 
 const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType) => {
-
-
     const modalStyle = {
         marginBottom: '9%',
         marginLeft: '25%'

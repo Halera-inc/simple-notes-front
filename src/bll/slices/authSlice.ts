@@ -15,25 +15,25 @@ export const registerUser = createAsyncThunk(
  )
 
 const initialState = {
-    notErrorLogin:true,
+    loginError:false,
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-    notErrorLogin(state, action: PayloadAction<boolean>) {
-            state.notErrorLogin= action.payload
+    isThereErrorOnLogin(state, action: PayloadAction<boolean>) {
+            state.loginError= action.payload
         },
     },
     extraReducers: (builder) => {
         builder
     // .addCase(loginUser.fulfilled, (state) => {
     //             state.isLoggedIn = true
-    //             state.notErrorlogin=true
+    //             state.loginError=false
     //         })
      }})
-export const {notErrorLogin} = authSlice.actions
+export const {isThereErrorOnLogin} = authSlice.actions
 
 export default authSlice.reducer
 

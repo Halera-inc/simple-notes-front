@@ -1,9 +1,8 @@
 import type {NextPage} from 'next'
-import {useRouter} from "next/router";
-import {getSession, signIn, signOut, useSession} from "next-auth/react";
+import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import {getSession} from "next-auth/react";
 import MainContainer from "../src/components/MainContainer";
 import LandingPage from "../src/components/landing/LandingPage";
-import {GetServerSideProps, GetServerSidePropsContext} from "next";
 
 const Home: NextPage = () => {
 
@@ -17,7 +16,7 @@ const Home: NextPage = () => {
     )
 }
 
-export default Home
+export default Home;
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
     const session = await getSession(context);

@@ -81,8 +81,14 @@ const Button = (props: PropsType) => {
                         style={!isHover
                             ? {...customStyles, ...props.style,}
                             : {...customStyles, ...props.style, ...isHoveredCustomStyles}}>
-                    <label id={'linkButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
-                           style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", cursor: "pointer"}}>
+                    <label  id={'linkButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
+                           style={{
+                               display: "flex",
+                               flexDirection: "row",
+                               alignItems: "center",
+                               justifyContent: "center",
+                               cursor: "pointer"
+                           }}>
                         {props.icon && <div style={{margin: '0 5px'}}>
                             {props.icon}
                         </div>}
@@ -114,6 +120,6 @@ const Button = (props: PropsType) => {
 
 };
 
-export default Button;
+export default Buton;
 
 
