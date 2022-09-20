@@ -14,7 +14,8 @@ import {getSession} from "next-auth/react";
 const Notes = () => {
 
     const router = useRouter()
-    const dispatch = useAppDispatch()
+    let useAppDispatch1 = useAppDispatch();
+    const dispatch = useAppDispatch1
     const notes = useAppSelector(state => state.notes.notes)
     const searchParams = useAppSelector(state => state.notes.searchParams)
     const [modalTitle, setModalTitle] = useState('')
@@ -47,8 +48,8 @@ const Notes = () => {
     const onContentChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setModalText(e.currentTarget.value)
     }
-    const onConfirmClickHandler = (id: string, title: string, note_text: string) => {
-        dispatch(editNote({id, title, note_text})) // todo need to fix with appAPI
+    const onConfirmClickHandler = (id: string, title: string, note_text: string, color: ColorSamplesType) => {
+        dispatch(editNote({id, title, note_text,color})) // todo need to fix with appAPI
     }
     const onDiscardClickHandler = () => {
 
@@ -70,6 +71,7 @@ const Notes = () => {
                          onTextChange={onContentChangeHandler}
                          onConfirm={onConfirmClickHandler}
                          onDiscard={onDiscardClickHandler}/>
+
             <div className={s.notesWrapper}>
                 <div className={s.notesBlock}>
                     {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase())
