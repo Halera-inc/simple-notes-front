@@ -120,6 +120,6 @@ const Button = (props: PropsType) => {
 
 };
 
-export default Buton;
+export default Button;
 
 
