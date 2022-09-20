@@ -32,8 +32,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
     }
 
     const [showColorBar, setShowColorBar] = useState(false)
-    const [showColor, setShowColor] = useState<ColorSamplesType>('blue')
-
+    const [showColor, setShowColor] = useState('blue')
 
     const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
     const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
@@ -74,7 +73,10 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                     <div className={s.modalBox} style={colorizedColor}>
                         <div className={s.topArea}>
                             <input type="text" className={s.cardTitle} style={colorizedColor} value={props.titleNode}
-                                   onChange={props.onTitleChange}/>
+                                   onChange={props.onTitleChange}
+                                   maxLength={30}
+
+                            />
                             <textarea className={s.textTextArea}
                                       maxLength={2000}
                                       rows={15} value={props.textNode}
@@ -120,7 +122,9 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                             <input type="text" className={s.cardTitle}
                                    style={props.defaultColor ? defaultNote : colorizedColorAdd}
                                    placeholder={'Add new title'}
-                                   value={props.titleNode} onChange={props.onTitleChange}/>
+                                   value={props.titleNode} onChange={props.onTitleChange}
+                                   maxLength={30}
+                            />
                             <textarea className={s.textTextArea}
                                       style={props.defaultColor ? defaultNote : colorizedColorAdd}
                                       rows={15}
