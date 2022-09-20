@@ -18,7 +18,7 @@ type PropsType = {
 }
 
 const Button = (props: PropsType) => {
-    const saveBtnRef = useRef<HTMLLabelElement>(null)
+    const btnRef = useRef<HTMLLabelElement>(null)
     const [isHover, setIsHover] = useState<boolean>(false)
 
     const callback = (params: any) => {
@@ -27,7 +27,7 @@ const Button = (props: PropsType) => {
 
     useEffect(()=>{
         if (props.require){
-            saveBtnRef.current && saveBtnRef.current.click()
+            btnRef.current && btnRef.current.click()
             props.setRequire && props.setRequire(false)
         }
     }, [props.require])
@@ -101,7 +101,7 @@ const Button = (props: PropsType) => {
                     style={!isHover
                         ? {...customStyles, ...props.style,}
                         : {...customStyles, ...props.style, ...isHoveredCustomStyles}}>
-                <label id={'defaultButton'} htmlFor={props.htmlFor ? props.htmlFor : ''} ref={saveBtnRef}
+                <label id={'defaultButton'} htmlFor={props.htmlFor ? props.htmlFor : ''} ref={btnRef}
                        style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", cursor: "pointer"}}>
                     {props.icon && <div style={{margin: '0 5px'}}>{props.icon}</div>}
                     <div style={{margin: '0 5px'}}>

@@ -31,6 +31,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
 
     const [showColorBar, setShowColorBar] = useState(false)
     const [saveClickRequire, setSaveClickRequire] = useState(false)
+    const [escClickRequire, setEscClickRequire] = useState(false)
+    const [cmdKeyPress, setCmdKeyPress] = useState(false)
     const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
 
@@ -45,6 +47,22 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
         }
     }
 
+    function onKeyDownHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T) {
+        if (e.keyCode === 91 || e.keyCode === 93) {
+            setCmdKeyPress(true)
+        } else if (e.keyCode === 13 && cmdKeyPress){
+            setSaveClickRequire(true)
+        } else if (e.keyCode === 27){
+            setEscClickRequire(true)
+        }
+    }
+    function onKeyUpHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T) {
+        if (e.keyCode === 91 || e.keyCode === 93) {
+            setCmdKeyPress(false)
+        } else if (e.keyCode === 27){
+            setEscClickRequire(false)
+        }
+    }
 
     if (props.typeNode === 'edit') {
         return (
@@ -54,13 +72,19 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                     <div className={s.modalBox} style={colorizedColor}>
                         <div className={s.topArea}>
                             <input type="text" className={s.cardTitle} style={colorizedColor} value={props.titleNode}
-                                   onChange={props.onTitleChange} onKeyPress={onKeyPressHandler}/>
+                                   onChange={props.onTitleChange}
+                                   onKeyPress={onKeyPressHandler}
+                                   onKeyDown={onKeyDownHandler}
+                                   onKeyUp={onKeyUpHandler}
+                            />
                             <textarea className={s.textTextArea}
                                       maxLength={2000}
                                       rows={15} value={props.textNode}
                                       style={colorizedColor}
                                       onChange={props.onTextChange}
                                       onKeyPress={onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                                      onKeyDown={onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                                      onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
                             />
                         </div>
                         <div className={s.modalAction}>
@@ -68,6 +92,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                     htmlFor={'my-modal'}
                                     color={'RED'}
                                     callback={() => props.onDiscard()}
+                                    require={escClickRequire}
+                                    setRequire={setEscClickRequire}
                             />
                             <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
                                       onClick={onColorChangeButtonClickHandler}/>
@@ -99,6 +125,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                    placeholder={'Add new title'}
                                    value={props.titleNode} onChange={props.onTitleChange}
                                    onKeyPress={onKeyPressHandler}
+                                   onKeyDown={onKeyDownHandler}
+                                   onKeyUp={onKeyUpHandler}
                             />
                             <textarea className={s.textTextArea}
                                       style={props.colorNote}
@@ -108,6 +136,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                       placeholder={'Add text'}
                                       onChange={props.onTextChange}
                                       onKeyPress={onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                                      onKeyDown={onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                                      onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
                             />
                         </div>
                         <div className={s.modalAction}>
@@ -115,6 +145,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                     color={'RED'}
                                     htmlFor={'my-modal-add-note'}
                                     callback={() => props.onDiscard()}
+                                    require={escClickRequire}
+                                    setRequire={setEscClickRequire}
                             />
                             <Button title={'Save'}
                                     color={'GREEN'}
