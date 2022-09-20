@@ -6,7 +6,6 @@ import InputForm from "src/components/Settings/inputform/InputForm";
 import {useSession} from "next-auth/react";
 import {OtherSettings} from "./OtherSettings";
 import {UserType} from "../../utils/types";
-import Image from 'next/image';
 
 
 const MainBlockSettings = () => {
@@ -23,7 +22,7 @@ const MainBlockSettings = () => {
             <div className={s.leftArea}>
                 <div className={s.myProfile}>
                     <div className={s.imgProfileWrapper}>
-                        <Image
+                        <img
                             style={{width: 200, height: 200, border: '2px solid var(--blue-dark)'}}
                             alt={'avatar'}
                             src={`${session?.user?.image}`}
