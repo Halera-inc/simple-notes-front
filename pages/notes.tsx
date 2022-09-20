@@ -23,7 +23,6 @@ const Notes = () => {
     const [modalId, setModalId] = useState('');
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
-
     const effectRan = useRef(false)
 
     useEffect(() => {
@@ -81,7 +80,9 @@ const Notes = () => {
                               note_text={n.note_text}
                               color={n.color}
                               noteId={n._id}
-                              edit={onCardClickHandler}/>
+                              edit={onCardClickHandler}
+                              createdAt={n.createdAt}
+                              />
                     )}
                 </div>
             </div>
