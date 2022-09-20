@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useRef, useState} from 'react';
 import s from '../styles/Modal.module.css'
 import EditIcon from "../assets/images/EditIcon";
 import {colorizedColorType} from "./Note";
@@ -28,37 +28,41 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
     }
 
     const [showColorBar, setShowColorBar] = useState(false)
-    const [saveClickRequire, setSaveClickRequire] = useState(false)
-    const [escClickRequire, setEscClickRequire] = useState(false)
     const [cmdKeyPress, setCmdKeyPress] = useState(false)
     const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
+    const modalSaveBtnRef = useRef<HTMLLabelElement>(null)
+    const modalCancelBtnRef = useRef<HTMLLabelElement>(null)
 
     const onColorChangeButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
         setShowColorBar(!showColorBar)
         e.stopPropagation()
     }
 
+    const saveRequireHandler = () => {
+        props.onConfirm(props.modalId, props.titleNode, props.textNode)
+        modalSaveBtnRef.current && modalSaveBtnRef.current.click()
+    }
+
     function onKeyPressHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T) {
         if (e.key === 'Enter' && (e.ctrlKey)) {
-            setSaveClickRequire(true)
+            saveRequireHandler()
         }
     }
 
     function onKeyDownHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T) {
         if (e.keyCode === 91 || e.keyCode === 93) {
             setCmdKeyPress(true)
-        } else if (e.keyCode === 13 && cmdKeyPress){
-            setSaveClickRequire(true)
-        } else if (e.keyCode === 27){
-            setEscClickRequire(true)
+        } else if (e.keyCode === 13 && cmdKeyPress) {
+            saveRequireHandler()
+        } else if (e.keyCode === 27) {
+            modalCancelBtnRef.current && modalCancelBtnRef.current.click()
         }
     }
+
     function onKeyUpHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T) {
         if (e.keyCode === 91 || e.keyCode === 93) {
             setCmdKeyPress(false)
-        } else if (e.keyCode === 27){
-            setEscClickRequire(false)
         }
     }
 
@@ -86,13 +90,13 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                             />
                         </div>
                         <div className={s.modalAction}>
-                            <Button title={'Cancel'}
-                                    htmlFor={'my-modal'}
-                                    color={'RED'}
-                                    callback={() => props.onDiscard()}
-                                    require={escClickRequire}
-                                    setRequire={setEscClickRequire}
-                            />
+                            <label ref={modalCancelBtnRef} htmlFor="my-modal" className={s.modalSave}>
+                                <Button title={'Cancel'}
+                                        htmlFor={'my-modal'}
+                                        color={'RED'}
+                                        callback={() => props.onDiscard()}
+                                />
+                            </label>
                             <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
                                       onClick={onColorChangeButtonClickHandler}/>
                             <ColorizedBar modalStyle={modalStyle}
@@ -100,13 +104,13 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                           showColorBar={showColorBar}
                                           setShowColorBar={setShowColorBar}
                                           currentColor={colorizedColor.color}/>
-                            <Button title={'Save'}
-                                    htmlFor={'my-modal'}
-                                    color={'GREEN'}
-                                    callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}
-                                    require={saveClickRequire}
-                                    setRequire={setSaveClickRequire}
-                            />
+                            <label ref={modalSaveBtnRef} htmlFor="my-modal" className={s.modalSave}>
+                                <Button title={'Save'}
+                                        htmlFor={'my-modal'}
+                                        color={'GREEN'}
+                                        callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}
+                                />
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -139,20 +143,20 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                             />
                         </div>
                         <div className={s.modalAction}>
-                            <Button title={'Cancel'}
-                                    color={'RED'}
-                                    htmlFor={'my-modal-add-note'}
-                                    callback={() => props.onDiscard()}
-                                    require={escClickRequire}
-                                    setRequire={setEscClickRequire}
-                            />
-                            <Button title={'Save'}
-                                    color={'GREEN'}
-                                    htmlFor={'my-modal-add-note'}
-                                    callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}
-                                    require={saveClickRequire}
-                                    setRequire={setSaveClickRequire}
-                            />
+                            <label ref={modalCancelBtnRef} htmlFor="my-modal" className={s.modalSave}>
+                                <Button title={'Cancel'}
+                                        color={'RED'}
+                                        htmlFor={'my-modal-add-note'}
+                                        callback={() => props.onDiscard()}
+                                />
+                            </label>
+                            <label ref={modalSaveBtnRef} htmlFor="my-modal" className={s.modalSave}>
+                                <Button title={'Save'}
+                                        color={'GREEN'}
+                                        htmlFor={'my-modal-add-note'}
+                                        callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}
+                                />
+                            </label>
                         </div>
                     </div>
                 </div>

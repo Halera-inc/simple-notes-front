@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {CSSProperties} from "styled-components";
 import Link from "next/link";
 
@@ -13,8 +13,6 @@ type PropsType = {
     htmlFor?: string
     className?: string
     type?: "button" | "reset" | "submit" | undefined
-    require?: boolean
-    setRequire?: (newValue: boolean)=>void
 }
 
 const Button = (props: PropsType) => {
@@ -24,13 +22,6 @@ const Button = (props: PropsType) => {
     const callback = (params: any) => {
         props.callback && props.callback(params)
     }
-
-    useEffect(()=>{
-        if (props.require){
-            btnRef.current && btnRef.current.click()
-            props.setRequire && props.setRequire(false)
-        }
-    }, [props.require])
 
     const returnColors = (color: colorsButtonType) => {
         if (color === 'RED') {
