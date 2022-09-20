@@ -123,11 +123,3 @@ export type ColorSamplesType =
     | "dark"
     | "default"
 
-// export type ColorType = {
-//     default: string
-//     blue: string
-//     green: string
-//     violet: string
-//     mustard: string
-//     dark: string
-// }
