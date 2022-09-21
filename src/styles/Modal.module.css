@@ -37,6 +37,7 @@
     @apply
     card-title
     text-blue-dark
+    min-w-full
 }
 
 .textTextArea {

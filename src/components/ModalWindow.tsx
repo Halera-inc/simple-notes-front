@@ -7,18 +7,22 @@ import colorizeNote from "../utils/colorizeNote";
 import {RootState} from "../bll/store";
 import {useSelector} from "react-redux";
 import Button from "./universalComponent/Button/Button";
+import {ColorSamplesType} from "../api/notes-api";
 
-type ModalWindowType = 'edit' | 'create'
+export type ModalWindowType = 'edit' | 'create'
 type ModalWindowPropsType = {
     titleNode: string
     textNode: string
     typeNode: ModalWindowType
     onTitleChange: (e: ChangeEvent<HTMLInputElement>) => void
     onTextChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    onConfirm: (id: string, title: string, note_text: string) => void
+    onConfirm?: (id: string, title: string, note_text: string, showColor: ColorSamplesType) => void //cюда передавать цвет
+    onCreatClickHandler?: (id: string, title: string, note_text: string, showColor: ColorSamplesType) => void //cюда передавать цвет
     onDiscard: () => void
     colorNote: colorizedColorType
     modalId: string
+    defaultColor?: boolean
+    setDefaultColor?: (value: boolean) => void
 }
 
 const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType) => {
@@ -28,11 +32,14 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
     }
 
     const [showColorBar, setShowColorBar] = useState(false)
+    const [showColor, setShowColor] = useState('blue')
     const [cmdKeyPress, setCmdKeyPress] = useState(false)
     const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
     const modalSaveBtnRef = useRef<HTMLLabelElement>(null)
     const modalCancelBtnRef = useRef<HTMLLabelElement>(null)
+    const colorizedColorAdd = colorizeNote(showColor)
+    const defaultNote = colorizeNote('blue')
 
     const onColorChangeButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
         setShowColorBar(!showColorBar)
@@ -78,7 +85,9 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                    onKeyPress={onKeyPressHandler}
                                    onKeyDown={onKeyDownHandler}
                                    onKeyUp={onKeyUpHandler}
+                                   maxLength={30}
                             />
+
                             <textarea className={s.textTextArea}
                                       maxLength={2000}
                                       rows={15} value={props.textNode}
@@ -100,9 +109,12 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                             <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
                                       onClick={onColorChangeButtonClickHandler}/>
                             <ColorizedBar modalStyle={modalStyle}
+                                          setShowColor={setShowColor}
                                           noteId={props.modalId}
                                           showColorBar={showColorBar}
                                           setShowColorBar={setShowColorBar}
+                                          typeNode={props.typeNode}
+                                          setDefaultColor={props.setDefaultColor}
                                           currentColor={colorizedColor.color}/>
                             <label ref={modalSaveBtnRef} htmlFor="my-modal" className={s.modalSave}>
                                 <Button title={'Save'}
@@ -121,19 +133,21 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
             <>
                 <input type="checkbox" id='my-modal-add-note' className="modal-toggle"/>
                 <div className="modal backdrop-blur-sm">
-                    <div className={s.modalBox}>
+                    <div className={s.modalBox} style={props.defaultColor ? defaultNote : colorizedColorAdd}>
                         <div className={s.topArea}>
-                            <input type="text" className={s.cardTitle} style={props.colorNote}
+                            <input type="text" className={s.cardTitle}
+                                   style={props.defaultColor ? defaultNote : colorizedColorAdd}
                                    placeholder={'Add new title'}
                                    value={props.titleNode} onChange={props.onTitleChange}
+                                   maxLength={30}
                                    onKeyPress={onKeyPressHandler}
                                    onKeyDown={onKeyDownHandler}
                                    onKeyUp={onKeyUpHandler}
                             />
                             <textarea className={s.textTextArea}
-                                      style={props.colorNote}
+                                      style={props.defaultColor ? defaultNote : colorizedColorAdd}
                                       rows={15}
-                                      maxLength={450}
+                                      maxLength={2000}
                                       value={props.textNode}
                                       placeholder={'Add text'}
                                       onChange={props.onTextChange}
@@ -150,6 +164,18 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                         callback={() => props.onDiscard()}
                                 />
                             </label>
+                            <EditIcon width={'2.5em'} height={'2.5em'}
+                                      fill={props.defaultColor ? defaultNote.color : colorizedColorAdd.color}
+                                      onClick={onColorChangeButtonClickHandler}/>
+                            <ColorizedBar modalStyle={modalStyle}
+                                          noteId={props.modalId}
+                                          typeNode={props.typeNode}
+                                          setShowColor={setShowColor}
+                                          showColorBar={showColorBar}
+                                          setShowColorBar={setShowColorBar}
+                                          setDefaultColor={props.setDefaultColor}
+                                          currentColor={colorizedColor.color}/>
+
                             <label ref={modalSaveBtnRef} htmlFor="my-modal-add-note" className={s.modalSave}>
                                 <Button title={'Save'}
                                         color={'GREEN'}
