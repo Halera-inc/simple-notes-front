@@ -3,6 +3,7 @@ import {ColorSamplesType} from 'src/api/notes-api';
 import {editNote} from 'src/bll/slices/notesSlice';
 import colorizeNote from 'src/utils/colorizeNote';
 import {useAppDispatch} from 'src/utils/hooks';
+import {ModalWindowType} from "../ModalWindow";
 
 type ColorizedBarPropsType = {
     noteId: string
@@ -10,6 +11,10 @@ type ColorizedBarPropsType = {
     setShowColorBar: (newStatus: boolean) => void
     currentColor: string
     modalStyle?: { marginBottom: string, marginLeft: string }
+    setShowColor?: (color: ColorSamplesType) => void
+    setNewColor?: (color: ColorSamplesType) => void
+    typeNode?: ModalWindowType
+    setDefaultColor?: (value: boolean) => void
 }
 
 const ColorizedBar: React.FC<ColorizedBarPropsType> = (
@@ -18,20 +23,30 @@ const ColorizedBar: React.FC<ColorizedBarPropsType> = (
         showColorBar,
         setShowColorBar,
         currentColor,
-        modalStyle
+        modalStyle,
+        setShowColor,
+        typeNode,
+        setDefaultColor,
     }) => {
 
     const colorSamples: ColorSamplesType[] = ["blue", "green", "violet", "mustard"]
     const dispatch = useAppDispatch()
+
     const onColorClick = (color: ColorSamplesType) => {
-        if (color !== currentColor) {
+        if (typeNode === 'create' ) {
+            setShowColor ? setShowColor(color) : "blur"
+            setDefaultColor ? setDefaultColor(false):null
+            setShowColorBar(!showColorBar)
+        }
+        if (typeNode === 'edit' || color !== currentColor) {
             dispatch(editNote({id: noteId, color: color}))
             setShowColorBar(!showColorBar)
         }
     }
 
     return (
-        <div style={modalStyle} className={`cursor-pointer absolute flex duration-300 ${showColorBar ? 'bottom-[40px]' : 'opacity-0 bottom-[30px]'}`}
+        <div style={modalStyle}
+             className={`cursor-pointer absolute flex duration-300 ${showColorBar ? 'bottom-[40px]' : 'opacity-0 bottom-[30px]'}`}
              onClick={(event) => {
                  event.stopPropagation()
              }}>

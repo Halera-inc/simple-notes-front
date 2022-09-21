@@ -25,7 +25,8 @@ export default async function handler(req, res) {
                     note_text,
                     color,
                     note_mode,
-                    user: user.id
+                    user: user.id,
+                    createdAt: Date().toString()
                 })
                 res.status(201).json({newNote})
             } catch (error) {
