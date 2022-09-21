@@ -1,6 +1,6 @@
 import s from './../src/styles/About.module.css';
 import MainContainer from "../src/components/MainContainer";
-import {useRouter} from "next/router";
+
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import {getSession} from "next-auth/react";
 
