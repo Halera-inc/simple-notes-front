@@ -143,14 +143,14 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                             />
                         </div>
                         <div className={s.modalAction}>
-                            <label ref={modalCancelBtnRef} htmlFor="my-modal" className={s.modalSave}>
+                            <label ref={modalCancelBtnRef} htmlFor="my-modal-add-note" className={s.modalSave}>
                                 <Button title={'Cancel'}
                                         color={'RED'}
                                         htmlFor={'my-modal-add-note'}
                                         callback={() => props.onDiscard()}
                                 />
                             </label>
-                            <label ref={modalSaveBtnRef} htmlFor="my-modal" className={s.modalSave}>
+                            <label ref={modalSaveBtnRef} htmlFor="my-modal-add-note" className={s.modalSave}>
                                 <Button title={'Save'}
                                         color={'GREEN'}
                                         htmlFor={'my-modal-add-note'}
