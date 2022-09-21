@@ -51,8 +51,14 @@ export const editNote = createAsyncThunk('notes/editNote',
         }
     })
 
-const initialState = {
-    notes: [] as Array<NoteTextType>,
+export type NotesState = {
+    notes: Array<NoteTextType>;
+    createNoteModal: boolean;
+    searchParams: string
+}
+
+const initialState: NotesState = {
+    notes: [],
     createNoteModal: false,
     searchParams: ''
 }
@@ -61,6 +67,9 @@ export const notesSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
+        rehydrate(state, action: PayloadAction<NotesState>) {
+        state.notes = action.payload.notes
+        },
         setCreateNoteModalShow(state, action: PayloadAction<{ isModalShow: boolean }>) {
             state.createNoteModal = action.payload.isModalShow
         },
@@ -99,7 +108,7 @@ export const notesSlice = createSlice({
     }
 })
 
-export const {setCreateNoteModalShow, setSearchParams} = notesSlice.actions
+export const {setCreateNoteModalShow, setSearchParams, rehydrate} = notesSlice.actions
 
 export default notesSlice.reducer
 

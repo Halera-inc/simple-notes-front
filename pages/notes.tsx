@@ -1,5 +1,5 @@
 import {ChangeEvent, useEffect, useRef, useState} from 'react'
-import {editNote, getNotes} from 'src/bll/slices/notesSlice';
+import {editNote, getNotes, rehydrate} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
@@ -7,11 +7,11 @@ import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
 import {useRouter} from "next/router";
 import {colorizedColorType} from "../src/components/Note";
-import {ColorSamplesType} from "../src/api/notes-api";
+import {ColorSamplesType, NoteTextType} from "../src/api/notes-api";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import {getSession} from "next-auth/react";
-
-const Notes = () => {
+import {store} from '../src/bll/store'
+const Notes = ({initialState}: any) => {
 
     const router = useRouter()
     let useAppDispatch1 = useAppDispatch();
@@ -23,16 +23,16 @@ const Notes = () => {
     const [modalId, setModalId] = useState('');
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
-    const effectRan = useRef(false)
+    // const effectRan = useRef(false)
 
     useEffect(() => {
-        if (!effectRan.current) {
-            dispatch(getNotes())
-            return () => {
-                effectRan.current = true
-            }
-        }
-    }, [dispatch])
+        // if (!effectRan.current) {
+            dispatch(rehydrate(initialState.notes))
+            // return () => {
+            //     effectRan.current = true
+            // }
+        // }
+    }, [dispatch, initialState])
 
     const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => {
         title && setModalTitle(title)
@@ -102,8 +102,9 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
             props: {}
         }
     }
+    await store.dispatch(getNotes())
     return {
-        props: {session}
+        props: {initialState: store.getState(), session}
     }
 }
 
