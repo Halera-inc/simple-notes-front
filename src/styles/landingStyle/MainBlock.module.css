@@ -47,11 +47,17 @@
         position: absolute;
         padding: 0;
         top: 100px;
+
     }
 
     .imgTitle svg {
         z-index: 0;
         width: 500px;
+        left: 46px;
+        position: absolute;
+    }
+    .title {
+        margin-bottom: 0;
     }
 
     .title p {

@@ -14,7 +14,7 @@ type PropsType = {
     htmlFor?: string
     className?: string
     type?: "button" | "reset" | "submit" | undefined
-   }
+}
 
 const Button = (props: PropsType) => {
 
@@ -73,7 +73,7 @@ const Button = (props: PropsType) => {
                         style={!isHover
                             ? {...customStyles, ...props.style,}
                             : {...customStyles, ...props.style, ...isHoveredCustomStyles}}>
-                    <label  id={'linkButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
+                    <label id={'linkButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
                            style={{
                                display: "flex",
                                flexDirection: "row",
@@ -81,10 +81,13 @@ const Button = (props: PropsType) => {
                                justifyContent: "center",
                                cursor: "pointer"
                            }}>
-                        {props.icon && <div style={{margin: '0 5px'}}>
+                        {props.icon &&
+                        <div style={{margin: '0 5px'}}>
                             {props.icon}
                         </div>}
-                        <div style={{margin: '0 5px'}}>{props.title}</div>
+                        <div style={{margin: '0 5px'}}>
+                            {props.title}
+                        </div>
                     </label>
                 </button>
             </Link>
