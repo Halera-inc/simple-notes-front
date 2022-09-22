@@ -32,10 +32,10 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
     }
 
     const [showColorBar, setShowColorBar] = useState(false)
-    const [showColor, setShowColor] = useState('blue')
+    const [showColor, setShowColor] = useState<ColorSamplesType>('blue')
 
     const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
-    const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
+    const currentCol = useSelector<RootState,ColorSamplesType| undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
     const colorizedColorAdd = colorizeNote(showColor)
     const defaultNote = colorizeNote('blue')
@@ -51,9 +51,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
     }
 
     const editNoteHandler = () => {
-        props.onConfirm ?
-            //@ts-ignore
-            props.onConfirm(props.modalId, props.titleNode, props.textNode, currentCol)
+        props.onConfirm  ?
+            props.onConfirm(props.modalId, props.titleNode, props.textNode, currentCol ? currentCol: 'blue')
             : ''
 
     }
