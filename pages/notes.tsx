@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useRef, useState} from 'react'
+import React, {ChangeEvent, useEffect, useRef, useState} from 'react'
 import {editNote, getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note/Note";
@@ -48,6 +48,7 @@ const Notes = () => {
     const onDiscardClickHandler = () => {
         // TODO: ????????
     }
+
 
     return (
         <MainContainer>
