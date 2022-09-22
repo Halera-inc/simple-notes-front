@@ -24,8 +24,8 @@ const SearchModule = () => {
             <div className='flex'>
                 <input onChange={onSearchValueChange}
                        type="text"
-                       placeholder="Search…"
-                       className={'input border-1 rounded-none border-blue-dark '}/>
+                       placeholder="Search"
+                       className={'input border-1 rounded-none border-blue-dark border-r-0'}/>
                 <button className="btn btn-square bg-blue border-1  border-blue-dark hover:bg-blue ">
                     <SearchIcon height={30}
                                 width={30}

@@ -7,8 +7,6 @@ import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
-import {GetServerSideProps, GetServerSidePropsContext} from "next";
-import {getSession} from "next-auth/react";
 
 const Notes = () => {
 

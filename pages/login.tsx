@@ -8,8 +8,7 @@ import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {useRouter} from "next/router";
-import {getProviders, getSession, signIn, SignInResponse, useSession} from "next-auth/react";
-import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import {signIn} from "next-auth/react";
 import Button from "../src/components/universalComponent/Button/Button";
 import {isThereErrorOnLogin} from 'src/bll/slices/authSlice';
 
@@ -57,7 +56,7 @@ const Login = ({providers}: any) => {
 
     const ProvidersButtons = ({providers}: any) => (
         <div className="flex flex-col w-full">
-            {Object.values(providers).map(
+            {providers && Object.values(providers).map(
                 (provider: any) =>
                     provider.name !== "Credentials" && (
                         <div className={s.providerButton} key={provider.name}>
