@@ -1,12 +1,23 @@
 import Note from "../../../serverUtils/models/Note";
 import dbConnect from "../../../serverUtils/dbConnect";
-import {getSession} from "next-auth/react";
+import {unstable_getServerSession} from "next-auth";
+import {authOptions} from "../auth/[...nextauth]";
+import {getToken} from "next-auth/jwt";
+
+const secret = process.env.NEXTAUTH_SECRET
 
 export default async function handler(req, res) {
     const {method} = req
+    const token = await getToken({ req, secret})
+    console.log(token)
     await dbConnect()
-    const session = await getSession({ req });
-    console.log(session)
+    const session = await unstable_getServerSession(req, res, authOptions);
+        console.log(session)
+
+    if (!session) {
+    res.status(401).json({ message: "You must be logged in to make this request." });
+    return;
+  }
     const {user} = session
 
     switch (method) {
