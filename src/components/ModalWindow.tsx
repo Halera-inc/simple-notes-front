@@ -26,13 +26,15 @@ type ModalWindowPropsType = {
 }
 
 const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType) => {
+
+
     const modalStyle = {
         marginBottom: '9%',
         marginLeft: '25%'
     }
 
     const [showColorBar, setShowColorBar] = useState(false)
-    const [showColor, setShowColor] = useState('blue')
+    const [showColor, setShowColor] = useState('blue' as ColorSamplesType)
     const [cmdKeyPress, setCmdKeyPress] = useState(false)
     const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
@@ -51,29 +53,30 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
             : ''
     }
 
-    const saveRequireHandler = () => {
-        props.onConfirm(props.modalId, props.titleNode, props.textNode)
-        modalSaveBtnRef.current && modalSaveBtnRef.current.click()
+    const editNoteHandler = () => {
+        props.onConfirm ?
+            props.onConfirm(props.modalId, props.titleNode, props.textNode, currentCol ? currentCol as ColorSamplesType : 'blue' as ColorSamplesType)
+            : ''
     }
 
-    const editNoteHandler = () => {
-        props.onConfirm  ?
-            props.onConfirm(props.modalId, props.titleNode, props.textNode, currentCol ? currentCol: 'blue')
-            : ''
-
-    function onKeyPressHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T) {
+    function onKeyPressHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T, type: 'edit' | 'create') {
         if (e.key === 'Enter' && (e.ctrlKey)) {
-            saveRequireHandler()
+            modalSaveBtnRef.current && modalSaveBtnRef.current.click()
+            type === 'edit' ? editNoteHandler() : creatNoteHandler()
         }
     }
 
-    function onKeyDownHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T) {
+    function onKeyDownHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T, type: 'edit' | 'create') {
         if (e.keyCode === 91 || e.keyCode === 93) {
             setCmdKeyPress(true)
         } else if (e.keyCode === 13 && cmdKeyPress) {
-            saveRequireHandler()
+            setCmdKeyPress(false)
+            modalSaveBtnRef.current && modalSaveBtnRef.current.click()
+            type === 'edit' ? editNoteHandler() : creatNoteHandler()
+
         } else if (e.keyCode === 27) {
             modalCancelBtnRef.current && modalCancelBtnRef.current.click()
+            props.onDiscard()
         }
     }
 
@@ -90,10 +93,11 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                 <div className="modal backdrop-blur-sm">
                     <div className={s.modalBox} style={colorizedColor}>
                         <div className={s.topArea}>
-                            <input type="text" className={s.cardTitle} style={colorizedColor} value={props.titleNode}
+                            <input type="text" className={s.cardTitle} style={colorizedColor}
+                                   value={props.titleNode}
                                    onChange={props.onTitleChange}
-                                   onKeyPress={onKeyPressHandler}
-                                   onKeyDown={onKeyDownHandler}
+                                   onKeyPress={(e) => onKeyPressHandler(e, 'edit')}
+                                   onKeyDown={(e) => onKeyDownHandler(e, 'edit')}
                                    onKeyUp={onKeyUpHandler}
                                    maxLength={30}
                             />
@@ -103,8 +107,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                       rows={15} value={props.textNode}
                                       style={colorizedColor}
                                       onChange={props.onTextChange}
-                                      onKeyPress={onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
-                                      onKeyDown={onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                                      onKeyPress={(e) => onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
+                                      onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
                                       onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
                             />
                         </div>
@@ -130,7 +134,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                 <Button title={'Save'}
                                         htmlFor={'my-modal'}
                                         color={'GREEN'}
-                                        callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}
+                                        callback={editNoteHandler}
                                 />
                             </label>
                         </div>
@@ -150,8 +154,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                    placeholder={'Add new title'}
                                    value={props.titleNode} onChange={props.onTitleChange}
                                    maxLength={30}
-                                   onKeyPress={onKeyPressHandler}
-                                   onKeyDown={onKeyDownHandler}
+                                   onKeyPress={(e) => onKeyPressHandler(e, 'create')}
+                                   onKeyDown={(e) => onKeyDownHandler(e, 'create')}
                                    onKeyUp={onKeyUpHandler}
                             />
                             <textarea className={s.textTextArea}
@@ -161,8 +165,8 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                       value={props.textNode}
                                       placeholder={'Add text'}
                                       onChange={props.onTextChange}
-                                      onKeyPress={onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
-                                      onKeyDown={onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                                      onKeyPress={(e) => onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'create')}
+                                      onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'create')}
                                       onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
                             />
                         </div>
@@ -190,7 +194,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                 <Button title={'Save'}
                                         color={'GREEN'}
                                         htmlFor={'my-modal-add-note'}
-                                        callback={() => props.onConfirm(props.modalId, props.titleNode, props.textNode)}
+                                        callback={creatNoteHandler}
                                 />
                             </label>
                         </div>
