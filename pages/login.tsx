@@ -11,36 +11,37 @@ import {useRouter} from "next/router";
 import {getProviders, getSession, signIn, useSession} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import Button from "../src/components/universalComponent/Button/Button";
-import {notErrorLogin} from 'src/bll/slices/authSlice';
 import GithubIcon from "../src/assets/images/GithubIcon";
 import GoogleIcon from "../src/assets/images/GoogleIcon";
+import {isThereErrorOnLogin} from "../src/bll/slices/authSlice";
 
 
 const Login = ({providers, session}: any) => {
-    // console.log(providers)
-    // console.log(session)
     const router = useRouter()
-    const notError = useAppSelector(state => state.auth.notErrorLogin)
+    const loginError = useAppSelector<boolean>(state => state.auth.loginError)
     const dispatch = useAppDispatch()
 
-    type FormikErrorType = {
-        email?: string
-        password?: string
-    }
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
         },
         onSubmit: async values => {
-            const res: any = await signIn("credentials", {
+            //@ts-ignore
+            const {error} = signIn("credentials", {
                 redirect: false,
                 email: values.email,
                 password: values.password,
                 callbackUrl: `${window.location.origin}`,
             })
-            res.error ? console.log(res.error) : redirectToHome();
-            formik.resetForm();
+            if (error) {
+                redirectToHome()
+                dispatch(isThereErrorOnLogin({value: false}))
+
+            } else {
+                dispatch(isThereErrorOnLogin({value: true}))
+            }
+            formik.resetForm()
         },
     })
 
@@ -52,7 +53,7 @@ const Login = ({providers, session}: any) => {
     };
 
     const resetHandler = () => {
-        dispatch(notErrorLogin(true));
+        dispatch(isThereErrorOnLogin({value: false}));
         formik.resetForm();
     }
 
@@ -63,11 +64,11 @@ const Login = ({providers, session}: any) => {
                 (provider: any) =>
                     provider.name !== "Credentials" && (
                         <div className={s.providerButton} key={provider.name}>
-                            {provider.name==='Google'?
-                              <GoogleIcon width={'3em'} height={'3em'}
-                                                                     color={'#5590C1'}/>
-                            : <GithubIcon width={'4em'} height={'4em'}
-                                          color={'#5590C1'}/>}
+                            {provider.name === 'Google' ?
+                                <GoogleIcon width={'3em'} height={'3em'}
+                                            color={'#5590C1'}/>
+                                : <GithubIcon width={'4em'} height={'4em'}
+                                              color={'#5590C1'}/>}
                             <Button
                                 title={`Sign in with ${provider.name}`}
                                 callback={() => signIn(provider.id)}
@@ -79,7 +80,6 @@ const Login = ({providers, session}: any) => {
                                     margin: 0,
                                     fontSize: 20
                                 }}/>
-                            {/*className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"*/}
                         </div>
                     )
             )}
@@ -114,9 +114,9 @@ const Login = ({providers, session}: any) => {
                                 <div className={`${s.formControl} ${s.one}`}>
                                     <label className={s.label}>
                                         <UserIcon width={'3em'} height={'3em'}
-                                                  color={notError ? '#5590C1' : '#F06464'}/>
+                                                  color={loginError ? '#F06464' : '#5590C1'}/>
                                         <input type="text" id='email' placeholder="email"
-                                               className={notError ? s.inputI : s.errorInput}
+                                               className={loginError ? s.errorInput : s.inputI}
                                                {...formik.getFieldProps('email')}/>
                                     </label>
                                     {formik.touched.email && formik.errors.email}
@@ -126,13 +126,13 @@ const Login = ({providers, session}: any) => {
                                 <div className={`${s.formControl} ${s.two}`}>
                                     <label className={s.label}>
                                         <KeyIcon width={'3em'} height={'3em'}
-                                                 color={notError ? '#5590C1' : '#F06464'}/>
+                                                 color={loginError ? '#F06464' : '#5590C1'}/>
                                         <input type="password" id='password'
                                                placeholder="password"
-                                               className={notError ? s.inputI : s.errorInput}
+                                               className={loginError ? s.errorInput : s.inputI}
                                                {...formik.getFieldProps('password')}/>
                                     </label>
-                                    {!notError ?
+                                    {loginError ?
                                         <div className={s.errorText}>Incorrect login or
                                             password!</div> : null}
                                 </div>
@@ -147,7 +147,7 @@ const Login = ({providers, session}: any) => {
                                                 margin: '0 0 60px 0',
                                                 fontSize: 20
                                             }}/>
-                                     {/*Надо доработать, isInitialized опять нет (Ваня)*/}
+                                    {/*Надо доработать, isInitialized опять нет (Ваня)*/}
                                     {/*{!isInitialized && <Spinner size={'60px'}*/}
                                     {/*                            style={{fill: 'blue'}}*/}
                                     {/*                            className={'absolute right-32'}/>}*/}

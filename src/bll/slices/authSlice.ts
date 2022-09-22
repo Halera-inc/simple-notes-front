@@ -8,32 +8,26 @@ export const registerUser = createAsyncThunk(
             const response = await authAPI.register(params.email, params.password, params.country)
             return response.data.message
         } catch (e) {
-            console.log("Error", e)
             return thunkAPI.rejectWithValue(e)
+
         }
     }
- )
+)
 
 const initialState = {
-    notErrorLogin:true,
+    loginError: false,
 };
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-    notErrorLogin(state, action: PayloadAction<boolean>) {
-            state.notErrorLogin= action.payload
+        isThereErrorOnLogin(state, action: PayloadAction<{ value: boolean }>) {
+            state.loginError = action.payload.value
         },
     },
-    extraReducers: (builder) => {
-        builder
-    // .addCase(loginUser.fulfilled, (state) => {
-    //             state.isLoggedIn = true
-    //             state.notErrorlogin=true
-    //         })
-     }})
-export const {notErrorLogin} = authSlice.actions
+})
+export const {isThereErrorOnLogin} = authSlice.actions
 
 export default authSlice.reducer
 
@@ -49,3 +43,4 @@ export type RegisterParamsType = {
     country: string
     username: string
 }
+
