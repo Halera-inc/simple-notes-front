@@ -35,7 +35,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
     const [showColor, setShowColor] = useState<ColorSamplesType>('blue')
 
     const modalCloseBtnRef = useRef<HTMLLabelElement>(null)
-    const currentCol = useSelector<RootState,ColorSamplesType| undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
+    const currentCol = useSelector<RootState, ColorSamplesType | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
     const colorizedColorAdd = colorizeNote(showColor)
     const defaultNote = colorizeNote('blue')
@@ -45,15 +45,11 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
         e.stopPropagation()
     }
     const creatNoteHandler = () => {
-        props.onCreatClickHandler ?
-            props.onCreatClickHandler(props.modalId, props.titleNode, props.textNode, showColor)
-            : ''
+        props.onCreatClickHandler && props.onCreatClickHandler(props.modalId, props.titleNode, props.textNode, showColor)
     }
 
     const editNoteHandler = () => {
-        props.onConfirm  ?
-            props.onConfirm(props.modalId, props.titleNode, props.textNode, currentCol ? currentCol: 'blue')
-            : ''
+        props.onConfirm && props.onConfirm(props.modalId, props.titleNode, props.textNode, currentCol ? currentCol : 'blue')
 
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -62,7 +58,6 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
             modalCloseBtnRef.current && modalCloseBtnRef.current.click()
         }
     }
-
 
     if (props.typeNode === 'edit') {
         return (
@@ -73,16 +68,13 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                         <div className={s.topArea}>
                             <input type="text" className={s.cardTitle} style={colorizedColor} value={props.titleNode}
                                    onChange={props.onTitleChange}
-                                   maxLength={30}
-
-                            />
+                                   maxLength={30}/>
                             <textarea className={s.textTextArea}
                                       maxLength={2000}
                                       rows={15} value={props.textNode}
                                       style={colorizedColor}
                                       onChange={props.onTextChange}
-                                      onKeyDown={onKeyPressHandler}
-                            />
+                                      onKeyDown={onKeyPressHandler}/>
                         </div>
                         <div className={s.modalAction}>
                             <Button title={'Cancel'}
@@ -103,8 +95,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                 <Button title={'Save'}
                                         htmlFor={'my-modal'}
                                         color={'GREEN'}
-                                        callback={editNoteHandler}
-                                />
+                                        callback={editNoteHandler}/>
                             </label>
                         </div>
                     </div>
@@ -122,8 +113,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                    style={props.defaultColor ? defaultNote : colorizedColorAdd}
                                    placeholder={'Add new title'}
                                    value={props.titleNode} onChange={props.onTitleChange}
-                                   maxLength={30}
-                            />
+                                   maxLength={30}/>
                             <textarea className={s.textTextArea}
                                       style={props.defaultColor ? defaultNote : colorizedColorAdd}
                                       rows={15}
@@ -158,7 +148,6 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
             </>
         )
     }
-
 };
 
 export default ModalWindow;
