@@ -45,11 +45,21 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
         setShowColorBar(!showColorBar)
         e.stopPropagation()
     }
+    const creatNoteHandler = () => {
+        props.onCreatClickHandler ?
+            props.onCreatClickHandler(props.modalId, props.titleNode, props.textNode, showColor)
+            : ''
+    }
 
     const saveRequireHandler = () => {
         props.onConfirm(props.modalId, props.titleNode, props.textNode)
         modalSaveBtnRef.current && modalSaveBtnRef.current.click()
     }
+
+    const editNoteHandler = () => {
+        props.onConfirm  ?
+            props.onConfirm(props.modalId, props.titleNode, props.textNode, currentCol ? currentCol: 'blue')
+            : ''
 
     function onKeyPressHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T) {
         if (e.key === 'Enter' && (e.ctrlKey)) {
