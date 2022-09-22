@@ -8,31 +8,25 @@ import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {useRouter} from "next/router";
-import {getProviders, getSession, signIn, useSession} from "next-auth/react";
-import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import {signIn} from "next-auth/react";
 import Button from "../src/components/universalComponent/Button/Button";
 import {isThereErrorOnLogin} from 'src/bll/slices/authSlice';
 
 
-const Login = ({providers, session}: any) => {
-    // console.log(providers)
-    // console.log(session)
+const Login = ({providers}: any) => {
+
     const router = useRouter()
     const loginError = useAppSelector(state => state.auth.loginError)
     const dispatch = useAppDispatch()
 
-    type FormikErrorType = {
-        email?: string
-        password?: string
-    }
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
         },
         onSubmit: async values => {
-            // @ts-ignore
-            const {error} = signIn("credentials", {
+
+            const {error}: any = signIn("credentials", {
                 redirect: false,
                 email: values.email,
                 password: values.password,
@@ -60,24 +54,20 @@ const Login = ({providers, session}: any) => {
         formik.resetForm();
     }
 
-
     const ProvidersButtons = ({providers}: any) => (
         <div className="flex flex-col w-full">
-            {Object.values(providers).map(
+            {providers && Object.values(providers).map(
                 (provider: any) =>
                     provider.name !== "Credentials" && (
                         <div className={s.providerButton} key={provider.name}>
                             <button
                                 onClick={() => signIn(provider.id)}
-                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
+                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                                 <span
                                     className="absolute inset-y-0 left-0 flex items-center pl-3">
                                 </span>{`Sign in with ${provider.name}`}
                             </button>
-                        </div>
-                    )
-            )}
+                        </div>))}
         </div>
     );
 
@@ -96,15 +86,10 @@ const Login = ({providers, session}: any) => {
                                     </Link>
                                 </div>
                             </div>
-
                             <ProvidersButtons providers={providers}/>
-
-                            <div
-                                className="flex items-center mb-8 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
-                            >
+                            <div className="flex items-center mb-8 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
                                 <p className="text-center font-semibold mx-4 mb-0">Or</p>
                             </div>
-
                             <form onSubmit={formik.handleSubmit}>
                                 <div className={`${s.formControl} ${s.one}`}>
                                     <label className={s.label}>
@@ -115,9 +100,7 @@ const Login = ({providers, session}: any) => {
                                                {...formik.getFieldProps('email')}/>
                                     </label>
                                     {formik.touched.email && formik.errors.email}
-
                                 </div>
-
                                 <div className={`${s.formControl} ${s.two}`}>
                                     <label className={s.label}>
                                         <KeyIcon width={'3em'} height={'3em'}
@@ -161,21 +144,3 @@ const Login = ({providers, session}: any) => {
 };
 
 export default Login;
-
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-    const session = await getSession(context);
-    console.log(session)
-    if (session) {
-        return {
-            redirect: {destination: '/notes'},
-            props: {}
-        }
-    }
-    return {
-        props: {
-            providers: await getProviders(),
-            session
-        }
-    }
-}
-

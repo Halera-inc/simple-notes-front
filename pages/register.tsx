@@ -15,7 +15,6 @@ import {signIn} from "next-auth/react";
 import InfoIcon from "../src/assets/images/InfoIcon";
 import Button from "../src/components/universalComponent/Button/Button";
 
-
 const Register = () => {
     const [info, setInfo] = useState(false)
     const options = useMemo(() => countryList().getData(), [])
@@ -26,8 +25,8 @@ const Register = () => {
         country?: string
         password?: string
         password2?: string
-
     }
+
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -95,7 +94,6 @@ const Register = () => {
         ? <div className={s.errorTextInvalid}>{formik.errors.password}</div>
         : <div className={s.errorTextRegistration}>{formik.errors.password}</div>
 
-
     return (
         <MainContainer>
             <div className={s.singnInBlock}>
@@ -128,7 +126,6 @@ const Register = () => {
                                         <div
                                             className={s.errorTextRegistration}>{formik.errors.username}</div> : ''}
                                 </div>
-
                                 <div className={`${s.formControl} ${s.one}`}>
                                     <label className={s.label}>
                                         <ListIcon width={'3em'} height={'3em'}
@@ -143,7 +140,6 @@ const Register = () => {
                                         <div
                                             className={s.errorTextRegistration}>{formik.errors.email}</div> : ''}
                                 </div>
-
                                 <div className={`${s.formControl} ${s.one}`}>
                                     <label className={s.label}>
                                         <CountryIcon width={'3em'} height={'3em'}
@@ -152,39 +148,33 @@ const Register = () => {
                                                          : '#5590C1'}/>
                                         {!formik.errors.country || !formik.touched.country ?
                                             <span className={s.array}>
-
                                         </span> : <span className={s.arrayError}>
-
                                         </span>}
                                         <select id='country'
                                                 onBlur={formik.handleBlur}
                                                 onChange={formik.handleChange}
                                                 value={formik.values.country}
                                                 className={formik.touched.country && formik.errors.country ? s.errorInput : s.inputI}>
-                                            <option defaultValue='country'>сountry
+                                            <option defaultValue='country'>
+                                                country
                                             </option>
                                             {options.map(m => {
                                                 return (
                                                     <option className={s.option}
                                                             key={m.value} value={m.label}>
                                                         {m.label}
-                                                    </option>
-                                                )
+                                                    </option>)
                                             })}
                                         </select>
                                     </label>
-                                    {formik.touched.country && formik.errors.country ?
-                                        <div
-                                            className={s.errorTextRegistration}>{formik.errors.country}</div> : ''}
+                                    {formik.touched.country && formik.errors.country && <div className={s.errorTextRegistration}>{formik.errors.country}</div>}
                                 </div>
-
                                 <div className={`${s.formControl} ${s.one}`}>
                                     <label className={s.label}>
                                         <KeyIcon width={'3em'} height={'3em'}
                                                  color={formik.errors.password && formik.touched.password
                                                      ? '#F06464'
                                                      : '#5590C1'}/>
-
                                         <input type="password" id='password'
                                                placeholder="password"
                                                className=
@@ -192,12 +182,10 @@ const Register = () => {
                                                {...formik.getFieldProps('password')} />
                                     </label>
                                     {formik.touched.password && formik.errors.password ? defferentPasswordClass : ''}
-                                    <div className={s.infoIcon} onClick={()=>setInfo(!info) }>
-                                        <InfoIcon width={'2em'}  height={'2em'} color='#5590C1'/>
+                                    <div className={s.infoIcon} onClick={() => setInfo(!info)}>
+                                        <InfoIcon width={'2em'} height={'2em'} color='#5590C1'/>
                                     </div>
-
                                 </div>
-
                                 <div className={`${s.formControl} ${s.two}`}>
                                     <label className={s.label}>
                                         <KeyIcon width={'3em'} height={'3em'}
@@ -219,8 +207,7 @@ const Register = () => {
                                                 height: 60,
                                                 margin: '0 0 60px 0',
                                                 fontSize: 18,
-                                                backgroundColor: "white"
-                                            }}/>
+                                                backgroundColor: "white"}}/>
                                 </div>
                             </form>
                             <Link href={"/login"}>
@@ -249,11 +236,11 @@ const Register = () => {
                                         • numbers <br/>
                                         • upper and lower case</p>
                         </span>}
-                        </div>
+                </div>
 
-                        </div>
-                        </MainContainer>
-                        );
-                    };
+            </div>
+        </MainContainer>
+    );
+};
 
-                    export default Register;
+export default Register;

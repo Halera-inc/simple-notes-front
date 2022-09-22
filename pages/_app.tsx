@@ -13,8 +13,8 @@ function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {
         <SessionProvider session={session}>
             <ThemeProvider enableSystem={true} attribute="class">
                 <Provider store={store}>
-                        <Sidebar/>
-                        <Component {...pageProps} />
+                    <Sidebar/>
+                    <Component {...pageProps} />
                 </Provider>
             </ThemeProvider>
         </SessionProvider>
