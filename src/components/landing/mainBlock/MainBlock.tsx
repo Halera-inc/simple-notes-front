@@ -20,9 +20,9 @@ const MainBlock = () => {
         <div className={s.mainBlockContainer}>
             <div className={s.blockTitle}>
                 <h1 className={s.title}>
-                    <p>Just.</p>
-                    <p>Simple.</p>
-                    <p>Notes.</p>
+                    Just<br/>
+                    Simple<br/>
+                    Notes
                 </h1>
 
                 <Button icon={<ArrowBackIcon style={{rotate: '180deg'}}/>}

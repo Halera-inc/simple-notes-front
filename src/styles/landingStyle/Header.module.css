@@ -26,12 +26,28 @@
     padding-right: 40px;
     cursor: pointer;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 540px) {
     .header {
         margin: 0 20px;
     }
     .header p {
         display: none;
+        width: 100%;
+    }
+    .title {
+        padding: 0;
+        line-height: 36px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+}
+@media screen and (min-width: 541px) {
+    .header {
+        margin: 0;
+    }
+    .header p {
+        display: block;
         width: 100%;
     }
     .title {
