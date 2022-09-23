@@ -50,13 +50,12 @@ const Note = ({
              onClick={() => edit(title, note_text, colorizedColor, color, noteId)}>
             <div className={s.title_date_space}>
                 <h2 className={s.cardTitle}>{title}</h2>
-                <p>{localDate}</p>
             </div>
             <p className={s.text}>{cropText(note_text)}</p>
             <div className={s.cardAction}>
                 <EditIcon height={27} width={27} fill={colorizedColor.color}
                           onClick={onColorChangeButtonClickHandler}/>
-                <small style={{margin: '5px 0 0 0'}}>{note_text?.length}</small>
+                <small style={{margin: '5px 0 0 0'}}>{localDate}</small>
                 <DeleteIcon fill={colorizedColor.color}
                             onClick={onDeleteButtonClickHandler}/>
                 <ColorizedBar noteId={noteId} showColorBar={showColorBar}

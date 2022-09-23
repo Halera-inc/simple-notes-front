@@ -1,21 +1,16 @@
-import {ChangeEvent, useEffect, useRef, useState} from 'react'
+import React, {ChangeEvent, useEffect, useRef, useState} from 'react'
 import {editNote, getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
-import {useRouter} from "next/router";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
-import {GetServerSideProps, GetServerSidePropsContext} from "next";
-import {getSession} from "next-auth/react";
 
 const Notes = () => {
 
-    const router = useRouter()
-    let useAppDispatch1 = useAppDispatch();
-    const dispatch = useAppDispatch1
+    const dispatch = useAppDispatch()
     const notes = useAppSelector(state => state.notes.notes)
     const searchParams = useAppSelector(state => state.notes.searchParams)
     const [modalTitle, setModalTitle] = useState('')
@@ -48,11 +43,12 @@ const Notes = () => {
         setModalText(e.currentTarget.value)
     }
     const onConfirmClickHandler = (id: string, title: string, note_text: string, color: ColorSamplesType) => {
-        dispatch(editNote({id, title, note_text,color})) // todo need to fix with appAPI
+        dispatch(editNote({id, title, note_text, color})) // todo need to fix with appAPI
     }
     const onDiscardClickHandler = () => {
-
+        // TODO: ????????
     }
+
 
     return (
         <MainContainer>
@@ -81,8 +77,7 @@ const Notes = () => {
                               color={n.color}
                               noteId={n._id}
                               edit={onCardClickHandler}
-                              createdAt={n.createdAt}
-                              />
+                              createdAt={n.createdAt}/>
                     )}
                 </div>
             </div>
@@ -91,25 +86,3 @@ const Notes = () => {
 }
 
 export default Notes
-
-//
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-    const session = await getSession(context);
-    console.log(session)
-    if (!session) {
-        return {
-            redirect: {destination: '/login', permanent: false},
-            props: {}
-        }
-    }
-    return {
-        props: {session}
-    }
-}
-
-// export const getZapdosAuthSession = async (ctx: {
-//     req: GetServerSidePropsContext["req"];
-//     res: GetServerSidePropsContext["res"];
-// }) => {
-//     return await unstable_getServerSession(ctx.req, ctx.res, authOptions)
-// }

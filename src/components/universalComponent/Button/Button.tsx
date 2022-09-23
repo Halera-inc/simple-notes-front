@@ -1,7 +1,6 @@
-import React, {LegacyRef, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {CSSProperties} from "styled-components";
 import Link from "next/link";
-import {Property} from "csstype";
 
 type colorsButtonType = 'RED' | 'GREEN' | 'DEFAULT'
 type PropsType = {
@@ -17,7 +16,7 @@ type PropsType = {
 }
 
 const Button = (props: PropsType) => {
-
+    const btnRef = useRef<HTMLLabelElement>(null)
     const [isHover, setIsHover] = useState<boolean>(false)
 
     const callback = (params: any) => {
@@ -102,14 +101,8 @@ const Button = (props: PropsType) => {
                     style={!isHover
                         ? {...customStyles, ...props.style,}
                         : {...customStyles, ...props.style, ...isHoveredCustomStyles}}>
-                <label id={'defaultButton'} htmlFor={props.htmlFor ? props.htmlFor : ''}
-                       style={{
-                           display: "flex",
-                           flexDirection: "row",
-                           alignItems: "center",
-                           justifyContent: "center",
-                           cursor: "pointer"
-                       }}>
+                <label id={'defaultButton'} htmlFor={props.htmlFor ? props.htmlFor : ''} ref={btnRef}
+                       style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", cursor: "pointer"}}>
                     {props.icon && <div style={{margin: '0 5px'}}>{props.icon}</div>}
                     <div style={{margin: '0 5px'}}>
                         {props.title}
