@@ -47,7 +47,6 @@
         position: absolute;
         padding: 0;
         top: 100px;
-
     }
 
     .imgTitle svg {
@@ -56,49 +55,46 @@
         left: 6rem;
         top: -3rem;
         position: absolute;
-    }
-    .title {
-        margin-bottom: 0;
+        opacity: 0.6;
     }
 
-    .title p {
+    .title {
+        margin-bottom: 0;
         font-size: 70px;
         line-height: 85px;
+        font-weight: bold;
     }
+
     .blockTitle {
         padding-top: 0;
     }
+
     .mainBlockContainer {
         margin: 0 20px;
     }
 }
+
 @media screen and (min-width: 541px) {
     .imgTitle svg {
         z-index: 0;
         width: 100rem;
         left: 0;
-        top: 10rem;
+        top: 30rem;
         position: absolute;
-    }
-    .title {
-        margin-bottom: 0;
+        opacity: 0.6;
     }
 
     .title {
+        margin-bottom: 0;
         font-size: 70px;
         line-height: 85px;
         font-weight: bold;
     }
-    /*.blockTitle {*/
-    /*    padding-top: 0;*/
-    /*}*/
-    /*.mainBlockContainer {*/
-    /*    margin: 0 20px;*/
-    /*}*/
-    /*.imgTitle {*/
-    /*    position: absolute;*/
-    /*    padding: 0;*/
-    /*    top: 100px;*/
-
-    /*}*/
+}
+@media screen and (min-width: 913px) {
+    .imgTitle svg {
+        width: 600px;
+        position: unset;
+        opacity: 1;
+    }
 }

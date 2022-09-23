@@ -18,3 +18,14 @@
         justify-content: center;
     }
 }
+@media screen and (min-width: 541px){
+    .footer {
+        justify-content: center;
+    }
+}
+@media screen and (min-width: 913px){
+    .footer {
+        justify-content: flex-start;
+    }
+}
+

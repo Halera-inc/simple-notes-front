@@ -20,3 +20,10 @@
         overflow: hidden;
     }
 }
+@media screen and (min-width: 913px) {
+    .landing {
+        padding: 0 30px 30px 30px;
+        align-items: center;
+        overflow: unset;
+    }
+}
