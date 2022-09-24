@@ -7,6 +7,7 @@ import ButtonIcon from "../../assets/images/ButtonIcon";
 import {useSession} from "next-auth/react";
 import Button from "../universalComponent/Button/Button";
 import SearchModule from "./SearchModule";
+import s from "src/components/Header/PagesHeader.module.css";
 
 
 const Header = () => {
@@ -25,14 +26,16 @@ const Header = () => {
                 ? <div>
                     {session
                         ? <div
-                            className=' backdrop-blur-md bg-white/70 fixed w-screen w-180 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
-                            <p className='text-[35px] font-bold ml-[128px] text-black '>
+                            className={s.pagesHeader_wrapper}>
+                            <p className={s.pagesHeader_title}>
                                 {pageName}
                             </p>
-                            <div className='flex justify-between w-[540px] items-center mr-[74px]'>
+                            <div className={s.pagesHeader_search}>
                                 <SearchModule/>
                                 <p className='text-lg text-black'>{session?.user?.name}</p>
-                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
+                                <span>
+                                    <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
+                                </span>
                             </div>
                         </div>
                         : <div className='z-50 flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]'>

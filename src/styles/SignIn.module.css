@@ -282,6 +282,12 @@
     .cardBody form input {
         margin-left: 0;
     }
+    .cardBody form select {
+        margin-left: 0;
+    }
+    .wrapperRegistrationCard {
+        transform: unset;
+    }
 }
 
 

@@ -46,3 +46,30 @@
     justify-content: flex-end;
 
 }
+
+@media screen and (max-width: 540px) {
+    .sidebarWrapper {
+        flex-direction: row;
+        top: calc(100% - 80px);
+        height: 80px;
+        width: 100%;
+    }
+    .whiteBg {
+        display: none;
+    }
+    .bottomBox {
+        display: none;
+    }
+    .middleBox {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+@media screen and (min-width: 541px) {
+
+}
+@media screen and (min-width: 913px) {
+
+}
