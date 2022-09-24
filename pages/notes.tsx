@@ -105,9 +105,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
     await store.dispatch(getNotes())
     return {
         props: {
-        initialState: store.getState(),
-        session
-        }
+        initialState: store.getState(), session}
     }
 }
 
