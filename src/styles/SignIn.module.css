@@ -268,10 +268,19 @@
     transform: translate(-38%, -343%);
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 540px) {
     .singnInBlock {
         display: block;
         margin: 20px 20px;
+    }
+    .cardTitle {
+         font-size: 35px !important;
+     }
+    .cardBody form svg {
+        display: none;
+    }
+    .cardBody form input {
+        margin-left: 0;
     }
 }
 
