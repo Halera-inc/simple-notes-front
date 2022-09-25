@@ -161,7 +161,6 @@ ul.collapseContent li p {
 }
 
 
-
 @media screen and (max-width: 540px) {
     .wrapperSettings {
         padding: 0;
@@ -206,27 +205,33 @@ ul.collapseContent li p {
     .editData {
         margin: 20px auto;
     }
+
     .otherSettings h3 {
         margin: 20px auto;
         font-size: 35px;
         text-align: center;
     }
+
     .collapseContent li {
         flex-direction: column;
 
     }
+
     .inputI {
         width: 100%;
         margin-top: 10px;
     }
-    .editMyProfile label li{
+
+    .editMyProfile label li {
         display: flex;
         flex-direction: column;
     }
+
     .editMyProfile input {
         width: 100%;
         margin-top: 10px;
     }
+
     .edit {
         text-align: -webkit-center;
     }
@@ -234,6 +239,20 @@ ul.collapseContent li p {
 }
 
 @media screen and (min-width: 541px) {
+    .wrapperSettings {
+        padding: 130px 0 0 140px;
+        align-content: flex-start;
+        flex-direction: column;
+
+    }
+
+    .wrapperMaimSettings {
+        flex-direction: column;
+    }
+    .otherSettings {
+        margin-right: 40px;
+        margin-bottom: 40px;
+    }
 }
 
 @media screen and (min-width: 913px) {
