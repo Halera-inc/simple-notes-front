@@ -8,6 +8,7 @@
     align-items: center;
     height: 100px;
     margin-bottom: 35px;
+    z-index: 100;
 }
 
 .pagesHeader_title {
@@ -27,13 +28,14 @@
 
 @media screen and (max-width: 540px) {
     .pagesHeader_wrapper {
-        margin: 10px auto;
+        margin: 0 auto;
         display: flex;
         flex-direction: column;
         backdrop-filter: unset;
         justify-content: space-between;
         align-items: center;
         height: max-content;
+        padding-bottom: 10px;
     }
 
     .pagesHeader_wrapper p {

@@ -272,6 +272,7 @@
     .singnInBlock {
         display: block;
         margin: 20px 20px;
+        width: max-content;
     }
     .cardTitle {
          font-size: 35px !important;
@@ -287,6 +288,9 @@
     }
     .wrapperRegistrationCard {
         transform: unset;
+    }
+    .errorText {
+        left: 0;
     }
 }
 
