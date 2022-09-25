@@ -149,10 +149,95 @@ ul.collapseContent li p {
     font-thin
 }
 
-.img{
+.img {
+
+    background: red;
+}
+
+.imgProfileWrapper_img {
     width: 200px;
     height: 200px;
-    background:red;
+    border: 2px solid var(--blue-dark);
+}
+
+
+
+@media screen and (max-width: 540px) {
+    .wrapperSettings {
+        padding: 0;
+        align-items: center;
+        align-content: flex-start;
+        width: max-content;
+        margin: 20px auto 20px;
+    }
+
+    .wrapperMaimSettings {
+        flex-direction: column;
+    }
+
+    .myProfile {
+        gap: 0;
+        margin-bottom: 0;
+        padding-right: 0;
+        flex-direction: column;
+    }
+
+    .leftArea {
+        width: 100%;
+    }
+
+    .imgProfileWrapper_img {
+        margin: 0 auto;
+    }
+
+    .imgProfileWrapper {
+        border: none;
+    }
+
+    .otherWrapper {
+        width: 250px;
+        margin: 0 auto;
+    }
+
+    .last_child {
+        margin-bottom: 80px;
+    }
+
+    .editData {
+        margin: 20px auto;
+    }
+    .otherSettings h3 {
+        margin: 20px auto;
+        font-size: 35px;
+        text-align: center;
+    }
+    .collapseContent li {
+        flex-direction: column;
+
+    }
+    .inputI {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .editMyProfile label li{
+        display: flex;
+        flex-direction: column;
+    }
+    .editMyProfile input {
+        width: 100%;
+        margin-top: 10px;
+    }
+    .edit {
+        text-align: -webkit-center;
+    }
+
+}
+
+@media screen and (min-width: 541px) {
+}
+
+@media screen and (min-width: 913px) {
+
 }
 
 

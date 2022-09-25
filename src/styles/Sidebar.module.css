@@ -52,7 +52,7 @@
 @media screen and (max-width: 540px) {
     .sidebarWrapper {
         flex-direction: row;
-        top: calc(100% - 80px);
+        top: calc(100% - 79px);
         height: 80px;
         width: 100%;
     }

@@ -36,7 +36,7 @@ export const OtherSettings = () => {
                     </div>
                 </div>
                 <div tabIndex={4}
-                     className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark rounded-none text-blue-dark  text-xl pl-3">
+                     className={`${s.last_child} collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark rounded-none text-blue-dark  text-xl pl-3`}>
                     <input type="checkbox"/>
                     <div className="collapse-title text-xl font-medium">
                         Change password
