@@ -10,6 +10,7 @@
     background: #E5F1FD;
     width: 100px;
 }
+
 .whiteBg {
     display: flex;
     align-items: center;
@@ -19,6 +20,7 @@
     width: 80px;
     border-radius: 30px;
 }
+
 .sidebarWrapper svg {
     cursor: pointer;
 }
@@ -54,12 +56,15 @@
         height: 80px;
         width: 100%;
     }
+
     .whiteBg {
         display: none;
     }
+
     .bottomBox {
         display: none;
     }
+
     .middleBox {
         width: 100%;
         flex-direction: row;
@@ -67,9 +72,16 @@
         align-items: center;
     }
 }
-@media screen and (min-width: 541px) {
 
+@media screen and (min-width: 541px) {
+    .upBox {
+        margin: 35px 0 61px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
+
 @media screen and (min-width: 913px) {
 
 }

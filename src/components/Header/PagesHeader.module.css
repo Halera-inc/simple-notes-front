@@ -29,13 +29,14 @@
 @media screen and (max-width: 540px) {
     .pagesHeader_wrapper {
         margin: 0 auto;
-        display: flex;
+        display: contents;
         flex-direction: column;
         backdrop-filter: unset;
         justify-content: space-between;
         align-items: center;
         height: max-content;
         padding-bottom: 10px;
+        text-align: center;
     }
 
     .pagesHeader_wrapper p {
@@ -55,4 +56,26 @@
     .pagesHeader_search span svg {
         display: none;
     }
+}
+
+@media screen and (min-width: 541px) {
+    .pagesHeader_wrapper {
+        margin: 0 20px 0 100px;
+        padding-bottom: 0;
+        width: calc(100% - 100px);
+
+    }
+    .pagesHeader_wrapper p {
+        width: 50%;
+    }
+
+    .pagesHeader_title {
+        margin: 30px 30px;
+        color: black;
+
+    }
+}
+
+@media screen and (min-width: 913px) {
+
 }
