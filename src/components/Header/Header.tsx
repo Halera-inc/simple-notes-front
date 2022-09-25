@@ -38,7 +38,7 @@ const Header = () => {
                                 </span>
                             </div>
                         </div>
-                        : <div className='z-50 flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]'>
+                        : <div className='z-40 flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]'>
                             <p className='px-32 text-[35px] font-bold ml-[75px]'>Simple Notes</p>
                             <div className='flex justify-between w-64 items-center mr-[100px]'>
                                 <a href={'/about'} className='text-blue-dark text-[25px] mr-[90px]'>About</a>

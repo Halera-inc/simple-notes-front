@@ -35,6 +35,7 @@
 
 .cardAction {
     display: flex;
+    z-index: 0;
     align-items: center;
     justify-content: center;
     margin-top: 15px;
