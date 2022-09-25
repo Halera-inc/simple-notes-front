@@ -21,7 +21,7 @@ const Error = () => {
         <MainContainer>
             <div className={s.content}>
                 <div className={s.iconMain}>
-                    <IconImageNotFound width={'80em'} height={'65em'}/>
+                    <IconImageNotFound width={'80em'} height={'55em'}/>
                     <div className={s.form}>
                         <div className={s.errorNumber}>404</div>
                         <p className={s.errorText}>page not found</p>

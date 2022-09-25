@@ -3,7 +3,7 @@ import React, {SVGProps} from 'react'
 
 export function IconImageNotFound(props: SVGProps<SVGSVGElement>) {
     return (
-        <svg width="1em" height="1em" viewBox="0 0 720 640" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <svg width="1em" height="1em" viewBox="0 0 720 540" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
 
             <g xmlns="http://www.w3.org/2000/svg" fillOpacity="0.2" fill="#5590C1"{...props}>
                 <path

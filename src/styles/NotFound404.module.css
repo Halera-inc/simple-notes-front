@@ -1,10 +1,11 @@
 .content {
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 100vh;
+
+
 }
 
 .iconMain {
@@ -14,7 +15,7 @@
 
 .form {
     position: absolute;
-    top:18%;
+    top:23%;
     left: 23%;
     display: flex;
     flex-direction: column;
@@ -37,7 +38,7 @@
 
 .btnWrapper {
     position: absolute;
-    top: 77%;
+    top: 91%;
     left: 39%;
 }
 
@@ -49,10 +50,7 @@
     .form {
         left: 23%;
     }
-    .btnWrapper {
-        left: 41%;
-        top: 76%;
-    }
+
 }
 @media (max-width: 1080px) {
     .content{
@@ -71,13 +69,12 @@
         margin-top: -50px;
     }
     .form {
-        top:23%;
+        top:28%;
         left: 31%;
         width:700px;
     }
     .btnWrapper {
         left: 57%;
-        top: 76%;
     }
 }
 @media (max-width: 850px) {
