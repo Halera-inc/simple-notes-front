@@ -25,7 +25,7 @@ const Header = () => {
                 ? <div>
                     {session
                         ? <div
-                            className=' backdrop-blur-md bg-white/70 fixed w-screen w-180 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
+                            className=' backdrop-blur-md bg-white/70 fixed w-screen w-180 z-40 justify-space flex justify-between items-center h-[100px] mb-[35px]'>
                             <p className='text-[35px] font-bold ml-[128px] text-black '>
                                 {pageName}
                             </p>
@@ -35,7 +35,7 @@ const Header = () => {
                                 <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}/>
                             </div>
                         </div>
-                        : <div className='z-50 flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]'>
+                        : <div className='z-40 flex justify-between items-center h-10 mt-[29px] mb-[35px] mr-[100px]'>
                             <p className='px-32 text-[35px] font-bold ml-[75px]'>Simple Notes</p>
                             <div className='flex justify-between w-64 items-center mr-[100px]'>
                                 <a href={'/about'} className='text-blue-dark text-[25px] mr-[90px]'>About</a>
