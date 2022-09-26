@@ -25,6 +25,27 @@
     margin-right: 74px;
     width: 540px;
 }
+.notAuth_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    margin: 29px 100px 35px 0;
+    z-index: 40;
+}
+.notAuth_header__title {
+    font-size: 35px;
+    padding: 0 32px;
+    font-weight: bold;
+    margin-left: 75px;
+}
+.noAuth_header__authBlock {
+    display: flex;
+    justify-content: space-between;
+    width: 64px;
+    align-items: center;
+    margin-right: 100px;
+}
 
 @media screen and (max-width: 540px) {
     .pagesHeader_wrapper {
@@ -37,6 +58,32 @@
         height: max-content;
         padding-bottom: 10px;
         text-align: center;
+    }
+    .notAuth_header h1 {
+        margin: 0px auto;
+        font-size: 35px;
+    }
+    .notAuth_header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 300px;
+        margin: 20px auto;
+    }
+    .noAuth_header__authBlock {
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        height: 180px;
+        margin: 0 auto;
+    }
+    .noAuth_header__authBlock a {
+        margin: 0 auto;
+    }
+    .noAuth_header__authBlock div {
+        margin: 0 auto;
     }
 
     .pagesHeader_wrapper p {
@@ -73,6 +120,32 @@
         margin: 30px 30px;
         color: black;
 
+    }
+    .notAuth_header h1 {
+        margin: 0 auto;
+        font-size: 35px;
+    }
+    .notAuth_header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 300px;
+        margin: 20px auto;
+    }
+    .noAuth_header__authBlock {
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        height: 180px;
+        margin: 0 auto;
+    }
+    .noAuth_header__authBlock a {
+        margin: 0 auto;
+    }
+    .noAuth_header__authBlock div {
+        margin: 0 auto;
     }
 }
 
