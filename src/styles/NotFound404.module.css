@@ -1,0 +1,101 @@
+.content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+
+}
+
+.iconMain {
+    position: relative;
+    margin-top: -5%;
+
+}
+
+.form {
+    position: absolute;
+    top:20%;
+    left: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.errorNumber {
+    font-size: 230px;
+    font-weight: bold;
+    color: #5590C1;
+}
+
+.errorText {
+    font-size: 75px;
+    color: #5590C1;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: -50px;
+}
+
+.btnWrapper {
+    position: absolute;
+    top: 91%;
+    left: 38%;
+}
+
+@media (max-width: 1080px) {
+    .iconMain {
+        max-width: 900px;
+        height:auto;
+
+    }
+    .errorNumber {
+        font-size: 207px;
+    }
+    .errorText {
+        font-size: 71px;
+        margin-top: -50px;
+    }
+    .form {
+        top:23%;
+        left: 23%;
+        width:632px;
+    }
+    .btnWrapper {
+        left: 43%;
+    }
+}
+@media (max-width: 850px) {
+    .iconMain {
+        max-width:100%;
+        margin-top:0;
+    }
+    .btnWrapper {
+       left: 49%;
+    }
+    .form {
+        left: 25%;
+    }
+}
+@media (max-width: 680px) {
+
+    .form {
+        left:30%;
+    }
+    .btnWrapper {
+        left: 59%;
+        width: 400px;
+    }
+
+}
+@media (max-width: 530px) {
+    .form {
+        left:38%;
+    }
+    .btnWrapper {
+        left: 77%;
+    }
+
+}
+
