@@ -14,10 +14,15 @@ import {authAPI} from "../src/api/notes-api";
 import {signIn} from "next-auth/react";
 import InfoIcon from "../src/assets/images/InfoIcon";
 import Button from "../src/components/universalComponent/Button/Button";
+import {Spinner} from "../src/components/Spinner";
+import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
+import {setIsAppFetching} from "../src/bll/slices/appSlice";
 
 const Register = () => {
     const [info, setInfo] = useState(false)
     const options = useMemo(() => countryList().getData(), [])
+    const loader= useAppSelector(state=>state.app.isAppFetching)
+    const dispatch = useAppDispatch()
     const router = useRouter()
     type FormikErrorType = {
         username?: string
@@ -62,6 +67,7 @@ const Register = () => {
             return errors;
         },
         onSubmit: async values => {
+            dispatch(setIsAppFetching(true))
             const res: any = await authAPI.register(values.email, values.password, values.country, values.username)
                 .then(async () => {
                     const res: any = await signIn("credentials", {
@@ -70,10 +76,13 @@ const Register = () => {
                         password: values.password,
                         callbackUrl: `${window.location.origin}`,
                     })
+                    dispatch(setIsAppFetching(false));
                     res.error ? console.log(res.error) : redirectToHome();
+                    dispatch(setIsAppFetching(false));
                 })
                 .catch((error) => {
                     console.log(error);
+                    dispatch(setIsAppFetching(false));
                 });
             console.log(res);
         },
@@ -199,7 +208,7 @@ const Register = () => {
                                     </label>
                                     {formik.touched.password2 && formik.errors.password2 ? defferentPassword2Class : " "}
                                 </div>
-                                <div className="card-actions justify-center">
+                                <div className="card-actions justify-center relative">
                                     <Button type={'submit'}
                                             title={'SignUp'}
                                             style={{
@@ -208,6 +217,12 @@ const Register = () => {
                                                 margin: '0 0 60px 0',
                                                 fontSize: 18,
                                                 backgroundColor: "white"}}/>
+                                    {loader ?  <Spinner size={'50px'} style={{
+                                            position:"absolute",
+                                            right:'19%',
+                                            top:"4%",
+                                        }}/>
+                                        : ''}
                                 </div>
                             </form>
                             <Link href={"/login"}>
