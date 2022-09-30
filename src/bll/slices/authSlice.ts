@@ -22,22 +22,16 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-    isThereErrorOnLogin(state, action: PayloadAction<boolean>) {
-            state.loginError= action.payload
+        isThereErrorOnLogin(state, action: PayloadAction<boolean>) {
+            state.loginError = action.payload
         },
     },
-    extraReducers: (builder) => {
-        builder
-    // .addCase(loginUser.fulfilled, (state) => {
-    //             state.isLoggedIn = true
-    //             state.loginError=false
-    //         })
-     }})
+    extraReducers: {}
+})
 export const {isThereErrorOnLogin} = authSlice.actions
 
 export default authSlice.reducer
 
-// Types for thunk
 
 export type LoginParamsType = {
     email: string
