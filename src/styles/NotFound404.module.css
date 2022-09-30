@@ -2,6 +2,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
 
@@ -10,26 +11,27 @@
 
 .iconMain {
     position: relative;
+    margin-top: -5%;
 
 }
 
 .form {
     position: absolute;
-    top:23%;
-    left: 23%;
+    top:20%;
+    left: 20%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .errorNumber {
-    font-size: 241px;
+    font-size: 230px;
     font-weight: bold;
     color: #5590C1;
 }
 
 .errorText {
-    font-size: 80px;
+    font-size: 75px;
     color: #5590C1;
     font-weight: bold;
     letter-spacing: 1px;
@@ -39,25 +41,12 @@
 .btnWrapper {
     position: absolute;
     top: 91%;
-    left: 39%;
+    left: 38%;
 }
 
-@media (max-width: 1290px) {
-    .content {
-        align-items:flex-start;
-
-    }
-    .form {
-        left: 23%;
-    }
-
-}
 @media (max-width: 1080px) {
-    .content{
-        height: auto;
-    }
     .iconMain {
-        width: 900px;
+        max-width: 900px;
         height:auto;
 
     }
@@ -69,26 +58,44 @@
         margin-top: -50px;
     }
     .form {
-        top:28%;
-        left: 31%;
-        width:700px;
+        top:23%;
+        left: 23%;
+        width:632px;
     }
     .btnWrapper {
-        left: 57%;
+        left: 43%;
     }
 }
 @media (max-width: 850px) {
-
-    .btnWrapper {
-       left: 73%;
-       width: 450px;
-    }
     .iconMain {
-        width: 700px;
-        height:auto;
+        max-width:100%;
+        margin-top:0;
+    }
+    .btnWrapper {
+       left: 49%;
     }
     .form {
-        left: 40%;
+        left: 25%;
     }
+}
+@media (max-width: 680px) {
+
+    .form {
+        left:30%;
+    }
+    .btnWrapper {
+        left: 59%;
+        width: 400px;
+    }
+
+}
+@media (max-width: 530px) {
+    .form {
+        left:38%;
+    }
+    .btnWrapper {
+        left: 77%;
+    }
+
 }
 
