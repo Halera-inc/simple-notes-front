@@ -1,5 +1,4 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-
 import {NullableType} from "../store";
 
 
@@ -13,13 +12,14 @@ export const appSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
-        setIsAppFetching(state, action: PayloadAction<{ isAppFetching: true }>) {
-            state.isAppFetching = action.payload.isAppFetching
+        setIsAppFetching(state, action: PayloadAction<boolean>) {
+            state.isAppFetching = action.payload
         }
     },
     extraReducers: {}
 })
 
-// export const {} = notesSlice.actions
+
+export const {setIsAppFetching} = appSlice.actions;
 
 export default appSlice.reducer

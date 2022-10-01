@@ -11,12 +11,15 @@ import {useRouter} from "next/router";
 import {signIn} from "next-auth/react";
 import Button from "../src/components/universalComponent/Button/Button";
 import {isThereErrorOnLogin} from 'src/bll/slices/authSlice';
+import {setIsAppFetching} from 'src/bll/slices/appSlice'
+import {Spinner} from "../src/components/Spinner";
 
 
 const Login = ({providers}: any) => {
 
     const router = useRouter()
     const loginError = useAppSelector(state => state.auth.loginError)
+    const loader= useAppSelector(state=>state.app.isAppFetching)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -25,13 +28,14 @@ const Login = ({providers}: any) => {
             password: '',
         },
         onSubmit: async values => {
-
+            dispatch(setIsAppFetching(true));
             const {error}: any = signIn("credentials", {
                 redirect: false,
                 email: values.email,
                 password: values.password,
                 callbackUrl: `${window.location.origin}`,
             })
+            dispatch(setIsAppFetching(false))
             if (error) {
                 redirectToHome()
                 dispatch(isThereErrorOnLogin(false))
@@ -116,7 +120,7 @@ const Login = ({providers}: any) => {
                                             password!</div> : null}
                                 </div>
 
-                                <div className="card-actions justify-center">
+                                <div className="card-actions justify-center relative">
                                     <Button title={'Login'}
                                             type={'submit'}
                                             style={{
@@ -126,6 +130,13 @@ const Login = ({providers}: any) => {
                                                 margin: '0 0 60px 0',
                                                 fontSize: 20
                                             }}/>
+                                    {loader ?  <Spinner size={'50px'} style={{
+                                        position:"absolute",
+                                        right:'19%',
+                                        top:"4%",
+                                    }}/>
+                                    : ''}
+
                                     {/*Надо доработать, isInitialized опять нет (Ваня)*/}
                                     {/*{!isInitialized && <Spinner size={'60px'}*/}
                                     {/*                            style={{fill: 'blue'}}*/}
