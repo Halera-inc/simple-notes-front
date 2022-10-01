@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     console.log(token)
     await dbConnect()
     const session = await unstable_getServerSession(req, res, authOptions);
-        console.log(session)
+        // console.log(session)
 
     if (!session) {
     res.status(401).json({ message: "You must be logged in to make this request." });
