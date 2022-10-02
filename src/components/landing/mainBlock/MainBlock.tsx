@@ -8,10 +8,10 @@ import ArrowBackIcon from "../../../assets/images/ArrowBackIcon";
 const MainBlock = () => {
 
     const buttonTitle = {
-        paddingTop: '12px',
-        paddingBottom: '12px',
-        paddingLeft: '37px',
-        paddingRight: '37px',
+        paddingTop: '15px',
+        paddingBottom: '15px',
+        paddingLeft: '30px',
+        paddingRight: '30px',
         fontSize: '25px',
     }
 
