@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import axios from 'axios'
-import {ColorSamplesType, notesAPI, NoteTextType, NoteViewType} from 'src/api/notes-api'
+import {ColorSamplesType, notesAPI, NoteTextType, NoteViewType} from "../../api/notes-api";
+
 
 export const getNotes = createAsyncThunk('notes/getNotes', async (_, thunkAPI) => {
         try {
@@ -101,7 +102,7 @@ export const notesSlice = createSlice({
 
 export const {setCreateNoteModalShow, setSearchParams} = notesSlice.actions
 
-export default notesSlice.reducer
+export const notesReducer =  notesSlice.reducer
 
 // T Y P E S
 type PostNoteParamsType = {
