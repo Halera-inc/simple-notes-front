@@ -29,8 +29,8 @@ export const authSlice = createSlice({
     extraReducers: {}
 })
 export const {isThereErrorOnLogin} = authSlice.actions
-
-export const authReducer = authSlice.reducer
+export  const authTestReducer =  authSlice.reducer
+export default authSlice.reducer
 
 
 export type LoginParamsType = {

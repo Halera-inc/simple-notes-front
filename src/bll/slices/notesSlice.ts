@@ -101,8 +101,8 @@ export const notesSlice = createSlice({
 })
 
 export const {setCreateNoteModalShow, setSearchParams} = notesSlice.actions
-
-export const notesReducer =  notesSlice.reducer
+export const notesTestReducer = notesSlice.reducer
+export default notesSlice.reducer
 
 // T Y P E S
 type PostNoteParamsType = {
