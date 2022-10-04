@@ -3,12 +3,12 @@
     justify-content: space-between;
     align-items: center;
     height: 65vh;
+    padding-bottom: 40px;
 }
 
 .blockTitle {
-    padding-top: 112px;
     display: flex;
-    justify-content: flex-start;
+    justify-content:center;
     flex-direction: column;
     align-items: flex-start;
 }
@@ -24,24 +24,8 @@
     line-height: 110px;
 }
 
-.button {
-    width: 158px;
-    height: 62px;
-    background-color: #E5F1FD;
-    border: 1px solid #5590C1;
-    color: #5590C1;
-    font-size: 25px;
-
-}
-
 .imgTitle {
     z-index: 0;
     padding-top: 78px;
     padding-right: 110px;
-
 }
-
-/*.btn {*/
-/*    position: relative;*/
-/*    bottom: 80px*/
-/*}*/

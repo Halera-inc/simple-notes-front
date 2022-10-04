@@ -7,6 +7,14 @@ import UserIcon from "../../../assets/images/UserIcon";
 
 const Header = (props: { title: string }) => {
 
+    const buttonHeader = {
+        paddingTop: '10px',
+        paddingBottom: '10px',
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        fontSize: '23px',
+    }
+
     const router = useRouter()
     const onChangeLogin = () => {
         typeof window !== 'undefined' && router.push('/login')
@@ -20,9 +28,11 @@ const Header = (props: { title: string }) => {
                 <Link href={'/about'}>
                     <p className={s.about}>About</p>
                 </Link>
-                <Button title='Login'
-                        icon={<UserIcon/>}
-                        callback={onChangeLogin}/>
+                <Button
+                    style={buttonHeader}
+                    title='Login'
+                    icon={<UserIcon/>}
+                    callback={onChangeLogin}/>
             </div>
         </div>
     );

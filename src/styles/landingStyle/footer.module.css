@@ -1,9 +1,9 @@
 .footer {
     display: flex;
     justify-content: flex-start;
-    align-items: flex-end;
+    align-items: center;
     max-width: 200px;
-    height: 10vh;
+    height: 17vh;
 }
 .footer a {
     cursor: pointer;
