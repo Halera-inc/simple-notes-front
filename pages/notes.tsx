@@ -48,6 +48,9 @@ const Notes = () => {
     const onDiscardClickHandler = () => {
         // TODO: ????????
     }
+    const moveCards = () => {
+
+    }
 
 
     return (
@@ -70,14 +73,16 @@ const Notes = () => {
             <div className={s.notesWrapper}>
                 <div className={s.notesBlock}>
                     {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase())
-                        || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase())).map((n) =>
+                        || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase())).map((n, i) =>
                         <Note key={n._id}
                               title={n.title}
                               note_text={n.note_text}
                               color={n.color}
                               noteId={n._id}
                               edit={onCardClickHandler}
-                              createdAt={n.createdAt}/>
+                              createdAt={n.createdAt}
+                              index={i}
+                        />
                     )}
                 </div>
             </div>
