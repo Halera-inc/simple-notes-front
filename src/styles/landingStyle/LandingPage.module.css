@@ -27,3 +27,29 @@
         overflow: unset;
     }
 }
+@media screen and (min-width: 1024px) {
+    .landing {
+        margin: 0 110px;
+    }
+}
+@media screen and (max-width: 540px) {
+    .landing {
+        padding: 0 0 2rem 0;
+        align-items: center;
+        overflow: hidden;
+    }
+}
+@media screen and (min-width: 541px) {
+    .landing {
+        padding: 0 30px 30px 30px;
+        align-items: center;
+        overflow: hidden;
+    }
+}
+@media screen and (min-width: 913px) {
+    .landing {
+        padding: 0 30px 30px 30px;
+        align-items: center;
+        overflow: unset;
+    }
+}

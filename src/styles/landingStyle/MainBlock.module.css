@@ -6,8 +6,6 @@
 }
 
 .blockTitle {
-    position: relative;
-    z-index: 100;
     padding-top: 112px;
     display: flex;
     justify-content: flex-start;
@@ -63,6 +61,7 @@
         font-size: 70px;
         line-height: 85px;
         font-weight: bold;
+        z-index: 10;
     }
 
     .blockTitle {
@@ -74,6 +73,9 @@
     }
 }
 
+    .blockTitle {
+        padding-top: 0;
+    }
 @media screen and (min-width: 541px) {
     .imgTitle svg {
         z-index: 0;
@@ -84,17 +86,37 @@
         opacity: 0.6;
     }
 
+    .mainBlockContainer {
+        margin: 0 20px;
+    }
+}
+
+
+
     .title {
         margin-bottom: 0;
         font-size: 70px;
         line-height: 85px;
         font-weight: bold;
     }
-}
+
 @media screen and (min-width: 913px) {
     .imgTitle svg {
         width: 600px;
         position: unset;
         opacity: 1;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .imgTitle svg {
+        width: 1000px;
+        position: unset;
+        opacity: 1;
+    }
+    .title {
+        margin-bottom: 0;
+        font-weight: 600;
+        font-size: 90px;
+        line-height: 110px;
     }
 }
