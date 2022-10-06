@@ -81,7 +81,7 @@ const InputForm = () => {
                     </label>
                 </ul>
 
-                <Button title={'Save'} type={'submit'}/>
+                <Button title={'Save'} type={'submit'} className={"edit_form_button"}/>
             </div>
         </form>
     );

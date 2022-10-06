@@ -3,13 +3,17 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    padding: 6px 18px;
+    /*padding: 6px 18px;*/
     margin: 7px;
     background-color: #E5F1FD;
     border: 1px solid #5590C1;
     color: #5590C1;
     cursor: pointer;
     transition: 0.1s ease-in-out;
+
+    /*//Button title*/
+    padding: 12px 37px;
+    font-size: 25px;
 }
 
 .button:hover {
@@ -20,4 +24,36 @@
 .button div {
     height: 100%;
     margin: 0 5px;
+}
+
+@media screen and (max-width: 540px) {
+    .button {
+        width: 114px;
+        height: 35px;
+        padding: 0;
+
+        display: unset;
+
+    }
+
+    .button svg {
+        display: none;
+    }
+
+    .button:hover {
+        color: white;
+        background-color: #5590C1;
+    }
+
+    .button div {
+        font-size: 12px;
+        margin: 0;
+    }
+    /*.edit_form_button button {*/
+    /*    width: 100%;*/
+    /*}*/
+    /*.Settings_Page_button button {*/
+    /*    margin: 0;*/
+    /*    width: 104px*/
+    /*}*/
 }

@@ -12,7 +12,7 @@
     font-weight: bold;
 }
 
-.wrapperBtn {
+.header_link_wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,6 +25,110 @@
     color: #5590C1;
     padding-right: 40px;
     cursor: pointer;
+}
+/*@media screen and (max-width: 540px) {*/
+/*    .header {*/
+/*        margin: 0 20px;*/
+/*    }*/
+/*    .header p {*/
+/*        display: none;*/
+/*        width: 100%;*/
+/*    }*/
+/*    .title {*/
+/*        padding: 0;*/
+/*        line-height: 36px;*/
+/*        font-size: 30px;*/
+/*        font-weight: bold;*/
+/*    }*/
+
+/*}*/
+/*@media screen and (min-width: 541px) {*/
+/*    .header {*/
+/*        margin: 0;*/
+/*    }*/
+/*    .header p {*/
+/*        display: block;*/
+/*        width: 100%;*/
+/*    }*/
+/*    .title {*/
+/*        padding: 0;*/
+/*        line-height: 36px;*/
+/*        font-size: 30px;*/
+/*        font-weight: bold;*/
+/*    }*/
+
+/*}*/
+/*@media screen and (min-width: 913px) {*/
+/*    .header {*/
+/*        margin: 0;*/
+/*    }*/
+/*    .header p {*/
+/*        display: block;*/
+/*        width: 100%;*/
+/*    }*/
+/*    .title {*/
+/*        padding: 0;*/
+/*        line-height: 36px;*/
+/*        font-size: 30px;*/
+/*        font-weight: bold;*/
+/*    }*/
+/*}*/
+@media screen and (max-width: 540px) {
+    .header {
+        margin: 0 20px;
+    }
+    .header p {
+        display: none;
+        width: 100%;
+    }
+    .title {
+        padding: 0;
+        line-height: 36px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+}
+@media screen and (min-width: 541px) {
+    .header {
+        margin: 0;
+    }
+    .header p {
+        display: block;
+        width: 100%;
+    }
+    .title {
+        padding: 0;
+        line-height: 36px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+}
+@media screen and (min-width: 913px) {
+    .header {
+        margin: 0 50px;
+    }
+    .header p {
+        display: block;
+        width: 100%;
+    }
+    .title {
+        padding: 0;
+        line-height: 36px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .header {
+        margin-left: 0;
+    }
+    .title {
+        font-weight: 700;
+        font-size: 35px;
+        line-height: 42px;
+    }
 }
 
 

@@ -85,7 +85,8 @@ const Login = ({providers}: any) => {
                                 <h2 className={s.cardTitle}> Sign In</h2>
                                 <div className={s.arrowIcon}>
                                     <Link href={"/"}>
-                                        <ArrowBackIcon width={'2.5em'} height={'2.5em'}
+                                        <ArrowBackIcon width={'2.5em'}
+                                                       height={'2.5em'}
                                                        color={'#5590C1'}/>
                                     </Link>
                                 </div>

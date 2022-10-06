@@ -12,8 +12,12 @@
     height: 100vh;
 }
 
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 540px) {
     .notesBlock {
         justify-content: center;
+        padding: 115px 20px 0 20px;
+    }
+    .notesWrapper {
+        padding-left: 0;
     }
 }

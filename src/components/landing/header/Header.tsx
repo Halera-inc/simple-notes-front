@@ -24,7 +24,7 @@ const Header = (props: { title: string }) => {
     return (
         <div className={s.header}>
             <h2 className={s.title}>{props.title}</h2>
-            <div className={s.wrapperBtn}>
+            <div className={s.header_link_wrapper}>
                 <Link href={'/about'}>
                     <p className={s.about}>About</p>
                 </Link>

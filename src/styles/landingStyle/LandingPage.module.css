@@ -1,8 +1,58 @@
 .landing {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 10fr 1fr;
     position: relative;
     padding: 0 100px;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+@media screen and (max-width: 540px) {
+    .landing {
+        padding: 0 0 2rem 0;
+        align-items: center;
+        overflow: hidden;
+    }
+}
+@media screen and (min-width: 541px) {
+    .landing {
+        padding: 0 30px 30px 30px;
+        align-items: center;
+        overflow: hidden;
+    }
+}
+@media screen and (min-width: 913px) {
+    .landing {
+        padding: 0 30px 30px 30px;
+        align-items: center;
+        overflow: unset;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .landing {
+        margin: 0 110px;
+    }
+}
+@media screen and (max-width: 540px) {
+    .landing {
+        padding: 0 0 2rem 0;
+        align-items: center;
+        overflow: hidden;
+    }
+}
+@media screen and (min-width: 541px) {
+    .landing {
+        padding: 0 30px 30px 30px;
+        align-items: center;
+        overflow: hidden;
+    }
+}
+@media screen and (min-width: 913px) {
+    .landing {
+        padding: 0 30px 30px 30px;
+        align-items: center;
+        overflow: unset;
+    }
 }

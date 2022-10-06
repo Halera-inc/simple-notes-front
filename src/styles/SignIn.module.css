@@ -268,6 +268,63 @@
     transform: translate(-38%, -343%);
 }
 
+@media screen and (max-width: 540px) {
+    .singnInBlock {
+        display: block;
+        margin: 20px 0;
+        width: 100%;
+    }
+    .cardTitle {
+         font-size: 35px !important;
+     }
+    .cardBody form svg {
+        display: none;
+    }
+    .cardBody form input {
+        margin-left: 0;
+    }
+    .cardBody form select {
+        margin-left: 0;
+    }
+    .wrapperRegistrationCard {
+        transform: unset;
+    }
+    .errorText {
+        left: 0;
+    }
+}
 
+@media screen and (max-width: 540px) {
+    .singnInBlock {
+        display: block;
+        margin: 20px 0;
+        width: max-content;
+        position: unset;
+    }
+
+    .cardTitle {
+         font-size: 35px !important;
+     }
+    .cardBody form svg {
+        display: none;
+    }
+    .cardBody form input {
+        margin-left: 0;
+    }
+    .cardBody form select {
+        margin-left: 0;
+    }
+    .wrapperRegistrationCard {
+        transform: unset;
+        position: unset;
+        margin: 0 20px;
+    }
+    .errorText {
+        left: 0;
+    }
+    .cardC {
+        margin: 0 20px;
+    }
+}
 
 
