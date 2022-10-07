@@ -28,10 +28,6 @@
     top: 50%;
     left: 50%;
 
-    /*@apply*/
-    /*flex*/
-    /*justify-center*/
-    /*items-center*/
 }
 
 .cardBody {
@@ -39,58 +35,15 @@
     padding: 73px 52px 23px 52px;
     text-align: center;
 }
-
-.wrapperTitle {
-    position: relative;
-}
-
-.cardTitle {
-    font-weight: 600;
-    font-size: 50px !important;
-    line-height: 61px;
-    margin-bottom: 73px;
-    @apply
-    card-title
-    flex
-    justify-center
-    text-blue-dark
-
-}
-
 .arrowIcon {
     position: absolute;
     left: 0;
-    top: 0;
+    top: -3px;
     cursor: pointer;
 }
-
-.array {
-    background: url('../assets/down-arrow.png') #fff no-repeat center center / 20px 20px;
-    width: 56px;
-    position: absolute;
-    height: calc(100% - 4px);
-    right: 3px;
-    pointer-events: none;
-
-}
-
-.arrayError {
-    background: url('../assets/down-arrow-red.png') #FFF4F4 no-repeat center center / 20px 20px;
-    width: 56px;
-    position: absolute;
-    height: calc(100% - 4px);
-    right: 3px;
-    pointer-events: none;
-
-}
-
-.cardC {
-    border: 1px solid #5590C1;
-    @apply
-    bg-blue
-    card
-    shadow-xl
-    rounded-none
+.bgBlack{
+    background-color: #000000 !important;
+    color: white !important;
 
 }
 
@@ -172,15 +125,6 @@
     left: 27%;
 }
 
-.text {
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 18px;
-    cursor: pointer;
-    margin-bottom: 15px;
-    @apply
-    text-blue-dark
-}
 
 .errorInput {
     background-color: #FFF4F4 !important;

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+    important: true,
     darkMode: 'class',
     content: [
         "./pages/**/*.{js,ts,jsx,tsx}",
@@ -8,6 +9,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                "grey":"#373737",
                 "bg-black": "#212121",
                 "white": "#FFFFFF",
                 "bg-white-dark": "#F2F6F9",
@@ -25,9 +27,29 @@ module.exports = {
                 "blue-night" : '#40617C',
 
             },
+            backgroundImage: {
+                'arraw': "url('../assets/down-arrow.png')",
+                'arrawError':"url('../assets/down-arrow-red.png')",
+            },
+
             fontFamily: {
                 'sans': ['Montserrat', 'sans-serif']
             }
+        },
+        screens: {
+
+
+            'xl': {'max': '1495px'},
+            // => @media (max-width: 1279px) { ... }
+
+            'lg': {'max': '1023px'},
+            // => @media (max-width: 1023px) { ... }
+
+            'md': {'max': '490px'},
+            // => @media (max-width: 767px) { ... }
+
+            'sm': {'max': '639px'},
+            // => @media (max-width: 639px) { ... }
         },
     },
     plugins: [

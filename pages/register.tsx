@@ -5,7 +5,7 @@ import Link from "next/link";
 import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import UserIcon from "../src/assets/images/UserIcon";
 import KeyIcon from "../src/assets/images/KeyIcon";
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import countryList from "react-select-country-list";
 import ListIcon from "../src/assets/images/ListIcon";
 import CountryIcon from "../src/assets/images/CountryIcon";
@@ -17,223 +17,320 @@ import Button from "../src/components/universalComponent/Button/Button";
 import {Spinner} from "../src/components/Spinner";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {setIsAppFetching} from "../src/bll/slices/appSlice";
+import {useTheme} from "next-themes";
 
 const Register = () => {
-    const [info, setInfo] = useState(false)
-    const options = useMemo(() => countryList().getData(), [])
-    const loader= useAppSelector(state=>state.app.isAppFetching)
-    const dispatch = useAppDispatch()
-    const router = useRouter()
-    type FormikErrorType = {
-        username?: string
-        email?: string
-        country?: string
-        password?: string
-        password2?: string
-    }
+        const [info, setInfo] = useState(false)
+        const options = useMemo(() => countryList().getData(), [])
+        const loader = useAppSelector(state => state.app.isAppFetching)
+        const dispatch = useAppDispatch()
+        const router = useRouter()
 
-    const formik = useFormik({
-        initialValues: {
-            username: '',
-            email: '',
-            country: '',
-            password: '',
-            password2: '',
-        },
+        const {systemTheme, theme, setTheme} = useTheme();
+        const [mounted, setMounted] = useState(false);
 
-        validate: (values) => {
-            const errors: FormikErrorType = {};
-            if (!values.username) {
-                errors.username = 'Required';
-            }
-            if (!values.email) {
-                errors.email = 'Required';
-            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                errors.email = 'Invalid email address';
-            }
-            if (!values.country) {
-                errors.country = 'Required';
-            }
-            if (!values.password) {
-                errors.password = 'Required';
-            } else if (!/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g.test(values.password)) {
-                errors.password = 'Invalid password'
-            }
-            if (!values.password2) {
-                errors.password2 = 'Required';
-            } else if (values.password !== values.password2) { //сдесь изменения
-                errors.password2 = 'Invalid password'
-            }
-            return errors;
-        },
-        onSubmit: async values => {
-            dispatch(setIsAppFetching(true))
-            const res: any = await authAPI.register(values.email, values.password, values.country, values.username)
-                .then(async () => {
-                    const res: any = await signIn("credentials", {
-                        redirect: false,
-                        email: values.email,
-                        password: values.password,
-                        callbackUrl: `${window.location.origin}`,
-                    })
-                    dispatch(setIsAppFetching(false));
-                    res.error ? console.log(res.error) : redirectToHome();
-                    dispatch(setIsAppFetching(false));
-                })
-                .catch((error) => {
-                    console.log(error);
-                    dispatch(setIsAppFetching(false));
-                });
-            console.log(res);
-        },
-    })
+        useEffect(() => {
+            setMounted(true)
+        }, [])
 
-    const redirectToHome = () => {
-        const {pathname} = router;
-        if (pathname === "/register") {
-            typeof window !== 'undefined' && router.push("/notes");
+        const RenderUserIcon = () => {
+            if (!mounted) return null;
+            const currentTheme = theme === "system" ? systemTheme : theme;
+            if (currentTheme === 'dark') {
+                return (
+                    <UserIcon width={'3em'} height={'3em'} color={formik.errors.username && formik.touched.username
+                        ? '#F06464'
+                        : '#ffffff'}/>
+                )
+            } else {
+                return (
+                    <UserIcon width={'3em'} height={'3em'} color={formik.errors.username && formik.touched.username
+                        ? '#F06464'
+                        : '#5590C1'}
+                    />
+                )
+            }
         }
-    };
 
-    const defferentClass = formik.errors.password2 === 'Invalid password'
-    const defferentPassword2Class = formik.errors.password2 === 'Invalid password'
-        ? <div className={s.errorTextInvalid}>{formik.errors.password2}</div>
-        : <div className={s.errorTextRegistration}>{formik.errors.password2}</div>
-    const defferentPasswordClass = formik.errors.password === 'Invalid password'
-        ? <div className={s.errorTextInvalid}>{formik.errors.password}</div>
-        : <div className={s.errorTextRegistration}>{formik.errors.password}</div>
+        const RenderListIcon = () => {
+            if (!mounted) return null;
+            const currentTheme = theme === "system" ? systemTheme : theme;
+            if (currentTheme === 'dark') {
+                return (
+                    <ListIcon width={'3em'} height={'3em'}
+                              color={formik.errors.email && formik.touched.email
+                                  ? '#F06464'
+                                  : '#ffffff'}/>
+                )
+            } else {
+                return (
+                    <ListIcon width={'3em'} height={'3em'}
+                              color={formik.errors.email && formik.touched.email
+                                  ? '#F06464'
+                                  : '#5590C1'}/>
+                )
+            }
+        }
+        const RenderСountryIcon = () => {
+            if (!mounted) return null;
+            const currentTheme = theme === "system" ? systemTheme : theme;
+            if (currentTheme === 'dark') {
+                return (
+                    <CountryIcon width={'3em'} height={'3em'}
+                                 color={formik.errors.country && formik.touched.country
+                                     ? '#F06464'
+                                     : '#ffffff'}/>
+                )
+            } else {
+                return (
+                    <CountryIcon width={'3em'} height={'3em'}
+                                 color={formik.errors.country && formik.touched.country
+                                     ? '#F06464'
+                                     : '#5590C1'}/>
+                )
+            }
+        }
+        const RenderPasswordIcon = () => {
+            if (!mounted) return null;
+            const currentTheme = theme === "system" ? systemTheme : theme;
+            if (currentTheme === 'dark') {
+                return (
+                    <KeyIcon width={'3em'} height={'3em'}
+                             color={formik.errors.password && formik.touched.password
+                                 ? '#F06464'
+                                 : '#ffffff'}/>
+                )
+            } else {
+                return (
+                    <KeyIcon width={'3em'} height={'3em'}
+                             color={formik.errors.password && formik.touched.password
+                                 ? '#F06464'
+                                 : '#5590C1'}/>
+                )
+            }
+        }
+        const RenderPassword2Icon = () => {
+            if (!mounted) return null;
+            const currentTheme = theme === "system" ? systemTheme : theme;
+            if (currentTheme === 'dark') {
+                return (
+                    <KeyIcon width={'3em'} height={'3em'}
+                             color={formik.errors.password2 && formik.touched.password2
+                                 ? '#F06464'
+                                 : '#ffffff'}/>
+                )
+            } else {
+                return (
+                    <KeyIcon width={'3em'} height={'3em'}
+                             color={formik.errors.password2 && formik.touched.password2
+                                 ? '#F06464'
+                                 : '#5590C1'}/>
+                )
+            }
+        }
 
-    return (
-        <MainContainer>
-            <div className={s.singnInBlock}>
-                <div className={s.wrapperRegistrationCard}>
-                    <div className={s.cardC}>
-                        <div className={s.cardBody}>
-                            <div className={s.wrapperTitle}>
-                                <h2 className={s.cardTitle}> Registration</h2>
-                                <div className={s.arrowIcon}>
-                                    <Link href={"/login"}>
-                                        <ArrowBackIcon width={'2.5em'} height={'2.5em'}
-                                                       color={'#5590C1'}/>
-                                    </Link>
-                                </div>
-                            </div>
-                            <form onSubmit={formik.handleSubmit}>
-                                <div className={`${s.formControl} ${s.one}`}>
-                                    <label className={s.label}>
-                                        <UserIcon width={'3em'} height={'3em'} color=
-                                            {formik.errors.username && formik.touched.username
-                                                ? '#F06464'
-                                                : '#5590C1'}
-                                        />
-                                        <input type="text" id='username'
-                                               placeholder="username"
-                                               className={formik.touched.username && formik.errors.username ? s.errorInput : s.inputI}
-                                               {...formik.getFieldProps('username')}/>
-                                    </label>
-                                    {formik.touched.username && formik.errors.username ?
-                                        <div
-                                            className={s.errorTextRegistration}>{formik.errors.username}</div> : ''}
-                                </div>
-                                <div className={`${s.formControl} ${s.one}`}>
-                                    <label className={s.label}>
-                                        <ListIcon width={'3em'} height={'3em'}
-                                                  color={formik.errors.email && formik.touched.email
-                                                      ? '#F06464'
-                                                      : '#5590C1'}/>
-                                        <input type="text" id='email' placeholder="email"
-                                               className={formik.touched.email && formik.errors.email ? s.errorInput : s.inputI}
-                                               {...formik.getFieldProps('email')}/>
-                                    </label>
-                                    {formik.touched.email && formik.errors.email ?
-                                        <div
-                                            className={s.errorTextRegistration}>{formik.errors.email}</div> : ''}
-                                </div>
-                                <div className={`${s.formControl} ${s.one}`}>
-                                    <label className={s.label}>
-                                        <CountryIcon width={'3em'} height={'3em'}
-                                                     color={formik.errors.country && formik.touched.country
-                                                         ? '#F06464'
-                                                         : '#5590C1'}/>
-                                        {!formik.errors.country || !formik.touched.country ?
-                                            <span className={s.array}>
-                                        </span> : <span className={s.arrayError}>
-                                        </span>}
-                                        <select id='country'
-                                                onBlur={formik.handleBlur}
-                                                onChange={formik.handleChange}
-                                                value={formik.values.country}
-                                                className={formik.touched.country && formik.errors.country ? s.errorInput : s.inputI}>
-                                            <option defaultValue='country'>
-                                                country
-                                            </option>
-                                            {options.map(m => {
-                                                return (
-                                                    <option className={s.option}
-                                                            key={m.value} value={m.label}>
-                                                        {m.label}
-                                                    </option>)
-                                            })}
-                                        </select>
-                                    </label>
-                                    {formik.touched.country && formik.errors.country && <div className={s.errorTextRegistration}>{formik.errors.country}</div>}
-                                </div>
-                                <div className={`${s.formControl} ${s.one}`}>
-                                    <label className={s.label}>
-                                        <KeyIcon width={'3em'} height={'3em'}
-                                                 color={formik.errors.password && formik.touched.password
-                                                     ? '#F06464'
-                                                     : '#5590C1'}/>
-                                        <input type="password" id='password'
-                                               placeholder="password"
-                                               className=
-                                                   {formik.touched.password && formik.errors.password ? s.errorInput : s.inputI}
-                                               {...formik.getFieldProps('password')} />
-                                    </label>
-                                    {formik.touched.password && formik.errors.password ? defferentPasswordClass : ''}
-                                    <div className={s.infoIcon} onClick={() => setInfo(!info)}>
-                                        <InfoIcon width={'2em'} height={'2em'} color='#5590C1'/>
+        type FormikErrorType = {
+            username?: string
+            email?: string
+            country?: string
+            password?: string
+            password2?: string
+        }
+
+        const formik = useFormik({
+            initialValues: {
+                username: '',
+                email: '',
+                country: '',
+                password: '',
+                password2: '',
+            },
+
+            validate: (values) => {
+                const errors: FormikErrorType = {};
+                if (!values.username) {
+                    errors.username = 'Required';
+                }
+                if (!values.email) {
+                    errors.email = 'Required';
+                } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                    errors.email = 'Invalid email address';
+                }
+                if (!values.country) {
+                    errors.country = 'Required';
+                }
+                if (!values.password) {
+                    errors.password = 'Required';
+                } else if (!/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g.test(values.password)) {
+                    errors.password = 'Invalid password'
+                }
+                if (!values.password2) {
+                    errors.password2 = 'Required';
+                } else if (values.password !== values.password2) { //сдесь изменения
+                    errors.password2 = 'Invalid password'
+                }
+                return errors;
+            },
+            onSubmit: async values => {
+                dispatch(setIsAppFetching(true))
+                const res: any = await authAPI.register(values.email, values.password, values.country, values.username)
+                    .then(async () => {
+                        const res: any = await signIn("credentials", {
+                            redirect: false,
+                            email: values.email,
+                            password: values.password,
+                            callbackUrl: `${window.location.origin}`,
+                        })
+                        dispatch(setIsAppFetching(false));
+                        res.error ? console.log(res.error) : redirectToHome();
+                        dispatch(setIsAppFetching(false));
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        dispatch(setIsAppFetching(false));
+                    });
+                console.log(res);
+            },
+        })
+
+        const inputI = "h-[60px] ml-[27px] w-[428px] bg-white dark:bg-black dark:border-none word-break: break-all  input  input-bordered input-info placeholder:text-blue-dark  rounded-none  text-blue-dark   text-xl"
+        const arraw = "bg-arraw bg-white dark:bg-black bg-no-repeat bg-center bg-[length:20px_20px] w-[56px] absolute h-[calc(100%-10px)] right-[2px] top-[5px] pointer-events-none"
+        const arrawError = "bg-arrawError bg-[#FFF4F4] bg-no-repeat bg-center bg-[length:20px_20px] w-[56px] absolute h-[calc(100%-10px)] right-[2px] top-[5px] pointer-events-none"
+        const redirectToHome = () => {
+            const {pathname} = router;
+            if (pathname === "/register") {
+                typeof window !== 'undefined' && router.push("/notes");
+            }
+        };
+
+        const defferentClass = formik.errors.password2 === 'Invalid password'
+        const defferentPassword2Class = formik.errors.password2 === 'Invalid password'
+            ? <div className={s.errorTextInvalid}>{formik.errors.password2}</div>
+            : <div className={s.errorTextRegistration}>{formik.errors.password2}</div>
+        const defferentPasswordClass = formik.errors.password === 'Invalid password'
+            ? <div className={s.errorTextInvalid}>{formik.errors.password}</div>
+            : <div className={s.errorTextRegistration}>{formik.errors.password}</div>
+
+        return (
+            <MainContainer>
+                <div className={s.singnInBlock}>
+                    <div className={s.wrapperRegistrationCard}>
+                        <div
+                            className={" bg-blue dark:bg-grey  card shadow-xl rounded-none  border-solid border-[1px] border-blue-dark"}>
+                            <div className={s.cardBody}>
+                                <div className={"relative"}>
+                                    <h2 className={"dark:text-white font-medium text-[50px] mb-[73px] card-title flex justify-center text-blue-dark"}> Registration</h2>
+                                    <div className={s.arrowIcon}>
+                                        <Link href={"/login"}>
+                                            <ArrowBackIcon width={'2.5em'} height={'2.5em'}
+                                                           color={'#5590C1'} className={"dark:text-white"}/>
+                                        </Link>
                                     </div>
                                 </div>
-                                <div className={`${s.formControl} ${s.two}`}>
-                                    <label className={s.label}>
-                                        <KeyIcon width={'3em'} height={'3em'}
-                                                 color={formik.errors.password2 && formik.touched.password2
-                                                     ? '#F06464'
-                                                     : '#5590C1'}/>
-                                        <input type="password" id='password2'
-                                               placeholder="confirm password"
-                                               className={formik.touched.password2 && formik.errors.password2 ? s.errorInput : s.inputI}
-                                               {...formik.getFieldProps('password2')}/>
-                                    </label>
-                                    {formik.touched.password2 && formik.errors.password2 ? defferentPassword2Class : " "}
-                                </div>
-                                <div className="card-actions justify-center relative">
-                                    <Button type={'submit'}
-                                            title={'SignUp'}
-                                            style={{
-                                                width: 200,
-                                                height: 60,
-                                                margin: '0 0 60px 0',
-                                                fontSize: 18,
-                                                backgroundColor: "white"}}/>
-                                    {loader ?  <Spinner size={'50px'} style={{
-                                            position:"absolute",
-                                            right:'19%',
-                                            top:"4%",
-                                        }}/>
-                                        : ''}
-                                </div>
-                            </form>
-                            <Link href={"/login"}>
-                                <p className={s.text}>Login</p>
-                            </Link>
+                                <form onSubmit={formik.handleSubmit}>
+                                    <div className={`${s.formControl} ${s.one}`}>
+                                        <label className={s.label}>
+                                            {RenderUserIcon()}
+                                            <input type="text" id='username'
+                                                   placeholder="username"
+                                                   className={formik.touched.username && formik.errors.username ? s.errorInput : inputI}
+                                                   {...formik.getFieldProps('username')}/>
+                                        </label>
+                                        {formik.touched.username && formik.errors.username ?
+                                            <div
+                                                className={s.errorTextRegistration}>{formik.errors.username}</div> : ''}
+                                    </div>
+                                    <div className={`${s.formControl} ${s.one}`}>
+                                        <label className={s.label}>
+                                            {RenderListIcon()}
+                                            <input type="text" id='email' placeholder="email"
+                                                   className={formik.touched.email && formik.errors.email ? s.errorInput : inputI}
+                                                   {...formik.getFieldProps('email')}/>
+                                        </label>
+                                        {formik.touched.email && formik.errors.email ?
+                                            <div
+                                                className={s.errorTextRegistration}>{formik.errors.email}</div> : ''}
+                                    </div>
+                                    <div className={`${s.formControl} ${s.one}`}>
+                                        <label className={s.label}>
+                                            {RenderСountryIcon()}
+                                            {!formik.errors.country || !formik.touched.country ?
+                                                <span className={arraw}>
+                                        </span> : <span className={arrawError}>
+                                        </span>}
+                                            <select id='country'
+                                                    onBlur={formik.handleBlur}
+                                                    onChange={formik.handleChange}
+                                                    value={formik.values.country}
+                                                    className={formik.touched.country && formik.errors.country ? s.errorInput : inputI}>
+                                                <option defaultValue='country'>
+                                                    country
+                                                </option>
+                                                {options.map(m => {
+                                                    return (
+                                                        <option className={s.option}
+                                                                key={m.value} value={m.label}>
+                                                            {m.label}
+                                                        </option>)
+                                                })}
+                                            </select>
+                                        </label>
+                                        {formik.touched.country && formik.errors.country &&
+                                            <div className={s.errorTextRegistration}>{formik.errors.country}</div>}
+                                    </div>
+                                    <div className={`${s.formControl} ${s.one}`}>
+                                        <label className={s.label}>
+                                            {RenderPasswordIcon()}
+                                            <input type="password" id='password'
+                                                   placeholder="password"
+                                                   className=
+                                                       {formik.touched.password && formik.errors.password ? s.errorInput : inputI}
+                                                   {...formik.getFieldProps('password')} />
+                                        </label>
+                                        {formik.touched.password && formik.errors.password ? defferentPasswordClass : ''}
+                                        <div className={s.infoIcon} onClick={() => setInfo(!info)}>
+                                            <InfoIcon width={'2em'} height={'2em'} color='#5590C1'/>
+                                        </div>
+                                    </div>
+                                    <div className={`${s.formControl} ${s.two}`}>
+                                        <label className={s.label}>
+                                            {RenderPassword2Icon()}
+                                            <input type="password" id='password2'
+                                                   placeholder="confirm password"
+                                                   className={formik.touched.password2 && formik.errors.password2 ? s.errorInput : inputI}
+                                                   {...formik.getFieldProps('password2')}/>
+                                        </label>
+                                        {formik.touched.password2 && formik.errors.password2 ? defferentPassword2Class : " "}
+                                    </div>
+                                    <div className="card-actions justify-center relative">
+                                        {/*<Button className= {s.bgBlack}*/}
+                                        <Button className={"@apply dark:bg-black dark:text-white dark:border-white"}
+                                                type={'submit'}
+                                                title={'SignUp'}
+                                                style={{
+                                                    width: 200,
+                                                    height: 60,
+                                                    margin: '0 0 60px 0',
+                                                    fontSize: 18,
+                                                    backgroundColor: "white",
+                                                }}/>
+                                        {loader ? <Spinner size={'50px'} style={{
+                                                position: "absolute",
+                                                right: '19%',
+                                                top: "4%",
+                                            }}/>
+                                            : ''}
+                                    </div>
+                                </form>
+                                <Link href={"/login"}>
+                                    <p className={"dark:text-white font-medium text-[15px] leading-[18px] mb-[15px] text-blue-dark cursor-pointer"}>Login</p>
+                                </Link>
 
+                            </div>
                         </div>
-                    </div>
-                    {info ?
-                        <span
-                            className={s.tooltipHover}><p>
+                        {info ?
+                            <span
+                                className={s.tooltipHover}><p>
                                         <b>The password must contain:</b>
                                         <br/>
                                         • at least 8 characters
@@ -241,9 +338,9 @@ const Register = () => {
                                         • numbers <br/>
                                         • upper and lower case</p>
                         </span>
-                        :
-                        <span
-                            className={s.tooltip}><p>
+                            :
+                            <span
+                                className={s.tooltip}><p>
                                         <b>The password must contain:</b>
                                         <br/>
                                         • at least 8 characters
@@ -251,11 +348,12 @@ const Register = () => {
                                         • numbers <br/>
                                         • upper and lower case</p>
                         </span>}
-                </div>
+                    </div>
 
-            </div>
-        </MainContainer>
-    );
-};
+                </div>
+            </MainContainer>
+        );
+    }
+;
 
 export default Register;

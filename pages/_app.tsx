@@ -13,8 +13,10 @@ function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {
         <SessionProvider session={session}>
             <ThemeProvider enableSystem={true} attribute="class">
                 <Provider store={store}>
+                    <div className="bg-white dark:bg-black">
                     <Sidebar/>
-                    <Component {...pageProps} />
+                        <Component {...pageProps} />
+                    </div>
                 </Provider>
             </ThemeProvider>
         </SessionProvider>

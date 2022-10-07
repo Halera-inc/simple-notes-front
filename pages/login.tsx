@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import MainContainer from "../src/components/MainContainer";
 import {useFormik} from "formik";
 import s from './../src/styles/SignIn.module.css'
@@ -13,14 +13,55 @@ import Button from "../src/components/universalComponent/Button/Button";
 import {isThereErrorOnLogin} from 'src/bll/slices/authSlice';
 import {setIsAppFetching} from 'src/bll/slices/appSlice'
 import {Spinner} from "../src/components/Spinner";
+import {useTheme} from "next-themes";
 
 
 const Login = ({providers}: any) => {
 
     const router = useRouter()
     const loginError = useAppSelector(state => state.auth.loginError)
-    const loader= useAppSelector(state=>state.app.isAppFetching)
+    const loader = useAppSelector(state => state.app.isAppFetching)
     const dispatch = useAppDispatch()
+
+    const {systemTheme, theme, setTheme} = useTheme();
+
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    const RenderUserIcon = () => {
+        if (!mounted) return null;
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        if (currentTheme === 'dark') {
+            return (
+                <UserIcon width={'3em'} height={'3em'}
+                          color={loginError ? '#F06464' : '#ffffff'}/>
+            )
+        } else {
+            return (
+                <UserIcon width={'3em'} height={'3em'}
+                          color={loginError ? '#F06464' : '#5590C1'}/>
+            )
+        }
+    }
+
+    const RenderKeyIcon = () => {
+        if (!mounted) return null;
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        if (currentTheme === 'dark') {
+            return (
+                <KeyIcon width={'3em'} height={'3em'}
+                         color={loginError ? '#F06464' : '#ffffff'}/>
+            )
+        } else {
+            return (
+                <KeyIcon width={'3em'} height={'3em'}
+                         color={loginError ? '#F06464' : '#5590C1'}/>
+            )
+        }
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -45,6 +86,7 @@ const Login = ({providers}: any) => {
             formik.resetForm();
         },
     })
+    const inputI = "h-[60px] ml-[27px] w-[428px] bg-white dark:bg-black dark:border-none word-break: break-all  input  input-bordered input-info placeholder:text-blue-dark  rounded-none  text-blue-dark   text-xl"
 
     const redirectToHome = () => {
         const {pathname} = router;
@@ -79,40 +121,42 @@ const Login = ({providers}: any) => {
         <MainContainer>
             <div className={s.singnInBlock}>
                 <div className={s.wrapperCard}>
-                    <div className={s.cardC}>
+                    <div
+                        className={" bg-blue dark:bg-grey  card shadow-xl rounded-none border-solid border-[1px] border-blue-dark"}>
                         <div className={s.cardBody}>
-                            <div className={s.wrapperTitle}>
-                                <h2 className={s.cardTitle}> Sign In</h2>
+                            <div className={"relative"}>
+                                <h2 className={"dark:text-white font-medium text-[50px] mb-[73px] card-title flex justify-center text-blue-dark"}> Sign
+                                    In</h2>
                                 <div className={s.arrowIcon}>
                                     <Link href={"/"}>
                                         <ArrowBackIcon width={'2.5em'}
                                                        height={'2.5em'}
-                                                       color={'#5590C1'}/>
+                                                       color={'#5590C1'} className={"dark:text-white"}/>
                                     </Link>
                                 </div>
                             </div>
                             <ProvidersButtons providers={providers}/>
-                            <div className="flex items-center mb-8 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                                <p className="text-center font-semibold mx-4 mb-0">Or</p>
+                            <div
+                                className="flex items-center text-blue-dark  mb-8 before:flex-1 before:border-t before:border-gray-300  text-blue-dark
+                                 before:mt-0.5 after:flex-1  text-blue-dark after:border-t after:border-gray-300 after:mt-0.5">
+                                <p className=" text-center text-blue-dark  font-semibold mx-4 mb-0">Or</p>
                             </div>
                             <form onSubmit={formik.handleSubmit}>
                                 <div className={`${s.formControl} ${s.one}`}>
                                     <label className={s.label}>
-                                        <UserIcon width={'3em'} height={'3em'}
-                                                  color={loginError ? '#F06464' : '#5590C1'}/>
+                                        {RenderUserIcon()}
                                         <input type="text" id='email' placeholder="email"
-                                               className={loginError ? s.errorInput : s.inputI}
+                                               className={loginError ? s.errorInput : inputI}
                                                {...formik.getFieldProps('email')}/>
                                     </label>
                                     {formik.touched.email && formik.errors.email}
                                 </div>
                                 <div className={`${s.formControl} ${s.two}`}>
                                     <label className={s.label}>
-                                        <KeyIcon width={'3em'} height={'3em'}
-                                                 color={loginError ? '#F06464' : '#5590C1'}/>
+                                        {RenderKeyIcon()}
                                         <input type="password" id='password'
                                                placeholder="password"
-                                               className={loginError ? s.errorInput : s.inputI}
+                                               className={loginError ? s.errorInput : inputI}
                                                {...formik.getFieldProps('password')}/>
                                     </label>
                                     {loginError ?
@@ -121,7 +165,8 @@ const Login = ({providers}: any) => {
                                 </div>
 
                                 <div className="card-actions justify-center relative">
-                                    <Button title={'Login'}
+                                    <Button className="dark:bg-black dark:text-white dark:border-white"
+                                            title={'Login'}
                                             type={'submit'}
                                             style={{
                                                 backgroundColor: "white",
@@ -130,12 +175,12 @@ const Login = ({providers}: any) => {
                                                 margin: '0 0 60px 0',
                                                 fontSize: 20
                                             }}/>
-                                    {loader ?  <Spinner size={'50px'} style={{
-                                        position:"absolute",
-                                        right:'19%',
-                                        top:"4%",
-                                    }}/>
-                                    : ''}
+                                    {loader ? <Spinner size={'50px'} style={{
+                                            position: "absolute",
+                                            right: '19%',
+                                            top: "4%",
+                                        }}/>
+                                        : ''}
 
                                     {/*Надо доработать, isInitialized опять нет (Ваня)*/}
                                     {/*{!isInitialized && <Spinner size={'60px'}*/}
@@ -144,8 +189,10 @@ const Login = ({providers}: any) => {
                                 </div>
                             </form>
                             <Link href={"/register"}><p
-                                className={s.text}>Registration</p></Link>
-                            <p onClick={resetHandler} className={s.text}>Reset
+                                className={"dark:text-white font-medium text-[15px] leading-[18px] mb-[15px] text-blue-dark cursor-pointer"}>Registration</p>
+                            </Link>
+                            <p onClick={resetHandler}
+                               className={" font-medium text-[15px] leading-[18px] mb-[15px] text-blue-dark cursor-pointer"}>Reset
                                 password</p>
                         </div>
                     </div>
