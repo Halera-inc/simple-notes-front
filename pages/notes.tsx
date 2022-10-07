@@ -20,15 +20,15 @@ const Notes = ({initialState}: any) => {
     const [modalId, setModalId] = useState('');
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
-    // const effectRan = useRef(false)
+    const effectRan = useRef(false)
 
     useEffect(() => {
-        // if (!effectRan.current) {
-            dispatch(rehydrate(initialState.notes))
-            // return () => {
-            //     effectRan.current = true
-            // }
-        // }
+        if (!effectRan.current) {
+        //     dispatch(rehydrate(initialState.notes))
+            return () => {
+                effectRan.current = true
+            }
+        }
     }, [dispatch, initialState])
 
     const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => {
