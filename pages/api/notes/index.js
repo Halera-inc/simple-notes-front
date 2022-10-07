@@ -12,6 +12,7 @@ export default async function handler(req, res) {
         case 'GET':
             try {
                 const notes = await Note.find({user: user.id})
+                console.log(notes)
                 res.status(200).json({notes})
             } catch (error) {
                 res.status(400).json({success: false})
@@ -35,6 +36,17 @@ export default async function handler(req, res) {
             break
         default:
             res.status(400).json({success: false})
+            break
+        case 'PUT':
+            const {notes} = req.body
+            console.log(notes)
+            try {
+                const updatedNotes = await Note.find({user: user.id}).map((n, index) => n = notes[index]).save()
+
+                res.status(201).json({updatedNotes})
+            } catch (error) {
+                res.status(400).json({success: false})
+            }
             break
     }
 }
