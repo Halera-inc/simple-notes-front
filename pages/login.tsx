@@ -8,12 +8,13 @@ import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {useRouter} from "next/router";
-import {signIn} from "next-auth/react";
+import {getProviders, getSession, signIn} from "next-auth/react";
 import Button from "../src/components/universalComponent/Button/Button";
 import {isThereErrorOnLogin} from 'src/bll/slices/authSlice';
 import {setIsAppFetching} from 'src/bll/slices/appSlice'
 import {Spinner} from "../src/components/Spinner";
 import {useTheme} from "next-themes";
+import {GetServerSideProps, GetServerSidePropsContext} from "next";
 
 
 const Login = ({providers}: any) => {
@@ -203,3 +204,20 @@ const Login = ({providers}: any) => {
 };
 
 export default Login;
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const session = await getSession(context);
+    console.log(session)
+    if (session) {
+        return {
+            redirect: {destination: '/notes'},
+            props: {}
+        }
+    }
+    return {
+        props: {
+            providers: await getProviders(),
+            session
+        }
+    }
+}

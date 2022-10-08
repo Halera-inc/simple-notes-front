@@ -7,6 +7,8 @@ import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
+import {getSession} from "next-auth/react";
+import {GetServerSideProps, GetServerSidePropsContext} from "next";
 
 const Notes = () => {
 
@@ -86,3 +88,17 @@ const Notes = () => {
 }
 
 export default Notes
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const session = await getSession(context);
+    console.log(session)
+    if (!session) {
+        return {
+            redirect: {destination: '/login', permanent: false},
+            props: {}
+        }
+    }
+    return {
+        props: {session}
+    }
+}

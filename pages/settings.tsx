@@ -1,6 +1,8 @@
 import MainContainer from "../src/components/MainContainer";
 import MainBlockSettings from "../src/components/Settings/MainBlockSettings";
 import s from "../src/styles/Settings.module.css";
+import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import {getSession} from "next-auth/react";
 
 const Settings = () => {
     return (
@@ -13,3 +15,16 @@ const Settings = () => {
 };
 
 export default Settings;
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const session = await getSession(context);
+    if (!session) {
+        return {
+            redirect: {destination: '/login', permanent: false},
+            props: {}
+        }
+    }
+    return {
+        props: {session}
+    }
+}

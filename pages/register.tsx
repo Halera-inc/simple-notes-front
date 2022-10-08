@@ -11,13 +11,14 @@ import ListIcon from "../src/assets/images/ListIcon";
 import CountryIcon from "../src/assets/images/CountryIcon";
 import {useRouter} from "next/router";
 import {authAPI} from "../src/api/notes-api";
-import {signIn} from "next-auth/react";
+import {getSession, signIn} from "next-auth/react";
 import InfoIcon from "../src/assets/images/InfoIcon";
 import Button from "../src/components/universalComponent/Button/Button";
 import {Spinner} from "../src/components/Spinner";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {setIsAppFetching} from "../src/bll/slices/appSlice";
 import {useTheme} from "next-themes";
+import {GetServerSideProps, GetServerSidePropsContext} from "next";
 
 const Register = () => {
         const [info, setInfo] = useState(false)
@@ -357,3 +358,16 @@ const Register = () => {
 ;
 
 export default Register;
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const session = await getSession(context);
+    if (!session) {
+        return {
+            redirect: {destination: '/login', permanent: false},
+            props: {}
+        }
+    }
+    return {
+        props: {session}
+    }
+}
