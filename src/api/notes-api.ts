@@ -36,6 +36,9 @@ export const notesAPI = {
             color,
             note_mode,
         });
+    },
+    dndNotes(newNotesArr: NoteTextType[]){
+        return instance.put('api/notes', newNotesArr)
     }
 }
 //for Auth

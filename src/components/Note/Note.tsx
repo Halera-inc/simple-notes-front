@@ -24,11 +24,8 @@ import type {Identifier, XYCoord} from 'dnd-core';
 // }
 
 export interface NoteProps {
-    id?: any
-    text?: string
     index: number
-    moveCard?: (dragIndex: number, hoverIndex: number) => void
-
+    moveCard?: (dragID: string, hoverID: string) => void
     title?: string
     note_text?: string
     color: ColorSamplesType
@@ -53,12 +50,11 @@ const Note = ({
                   noteId,
                   createdAt,
                   index,
+                  moveCard,
               }: NoteProps) => {
     const dispatch = useAppDispatch()
     const colorizedColor = colorizeNote(color)
     const [showColorBar, setShowColorBar] = useState(false)
-
-    console.log('index ', index)
 
     const onDeleteButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
         dispatch(deleteNote({noteId}))
@@ -140,12 +136,13 @@ const Note = ({
             // Time to actually perform the action
             console.log('*****************move card******************')
 
-            console.log('________FROM________')
-            console.log(dragIndex)
-            console.log('dragID ', dragID)
-            console.log('________TO________')
-            console.log(hoverIndex)
-            console.log('hoverID ', hoverID)
+            // console.log('________FROM________')
+            // console.log(dragIndex)
+            // console.log('dragID ', dragID)
+            // console.log('________TO________')
+            // console.log(hoverIndex)
+            // console.log('hoverID ', hoverID)
+            moveCard && moveCard(dragID, hoverID)
 
 
             // moveCard(dragIndex, hoverIndex)

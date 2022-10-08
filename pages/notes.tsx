@@ -1,12 +1,12 @@
-import React, {ChangeEvent, useEffect, useRef, useState} from 'react'
-import {editNote, getNotes} from 'src/bll/slices/notesSlice';
+import React, {ChangeEvent, useCallback, useEffect, useRef, useState} from 'react'
+import {dndNotes, editNote, getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
 import {colorizedColorType} from "../src/components/Note";
-import {ColorSamplesType} from "../src/api/notes-api";
+import {ColorSamplesType, NoteTextType} from "../src/api/notes-api";
 
 const Notes = () => {
 
@@ -19,6 +19,7 @@ const Notes = () => {
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
     const effectRan = useRef(false)
+    let legacyNotes = [] as NoteTextType[]
 
     useEffect(() => {
         if (!effectRan.current) {
@@ -28,6 +29,9 @@ const Notes = () => {
             }
         }
     }, [dispatch])
+    useEffect(() => {
+        legacyNotes = [...notes]
+    }, [notes])
 
     const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => {
         title && setModalTitle(title)
@@ -48,10 +52,28 @@ const Notes = () => {
     const onDiscardClickHandler = () => {
         // TODO: ????????
     }
-    const moveCards = () => {
 
-    }
+    const moveCards = useCallback((dragID: string, hoverID: string) => {
+        console.log(legacyNotes)
+        // console.log('MoveCard')
+        console.log('dragID ', dragID)
+        console.log('hoverID ', hoverID)
+        // debugger
+        const dragIndex = legacyNotes.findIndex((arr) => arr._id == dragID)
+        const hoverIndex = legacyNotes.findIndex((arr) => arr._id == hoverID)
+        // console.log('dragIndex ', dragIndex)
+        // console.log('hoverIndex ', hoverIndex)
 
+
+        const newArray = [...legacyNotes]
+        const draggedElement = newArray.splice(dragIndex, 1)
+        newArray.splice(hoverIndex, 0, draggedElement[0])
+        console.log(newArray)
+        if (newArray.length === legacyNotes.length) {
+            dispatch(dndNotes({newNotesArray: newArray}))
+        }
+
+    }, [legacyNotes])
 
     return (
         <MainContainer>
@@ -82,6 +104,7 @@ const Notes = () => {
                               edit={onCardClickHandler}
                               createdAt={n.createdAt}
                               index={i}
+                              moveCard={moveCards}
                         />
                     )}
                 </div>
@@ -91,3 +114,4 @@ const Notes = () => {
 }
 
 export default Notes
+
