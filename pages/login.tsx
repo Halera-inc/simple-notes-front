@@ -202,4 +202,4 @@ const Login = ({providers}: any) => {
     )
 };
 
-export default Login;
+export default Login

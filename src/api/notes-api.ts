@@ -38,7 +38,7 @@ export const notesAPI = {
         });
     },
     dndNotes(newNotesArr: NoteTextType[]){
-        return instance.put('api/notes', newNotesArr)
+        return instance.put('api/notes', {notes: newNotesArr})
     }
 }
 //for Auth

@@ -56,9 +56,7 @@ export const dndNotes = createAsyncThunk('notes/dndNote',
     async (params: { newNotesArray: NoteTextType[]}, thunkAPI) => {
         try {
             const res = await notesAPI.dndNotes(params.newNotesArray)
-            const notes = res.data
-            return notes.notes
-
+            return res.data.insertedNotes
         } catch (error) {
             console.log(error)
             return thunkAPI.rejectWithValue(null)
