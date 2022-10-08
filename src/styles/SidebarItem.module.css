@@ -7,6 +7,3 @@
     cursor: pointer;
     transition: 0.2s;
 }
-.wrapper:hover {
-    background-color: white;
-}

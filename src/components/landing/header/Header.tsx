@@ -22,9 +22,9 @@ const Header = (props: { title: string }) => {
     }
 
     return (
-        <div className={s.header}>
-            <h2 className={s.title}>{props.title}</h2>
-            <div className={s.header_link_wrapper}>
+        <div className={"flex flex justify-between items-center h-[15vh]"}>
+            <h2 className={' font-bold p-y-[39px] p-x-[0] leading-[42px] text-[35px]  dark:text-white dark:font-semibold md:text-[30px]'}>{props.title}</h2>
+            <div className={s.wrapperBtn}>
                 <Link href={'/about'}>
                     <p className={s.about}>About</p>
                 </Link>

@@ -12,12 +12,13 @@ type PropsType = {
 
 const SidebarItem = ({icon, tooltipInfo, link, active, redActive}: PropsType) => {
 
+
     const [hover, setHover] = useState<boolean>(false)
 
 
     return (
         <Link href={link ? link : '#'}>
-            <div className={`tooltip tooltip-right ${s.wrapper} ${active ? 'bg-white' : 'none'}`}
+            <div className={`tooltip tooltip-right ${s.wrapper} hover:bg-white ${active ? 'bg-white ' : 'none'}`}
                  data-tip={tooltipInfo ? tooltipInfo : 'Other'}
                  onMouseEnter={() => setHover(true)}
                  onMouseLeave={() => setHover(false)}

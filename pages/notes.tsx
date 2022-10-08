@@ -67,7 +67,7 @@ const Notes = () => {
                          onConfirm={onConfirmClickHandler}
                          onDiscard={onDiscardClickHandler}/>
 
-            <div className={s.notesWrapper}>
+            <div className={" dark:bg-grey p-l-[100px] height-[100vh]"}>
                 <div className={s.notesBlock}>
                     {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase())
                         || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase())).map((n) =>

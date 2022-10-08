@@ -1,9 +1,8 @@
 .footer {
     display: flex;
     justify-content: flex-start;
-    align-items: flex-end;
-    /*max-width: 200px;*/
-    height: 10vh;
+    align-items: center;
+    height: 17vh;
 }
 .footer a {
     cursor: pointer;
@@ -12,20 +11,19 @@
     font-size: 20px;
     line-height: 24px;
     color: #C8C8C8;
+    text-align: center;
 }
+@media screen and (max-width: 913px){
+    .footer {
+        justify-content: center;
+    }
+}
+
 @media screen and (max-width: 540px){
     .footer {
         justify-content: center;
     }
 }
-@media screen and (min-width: 541px){
-    .footer {
-        justify-content: center;
-    }
-}
-@media screen and (min-width: 913px){
-    .footer {
-        justify-content: flex-start;
-    }
-}
+
+
 
