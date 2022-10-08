@@ -1,7 +1,4 @@
-.notesWrapper {
-    padding-left: 100px;
-    height: 100vh;
-}
+
 
 .notesBlock {
     gap: 25px;
@@ -15,5 +12,15 @@
 @media screen and (max-width: 991px) {
     .notesBlock {
         justify-content: center;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .notesBlock {
+        justify-content: center;
+        padding: 115px 20px 0 20px;
+    }
+    .notesWrapper {
+        padding-left: 0;
     }
 }

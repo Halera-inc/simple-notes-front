@@ -22,13 +22,13 @@ const MainBlockSettings = () => {
             <div className={s.leftArea}>
                 <div className={s.myProfile}>
                     <div className={s.imgProfileWrapper}>
-                        <img
-                            style={{width: 200, height: 200, border: '2px solid var(--blue-dark)'}}
-                            alt={'avatar'}
-                            src={`${session?.user?.image}`}
+                        <img className={s.imgProfileWrapper_img}
+
+                             alt={'avatar'}
+                             src={`${session?.user?.image}`}
                         />
 
-                    {/*Пока убрал Image так как не знаю как правильно прописывать в next.config.js (Ваня)*/}
+                        {/*Пока убрал Image так как не знаю как правильно прописывать в next.config.js (Ваня)*/}
                         {/*<Image src={`${session?.user?.image}`}*/}
                         {/*       width={200}*/}
                         {/*       height={200}*/}
@@ -41,7 +41,7 @@ const MainBlockSettings = () => {
                         </ul>
                         <Button title={'Edit'}
                                 callback={editProfileHandler}
-                                style={{margin: 0, width: '104px'}}/>
+                                className={"Settings_Page_button"}/>
                     </div>
                 </div>
                 {edit ? <InputForm/> : ''}

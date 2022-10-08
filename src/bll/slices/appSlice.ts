@@ -19,7 +19,7 @@ export const appSlice = createSlice({
     extraReducers: {}
 })
 
-
+export const  appReducer = appSlice.reducer
 export const {setIsAppFetching} = appSlice.actions;
 
 export default appSlice.reducer

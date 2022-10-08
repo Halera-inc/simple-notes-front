@@ -18,16 +18,17 @@ const MainBlock = () => {
     return (
         <div className={s.mainBlockContainer}>
             <div className={s.blockTitle}>
-                <h1 className={s.title}>
-                    <p>Just.</p>
-                    <p>Simple.</p>
-                    <p>Notes.</p>
-                </h1>
+                <h1 className={'dark:text-white mb-[30px]' }>
+                    <p className={'text-[90px]  font-bold leading-[110px]'}>Just.</p>
+                    <p className={'text-[90px]  font-bold leading-[110px]'}>Simple.</p>
+                    <p className={'text-[90px]  font-bold leading-[110px]'}>Notes.</p>
 
+                </h1>
                 <Button icon={<ArrowBackIcon style={{rotate: '180deg'}}/>}
                         style={buttonTitle}
                         title='Start now'
                         link={'/login'}/>
+
             </div>
             <div className={s.imgTitle}>
                 <SapienMainBlockIcon width={744} height={744} z-0/>

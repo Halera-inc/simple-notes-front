@@ -8,20 +8,9 @@
 
 .blockTitle {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     flex-direction: column;
     align-items: flex-start;
-}
-
-.title {
-    margin-bottom: 40px;
-}
-
-.title p {
-    font-size: 90px;
-    white-space: pre-line;
-    font-weight: bold;
-    line-height: 110px;
 }
 
 .imgTitle {
@@ -29,3 +18,54 @@
     padding-top: 78px;
     padding-right: 110px;
 }
+
+@media screen and (max-width: 1466px) {
+    .imgTitle {
+        padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 1249px) {
+    .imgTitle svg {
+        width: 600px;
+    }
+}
+
+@media screen and (max-width: 1172px) {
+    .mainBlockContainer {
+        justify-content: center;
+        position: relative;
+    }
+
+    .imgTitle svg {
+        width: 700px;
+
+    }
+    .blockTitle {
+        position: absolute;
+        z-index: 5;
+        top: 10%;
+        left: 0;
+
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .imgTitle svg {
+        width: 600px;
+
+    }
+}
+
+@media (max-width: 625px) {
+    .imgTitle svg {
+                z-index: 0;
+                width: 50rem;
+                left: 6rem;
+                top: -3rem;
+                position: absolute;
+                opacity: 0.6;
+}}
+
+
+

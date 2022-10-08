@@ -29,7 +29,7 @@ export const authSlice = createSlice({
     extraReducers: {}
 })
 export const {isThereErrorOnLogin} = authSlice.actions
-
+export  const authTestReducer =  authSlice.reducer
 export default authSlice.reducer
 
 

@@ -1,9 +1,3 @@
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 15vh;
-}
 
 .title {
     padding: 39px 0;
@@ -26,6 +20,27 @@
     padding-right: 40px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 800px) {
+    .about {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .about {
+        display: none;
+    }
+
+    .title {
+        line-height: 36px;
+        font-size: 30px;
+        font-weight: bold;
+    }
+}
+
+
+
 
 
 

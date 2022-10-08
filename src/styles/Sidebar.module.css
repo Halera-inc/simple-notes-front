@@ -6,10 +6,12 @@
     left: 0;
     bottom: 0;
     flex-direction: column;
-    height: 100vh;
+    /*height: 100vh;*/
     background: #E5F1FD;
     width: 100px;
+
 }
+
 .whiteBg {
     display: flex;
     align-items: center;
@@ -19,6 +21,7 @@
     width: 80px;
     border-radius: 30px;
 }
+
 .sidebarWrapper svg {
     cursor: pointer;
 }
@@ -46,3 +49,29 @@
     justify-content: flex-end;
 
 }
+
+@media screen and (max-width: 540px) {
+    .sidebarWrapper {
+        flex-direction: row;
+        top: calc(100% - 79px);
+        height: 80px;
+        width: 100%;
+    }
+
+    .whiteBg {
+        display: none;
+    }
+
+    .bottomBox {
+        display: none;
+    }
+
+    .middleBox {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+

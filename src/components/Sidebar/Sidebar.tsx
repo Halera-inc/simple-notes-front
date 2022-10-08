@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useRef, useState} from 'react';
+import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
 import s from '../../styles/Sidebar.module.css'
 import LoginIcon from "../../assets/images/LoginIcon";
 import NotesIcon from "../../assets/images/NotesIcon";
@@ -52,8 +52,101 @@ const Sidebar = () => {
     }
 
     const {systemTheme, theme, setTheme} = useTheme();
+    const [mounted, setMounted] = useState(false);
 
-    const currentTheme = theme === "system" ? systemTheme : theme;
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    const RenderChangeThemeIcon = () => {
+        if (!mounted) return null;
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        if (currentTheme === 'dark') {
+            return (
+                <SidebarItem tooltipInfo={'Light Side'}
+                             icon={<SunnyIcon onClick={() => {
+                                 setTheme('light')
+                             }} width={50} fill={'#ffffff'}
+                                              className={"hover:fill-black"}/>}/>
+            )
+        }
+        if (currentTheme !== 'dark') {
+            return (
+                <SidebarItem tooltipInfo={'Dark Side'}
+                             icon={<MoonIcon onClick={() => {
+                                 setTheme('dark')
+                             }} width={50} fill={'#5590C1'}/>}/>
+            )
+        }
+    }
+
+    const RenderLagoutIcon = () => {
+        if (!mounted) return null;
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        if (currentTheme === 'dark') {
+            return (
+                <LoginIcon width={50} fill={'#ffffff'}
+                           className={"hover:fill-black"}
+                           onClick={onLogoutClickHandle}/>
+            )
+        } else {
+            return (
+                <LoginIcon width={50} fill={'#5590C1'}
+                           onClick={onLogoutClickHandle}/>
+            )
+        }
+    }
+    const RenderSettingIcon = () => {
+        if (!mounted) return null;
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        if (currentTheme === 'dark') {
+            return (
+                <SettingIcon width={50} fill={router.pathname === '/settings' ? "dark:text-grey" : '#ffffff'}
+                             className={"hover:fill-black"}/>
+            )
+        } else {
+            return (
+                <SettingIcon width={50} fill={'#5590C1'}/>
+            )
+        }
+    }
+
+    const RenderNotesIcon = () => {
+        if (!mounted) return null;
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        if (currentTheme === 'dark') {
+            return (
+                <NotesIcon width={50}
+                           fill={router.pathname === '/notes' ? "dark:text-black" : '#ffffff'}
+                           className={"dark:text-grey hover:fill-black"}/>
+            )
+        } else {
+            return (
+                <NotesIcon width={50}
+                           fill={'#5590C1'}
+                           className={"dark:text-grey"}/>
+            )
+        }
+    }
+
+    const RenderAddNoteIcon = () => {
+        if (!mounted) return null;
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        if (currentTheme === 'dark') {
+            return (
+                <PlusIcon width={50}
+                          fill={'#ffffff'}
+                          className={"hover:fill-black"}
+                          onClick={onAddNoteClickHandler}/>
+            )
+        } else {
+            return (
+                <PlusIcon width={50}
+                          fill={'#5590C1'}
+                          onClick={onAddNoteClickHandler}/>
+            )
+        }
+    }
 
     const onLogoutClickHandle = () => {
         signOut()
@@ -63,7 +156,8 @@ const Sidebar = () => {
     const pagesWithNavbar = ["/notes", "/settings"];
     const renderNavbar = pagesWithNavbar.includes(pathname);
     return renderNavbar ? (
-        <div className={s.sidebarWrapper}>
+        <div
+            className={"z-[100] dark:bg-black flex fixed top-0 left-0 bottom-0 flex-col h-[100vh] bg-[#E5F1FD] w-[100px]"}>
             <label ref={modalAddBtnRef} htmlFor='my-modal-add-note'
                    className="btn modal-button hidden">open
                 modal</label>
@@ -79,43 +173,31 @@ const Sidebar = () => {
                          onCreatClickHandler={onCreatClickHandler}
                          onDiscard={onDiscardClickHandler}/>
             <div className={s.upBox}>
-                <span className={s.whiteBg}>
+                <span
+                    className={"flex items-center  justify-center bg-white h-[80px] w-[80px] rounded-[30px]"}>
                     <PencilIcon width={50} fill={'none'} stroke={'#5590C1'}/>
                 </span>
             </div>
             <div className={s.middleBox}>
                 <SidebarItem tooltipInfo={'Create note'}
                              link={'/notes'}
-                             icon={<PlusIcon width={50}
-                                             fill={'#5590C1'}
-                                             onClick={onAddNoteClickHandler}/>}/>
+                             icon={RenderAddNoteIcon()}/>
                 <SidebarItem tooltipInfo={'My notes'}
                              active={router.pathname === '/notes'}
                              link={'/notes'}
-                             icon={<NotesIcon width={50} fill={'#5590C1'}/>}/>
+                             icon={RenderNotesIcon()}/>
                 <SidebarItem tooltipInfo={'Settings'}
                              active={router.pathname === '/settings'}
                              link={'/settings'}
-                             icon={<SettingIcon width={50} fill={'#5590C1'}/>}/>
+                             icon={RenderSettingIcon()}/>
             </div>
             <div className={s.bottomBox}>
-                {currentTheme === 'dark' &&
-                    <SidebarItem tooltipInfo={'Light Side'}
-                                 icon={<SunnyIcon onClick={() => {
-                                     setTheme('light')
-                                 }} width={50} fill={'#5590C1'}/>}/>}
-                {currentTheme !== 'dark' &&
-                    <SidebarItem tooltipInfo={'Dark Side'}
-                                 icon={<MoonIcon onClick={() => {
-                                     setTheme('dark')
-                                 }} width={50} fill={'#5590C1'}/>}/>
-                }
+                {RenderChangeThemeIcon()}
 
                 <SidebarItem tooltipInfo={'Log out'}
                              redActive={true}
                              link={'/#'}
-                             icon={<LoginIcon width={50} fill={'#5590C1'}
-                                              onClick={onLogoutClickHandle}/>}/>
+                             icon={RenderLagoutIcon()}/>
             </div>
             <div className={'bg'}></div>
         </div>
