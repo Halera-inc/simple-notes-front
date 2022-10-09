@@ -9,7 +9,7 @@ export function SearchIcon(props: SVGProps<SVGSVGElement>) {
              viewBox="0 0 20 20"
              stroke={'0.5px'}
              {...props}>
-            <path fill={props.fill ? props.fill : "#E5E5E5"}
+            <path fill="currentColor"
                   fillRule="evenodd"
                   d="M8 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8ZM2 8a6 6 0 1 1 10.89 3.476l4.817 4.817a1 1 0 0 1-1.414 1.414l-4.816-4.816A6 6 0 0 1 2 8Z"
                   clipRule="evenodd"></path>

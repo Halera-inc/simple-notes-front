@@ -10,8 +10,11 @@
 
 .providerButton {
     margin-bottom: 30px;
-    width: 80%;
-    align-self: center;
+    @apply
+    w-full
+    flex
+    justify-center
+    items-center
 }
 
 .wrapperCard {
