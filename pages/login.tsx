@@ -8,12 +8,15 @@ import ArrowBackIcon from "../src/assets/images/ArrowBackIcon";
 import Link from "next/link";
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {useRouter} from "next/router";
-import {signIn} from "next-auth/react";
+import {getProviders, getSession, signIn} from "next-auth/react";
 import Button from "../src/components/universalComponent/Button/Button";
 import {isThereErrorOnLogin} from 'src/bll/slices/authSlice';
 import {setIsAppFetching} from 'src/bll/slices/appSlice'
 import {Spinner} from "../src/components/Spinner";
 import {useTheme} from "next-themes";
+import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import GoogleIcon from "../src/assets/images/GoogleIcon";
+import GithubIcon from "../src/assets/images/GithubIcon";
 
 
 const Login = ({providers}: any) => {
@@ -30,6 +33,38 @@ const Login = ({providers}: any) => {
     useEffect(() => {
         setMounted(true)
     }, [])
+
+    const RenderGithubIcon = () => {
+        if (!mounted) return null;
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        if (currentTheme === 'dark') {
+            return (
+                <GithubIcon width={'4em'} height={'4em'}
+                            color={'#ffffff'}/>
+            )
+        } else {
+            return (
+                <GithubIcon width={'4em'} height={'4em'}
+                            color={'#5590C1'}/>
+            )
+        }
+    }
+
+    const RenderGoogleIcon = () => {
+        if (!mounted) return null;
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        if (currentTheme === 'dark') {
+            return (
+                <GoogleIcon width={'3em'} height={'3em'}
+                            color={'#ffffff'}/>
+            )
+        } else {
+            return (
+                <GoogleIcon width={'3em'} height={'3em'}
+                            color={'#5590C1'}/>
+            )
+        }
+    }
 
     const RenderUserIcon = () => {
         if (!mounted) return null;
@@ -106,13 +141,22 @@ const Login = ({providers}: any) => {
                 (provider: any) =>
                     provider.name !== "Credentials" && (
                         <div className={s.providerButton} key={provider.name}>
-                            <button
-                                onClick={() => signIn(provider.id)}
-                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                <span
-                                    className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                </span>{`Sign in with ${provider.name}`}
-                            </button>
+
+                            {provider.name === 'Google' ?
+                                RenderGoogleIcon()
+                                : RenderGithubIcon()}
+                            <Button
+                                className="dark:bg-black dark:border-none"
+                                title={`Sign in with ${provider.name}`}
+                                callback={() => signIn(provider.id)}
+                                style={{
+                                    justifyContent: "flex-start",
+                                    backgroundColor: "white",
+                                    width: 428,
+                                    height: 60,
+                                    margin: 0,
+                                    fontSize: 20
+                                }}/>
                         </div>))}
         </div>
     );
@@ -202,4 +246,21 @@ const Login = ({providers}: any) => {
     )
 };
 
-export default Login
+export default Login;
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+    const session = await getSession(context);
+    console.log(session)
+    if (session) {
+        return {
+            redirect: {destination: '/notes'},
+            props: {}
+        }
+    }
+    return {
+        props: {
+            providers: await getProviders(),
+            session
+        }
+    }
+}
