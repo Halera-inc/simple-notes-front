@@ -55,8 +55,13 @@ export const editNote = createAsyncThunk('notes/editNote',
 export const dndNotes = createAsyncThunk('notes/dndNote',
     async (params: { newNotesArray: NoteTextType[]}, thunkAPI) => {
         try {
+            console.log('request')
             const res = await notesAPI.dndNotes(params.newNotesArray)
-            return res.data.insertedNotes
+            console.log(res)
+            if (res.status == 201){
+                return params.newNotesArray
+            }
+            // return res.data.insertedNotes
         } catch (error) {
             console.log(error)
             return thunkAPI.rejectWithValue(null)
@@ -109,7 +114,8 @@ export const notesSlice = createSlice({
                 }
             })
             .addCase(dndNotes.fulfilled, (state, action) => {
-                state.notes = action.payload
+                console.log('state')
+                if (action.payload) state.notes = action.payload
             })
     }
 })

@@ -6,7 +6,7 @@ import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
 import {colorizedColorType} from "../src/components/Note";
-import {ColorSamplesType, NoteTextType} from "../src/api/notes-api";
+import {ColorSamplesType} from "../src/api/notes-api";
 
 const Notes = () => {
 
@@ -19,7 +19,6 @@ const Notes = () => {
     const [modalText, setModalText] = useState('')
     const modalBtnRef = useRef<HTMLLabelElement>(null)
     const effectRan = useRef(false)
-    let legacyNotes = [] as NoteTextType[]
 
     useEffect(() => {
         if (!effectRan.current) {
@@ -29,9 +28,10 @@ const Notes = () => {
             }
         }
     }, [dispatch])
-    useEffect(() => {
-        legacyNotes = [...notes]
-    }, [notes])
+    // useEffect(() => {
+    //     legacyNotes = [...notes]
+    //     console.log('legacyNotes')
+    // }, [notes])
 
     const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => {
         title && setModalTitle(title)
@@ -54,6 +54,7 @@ const Notes = () => {
     }
 
     const moveCards = useCallback((dragID: string, hoverID: string) => {
+        let legacyNotes = [...notes]
         console.log(legacyNotes)
         // console.log('MoveCard')
         console.log('dragID ', dragID)
@@ -71,9 +72,12 @@ const Notes = () => {
         console.log(newArray)
         if (newArray.length === legacyNotes.length) {
             dispatch(dndNotes({newNotesArray: newArray}))
+            // console.log('switch')
         }
 
-    }, [legacyNotes])
+    },[notes, dispatch])
+
+    console.log('rerender notes')
 
     return (
         <MainContainer>
