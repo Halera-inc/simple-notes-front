@@ -14,16 +14,7 @@ import {useDrag, useDrop} from 'react-dnd';
 import {ItemTypes} from 'src/utils/item';
 import type {Identifier, XYCoord} from 'dnd-core';
 
-// type NotePropsType = {
-//     title?: string
-//     note_text?: string
-//     color: ColorSamplesType
-//     noteId: string
-//     edit: (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => void
-//     createdAt?: Date
-// }
-
-export interface NoteProps {
+type NotePropsType = {
     index: number
     moveCard?: (dragID: string, hoverID: string) => void
     title?: string
@@ -34,7 +25,7 @@ export interface NoteProps {
     createdAt?: Date
 }
 
-interface DragItem {
+type DragItem = {
     index: number
     noteId: string
     type: string
@@ -50,7 +41,7 @@ const Note = ({
                   createdAt,
                   index,
                   moveCard,
-              }: NoteProps) => {
+              }: NotePropsType) => {
     const dispatch = useAppDispatch()
     const colorizedColor = colorizeNote(color)
     const [showColorBar, setShowColorBar] = useState(false)
@@ -69,8 +60,7 @@ const Note = ({
     const localDate = new Date(str).toLocaleDateString('ru-RU')
 
 
-    //DND block
-
+    //Drag and Drop logic
 
     const ref = useRef<HTMLDivElement>(null)
     const [{handlerId}, drop] = useDrop<DragItem,
@@ -91,108 +81,46 @@ const Note = ({
             const hoverIndex = index
             const hoverID = noteId
 
-            // console.log(item)
-
             // Don't replace items with themselves
             if (dragIndex === hoverIndex) {
-                console.log('same')
                 return
             }
 
             // Determine rectangle on screen
             const hoverBoundingRect = ref.current?.getBoundingClientRect()
 
-            // Get vertical middle
+            // Get vertical and horizontal middles
             const hoverMiddleX =
                 (hoverBoundingRect.right - hoverBoundingRect.left) / 2
             const hoverMiddleY =
                 (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-            console.log('hoverBoundingRect.right', hoverBoundingRect.right)
-            console.log('hoverBoundingRect.left', hoverBoundingRect.left)
-            console.log('hoverBoundingRect.top', hoverBoundingRect.top)
-            console.log('hoverBoundingRect.bottom', hoverBoundingRect.bottom)
-            console.log('hoverMiddleX', hoverMiddleX)
-            console.log('hoverMiddleY', hoverMiddleY)
 
             // Determine mouse position
             const clientOffset = monitor.getClientOffset()
 
-            // Get pixels to the left
-            const hoverClientX = (clientOffset as XYCoord).x - hoverBoundingRect.left   //положение мыши на экране
-            const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top   //положение мыши на экране
-            console.log('(clientOffset as XYCoord).x', (clientOffset as XYCoord).x)
-            console.log('(clientOffset as XYCoord).y', (clientOffset as XYCoord).y)
-            // console.log('hoverBoundingRect.left', hoverBoundingRect.left)
-            console.log('hoverClientX', hoverClientX)
-            console.log('hoverClientY', hoverClientY)
-            console.log('______________________________________')
+            // Get pixels to the left corner of hover rectangle
+            const hoverClientX = (clientOffset as XYCoord).x - hoverBoundingRect.left   //положение мыши на экране по оси X относительно левого верхнего угла прямоугольника
+            const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top   //положение мыши на экране по оси Y относительно левого верхнего угла прямоугольника
 
-            // Only perform the move when the mouse has crossed half of the items height
-            // When dragging downwards, only move when the cursor is below 50%
-            // When dragging upwards, only move when the cursor is above 50%
+            // Only perform the move when the mouse has crossed the border of
+            // an imaginary rectangle in the center of the card 50% wide and 50% high of the card
 
-            // // Dragging downwards
-            // if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
-            //     console.log('dragIndex ',dragIndex)
-            //     console.log('hoverIndex ',hoverIndex)
-            //     console.log('DOWN_______OLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLO')
-            //     return
-            //
-            // }
-            //
-            // // Dragging upwards
-            // if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
-            //     console.log('dragIndex ',dragIndex)
-            //     console.log('hoverIndex ',hoverIndex)
-            //     console.log('UP_______OLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLO')
-            //
-            //     return
-            // }
-
-            //Dragging
-            if (dragIndex !== hoverIndex && (hoverClientX < (hoverMiddleX * 0.8))) {
-                console.log('dragIndex ', dragIndex)
-                console.log('hoverIndex ', hoverIndex)
-                console.log('UP_______OLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLO')
-
+            //Non-Dragging cases
+            if (dragIndex !== hoverIndex && (hoverClientX < (hoverMiddleX * 0.5))) {
                 return
             }
-            if (dragIndex !== hoverIndex && (hoverClientX > (hoverMiddleX * 1.2))) {
-                console.log('dragIndex ', dragIndex)
-                console.log('hoverIndex ', hoverIndex)
-                console.log('UP_______OLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLO')
-
+            if (dragIndex !== hoverIndex && (hoverClientX > (hoverMiddleX * 1.5))) {
                 return
             }
-            if (dragIndex !== hoverIndex && (hoverClientY < (hoverMiddleY * 0.8))) {
-                console.log('dragIndex ', dragIndex)
-                console.log('hoverIndex ', hoverIndex)
-                console.log('UP_______OLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLO')
-
+            if (dragIndex !== hoverIndex && (hoverClientY < (hoverMiddleY * 0.5))) {
                 return
             }
-            if (dragIndex !== hoverIndex && (hoverClientY > (hoverMiddleY * 1.2))) {
-                console.log('dragIndex ', dragIndex)
-                console.log('hoverIndex ', hoverIndex)
-                console.log('UP_______OLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLOOLOLOLOLOLO')
-
+            if (dragIndex !== hoverIndex && (hoverClientY > (hoverMiddleY * 1.5))) {
                 return
             }
-
 
             // Time to actually perform the action
-            console.log('*****************move card******************')
-
-            console.log('________FROM________')
-            console.log(dragIndex)
-            console.log('dragID ', dragID)
-            console.log('________TO________')
-            console.log(hoverIndex)
-            console.log('hoverID ', hoverID)
             moveCard && moveCard(dragID, hoverID)
-
-
-            // moveCard(dragIndex, hoverIndex)
 
             // Note: we're mutating the monitor item here!
             // Generally it's better to avoid mutations,
@@ -212,14 +140,8 @@ const Note = ({
         }),
     })
 
-    const opacity = isDragging ? 0 : 1
     drag(drop(ref))
-
-
-    ///
-
-    console.log(`rerender note ${title}`)
-
+    colorizedColor.opacity = isDragging ? 0 : 1
     return (
         <div className={s.card} style={colorizedColor} ref={ref} data-handler-id={handlerId}
              onClick={() => edit(title, note_text, colorizedColor, color, noteId)}>

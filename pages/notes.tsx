@@ -28,10 +28,6 @@ const Notes = () => {
             }
         }
     }, [dispatch])
-    // useEffect(() => {
-    //     legacyNotes = [...notes]
-    //     console.log('legacyNotes')
-    // }, [notes])
 
     const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => {
         title && setModalTitle(title)
@@ -55,29 +51,15 @@ const Notes = () => {
 
     const moveCards = useCallback((dragID: string, hoverID: string) => {
         let legacyNotes = [...notes]
-        console.log(legacyNotes)
-        // console.log('MoveCard')
-        console.log('dragID ', dragID)
-        console.log('hoverID ', hoverID)
-        // debugger
         const dragIndex = legacyNotes.findIndex((arr) => arr._id == dragID)
         const hoverIndex = legacyNotes.findIndex((arr) => arr._id == hoverID)
-        // console.log('dragIndex ', dragIndex)
-        // console.log('hoverIndex ', hoverIndex)
-
-
         const newArray = [...legacyNotes]
         const draggedElement = newArray.splice(dragIndex, 1)
         newArray.splice(hoverIndex, 0, draggedElement[0])
-        console.log(newArray)
         if (newArray.length === legacyNotes.length) {
             dispatch(dndNotes({newNotesArray: newArray}))
-            // console.log('switch')
         }
-
     },[notes, dispatch])
-
-    console.log('rerender notes')
 
     return (
         <MainContainer>
