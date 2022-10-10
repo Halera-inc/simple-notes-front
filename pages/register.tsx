@@ -361,9 +361,9 @@ export default Register;
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
     const session = await getSession(context);
-    if (!session) {
+    if (session) {
         return {
-            redirect: {destination: '/login', permanent: false},
+            redirect: {destination: '/notes', permanent: false},
             props: {}
         }
     }
