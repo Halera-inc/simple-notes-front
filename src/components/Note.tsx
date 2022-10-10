@@ -18,6 +18,7 @@ export type colorizedColorType = {
     color?: string,
     borderColor?: string,
     backgroundColor?: string,
+    opacity?: number
 }
 
 const Note = ({title = '', note_text = '', color,edit,noteId}: NotePropsType) => {

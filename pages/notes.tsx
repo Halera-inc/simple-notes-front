@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useEffect, useRef, useState} from 'react'
-import {editNote, getNotes} from 'src/bll/slices/notesSlice';
+import React, {ChangeEvent, useCallback, useEffect, useRef, useState} from 'react'
+import {dndNotes, editNote, getNotes} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
@@ -51,6 +51,17 @@ const Notes = () => {
         // TODO: ????????
     }
 
+    const moveCards = useCallback((dragID: string, hoverID: string) => {
+        let legacyNotes = [...notes]
+        const dragIndex = legacyNotes.findIndex((arr) => arr._id == dragID)
+        const hoverIndex = legacyNotes.findIndex((arr) => arr._id == hoverID)
+        const newArray = [...legacyNotes]
+        const draggedElement = newArray.splice(dragIndex, 1)
+        newArray.splice(hoverIndex, 0, draggedElement[0])
+        if (newArray.length === legacyNotes.length) {
+            dispatch(dndNotes({newNotesArray: newArray}))
+        }
+    },[notes, dispatch])
 
     return (
         <MainContainer>
@@ -72,14 +83,17 @@ const Notes = () => {
             <div className={" dark:bg-grey p-l-[100px] height-[100vh]"}>
                 <div className={s.notesBlock}>
                     {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase())
-                        || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase())).map((n) =>
+                        || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase())).map((n, i) =>
                         <Note key={n._id}
                               title={n.title}
                               note_text={n.note_text}
                               color={n.color}
                               noteId={n._id}
                               edit={onCardClickHandler}
-                              createdAt={n.createdAt}/>
+                              createdAt={n.createdAt}
+                              index={i}
+                              moveCard={moveCards}
+                        />
                     )}
                 </div>
             </div>

@@ -5,21 +5,25 @@ import {Provider} from 'react-redux'
 import {ThemeProvider} from "next-themes";
 import Sidebar from "../src/components/Sidebar/Sidebar";
 import {SessionProvider} from 'next-auth/react';
+import {HTML5Backend} from "react-dnd-html5-backend";
+import { DndProvider } from 'react-dnd';
 
 
 function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {
 
     return (
-        <SessionProvider session={session}>
-            <ThemeProvider enableSystem={true} attribute="class">
-                <Provider store={store}>
-                    <div className="bg-white dark:bg-black">
-                    <Sidebar/>
-                        <Component {...pageProps} />
-                    </div>
-                </Provider>
-            </ThemeProvider>
-        </SessionProvider>
+        <DndProvider backend={HTML5Backend}>
+            <SessionProvider session={session}>
+                <ThemeProvider enableSystem={true} attribute="class">
+                    <Provider store={store}>
+                        <div className="bg-white dark:bg-black">
+                            <Sidebar/>
+                            <Component {...pageProps} />
+                        </div>
+                    </Provider>
+                </ThemeProvider>
+            </SessionProvider>
+        </DndProvider>
 
     )
 }
