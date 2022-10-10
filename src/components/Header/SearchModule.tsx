@@ -29,7 +29,8 @@ const SearchModule = () => {
                 <button className="btn btn-square bg-blue border-1  border-blue-dark hover:bg-blue ">
                     <SearchIcon height={30}
                                 width={30}
-                                fill={'var(--blue-dark)'}/>
+                                fill={'var(--blue-dark)'}
+                    className={"dark:text-grey "}/>
                 </button>
             </div>
         </div>

@@ -19,6 +19,7 @@ import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {setIsAppFetching} from "../src/bll/slices/appSlice";
 import {useTheme} from "next-themes";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import {emailRegular, passwordRegular} from "src/utils/regulars";
 
 const Register = () => {
         const [info, setInfo] = useState(false)
@@ -154,7 +155,7 @@ const Register = () => {
                 }
                 if (!values.email) {
                     errors.email = 'Required';
-                } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                } else if (!emailRegular.test(values.email)) {
                     errors.email = 'Invalid email address';
                 }
                 if (!values.country) {
@@ -162,7 +163,7 @@ const Register = () => {
                 }
                 if (!values.password) {
                     errors.password = 'Required';
-                } else if (!/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{8,}/g.test(values.password)) {
+                } else if (!passwordRegular.test(values.password)) {
                     errors.password = 'Invalid password'
                 }
                 if (!values.password2) {
@@ -277,7 +278,7 @@ const Register = () => {
                                             </select>
                                         </label>
                                         {formik.touched.country && formik.errors.country &&
-                                            <div className={s.errorTextRegistration}>{formik.errors.country}</div>}
+                                        <div className={s.errorTextRegistration}>{formik.errors.country}</div>}
                                     </div>
                                     <div className={`${s.formControl} ${s.one}`}>
                                         <label className={s.label}>

@@ -15,8 +15,8 @@ import {setIsAppFetching} from 'src/bll/slices/appSlice'
 import {Spinner} from "../src/components/Spinner";
 import {useTheme} from "next-themes";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
-import GoogleIcon from "../src/assets/images/GoogleIcon";
 import GithubIcon from "../src/assets/images/GithubIcon";
+import GoogleIcon from "../src/assets/images/GoogleIcon";
 
 
 const Login = ({providers}: any) => {
@@ -34,40 +34,40 @@ const Login = ({providers}: any) => {
         setMounted(true)
     }, [])
 
-    const RenderGithubIcon = () => {
-        if (!mounted) return null;
+    const RenderGoogleIcon = () => {
+        if (!mounted) return undefined;
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === 'dark') {
             return (
-                <GithubIcon width={'4em'} height={'4em'}
+                <GoogleIcon width={'2em'} height={'2em'}
                             color={'#ffffff'}/>
             )
         } else {
             return (
-                <GithubIcon width={'4em'} height={'4em'}
+                <GoogleIcon width={'2em'} height={'2em'}
                             color={'#5590C1'}/>
             )
         }
     }
 
-    const RenderGoogleIcon = () => {
-        if (!mounted) return null;
+    const RenderGithubIcon = () => {
+        if (!mounted) return undefined;
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === 'dark') {
             return (
-                <GoogleIcon width={'3em'} height={'3em'}
-                            color={'#ffffff'}/>
+                <GithubIcon width={'2.5em'} height={'2.5em'}
+                            color={'#ffffff'} />
             )
         } else {
             return (
-                <GoogleIcon width={'3em'} height={'3em'}
+                <GithubIcon width={'2.5em'} height={'2.5em'}
                             color={'#5590C1'}/>
             )
         }
     }
 
     const RenderUserIcon = () => {
-        if (!mounted) return null;
+        if (!mounted) return undefined;
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === 'dark') {
             return (
@@ -141,12 +141,11 @@ const Login = ({providers}: any) => {
                 (provider: any) =>
                     provider.name !== "Credentials" && (
                         <div className={s.providerButton} key={provider.name}>
-
-                            {provider.name === 'Google' ?
-                                RenderGoogleIcon()
-                                : RenderGithubIcon()}
                             <Button
-                                className="dark:bg-black dark:border-none"
+                                icon={provider.name === 'Google'
+                                    ? RenderGoogleIcon()
+                                    : RenderGithubIcon()}
+                                className="dark:bg-black dark:border-white  dark:text-white pl-[15%]"
                                 title={`Sign in with ${provider.name}`}
                                 callback={() => signIn(provider.id)}
                                 style={{
@@ -155,8 +154,12 @@ const Login = ({providers}: any) => {
                                     width: 428,
                                     height: 60,
                                     margin: 0,
-                                    fontSize: 20
+                                    fontSize: 20,
+
                                 }}/>
+                            {/*RenderGoogleIcon()*/}
+                            {/*: RenderGithubIcon()}*/}
+
                         </div>))}
         </div>
     );
