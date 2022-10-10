@@ -105,14 +105,14 @@ const Login = ({providers}: any) => {
         },
         onSubmit: async values => {
             dispatch(setIsAppFetching(true));
-            const {error}: any = signIn("credentials", {
+            const {ok}: any = await signIn("credentials", {
                 redirect: false,
                 email: values.email,
                 password: values.password,
                 callbackUrl: `${window.location.origin}`,
             })
             dispatch(setIsAppFetching(false))
-            if (error) {
+            if (ok) {
                 redirectToHome()
                 dispatch(isThereErrorOnLogin(false))
             } else {
@@ -121,7 +121,7 @@ const Login = ({providers}: any) => {
             formik.resetForm();
         },
     })
-    const inputI = "h-[60px] ml-[27px] w-[428px] bg-white dark:bg-black dark:border-none word-break: break-all  input  input-bordered input-info placeholder:text-blue-dark  rounded-none  text-blue-dark   text-xl"
+    const inputI = "h-[60-px] ml-[27px] w-[428px] bg-white dark:bg-black dark:border-none word-break: break-all  input  input-bordered input-info placeholder:text-blue-dark  rounded-none  text-blue-dark   text-xl"
 
     const redirectToHome = () => {
         const {pathname} = router;
@@ -175,7 +175,8 @@ const Login = ({providers}: any) => {
                                     <Link href={"/"}>
                                         <ArrowBackIcon width={'2.5em'}
                                                        height={'2.5em'}
-                                                       color={'#5590C1'} className={"dark:text-white"}/>
+                                                       color={'#5590C1'}
+                                                       className={"dark:text-white"}/>
                                     </Link>
                                 </div>
                             </div>
@@ -209,16 +210,17 @@ const Login = ({providers}: any) => {
                                 </div>
 
                                 <div className="card-actions justify-center relative">
-                                    <Button className="dark:bg-black dark:text-white dark:border-white"
-                                            title={'Login'}
-                                            type={'submit'}
-                                            style={{
-                                                backgroundColor: "white",
-                                                width: 200,
-                                                height: 60,
-                                                margin: '0 0 60px 0',
-                                                fontSize: 20
-                                            }}/>
+                                    <Button
+                                        className="dark:bg-black dark:text-white dark:border-white"
+                                        title={'Login'}
+                                        type={'submit'}
+                                        style={{
+                                            backgroundColor: "white",
+                                            width: 200,
+                                            height: 60,
+                                            margin: '0 0 60px 0',
+                                            fontSize: 20
+                                        }}/>
                                     {loader ? <Spinner size={'50px'} style={{
                                             position: "absolute",
                                             right: '19%',
