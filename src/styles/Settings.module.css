@@ -1,11 +1,10 @@
-.wrapperMaimSettings {
+.wrapperMainSettings {
     @apply
     flex
     justify-between
 }
 
 .leftArea {
-    width: 30%;
     @apply
     flex
     flex-col
@@ -40,8 +39,9 @@
 
 .reg {
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
+    margin-top: 10px;
+    font-size: 17px;
+    line-height: 20px;
     color: #7D7D7D;
 
 }
@@ -52,10 +52,26 @@ ul.editData li {
 }
 
 .edit {
-    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.editMyProfile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.editMyProfile label {
+
+    display: flex;
+    justify-content: space-between;
 }
 
 ul.editMyProfile li {
+    height: 60px;
     font-weight: 700;
     font-size: 22px;
     line-height: 27px;
@@ -68,28 +84,13 @@ ul.editMyProfile li {
 
 }
 
-ul.editMyProfile input {
-    width: 412px;
-    height: 60px;
-    @apply
-    input
-    input-bordered
-    placeholder-current
-    placeholder-black
-    w-full
-    text-lg
-    font-thin
-    max-w-xs
-    rounded-none
-}
-
 
 .otherSettings {
-    /*padding-right: 250px;*/
+    padding-right: 100px;
 }
 
 .other {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 40px;
     line-height: 49px;
     margin-bottom: 27px;
@@ -239,10 +240,8 @@ ul.collapseContent li p {
     .wrapperMaimSettings {
         flex-direction: column;
     }
-    .otherSettings {
-        margin-right: 40px;
-        margin-bottom: 40px;
-    }
+
+
 }
 
 @media screen and (min-width: 913px) {

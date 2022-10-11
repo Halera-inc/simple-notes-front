@@ -14,6 +14,8 @@ const InputForm = () => {
     const dispatch = useAppDispatch()
     const {data: session} = useSession()
 
+    const inputStyle= "h-[100%] w-[412px] bg-white dark:bg-black dark:border-none " +
+        "word-break: break-all  font-thin  text-lg input  input-bordered  placeholder-current input-info  placeholder-blue-dark dark:placeholder-blue-dark rounded-none text-black dark:text-white"
 
 
 
@@ -53,35 +55,37 @@ const InputForm = () => {
         <form onSubmit={formik.handleSubmit}>
             <div className={s.edit}>
                 <ul className={s.editMyProfile}>
-                    <label>
-                        <li>Username: <input
+                    <li><div className="dark:text-white">Username:</div> <input
                             type="text"
                             placeholder="Enter UserName"
-                            className={s.inf}
+                            className={inputStyle}
                             name='user'
                             //@ts-ignore
                             defaultValue={session?.user?.name}
                             onChange={formik.handleChange}
                         />
                         </li>
-                    </label>
-                    <label>
-                        <li>Email: <input
+
+                    <li><div className="dark:text-white">Email:</div> <input
                             disabled={true}
                             placeholder="Enter New Email"
-                            className={s.inf}
+                            className={inputStyle}
                             {...formik.getFieldProps('email')}/></li>
-                    </label>
-                    <label>
-                        <li>Country: <input
+
+                    <li><div className="dark:text-white">Country:</div> <input
                             placeholder="Change Country"
-                            className={s.inf}
+                            className={inputStyle}
                             {...formik.getFieldProps('country')}/>
                         </li>
-                    </label>
                 </ul>
-
-                <Button title={'Save'} type={'submit'} className={"edit_form_button"}/>
+                <Button title={'Save'} type={'submit'}
+                        className={"dark:bg-black dark:border-white dark:text-white"}
+                        style={{
+                            width: 158,
+                            height: 60,
+                            margin: '0 0 60px 0',
+                            fontSize: 25,
+                        }}/>
             </div>
         </form>
     );
