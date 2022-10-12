@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         case 'POST':
             let {title, note_text, color, note_mode} = req.body
             if(!title) {
-                title = 'Add you title'
+                title = 'Add your title'
             }
             try {
                 const newNote = await Note.create({
