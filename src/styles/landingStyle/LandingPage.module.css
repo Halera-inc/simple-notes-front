@@ -18,10 +18,12 @@
         padding: 0 50px;
     }
 }
-@media (max-width: 535px) {
+
+@media (max-width: 625px) {
     .landing{
-        padding: 0 25px;
+        padding: 0 25px 15px 25px;
         overflow: hidden;
     }
 }
+
 

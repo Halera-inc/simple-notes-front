@@ -19,14 +19,15 @@ const MainBlock = () => {
         <div className={s.mainBlockContainer}>
             <div className={s.blockTitle}>
                 <h1 className={'dark:text-white mb-[30px]' }>
-                    <p className={'text-[90px]  font-bold leading-[110px]'}>Just.</p>
-                    <p className={'text-[90px]  font-bold leading-[110px]'}>Simple.</p>
-                    <p className={'text-[90px]  font-bold leading-[110px]'}>Notes.</p>
+                    <p className={'text-[90px] sm:text-[80px] md:text-[70px] font-bold leading-[110px] sm:leading-[100px]'}>Just.</p>
+                    <p className={'text-[90px] sm:text-[80px] md:text-[70px] font-bold leading-[110px] sm:leading-[100px]'}>Simple.</p>
+                    <p className={'text-[90px] sm:text-[80px] md:text-[70px] font-bold leading-[110px] sm:leading-[100px]'}>Notes.</p>
 
                 </h1>
                 <Button icon={<ArrowBackIcon style={{rotate: '180deg'}}/>}
                         style={buttonTitle}
                         title='Start now'
+                        className={'sm:px-[15px] sm:py-[10px] sm:text-[20px]'}
                         link={'/login'}/>
 
             </div>

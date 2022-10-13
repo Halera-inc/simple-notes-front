@@ -41,6 +41,7 @@
         width: 700px;
 
     }
+
     .blockTitle {
         position: absolute;
         z-index: 5;
@@ -59,13 +60,16 @@
 
 @media (max-width: 625px) {
     .imgTitle svg {
-                z-index: 0;
-                width: 50rem;
-                left: 6rem;
-                top: -3rem;
-                position: absolute;
-                opacity: 0.6;
-}}
+        left: 3rem;
+        top: -4rem;
+        position: absolute;
+        opacity: 0.6;
+        overflow: hidden;
+    }
+    .blockTitle {
+        top: 5%;
+    }
+}
 
 
 
