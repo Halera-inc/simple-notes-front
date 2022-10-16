@@ -15,7 +15,8 @@ const NoteSchema = new Schema({
     },
     note_mode: {type: String, enum: ['note_text', 'note_todo'], default: 'note_text'},
     createdAt: {type: Date, default: () => Date.toString(), immutable: true},
-    user: {type: mongoose.SchemaTypes.ObjectId, ref: 'User'}
+    user: {type: mongoose.SchemaTypes.ObjectId, ref: 'User'},
+    pinned: {type: Boolean, default: false}
 })
 
 const Note = mongoose.models.Note || mongoose.model('Note', NoteSchema)

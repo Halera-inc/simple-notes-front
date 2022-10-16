@@ -111,6 +111,7 @@ export type NoteTextType = {
     createdAt?: Date,
     color: ColorSamplesType,
     user?: string
+    pinned: boolean
 }
 export type TaskType = {
     idTask: string,
