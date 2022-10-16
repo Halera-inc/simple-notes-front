@@ -37,19 +37,19 @@ module.exports = {
             }
         },
         screens: {
-
-
             'xl': {'max': '1495px'},
             // => @media (max-width: 1279px) { ... }
 
             'lg': {'max': '1023px'},
             // => @media (max-width: 1023px) { ... }
 
-            'md': {'max': '490px'},
-            // => @media (max-width: 767px) { ... }
-
             'sm': {'max': '639px'},
-            // => @media (max-width: 639px) { ... }
+            // => @media (max-width: 639px) { ..!!. }
+
+            'md': {'max': '430px'},
+            // => @media (max-width: 767px) { ..!!. }
+
+
         },
     },
     plugins: [
