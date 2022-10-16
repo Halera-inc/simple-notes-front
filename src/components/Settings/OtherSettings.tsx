@@ -3,12 +3,15 @@ import Button from "../universalComponent/Button/Button";
 import React from "react";
 
 export const OtherSettings = () => {
+    const inputStyle= " collapse collapse-arrow border dark:text-white  border-blue-dark bg-blue dark:bg-black dark:color-white dark:border-none " +
+        "  rounded-none  text-blue-dark mb-5 pl-3  text-xl "
+
     return (
         <div className={s.otherSettings}>
             <h3 className={s.other}>Other settings</h3>
             <div className={s.otherWrapper}>
                 <div tabIndex={1}
-                     className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark rounded-none text-blue-dark  text-xl mb-5 pl-3">
+                     className={inputStyle}>
                     <input type="checkbox"/>
                     <div className="collapse-title text-xl font-medium">
                         Settings One
@@ -17,7 +20,7 @@ export const OtherSettings = () => {
                         <p>Settings One</p>
                     </div>
                 </div>
-                <div tabIndex={2} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark rounded-none text-blue-dark  text-xl mb-5 pl-3">
+                <div tabIndex={2} className={inputStyle}>
                     <input type="checkbox"/>
                     <div className="collapse-title text-xl font-medium">
                         Settings Two
@@ -26,7 +29,7 @@ export const OtherSettings = () => {
                         <p>Settings Two</p>
                     </div>
                 </div>
-                <div tabIndex={3} className=" collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark rounded-none text-blue-dark  text-base  mb-5 pl-3">
+                <div tabIndex={3} className={inputStyle}>
                     <input type="checkbox"/>
                     <div className="collapse-title text-xl font-medium">
                         Setting Three
@@ -36,30 +39,36 @@ export const OtherSettings = () => {
                     </div>
                 </div>
                 <div tabIndex={4}
-                     className={`${s.last_child} collapse collapse-arrow border  border-blue-dark bg-blue placeholder:text-blue-dark rounded-none text-blue-dark  text-xl pl-3`}>
+                     className={`${s.last_child} ${inputStyle}`}>
                     <input type="checkbox"/>
                     <div className="collapse-title text-xl font-medium">
                         Change password
                     </div>
-                    <div className={"collapse-content text-right "}>
+                    <div className={"collapse-content text-right  "}>
                         <ul className={s.collapseContent}>
                             <li>
-                                <p>Current password</p>
+                                <p className="dark:text-white">Current password</p>
                                 <input type="password" id='password'
-                                       className={s.inputI}/>
+                                       className={`${s.inputI} dark:bg-grey dark:border-none`}/>
                             </li>
                             <li>
-                                <p>New password </p>
+                                <p className="dark:text-white">New password </p>
                                 <input type="password" id='password'
-                                       className={s.inputI}/>
+                                       className={`${s.inputI} dark:bg-grey dark:border-none`}/>
                             </li>
                             <li>
-                                <p>Repeat password</p>
+                                <p className="dark:text-white">Repeat password</p>
                                 <input type="password" id='password'
-                                       className={s.inputI}/>
+                                       className={`${s.inputI} dark:bg-grey dark:border-none`}/>
                             </li>
                             <li>
-                                <Button title={'Save'} style={{backgroundColor: 'white'}}/>
+                                <div> </div>
+                                <Button title={'Save'}
+                                        className={"dark:bg-black dark:border-white dark:text-white"}
+                                        style={{backgroundColor: 'white',
+                                    width: 158,
+                                    height: 50,
+                                    fontSize: 22,}}/>
                             </li>
                         </ul>
                     </div>
