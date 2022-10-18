@@ -18,6 +18,10 @@ import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import GithubIcon from "../src/assets/images/GithubIcon";
 import GoogleIcon from "../src/assets/images/GoogleIcon";
 
+type FormikErrorType = {
+    email: string
+    password: string
+}
 
 const Login = ({providers}: any) => {
 
@@ -56,7 +60,7 @@ const Login = ({providers}: any) => {
         if (currentTheme === 'dark') {
             return (
                 <GithubIcon width={'2.5em'} height={'2.5em'}
-                            color={'#ffffff'} />
+                            color={'#ffffff'}/>
             )
         } else {
             return (
@@ -113,22 +117,23 @@ const Login = ({providers}: any) => {
             })
             dispatch(setIsAppFetching(false))
             if (error) {
-                redirectToHome()
-                dispatch(isThereErrorOnLogin(false))
-            } else {
                 dispatch(isThereErrorOnLogin(true))
+            } else {
+                redirectToNotes()
+                dispatch(isThereErrorOnLogin(false))
             }
             formik.resetForm();
         },
     })
     const inputI = "h-[60px] ml-[27px] w-[428px] bg-white dark:bg-black dark:border-none word-break: break-all  input  input-bordered input-info placeholder:text-blue-dark  rounded-none  text-blue-dark   text-xl"
 
-    const redirectToHome = () => {
+    const redirectToNotes = () => {
         const {pathname} = router;
         if (pathname === "/login") {
             typeof window !== 'undefined' && router.push("/notes");
         }
     };
+
 
     const resetHandler = () => {
         dispatch(isThereErrorOnLogin(false));
