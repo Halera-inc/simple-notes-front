@@ -27,12 +27,12 @@ const Header = () => {
                         ? <div
                             className='dark:bg-grey   backdrop-blur-md dark:bg-grey/70 bg-white/70 fixed w-screen w-180
                             z-40 justify-space flex justify-between
-                            items-center h-[100px] mb-[35px]  max: pr-[50px] max: pl-[50px]
+                            items-center h-[100px] max: pr-[50px] max: pl-[50px]
                            '>
                             <p className='text-[35px] dark:text-white font-bold ml-[128px] text-black '>
                                 {pageName}
                             </p>
-                            <div className='flex justify-between w-[540px] items-center mr-[74px]'>
+                            <div className='flex justify-between w-[600px] items-center mr-[74px]'>
                                 <SearchModule/>
                                 <p className=' dark:text-white text-lg text-black'>{session?.user?.name}</p>
                                 <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className={"dark:text-white"}/>

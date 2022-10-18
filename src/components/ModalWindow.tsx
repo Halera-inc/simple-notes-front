@@ -90,7 +90,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
         return (
             <>
                 <input type="checkbox" id='my-modal' className="modal-toggle"/>
-                <div className="modal backdrop-blur-sm">
+                <div className="modal  backdrop-blur-sm ">
                     <div className={s.modalBox} style={colorizedColor}>
                         <div className={s.topArea}>
                             <input type="text" className={s.cardTitle} style={colorizedColor}
