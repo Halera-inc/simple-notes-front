@@ -30,7 +30,8 @@ export default async function handler(req, res) {
                     color,
                     note_mode,
                     user: user.id,
-                    createdAt: Date().toString()
+                    createdAt: Date().toString(),
+                    pinned: false
                 })
                 res.status(201).json({newNote})
             } catch (error) {

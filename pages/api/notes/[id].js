@@ -26,14 +26,15 @@ export default async function handler(req, res) {
             break
         case 'PUT':
             try {
-                const {title, note_text, color, note_mode} = req.body
+                const {title, note_text, color, note_mode, pinned} = req.body
                 const targetId = req.query.id
                 await Note.findByIdAndUpdate(targetId, {
                     $set: {
                         title,
                         note_text,
                         color,
-                        note_mode
+                        note_mode,
+                        pinned
                     }
                 }, {runValidators: true})
                 const updatedNote = await Note.findById(targetId)
