@@ -151,11 +151,14 @@ const Note = ({
             <p className={s.text}>{cropText(note_text)}</p>
             <div className={s.cardAction}>
                 <EditIcon height={27} width={27} fill={colorizedColor.color}
+                          className={s.hoverStyle}
                           onClick={onColorChangeButtonClickHandler}/>
                 <small style={{margin: '5px 0 0 0'}}>{localDate}</small>
-                <DeleteIcon fill={colorizedColor.color}
+                <DeleteIcon className={s.hoverStyle}
+                            fill={colorizedColor.color}
                             onClick={onDeleteButtonClickHandler}/>
-                <ColorizedBar noteId={noteId} showColorBar={showColorBar}
+                <ColorizedBar
+                    noteId={noteId} showColorBar={showColorBar}
                               setShowColorBar={setShowColorBar} currentColor={color}/>
             </div>
         </div>

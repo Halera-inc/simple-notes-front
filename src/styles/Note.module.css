@@ -8,7 +8,6 @@
     width: 100%;
     min-height: 250px;
     max-height: 500px;
-    /*z-index: -5;*/
     transition: 0.15s ease-in-out;
     @apply shadow-lg
 
@@ -18,10 +17,12 @@
     cursor: pointer;
     outline: 1px solid;
 }
-.title_date_space{
+
+.title_date_space {
     display: flex;
     justify-content: space-between;
 }
+
 .cardTitle {
     margin-bottom: 15px;
     @apply
@@ -35,7 +36,6 @@
 
 .cardAction {
     display: flex;
-    z-index: 0;
     align-items: center;
     justify-content: center;
     margin-top: 15px;
@@ -45,4 +45,14 @@
     card-actions
     justify-between
 
+}
+
+.hoverStyle {
+    width: 2em;
+    height: 2em;
+    transition: transform 0.25s;
+}
+
+.hoverStyle:hover {
+    transform: scale(1.3);
 }
