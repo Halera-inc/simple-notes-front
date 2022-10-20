@@ -67,7 +67,7 @@ const Notes = () => {
         <MainContainer>
             <label ref={modalBtnRef}
                    htmlFor='my-modal'
-                   className="btn modal-button hidden">
+                   className="btn modal-button hidden dark:bg-grey">
                 open modal
             </label>
             <ModalWindow titleNode={modalTitle}
@@ -80,7 +80,7 @@ const Notes = () => {
                          onConfirm={onConfirmClickHandler}
                          onDiscard={onDiscardClickHandler}/>
 
-            <div className={" dark:bg-grey p-l-[100px] height-[100vh]"}>
+            <div className={"dark:bg-grey p-l-[100px] h-[100%] min-h-[100vh]"}>
                 <div className={s.notesBlock}>
                     {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase())
                         || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase())).map((n, i) =>

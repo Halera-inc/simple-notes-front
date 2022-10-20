@@ -90,7 +90,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
         return (
             <>
                 <input type="checkbox" id='my-modal' className="modal-toggle"/>
-                <div className="modal backdrop-blur-sm">
+                <div className="modal  backdrop-blur-sm ">
                     <div className={s.modalBox} style={colorizedColor}>
                         <div className={s.topArea}>
                             <input type="text" className={s.cardTitle} style={colorizedColor}
@@ -121,6 +121,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                 />
                             </label>
                             <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
+                                      className={s.hoverStyle}
                                       onClick={onColorChangeButtonClickHandler}/>
                             <ColorizedBar modalStyle={modalStyle}
                                           setShowColor={setShowColor}
@@ -179,6 +180,7 @@ const ModalWindow: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType
                                 />
                             </label>
                             <EditIcon width={'2.5em'} height={'2.5em'}
+                                      className={s.hoverStyle}
                                       fill={props.defaultColor ? defaultNote.color : colorizedColorAdd.color}
                                       onClick={onColorChangeButtonClickHandler}/>
                             <ColorizedBar modalStyle={modalStyle}
