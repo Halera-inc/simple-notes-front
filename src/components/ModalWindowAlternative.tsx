@@ -9,7 +9,7 @@ import Button from "./universalComponent/Button/Button";
 import EditIcon from "../assets/images/EditIcon";
 import ColorizedBar from "./Note/ColorizedBar";
 import {useAppDispatch} from "../utils/hooks";
-import {setModalShow} from "../bll/slices/notesSlice";
+import {setAddNoteNodalShow, setEditNoteModalShow} from "../bll/slices/notesSlice";
 
 
 export type ModalWindowType = 'edit' | 'create'
@@ -20,6 +20,7 @@ type ModalWindowPropsType = {
     onTitleChange: (e: ChangeEvent<HTMLInputElement>) => void
     onTextChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
     onConfirm?: (id: string, title: string, note_text: string, showColor: ColorSamplesType) => void //cюда передавать цвет
+    onDiscard?: () => void
     onCreatClickHandler?: (id: string, title: string, note_text: string, showColor: ColorSamplesType) => void //cюда передавать цвет
     colorNote: colorizedColorType
     modalId: string
@@ -29,7 +30,9 @@ type ModalWindowPropsType = {
 }
 
 
-const ModalWindowAlternative: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsType) => {
+const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, onTextChange, onConfirm,
+                                    onDiscard, onCreatClickHandler, modalId, defaultColor,
+                                    setDefaultColor, modalShow}: ModalWindowPropsType) => {
 
     const modalWindowRef = useRef<HTMLDivElement>(null)
     const modalWindowBackgroundRef = useRef<HTMLDivElement>(null)
@@ -37,9 +40,13 @@ const ModalWindowAlternative: React.FC<ModalWindowPropsType> = (props: ModalWind
 
     useEffect(() => {
         document.body.addEventListener('click', (e: any) => {
-            if (e.path.includes(modalWindowBackgroundRef.current) && !e.path.includes(modalWindowRef.current) && props.modalShow) {
+            if (e.path.includes(modalWindowBackgroundRef.current) && !e.path.includes(modalWindowRef.current) && modalShow) {
                 console.log('click away')
-                dispatch(setModalShow({isModalShow: false}))
+                if (typeNode === 'edit'){
+                    dispatch(setEditNoteModalShow({isModalShow: false}))
+                } else {
+                    onDiscard && onDiscard()
+                }
             }
         })
         return function cleanup() {
@@ -47,13 +54,15 @@ const ModalWindowAlternative: React.FC<ModalWindowPropsType> = (props: ModalWind
                 console.log('unmount modalWindowComponent')
             })
         }
-    }, [dispatch])
+    }, [dispatch, modalShow, onDiscard, typeNode])
 
-    const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === props.modalId)?.color)
+    const currentCol = useSelector<RootState, string | undefined>(state => state.notes.notes.find(el => el._id === modalId)?.color)
     const colorizedColor = colorizeNote(currentCol)
     const [showColorBar, setShowColorBar] = useState(false)
     const [showColor, setShowColor] = useState('blue' as ColorSamplesType)
     const [cmdKeyPress, setCmdKeyPress] = useState(false)
+    const colorizedColorAdd = colorizeNote(showColor)
+    const defaultNote = colorizeNote('blue')
 
     const modalStyle = {
         marginBottom: '9%',
@@ -66,20 +75,22 @@ const ModalWindowAlternative: React.FC<ModalWindowPropsType> = (props: ModalWind
         e.stopPropagation()
     }
     const creatNoteHandler = () => {
-        props.onCreatClickHandler ?
-            props.onCreatClickHandler(props.modalId, props.titleNode, props.textNode, showColor)
+        onCreatClickHandler ?
+            onCreatClickHandler(modalId, titleNode, textNode, showColor)
             : ''
+        dispatch(setAddNoteNodalShow({isModalShow: false}))
     }
     const editNoteHandler = () => {
-        props.onConfirm ?
-            props.onConfirm(props.modalId, props.titleNode, props.textNode, currentCol ? currentCol as ColorSamplesType : 'blue' as ColorSamplesType)
+        onConfirm ?
+            onConfirm(modalId, titleNode, textNode, currentCol ? currentCol as ColorSamplesType : 'blue' as ColorSamplesType)
             : ''
+        dispatch(setEditNoteModalShow({isModalShow: false}))
     }
 
     //HotKeys Block//
     function onKeyPressHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T, type: 'edit' | 'create') {
         if (e.key === 'Enter' && (e.ctrlKey)) {
-            dispatch(setModalShow({isModalShow: false}))
+            dispatch(setEditNoteModalShow({isModalShow: false}))
             type === 'edit' ? editNoteHandler() : creatNoteHandler()
         }
     }
@@ -89,11 +100,11 @@ const ModalWindowAlternative: React.FC<ModalWindowPropsType> = (props: ModalWind
             setCmdKeyPress(true)
         } else if (e.keyCode === 13 && cmdKeyPress) {
             setCmdKeyPress(false)
-            dispatch(setModalShow({isModalShow: false}))
+            dispatch(setEditNoteModalShow({isModalShow: false}))
             type === 'edit' ? editNoteHandler() : creatNoteHandler()
 
         } else if (e.keyCode === 27) {
-            dispatch(setModalShow({isModalShow: false}))
+            dispatch(setEditNoteModalShow({isModalShow: false}))
         }
     }
 
@@ -104,54 +115,112 @@ const ModalWindowAlternative: React.FC<ModalWindowPropsType> = (props: ModalWind
     }
 
 
-    return (
-        <div className={s.modal} ref={modalWindowBackgroundRef}>
-            <div className={s.modalBox} style={colorizedColor} ref={modalWindowRef}>
-                <div className={s.topArea}>
-                    <input type="text" className={s.cardTitle} style={colorizedColor}
-                           value={props.titleNode}
-                           onChange={props.onTitleChange}
-                           onKeyPress={(e) => onKeyPressHandler(e, 'edit')}
-                           onKeyDown={(e) => onKeyDownHandler(e, 'edit')}
-                           onKeyUp={onKeyUpHandler}
-                           maxLength={30}
-                    />
+    if (typeNode === 'edit') {
+        console.log('edit')
+        return (
+            <div className={s.modal} ref={modalWindowBackgroundRef}>
+                <div className={s.modalBox} style={colorizedColor} ref={modalWindowRef}>
+                    <div className={s.topArea}>
+                        <input type="text" className={s.cardTitle} style={colorizedColor}
+                               value={titleNode}
+                               onChange={onTitleChange}
+                               onKeyPress={(e) => onKeyPressHandler(e, 'edit')}
+                               onKeyDown={(e) => onKeyDownHandler(e, 'edit')}
+                               onKeyUp={onKeyUpHandler}
+                               maxLength={30}
+                        />
 
-                    <textarea className={s.textTextArea}
-                              maxLength={2000}
-                              rows={15} value={props.textNode}
-                              style={colorizedColor}
-                              onChange={props.onTextChange}
-                              onKeyPress={(e) => onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
-                              onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
-                              onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
-                    />
-                </div>
-                <div className={s.modalAction}>
-                    <Button title={'Cancel'}
-                            color={'RED'}
-                            callback={() => {dispatch(setModalShow({isModalShow: false}))}}
-                    />
-                    <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
-                              className={s.hoverStyle}
-                              onClick={onColorChangeButtonClickHandler}/>
-                    <ColorizedBar modalStyle={modalStyle}
-                                  setShowColor={setShowColor}
-                                  noteId={props.modalId}
-                                  showColorBar={showColorBar}
-                                  setShowColorBar={setShowColorBar}
-                                  typeNode={props.typeNode}
-                                  setDefaultColor={props.setDefaultColor}
-                                  currentColor={colorizedColor.color}/>
-                    <Button title={'Save'}
-                            color={'GREEN'}
-                            callback={editNoteHandler}
-                    />
+                        <textarea className={s.textTextArea}
+                                  maxLength={2000}
+                                  rows={15} value={textNode}
+                                  style={colorizedColor}
+                                  onChange={onTextChange}
+                                  onKeyPress={(e) => onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
+                                  onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
+                                  onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                        />
+                    </div>
+                    <div className={s.modalAction}>
+                        <Button title={'Cancel'}
+                                color={'RED'}
+                                callback={() => {
+                                    dispatch(setEditNoteModalShow({isModalShow: false}))
+                                }}
+                        />
+                        <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
+                                  className={s.hoverStyle}
+                                  onClick={onColorChangeButtonClickHandler}/>
+                        <ColorizedBar modalStyle={modalStyle}
+                                      setShowColor={setShowColor}
+                                      noteId={modalId}
+                                      showColorBar={showColorBar}
+                                      setShowColorBar={setShowColorBar}
+                                      typeNode={typeNode}
+                                      setDefaultColor={setDefaultColor}
+                                      currentColor={colorizedColor.color}/>
+                        <Button title={'Save'}
+                                color={'GREEN'}
+                                callback={editNoteHandler}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        );
+    } else {
+        console.log('new')
+        return (
+            <div className={s.modal} ref={modalWindowBackgroundRef}>
+                <div className={s.modalBox} style={defaultColor ? defaultNote : colorizedColorAdd} ref={modalWindowRef}>
+                    <div className={s.topArea}>
+                        <input type="text" className={s.cardTitle}
+                               style={defaultColor ? defaultNote : colorizedColorAdd}
+                               placeholder={'Add new title'}
+                               value={titleNode} onChange={onTitleChange}
+                               maxLength={30}
+                               onKeyPress={(e) => onKeyPressHandler(e, 'create')}
+                               onKeyDown={(e) => onKeyDownHandler(e, 'create')}
+                               onKeyUp={onKeyUpHandler}
+                        />
+                        <textarea className={s.textTextArea}
+                                  style={defaultColor ? defaultNote : colorizedColorAdd}
+                                  rows={15}
+                                  maxLength={2000}
+                                  value={textNode}
+                                  placeholder={'Add text'}
+                                  onChange={onTextChange}
+                                  onKeyPress={(e) => onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'create')}
+                                  onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'create')}
+                                  onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                        />
+                    </div>
+                    <div className={s.modalAction}>
+                        <Button title={'Cancel'}
+                                color={'RED'}
+                                callback={() => {
+                                    onDiscard && onDiscard()
+                                }}
+                        />
+                        <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
+                                  className={s.hoverStyle}
+                                  onClick={onColorChangeButtonClickHandler}/>
+                        <ColorizedBar modalStyle={modalStyle}
+                                      setShowColor={setShowColor}
+                                      noteId={modalId}
+                                      showColorBar={showColorBar}
+                                      setShowColorBar={setShowColorBar}
+                                      typeNode={typeNode}
+                                      setDefaultColor={setDefaultColor}
+                                      currentColor={colorizedColor.color}/>
+                        <Button title={'Save'}
+                                color={'GREEN'}
+                                callback={creatNoteHandler}
+                        />
+                    </div>
+                </div>
+            </div>
 
-    );
+        );
+    }
 };
 
 export default ModalWindowAlternative;

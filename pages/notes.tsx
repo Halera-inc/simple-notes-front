@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useCallback, useEffect, useRef, useState} from 'react'
-import {dndNotes, editNote, getNotes, setModalShow} from 'src/bll/slices/notesSlice';
+import {dndNotes, editNote, getNotes, setEditNoteModalShow} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
@@ -23,7 +23,7 @@ const Notes = () => {
     // const modalBtnRef = useRef<HTMLLabelElement>(null)
     const effectRan = useRef(false)
     // const [modalShow, setModalShow] = useState(false)
-    const modalShow = useAppSelector(state => state.notes.modalShow)
+    const modalShow = useAppSelector(state => state.notes.editNoteModalShow)
 
     useEffect(() => {
         if (!effectRan.current) {
@@ -40,7 +40,7 @@ const Notes = () => {
         note_text && setModalText(note_text)
         setModalColor(colorizedColor)
         setModalId(noteId);
-        dispatch(setModalShow({isModalShow: true}))
+        dispatch(setEditNoteModalShow({isModalShow: true}))
         // modalBtnRef.current && modalBtnRef.current.click()
     }
     const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +51,10 @@ const Notes = () => {
     }
     const onConfirmClickHandler = (id: string, title: string, note_text: string, color: ColorSamplesType) => {
         dispatch(editNote({id, title, note_text, color})) // todo need to fix with appAPI
-        setModalShow({isModalShow: true})
+        setEditNoteModalShow({isModalShow: false})
+    }
+    const onDiscardClickHandler = () => {
+        setEditNoteModalShow({isModalShow: false})
     }
 
     const moveCards = useCallback((dragID: string, hoverID: string) => {
@@ -81,7 +84,10 @@ const Notes = () => {
                                                   onTitleChange={onTitleChangeHandler}
                                                   onTextChange={onContentChangeHandler}
                                                   onConfirm={onConfirmClickHandler}
-                                                  modalShow={modalShow}/>}
+                                                  modalShow={modalShow}
+                                                  onDiscard={onDiscardClickHandler}
+
+            />}
 
             <div className={"dark:bg-grey p-l-[100px] h-[100%] min-h-[100vh]"}>
                 <div className={s.notesBlock}>
