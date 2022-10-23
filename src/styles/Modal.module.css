@@ -55,6 +55,15 @@
     bg-transparent
     text-blue-dark
 }
+.hoverStyle {
+    width: 2.5em;
+    height: 2.5em;
+    transition: transform 0.25s;
+}
+
+.hoverStyle:hover {
+    transform: scale(1.3);
+}
 @media screen and (max-width: 540px) {
     .modalBox {
         width: 100%;
