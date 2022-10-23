@@ -65,7 +65,7 @@ export const dndNotes = createAsyncThunk('notes/dndNote',
 
 const initialState = {
     notes: [] as Array<NoteTextType>,
-    createNoteModal: false,
+    modalShow: false,
     searchParams: ''
 }
 
@@ -73,8 +73,8 @@ export const notesSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
-        setCreateNoteModalShow(state, action: PayloadAction<{ isModalShow: boolean }>) {
-            state.createNoteModal = action.payload.isModalShow
+        setModalShow(state, action: PayloadAction<{ isModalShow: boolean }>) {
+            state.modalShow = action.payload.isModalShow
         },
         setSearchParams(state, action: PayloadAction<{newValue: string}>){
             if (action.payload.newValue.length >= 2 || action.payload.newValue === '') {
@@ -114,7 +114,7 @@ export const notesSlice = createSlice({
     }
 })
 
-export const {setCreateNoteModalShow, setSearchParams} = notesSlice.actions
+export const {setModalShow, setSearchParams} = notesSlice.actions
 export const notesTestReducer = notesSlice.reducer
 export default notesSlice.reducer
 
