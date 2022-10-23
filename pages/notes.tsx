@@ -9,7 +9,6 @@ import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
 import {getSession} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
-import ModalWindowAlternative from "../src/components/ModalWindowAlternative";
 
 const Notes = () => {
 
@@ -71,21 +70,16 @@ const Notes = () => {
 
     return (
         <MainContainer>
-            {/*<label ref={modalBtnRef}*/}
-            {/*       htmlFor='my-modal'*/}
-            {/*       className="btn modal-button hidden dark:bg-grey">*/}
-            {/*    open modal*/}
-            {/*</label>*/}
-            {modalShow && <ModalWindowAlternative titleNode={modalTitle}
-                                                  textNode={modalText}
-                                                  typeNode={'edit'}
-                                                  colorNote={modalColor}
-                                                  modalId={modalId}
-                                                  onTitleChange={onTitleChangeHandler}
-                                                  onTextChange={onContentChangeHandler}
-                                                  onConfirm={onConfirmClickHandler}
-                                                  modalShow={modalShow}
-                                                  onDiscard={onDiscardClickHandler}
+            {modalShow && <ModalWindow titleNode={modalTitle}
+                                       textNode={modalText}
+                                       typeNode={'edit'}
+                                       colorNote={modalColor}
+                                       modalId={modalId}
+                                       onTitleChange={onTitleChangeHandler}
+                                       onTextChange={onContentChangeHandler}
+                                       onConfirm={onConfirmClickHandler}
+                                       modalShow={modalShow}
+                                       onDiscard={onDiscardClickHandler}
 
             />}
 

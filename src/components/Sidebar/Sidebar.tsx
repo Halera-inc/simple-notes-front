@@ -15,7 +15,6 @@ import {createNote, setAddNoteNodalShow} from "../../bll/slices/notesSlice";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {signOut} from "next-auth/react";
 import {ColorSamplesType} from "../../api/notes-api";
-import ModalWindowAlternative from "../ModalWindowAlternative";
 
 const Sidebar = () => {
 
@@ -90,13 +89,13 @@ const Sidebar = () => {
             return (
                 <LoginIcon width={50} fill={'#ffffff'}
                            className={"hover:fill-black"}
-                           // onClick={onLogoutClickHandle}
+                    // onClick={onLogoutClickHandle}
                 />
             )
         } else {
             return (
                 <LoginIcon width={50} fill={'#5590C1'}
-                           // onClick={onLogoutClickHandle}
+                    // onClick={onLogoutClickHandle}
                 />
             )
         }
@@ -168,18 +167,18 @@ const Sidebar = () => {
             <label ref={modalAddBtnRef} htmlFor='my-modal-add-note'
                    className="btn modal-button hidden">open
                 modal</label>
-            {addMoteModalShow && <ModalWindowAlternative titleNode={newNoteTitle}
-                                                         textNode={newNoteText}
-                                                         colorNote={{}}
-                                                         defaultColor={defaultColor}
-                                                         modalId={''}
-                                                         setDefaultColor={setDefaultColor}
-                                                         typeNode={'create'}
-                                                         onTitleChange={onTitleChangeHandler}
-                                                         onTextChange={onContentChangeHandler}
-                                                         onCreatClickHandler={onCreatClickHandler}
-                                                         modalShow={addMoteModalShow}
-                                                         onDiscard={onDiscardClickHandler}
+            {addMoteModalShow && <ModalWindow titleNode={newNoteTitle}
+                                              textNode={newNoteText}
+                                              colorNote={{}}
+                                              defaultColor={defaultColor}
+                                              modalId={''}
+                                              setDefaultColor={setDefaultColor}
+                                              typeNode={'create'}
+                                              onTitleChange={onTitleChangeHandler}
+                                              onTextChange={onContentChangeHandler}
+                                              onCreatClickHandler={onCreatClickHandler}
+                                              modalShow={addMoteModalShow}
+                                              onDiscard={onDiscardClickHandler}
             />}
             <div className={s.upBox}>
                 <span
