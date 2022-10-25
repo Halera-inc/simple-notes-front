@@ -19,9 +19,7 @@ const Notes = () => {
     const [modalColor, setModalColor] = useState<colorizedColorType>({})
     const [modalId, setModalId] = useState('');
     const [modalText, setModalText] = useState('')
-    // const modalBtnRef = useRef<HTMLLabelElement>(null)
     const effectRan = useRef(false)
-    // const [modalShow, setModalShow] = useState(false)
     const modalShow = useAppSelector(state => state.notes.editNoteModalShow)
 
     useEffect(() => {
@@ -34,13 +32,11 @@ const Notes = () => {
     }, [dispatch])
 
     const onCardClickHandler = (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => {
-        console.log('onCardClick')
         title && setModalTitle(title)
         note_text && setModalText(note_text)
         setModalColor(colorizedColor)
         setModalId(noteId);
         dispatch(setEditNoteModalShow({isModalShow: true}))
-        // modalBtnRef.current && modalBtnRef.current.click()
     }
     const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setModalTitle(e.currentTarget.value)
@@ -50,10 +46,14 @@ const Notes = () => {
     }
     const onConfirmClickHandler = (id: string, title: string, note_text: string, color: ColorSamplesType) => {
         dispatch(editNote({id, title, note_text, color})) // todo need to fix with appAPI
-        setEditNoteModalShow({isModalShow: false})
+        dispatch(setEditNoteModalShow({isModalShow: false}))
+        setModalTitle('')
+        setModalText('')
     }
     const onDiscardClickHandler = () => {
-        setEditNoteModalShow({isModalShow: false})
+        dispatch(setEditNoteModalShow({isModalShow: false}))
+        setModalTitle('')
+        setModalText('')
     }
 
     const moveCards = useCallback((dragID: string, hoverID: string) => {

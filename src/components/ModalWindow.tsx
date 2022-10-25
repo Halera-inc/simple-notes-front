@@ -9,7 +9,6 @@ import Button from "./universalComponent/Button/Button";
 import EditIcon from "../assets/images/EditIcon";
 import ColorizedBar from "./Note/ColorizedBar";
 import {useAppDispatch} from "../utils/hooks";
-import {setAddNoteNodalShow, setEditNoteModalShow} from "../bll/slices/notesSlice";
 
 
 export type ModalWindowType = 'edit' | 'create'
@@ -41,9 +40,8 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
     useEffect(() => {
         document.body.addEventListener('click', (e: any) => {
             if (e.path.includes(modalWindowBackgroundRef.current) && !e.path.includes(modalWindowRef.current) && modalShow) {
-                console.log('click away')
                 if (typeNode === 'edit'){
-                    dispatch(setEditNoteModalShow({isModalShow: false}))
+                    onDiscard && onDiscard()
                 } else {
                     onDiscard && onDiscard()
                 }
@@ -78,19 +76,16 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
         onCreatClickHandler ?
             onCreatClickHandler(modalId, titleNode, textNode, showColor)
             : ''
-        dispatch(setAddNoteNodalShow({isModalShow: false}))
     }
     const editNoteHandler = () => {
         onConfirm ?
             onConfirm(modalId, titleNode, textNode, currentCol ? currentCol as ColorSamplesType : 'blue' as ColorSamplesType)
             : ''
-        dispatch(setEditNoteModalShow({isModalShow: false}))
     }
 
     //HotKeys Block//
     function onKeyPressHandler<T extends React.KeyboardEvent = React.KeyboardEvent<HTMLInputElement>>(e: T, type: 'edit' | 'create') {
         if (e.key === 'Enter' && (e.ctrlKey)) {
-            dispatch(setEditNoteModalShow({isModalShow: false}))
             type === 'edit' ? editNoteHandler() : creatNoteHandler()
         }
     }
@@ -100,12 +95,11 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
             setCmdKeyPress(true)
         } else if (e.keyCode === 13 && cmdKeyPress) {
             setCmdKeyPress(false)
-            dispatch(setEditNoteModalShow({isModalShow: false}))
             type === 'edit' ? editNoteHandler() : creatNoteHandler()
 
         } else if (e.keyCode === 27) {
             if (type === 'edit') {
-                dispatch(setEditNoteModalShow({isModalShow: false}))
+                onDiscard && onDiscard()
             } else {
                 onDiscard && onDiscard()
             }
@@ -120,7 +114,6 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
 
 
     if (typeNode === 'edit') {
-        console.log('edit')
         return (
             <div className={s.modal} ref={modalWindowBackgroundRef}>
                 <div className={s.modalBox} style={colorizedColor} ref={modalWindowRef}>
@@ -148,7 +141,7 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
                         <Button title={'Cancel'}
                                 color={'RED'}
                                 callback={() => {
-                                    dispatch(setEditNoteModalShow({isModalShow: false}))
+                                    onDiscard && onDiscard()
                                 }}
                         />
                         <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
@@ -171,7 +164,6 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
             </div>
         );
     } else {
-        console.log('new')
         return (
             <div className={s.modal} ref={modalWindowBackgroundRef}>
                 <div className={s.modalBox} style={defaultColor ? defaultNote : colorizedColorAdd} ref={modalWindowRef}>

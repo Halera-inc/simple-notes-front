@@ -29,7 +29,6 @@ const Sidebar = () => {
 
 
     const onAddNoteClickHandler = () => {
-        console.log('create')
         dispatch(setAddNoteNodalShow({isModalShow: true}))
     }
     const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +40,7 @@ const Sidebar = () => {
 
     const onCreatClickHandler = (id: string, title: string, note_text: string, showColor: ColorSamplesType) => {  // todo need to fix with appAPI
         dispatch(createNote({title: title, note_text: note_text, color: showColor})) //сюда нужно передать цвет
+        dispatch(setAddNoteNodalShow({isModalShow: false}))
         setNewNoteTitle('')
         setNewNoteText('')
         setDefaultColor(true)
