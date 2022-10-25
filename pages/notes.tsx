@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useCallback, useEffect, useRef, useState} from 'react'
-import {dndNotes, editNote, getNotes} from 'src/bll/slices/notesSlice';
+import {dndNotes, editNote, getNotes, setEditNoteModalShow} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
@@ -19,8 +19,8 @@ const Notes = () => {
     const [modalColor, setModalColor] = useState<colorizedColorType>({})
     const [modalId, setModalId] = useState('');
     const [modalText, setModalText] = useState('')
-    const modalBtnRef = useRef<HTMLLabelElement>(null)
     const effectRan = useRef(false)
+    const modalShow = useAppSelector(state => state.notes.editNoteModalShow)
 
     useEffect(() => {
         if (!effectRan.current) {
@@ -36,7 +36,7 @@ const Notes = () => {
         note_text && setModalText(note_text)
         setModalColor(colorizedColor)
         setModalId(noteId);
-        modalBtnRef.current && modalBtnRef.current.click()
+        dispatch(setEditNoteModalShow({isModalShow: true}))
     }
     const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setModalTitle(e.currentTarget.value)
@@ -46,9 +46,14 @@ const Notes = () => {
     }
     const onConfirmClickHandler = (id: string, title: string, note_text: string, color: ColorSamplesType) => {
         dispatch(editNote({id, title, note_text, color})) // todo need to fix with appAPI
+        dispatch(setEditNoteModalShow({isModalShow: false}))
+        setModalTitle('')
+        setModalText('')
     }
     const onDiscardClickHandler = () => {
-        // TODO: ????????
+        dispatch(setEditNoteModalShow({isModalShow: false}))
+        setModalTitle('')
+        setModalText('')
     }
 
     const moveCards = useCallback((dragID: string, hoverID: string) => {
@@ -61,24 +66,22 @@ const Notes = () => {
         if (newArray.length === legacyNotes.length) {
             dispatch(dndNotes({newNotesArray: newArray}))
         }
-    },[notes, dispatch])
+    }, [notes, dispatch])
 
     return (
         <MainContainer>
-            <label ref={modalBtnRef}
-                   htmlFor='my-modal'
-                   className="btn modal-button hidden dark:bg-grey">
-                open modal
-            </label>
-            <ModalWindow titleNode={modalTitle}
-                         textNode={modalText}
-                         typeNode={'edit'}
-                         colorNote={modalColor}
-                         modalId={modalId}
-                         onTitleChange={onTitleChangeHandler}
-                         onTextChange={onContentChangeHandler}
-                         onConfirm={onConfirmClickHandler}
-                         onDiscard={onDiscardClickHandler}/>
+            {modalShow && <ModalWindow titleNode={modalTitle}
+                                       textNode={modalText}
+                                       typeNode={'edit'}
+                                       colorNote={modalColor}
+                                       modalId={modalId}
+                                       onTitleChange={onTitleChangeHandler}
+                                       onTextChange={onContentChangeHandler}
+                                       onConfirm={onConfirmClickHandler}
+                                       modalShow={modalShow}
+                                       onDiscard={onDiscardClickHandler}
+
+            />}
 
             <div className={"dark:bg-grey p-l-[100px] h-[100%] min-h-[100vh]"}>
                 <div className={s.notesBlock}>
