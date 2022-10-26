@@ -8,9 +8,10 @@ type PropsType = {
     link?: string
     active?: boolean
     redActive?: boolean
+    onClick?: ()=>void
 }
 
-const SidebarItem = ({icon, tooltipInfo, link, active, redActive}: PropsType) => {
+const SidebarItem = ({icon, tooltipInfo, link, active, redActive, onClick}: PropsType) => {
 
 
     const [hover, setHover] = useState<boolean>(false)
@@ -22,7 +23,7 @@ const SidebarItem = ({icon, tooltipInfo, link, active, redActive}: PropsType) =>
                  data-tip={tooltipInfo ? tooltipInfo : 'Other'}
                  onMouseEnter={() => setHover(true)}
                  onMouseLeave={() => setHover(false)}
-                 style={hover && redActive ? {backgroundColor: '#ffeeee'} : {}}>
+                 style={hover && redActive ? {backgroundColor: '#ffeeee'} : {}} onClick={onClick}>
                 {icon}
             </div>
         </Link>

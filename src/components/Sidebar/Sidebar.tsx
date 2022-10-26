@@ -11,8 +11,8 @@ import {useRouter} from "next/router";
 import ModalWindow from "../ModalWindow";
 import {useTheme} from "next-themes";
 import MoonIcon from "src/assets/images/MoonIcon";
-import {createNote} from "../../bll/slices/notesSlice";
-import {useAppDispatch} from "../../utils/hooks";
+import {createNote, setAddNoteNodalShow} from "../../bll/slices/notesSlice";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {signOut} from "next-auth/react";
 import {ColorSamplesType} from "../../api/notes-api";
 
@@ -25,10 +25,11 @@ const Sidebar = () => {
     const [newNoteTitle, setNewNoteTitle] = useState('')
     const [newNoteText, setNewNoteText] = useState('')
     const [defaultColor, setDefaultColor] = useState(false)
+    const addMoteModalShow = useAppSelector(state => state.notes.addNoteNodalShow)
 
 
     const onAddNoteClickHandler = () => {
-        modalAddBtnRef.current && modalAddBtnRef.current.click()
+        dispatch(setAddNoteNodalShow({isModalShow: true}))
     }
     const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewNoteTitle(e.currentTarget.value)
@@ -39,16 +40,17 @@ const Sidebar = () => {
 
     const onCreatClickHandler = (id: string, title: string, note_text: string, showColor: ColorSamplesType) => {  // todo need to fix with appAPI
         dispatch(createNote({title: title, note_text: note_text, color: showColor})) //сюда нужно передать цвет
+        dispatch(setAddNoteNodalShow({isModalShow: false}))
         setNewNoteTitle('')
         setNewNoteText('')
         setDefaultColor(true)
-
     }
 
 
     const onDiscardClickHandler = () => {  // todo need to fix with appAPI
         setNewNoteTitle('')
         setNewNoteText('')
+        dispatch(setAddNoteNodalShow({isModalShow: false}))
     }
 
     const {systemTheme, theme, setTheme} = useTheme();
@@ -80,19 +82,21 @@ const Sidebar = () => {
         }
     }
 
-    const RenderLagoutIcon = () => {
+    const RenderLogoutIcon = () => {
         if (!mounted) return null;
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === 'dark') {
             return (
                 <LoginIcon width={50} fill={'#ffffff'}
                            className={"hover:fill-black"}
-                           onClick={onLogoutClickHandle}/>
+                    // onClick={onLogoutClickHandle}
+                />
             )
         } else {
             return (
                 <LoginIcon width={50} fill={'#5590C1'}
-                           onClick={onLogoutClickHandle}/>
+                    // onClick={onLogoutClickHandle}
+                />
             )
         }
     }
@@ -137,13 +141,15 @@ const Sidebar = () => {
                 <PlusIcon width={50}
                           fill={'#ffffff'}
                           className={"hover:fill-black"}
-                          onClick={onAddNoteClickHandler}/>
+                    // onClick={onAddNoteClickHandler}
+                />
             )
         } else {
             return (
                 <PlusIcon width={50}
                           fill={'#5590C1'}
-                          onClick={onAddNoteClickHandler}/>
+                    // onClick={onAddNoteClickHandler}
+                />
             )
         }
     }
@@ -161,17 +167,19 @@ const Sidebar = () => {
             <label ref={modalAddBtnRef} htmlFor='my-modal-add-note'
                    className="btn modal-button hidden">open
                 modal</label>
-            <ModalWindow titleNode={newNoteTitle}
-                         textNode={newNoteText}
-                         colorNote={{}}
-                         defaultColor={defaultColor}
-                         modalId={''}
-                         setDefaultColor={setDefaultColor}
-                         typeNode={'create'}
-                         onTitleChange={onTitleChangeHandler}
-                         onTextChange={onContentChangeHandler}
-                         onCreatClickHandler={onCreatClickHandler}
-                         onDiscard={onDiscardClickHandler}/>
+            {addMoteModalShow && <ModalWindow titleNode={newNoteTitle}
+                                              textNode={newNoteText}
+                                              colorNote={{}}
+                                              defaultColor={defaultColor}
+                                              modalId={''}
+                                              setDefaultColor={setDefaultColor}
+                                              typeNode={'create'}
+                                              onTitleChange={onTitleChangeHandler}
+                                              onTextChange={onContentChangeHandler}
+                                              onCreatClickHandler={onCreatClickHandler}
+                                              modalShow={addMoteModalShow}
+                                              onDiscard={onDiscardClickHandler}
+            />}
             <div className={s.upBox}>
                 <span
                     className={"flex items-center  justify-center bg-white h-[80px] w-[80px] rounded-[30px]"}>
@@ -181,7 +189,8 @@ const Sidebar = () => {
             <div className={s.middleBox}>
                 <SidebarItem tooltipInfo={'Create note'}
                              link={'/notes'}
-                             icon={RenderAddNoteIcon()}/>
+                             icon={RenderAddNoteIcon()}
+                             onClick={onAddNoteClickHandler}/>
                 <SidebarItem tooltipInfo={'My notes'}
                              active={router.pathname === '/notes'}
                              link={'/notes'}
@@ -197,7 +206,9 @@ const Sidebar = () => {
                 <SidebarItem tooltipInfo={'Log out'}
                              redActive={true}
                              link={'/#'}
-                             icon={RenderLagoutIcon()}/>
+                             icon={RenderLogoutIcon()}
+                             onClick={onLogoutClickHandle}
+                />
             </div>
             <div className={'bg'}></div>
         </div>

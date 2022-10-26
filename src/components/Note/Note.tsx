@@ -3,8 +3,8 @@ import EditIcon from "../../assets/images/EditIcon";
 import DeleteIcon from "../../assets/images/DeleteIcon";
 import colorizeNote from "../../utils/colorizeNote";
 import {useRef, useState} from 'react';
-import {useAppDispatch} from "../../utils/hooks";
-import {deleteNote} from "../../bll/slices/notesSlice";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
+import {deleteNote, notesSlice} from "../../bll/slices/notesSlice";
 import ColorizedBar from './ColorizedBar';
 import React from 'react'
 import {ColorSamplesType} from 'src/api/notes-api';
@@ -13,6 +13,8 @@ import {cropText} from "../../utils/cropText";
 import {useDrag, useDrop} from 'react-dnd';
 import {ItemTypes} from 'src/utils/item';
 import type {Identifier, XYCoord} from 'dnd-core';
+import  {PushPinIcon} from "../../assets/images/PushPin";
+
 
 type NotePropsType = {
     index: number
@@ -44,6 +46,7 @@ const Note = ({
               }: NotePropsType) => {
     const dispatch = useAppDispatch()
     const colorizedColor = colorizeNote(color)
+    const pushPin=useAppSelector(state=> state.notes.pushPin)
     const [showColorBar, setShowColorBar] = useState(false)
 
     const onDeleteButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -145,8 +148,11 @@ const Note = ({
     return (
         <div className={s.card} style={colorizedColor} ref={ref} data-handler-id={handlerId}
              onClick={() => edit(title, note_text, colorizedColor, color, noteId)}>
+
             <div className={s.title_date_space}>
+
                 <h2 className={s.cardTitle}>{title}</h2>
+                <PushPinIcon height={30} width={30} fill={colorizedColor.color}/>
             </div>
             <p className={s.text}>{cropText(note_text)}</p>
             <div className={s.cardAction}>
