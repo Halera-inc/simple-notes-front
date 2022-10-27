@@ -41,11 +41,11 @@ export const deleteNote = createAsyncThunk('notes/deleteNote', async (param: { n
 })
 
 export const editNote = createAsyncThunk('notes/editNote',
-    async (params: { id: string, title?: string, note_text?: string, color?: ColorSamplesType, note_mode?: NoteViewType }, thunkAPI) => {
+    async (params: { id: string, title?: string, note_text?: string, color?: ColorSamplesType, note_mode?: NoteViewType, pinned?:boolean }, thunkAPI) => {
         try {
             const res = await notesAPI.updateNote(params.id, params.title,
-                params.note_text, params.color, params.note_mode)
-            return {noteId: params.id, newColor: params.color, newTitle: params.title, newText: params.note_text, newMode: params.note_mode}
+                params.note_text, params.color, params.note_mode,params.pinned)
+            return {noteId: params.id, newColor: params.color, newTitle: params.title, newText: params.note_text, newMode: params.note_mode, newPinned: params.pinned}
         } catch (error) {
             console.log(error)
             return thunkAPI.rejectWithValue(null)
@@ -132,4 +132,5 @@ type PostNoteParamsType = {
     note_text?: string
     color?: ColorSamplesType
     note_mode?: string
+    pinned?: boolean
 }

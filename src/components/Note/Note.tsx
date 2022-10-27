@@ -4,7 +4,7 @@ import DeleteIcon from "../../assets/images/DeleteIcon";
 import colorizeNote from "../../utils/colorizeNote";
 import {useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
-import {deleteNote, notesSlice} from "../../bll/slices/notesSlice";
+import {createNote, deleteNote, editNote, notesSlice} from "../../bll/slices/notesSlice";
 import ColorizedBar from './ColorizedBar';
 import React from 'react'
 import {ColorSamplesType} from 'src/api/notes-api';
@@ -13,18 +13,21 @@ import {cropText} from "../../utils/cropText";
 import {useDrag, useDrop} from 'react-dnd';
 import {ItemTypes} from 'src/utils/item';
 import type {Identifier, XYCoord} from 'dnd-core';
-import  {PushPinIcon} from "../../assets/images/PushPin";
+import {PushPinIcon} from "../../assets/images/PushPin";
+import {PushPinBlackIcon} from "../../assets/images/PushPinBlack";
 
 
-type NotePropsType = {
+export type NotePropsType = {
     index: number
     moveCard?: (dragID: string, hoverID: string) => void
     title?: string
     note_text?: string
     color: ColorSamplesType
     noteId: string
+    pinned:boolean
     edit: (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => void
     createdAt?: Date
+    changePinnedHandler:(noteId:string, result:boolean)=> void
 }
 
 type DragItem = {
@@ -38,6 +41,8 @@ const Note = ({
                   title = '',
                   note_text = '',
                   color,
+                  pinned,
+                  changePinnedHandler,
                   edit,
                   noteId,
                   createdAt,
@@ -46,8 +51,17 @@ const Note = ({
               }: NotePropsType) => {
     const dispatch = useAppDispatch()
     const colorizedColor = colorizeNote(color)
-    const pushPin=useAppSelector(state=> state.notes.pushPin)
+
     const [showColorBar, setShowColorBar] = useState(false)
+
+    const [changePushPin, setChangePushPin] = useState<boolean>(pinned);
+
+    const changePushPinHandler = (e: React.MouseEvent<SVGSVGElement>) => {
+        setChangePushPin(!changePushPin);
+         const result=!changePushPin ? true : false;
+        changePinnedHandler(noteId, result)
+        e.stopPropagation()
+    }
 
     const onDeleteButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
         dispatch(deleteNote({noteId}))
@@ -152,7 +166,10 @@ const Note = ({
             <div className={s.title_date_space}>
 
                 <h2 className={s.cardTitle}>{title}</h2>
-                <PushPinIcon height={30} width={30} fill={colorizedColor.color}/>
+                {changePushPin ?
+                    <PushPinBlackIcon height={30} width={30} fill={colorizedColor.color}
+                                      onClick={changePushPinHandler}/>
+                    : <PushPinIcon height={30} width={30} fill={colorizedColor.color} onClick={changePushPinHandler}/>}
             </div>
             <p className={s.text}>{cropText(note_text)}</p>
             <div className={s.cardAction}>
@@ -165,7 +182,7 @@ const Note = ({
                             onClick={onDeleteButtonClickHandler}/>
                 <ColorizedBar
                     noteId={noteId} showColorBar={showColorBar}
-                              setShowColorBar={setShowColorBar} currentColor={color}/>
+                    setShowColorBar={setShowColorBar} currentColor={color}/>
             </div>
         </div>
     )

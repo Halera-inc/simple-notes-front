@@ -50,6 +50,9 @@ const Notes = () => {
         setModalTitle('')
         setModalText('')
     }
+    const changePinnedHandler = (noteId:string, result:boolean) => {
+        dispatch(editNote({id:noteId, pinned:result}))
+    }
     const onDiscardClickHandler = () => {
         dispatch(setEditNoteModalShow({isModalShow: false}))
         setModalTitle('')
@@ -93,9 +96,11 @@ const Notes = () => {
                               color={n.color}
                               noteId={n._id}
                               edit={onCardClickHandler}
+                              changePinnedHandler={changePinnedHandler}
                               createdAt={n.createdAt}
                               index={i}
                               moveCard={moveCards}
+                              pinned={n.pinned}
                         />
                     )}
                 </div>
