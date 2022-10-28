@@ -115,6 +115,9 @@ export const notesSlice = createSlice({
                 if (action.payload && action.payload.newMode) {
                     state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].note_mode = action.payload.newMode
                 }
+                if (action.payload && action.payload.newPinned) {
+                    state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].pinned = action.payload.newPinned
+                }
             })
             .addCase(dndNotes.fulfilled, (state, action) => {
                 state.notes = action.payload
