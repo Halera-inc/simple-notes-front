@@ -10,13 +10,14 @@ import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import {useRouter} from "next/router";
 import {getProviders, getSession, signIn} from "next-auth/react";
 import Button from "../src/components/universalComponent/Button/Button";
-import {isThereErrorOnLogin} from 'src/bll/slices/authSlice';
+import {isErrorInfo, isThereErrorOnLogin} from 'src/bll/slices/authSlice';
 import {setIsAppFetching} from 'src/bll/slices/appSlice'
 import {Spinner} from "../src/components/Spinner";
 import {useTheme} from "next-themes";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import GithubIcon from "../src/assets/images/GithubIcon";
 import GoogleIcon from "../src/assets/images/GoogleIcon";
+
 
 type FormikErrorType = {
     email: string
@@ -109,18 +110,20 @@ const Login = ({providers}: any) => {
         },
         onSubmit: async values => {
             dispatch(setIsAppFetching(true));
-            const {error}: any = signIn("credentials", {
-                redirect: false,
-                email: values.email,
-                password: values.password,
-                callbackUrl: `${window.location.origin}`,
-            })
-            dispatch(setIsAppFetching(false))
-            if (error) {
-                dispatch(isThereErrorOnLogin(true))
-            } else {
+            try {
+                await signIn("credentials", {
+                    redirect: false,
+                    email: values.email,
+                    password: values.password,
+                    callbackUrl: `${window.location.origin}`,
+                })
                 redirectToNotes()
                 dispatch(isThereErrorOnLogin(false))
+            } catch (err) {
+                dispatch(isThereErrorOnLogin(true))
+
+            } finally {
+                dispatch(setIsAppFetching(false))
             }
             formik.resetForm();
         },

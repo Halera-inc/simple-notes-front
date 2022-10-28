@@ -16,6 +16,7 @@ export const registerUser = createAsyncThunk(
 
 const initialState = {
     loginError:false,
+
 };
 
 export const authSlice = createSlice({
@@ -25,6 +26,7 @@ export const authSlice = createSlice({
         isThereErrorOnLogin(state, action: PayloadAction<boolean>) {
             state.loginError = action.payload
         },
+
     },
     extraReducers: {}
 })
