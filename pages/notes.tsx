@@ -9,7 +9,7 @@ import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
 import {getSession} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
-import {layout, SpringGrid, measureItems, CSSGrid, makeResponsive } from 'react-stonecutter';
+import {layout, measureItems, CSSGrid, makeResponsive } from 'react-stonecutter';
 
 const Notes = () => {
     const Grid = makeResponsive(measureItems(CSSGrid), {
@@ -72,6 +72,9 @@ const Notes = () => {
         }
     }, [notes, dispatch])
 
+    // @ts-ignore
+    // @ts-ignore
+    // @ts-ignore
     return (
         <MainContainer>
             {modalShow && <ModalWindow titleNode={modalTitle}
@@ -87,12 +90,13 @@ const Notes = () => {
 
             />}
 
+
             <div className={"dark:bg-grey p-l-[100px] h-[100%] min-h-[100vh]"}>
                 <div className={s.notesBlock}>
                     <Grid
                         component="ul"
                         columns={2}
-                        columnWidth={250}
+                        columnWidth={365}
                         gutterWidth={10}
                         gutterHeight={10}
                         layout={layout.pinterest}
