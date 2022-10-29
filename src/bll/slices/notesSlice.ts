@@ -41,11 +41,11 @@ export const deleteNote = createAsyncThunk('notes/deleteNote', async (param: { n
 })
 
 export const editNote = createAsyncThunk('notes/editNote',
-    async (params: { id: string, title?: string, note_text?: string, color?: ColorSamplesType, note_mode?: NoteViewType }, thunkAPI) => {
+    async (params: { id: string, title?: string, note_text?: string, color?: ColorSamplesType, note_mode?: NoteViewType, pinned?:boolean }, thunkAPI) => {
         try {
             const res = await notesAPI.updateNote(params.id, params.title,
-                params.note_text, params.color, params.note_mode)
-            return {noteId: params.id, newColor: params.color, newTitle: params.title, newText: params.note_text, newMode: params.note_mode}
+                params.note_text, params.color, params.note_mode,params.pinned)
+            return {noteId: params.id, newColor: params.color, newTitle: params.title, newText: params.note_text, newMode: params.note_mode, newPinned: params.pinned}
         } catch (error) {
             console.log(error)
             return thunkAPI.rejectWithValue(null)
@@ -68,16 +68,12 @@ const initialState = {
     editNoteModalShow: false,
     addNoteNodalShow: false,
     searchParams: '',
-    pushPin:false,
 }
 
 export const notesSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
-        setPushPin(state, action:PayloadAction<{value:boolean}>){
-            state.pushPin  = action.payload.value
-        },
         setEditNoteModalShow(state, action: PayloadAction<{ isModalShow: boolean }>) {
             state.editNoteModalShow = action.payload.isModalShow
         },
@@ -103,6 +99,7 @@ export const notesSlice = createSlice({
                 state.notes.splice(state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId), 1);
             })
             .addCase(editNote.fulfilled, (state, action) => {
+
                 if (action.payload && action.payload.newTitle) {
                     state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].title = action.payload.newTitle
                 }
@@ -115,6 +112,9 @@ export const notesSlice = createSlice({
                 if (action.payload && action.payload.newMode) {
                     state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].note_mode = action.payload.newMode
                 }
+                if (action.payload && action.payload.newPinned !==undefined) {
+                    state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].pinned = action.payload.newPinned
+                }
             })
             .addCase(dndNotes.fulfilled, (state, action) => {
                 state.notes = action.payload
@@ -122,7 +122,7 @@ export const notesSlice = createSlice({
     }
 })
 
-export const {setPushPin, setEditNoteModalShow, setAddNoteNodalShow, setSearchParams} = notesSlice.actions
+export const {setEditNoteModalShow, setAddNoteNodalShow, setSearchParams} = notesSlice.actions
 export const notesTestReducer = notesSlice.reducer
 export default notesSlice.reducer
 
@@ -132,4 +132,5 @@ type PostNoteParamsType = {
     note_text?: string
     color?: ColorSamplesType
     note_mode?: string
+    pinned?: boolean
 }

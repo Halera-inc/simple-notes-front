@@ -29,12 +29,13 @@ export const notesAPI = {
     deleteNote(id: string) {
         return instance.delete(`api/notes/${id}`);
     },
-    updateNote(id: string, title?: string, note_text?: string, color?: string, note_mode?: NoteViewType) {
+    updateNote(id: string, title?: string, note_text?: string, color?: string, note_mode?: NoteViewType, pinned?:boolean) {
         return instance.put(`api/notes/${id}`, {
             title,
             note_text,
             color,
             note_mode,
+            pinned,
         });
     },
     dndNotes(newNotesArr: NoteTextType[]){

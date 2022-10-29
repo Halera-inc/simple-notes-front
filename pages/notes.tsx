@@ -96,6 +96,7 @@ const Notes = () => {
                               createdAt={n.createdAt}
                               index={i}
                               moveCard={moveCards}
+                              pinned={n.pinned}
                         />
                     )}
                 </div>
