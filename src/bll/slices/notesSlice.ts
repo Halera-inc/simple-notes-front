@@ -68,16 +68,12 @@ const initialState = {
     editNoteModalShow: false,
     addNoteNodalShow: false,
     searchParams: '',
-    pushPin:false,
 }
 
 export const notesSlice = createSlice({
     name: 'notes',
     initialState,
     reducers: {
-        setPushPin(state, action:PayloadAction<{value:boolean}>){
-            state.pushPin  = action.payload.value
-        },
         setEditNoteModalShow(state, action: PayloadAction<{ isModalShow: boolean }>) {
             state.editNoteModalShow = action.payload.isModalShow
         },
@@ -103,6 +99,7 @@ export const notesSlice = createSlice({
                 state.notes.splice(state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId), 1);
             })
             .addCase(editNote.fulfilled, (state, action) => {
+
                 if (action.payload && action.payload.newTitle) {
                     state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].title = action.payload.newTitle
                 }
@@ -115,7 +112,7 @@ export const notesSlice = createSlice({
                 if (action.payload && action.payload.newMode) {
                     state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].note_mode = action.payload.newMode
                 }
-                if (action.payload && action.payload.newPinned) {
+                if (action.payload && action.payload.newPinned !==undefined) {
                     state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].pinned = action.payload.newPinned
                 }
             })
@@ -125,7 +122,7 @@ export const notesSlice = createSlice({
     }
 })
 
-export const {setPushPin, setEditNoteModalShow, setAddNoteNodalShow, setSearchParams} = notesSlice.actions
+export const {setEditNoteModalShow, setAddNoteNodalShow, setSearchParams} = notesSlice.actions
 export const notesTestReducer = notesSlice.reducer
 export default notesSlice.reducer
 

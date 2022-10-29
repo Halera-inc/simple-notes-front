@@ -3,8 +3,8 @@ import EditIcon from "../../assets/images/EditIcon";
 import DeleteIcon from "../../assets/images/DeleteIcon";
 import colorizeNote from "../../utils/colorizeNote";
 import {useRef, useState} from 'react';
-import {useAppDispatch, useAppSelector} from "../../utils/hooks";
-import {createNote, deleteNote, editNote, notesSlice} from "../../bll/slices/notesSlice";
+import {useAppDispatch} from "../../utils/hooks";
+import {deleteNote, editNote} from "../../bll/slices/notesSlice";
 import ColorizedBar from './ColorizedBar';
 import React from 'react'
 import {ColorSamplesType} from 'src/api/notes-api';
@@ -24,7 +24,7 @@ export type NotePropsType = {
     note_text?: string
     color: ColorSamplesType
     noteId: string
-    pinned:boolean
+    pinned: boolean
     edit: (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => void
     createdAt?: Date
 }
@@ -50,22 +50,12 @@ const Note = ({
     const dispatch = useAppDispatch()
     const colorizedColor = colorizeNote(color)
 
-
     const [showColorBar, setShowColorBar] = useState(false)
 
     const changePushPinHandler = (e: React.MouseEvent<SVGSVGElement>) => {
-        dispatch(editNote({id: noteId, pinned:!pinned}))
+        dispatch(editNote({id: noteId, pinned: !pinned}))
         e.stopPropagation()
     }
-
-    // const [changePushPin, setChangePushPin] = useState<boolean>(pinned);
-
-    // const changePushPinHandler = (e: React.MouseEvent<SVGSVGElement>) => {
-    //     setChangePushPin(!changePushPin);
-    //      const result=!changePushPin ? true : false;
-    //     changePinnedHandler(noteId, result)
-    //     e.stopPropagation()
-    // }
 
     const onDeleteButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
         dispatch(deleteNote({noteId}))
@@ -170,13 +160,9 @@ const Note = ({
             <div className={s.title_date_space}>
 
                 <h2 className={s.cardTitle}>{title}</h2>
-                {/*{changePushPin ?*/}
-                {/*    <PushPinBlackIcon height={30} width={30} fill={colorizedColor.color}*/}
-                {/*                      onClick={changePushPinHandler}/>*/}
-                {/*    : <PushPinIcon height={30} width={30} fill={colorizedColor.color} onClick={changePushPinHandler}/>}*/}
                 {pinned ?
                     <PushPinBlackIcon height={30} width={30} fill={colorizedColor.color}
-                                     onClick={changePushPinHandler}/>
+                                      onClick={changePushPinHandler}/>
                     : <PushPinIcon height={30} width={30} fill={colorizedColor.color} onClick={changePushPinHandler}/>}
             </div>
             <p className={s.text}>{cropText(note_text)}</p>
