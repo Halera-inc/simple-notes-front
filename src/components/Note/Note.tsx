@@ -161,17 +161,17 @@ const Note = ({
 
                 <h2 className={s.cardTitle}>{title}</h2>
                 {pinned ?
-                    <PushPinBlackIcon height={30} width={30} fill={colorizedColor.color}
+                    <PushPinBlackIcon height={25} width={25} fill={colorizedColor.color}
                                       onClick={changePushPinHandler}/>
-                    : <PushPinIcon height={30} width={30} fill={colorizedColor.color} onClick={changePushPinHandler}/>}
+                    : <PushPinIcon height={25} width={25} fill={colorizedColor.color} onClick={changePushPinHandler}/>}
             </div>
             <p className={s.text}>{cropText(note_text)}</p>
             <div className={s.cardAction}>
-                <EditIcon height={27} width={27} fill={colorizedColor.color}
+                <EditIcon  height={25} width={25} fill={colorizedColor.color}
                           className={s.hoverStyle}
                           onClick={onColorChangeButtonClickHandler}/>
                 <small style={{margin: '5px 0 0 0'}}>{localDate}</small>
-                <DeleteIcon className={s.hoverStyle}
+                <DeleteIcon height={25} width={25} className={s.hoverStyle}
                             fill={colorizedColor.color}
                             onClick={onDeleteButtonClickHandler}/>
                 <ColorizedBar

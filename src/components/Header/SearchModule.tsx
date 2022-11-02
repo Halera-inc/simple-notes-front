@@ -25,8 +25,8 @@ const SearchModule = () => {
                 <input onChange={onSearchValueChange}
                        type="text"
                        placeholder="Search"
-                       className={'input border-1 rounded-r-none border-blue-dark w-[250px]'}/>
-                <button className="btn btn-square bg-blue-dark dark:bg-blue border-1 rounded-l-none  border-blue-dark hover:bg-blue ">
+                       className={'input border-1 rounded-none border-blue-dark w-[250px]'}/>
+                <button className="btn btn-square bg-blue-dark dark:bg-blue border-1 rounded-none  border-blue-dark hover:bg-blue ">
                     <SearchIcon height={30}
                                 width={30}
                                 fill={'var(--blue-dark)'}

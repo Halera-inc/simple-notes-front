@@ -67,7 +67,6 @@ const Notes = () => {
             dispatch(dndNotes({newNotesArray: newArray}))
         }
     }, [notes, dispatch])
-
     return (
         <MainContainer>
             {modalShow && <ModalWindow titleNode={modalTitle}
@@ -83,10 +82,26 @@ const Notes = () => {
 
             />}
 
-            <div className={"dark:bg-grey p-l-[100px] h-[100%] min-h-[100vh]"}>
+            <div className={"dark:bg-grey pl-[100px] h-[100%] min-h-[100vh] pt-[70px]"}>
+                {notes.find(n =>  n.pinned) ? <div className={s.fixNoteBlock}>
+                    {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase()) && n.pinned
+                        || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase()) && n.pinned).map((n, i) =>
+                        <Note key={n._id}
+                              title={n.title}
+                              note_text={n.note_text}
+                              color={n.color}
+                              noteId={n._id}
+                              edit={onCardClickHandler}
+                              createdAt={n.createdAt}
+                              index={i}
+                              moveCard={moveCards}
+                              pinned={n.pinned}
+                        />
+                    )}
+                </div>: ''}
                 <div className={s.notesBlock}>
-                    {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase())
-                        || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase())).map((n, i) =>
+                    {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase())&& !n.pinned
+                        || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase()) && !n.pinned).map((n, i) =>
                         <Note key={n._id}
                               title={n.title}
                               note_text={n.note_text}
@@ -100,7 +115,7 @@ const Notes = () => {
                         />
                     )}
                 </div>
-            </div>
+                </div>
         </MainContainer>
     )
 }
