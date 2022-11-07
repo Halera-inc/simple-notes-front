@@ -9,6 +9,7 @@ import Button from "./universalComponent/Button/Button";
 import EditIcon from "../assets/images/EditIcon";
 import ColorizedBar from "./Note/ColorizedBar";
 import {useAppDispatch} from "../utils/hooks";
+import {UniversalModalWindow} from "src/components/universalComponent/UniversalModalWindow";
 
 
 export type ModalWindowType = 'edit' | 'create'

@@ -10,6 +10,7 @@ import {ColorSamplesType} from "../src/api/notes-api";
 import {getSession} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 
+
 const Notes = () => {
 
     const dispatch = useAppDispatch()
@@ -21,6 +22,7 @@ const Notes = () => {
     const [modalText, setModalText] = useState('')
     const effectRan = useRef(false)
     const modalShow = useAppSelector(state => state.notes.editNoteModalShow)
+
 
     useEffect(() => {
         if (!effectRan.current) {
@@ -80,7 +82,9 @@ const Notes = () => {
                                        modalShow={modalShow}
                                        onDiscard={onDiscardClickHandler}
 
-            />}
+            /> }
+
+
 
             <div className={"dark:bg-grey pl-[100px] h-[100%] min-h-[100vh] pt-[70px]"}>
                 {notes.find(n =>  n.pinned) ? <div className={s.fixNoteBlock}>
