@@ -74,6 +74,7 @@ const initialState = {
     notes: [] as Array<NoteTextType>,
     editNoteModalShow: false,
     addNoteNodalShow: false,
+    openUniversalModal:false,
     searchParams: '',
 }
 
@@ -93,6 +94,9 @@ export const notesSlice = createSlice({
                 state.searchParams = action.payload.newValue.trim()
             }
 
+        },
+        setUniversalModal(state,action:PayloadAction<{isUniversalModalShow:boolean}>){
+            state.openUniversalModal = action.payload.isUniversalModalShow
         }
     },
     extraReducers: (builder) => {
@@ -130,7 +134,7 @@ export const notesSlice = createSlice({
     }
 })
 
-export const {setEditNoteModalShow, setAddNoteNodalShow, setSearchParams} = notesSlice.actions
+export const {setEditNoteModalShow, setAddNoteNodalShow,setUniversalModal, setSearchParams} = notesSlice.actions
 export const notesTestReducer = notesSlice.reducer
 export default notesSlice.reducer
 

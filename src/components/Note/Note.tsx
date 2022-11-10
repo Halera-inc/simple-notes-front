@@ -2,11 +2,11 @@ import s from '../../styles/Note.module.css'
 import EditIcon from "../../assets/images/EditIcon";
 import DeleteIcon from "../../assets/images/DeleteIcon";
 import colorizeNote from "../../utils/colorizeNote";
-import {useRef, useState} from 'react';
-import {useAppDispatch} from "../../utils/hooks";
+import {ChangeEvent, useRef, useState} from 'react';
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {
     deleteNote,
-    editNote,
+    editNote, setUniversalModal,
 
 } from "../../bll/slices/notesSlice";
 import ColorizedBar from './ColorizedBar';
@@ -31,6 +31,7 @@ export type NotePropsType = {
     noteId: string
     pinned: boolean
     edit: (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => void
+    deleteNote:(noteId:string,e:any)=>void
     createdAt?: Date
 }
 
@@ -51,36 +52,26 @@ const Note = ({
                   createdAt,
                   index,
                   moveCard,
+                  deleteNote,
               }: NotePropsType) => {
     const dispatch = useAppDispatch()
     const colorizedColor = colorizeNote(color)
 
     const [showColorBar, setShowColorBar] = useState(false)
-    const [open, setOpen] = useState<boolean>(false)
+
 
     const changePushPinHandler = (e: React.MouseEvent<SVGSVGElement>) => {
         dispatch(editNote({id: noteId, pinned: !pinned}))
         e.stopPropagation()
     }
-    //
-    // const onDeleteButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
-    //     dispatch(deleteNote({noteId}))
-    //     e.stopPropagation()
-    // }
+
 
     const onColorChangeButtonClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
         setShowColorBar(!showColorBar)
         e.stopPropagation()
     }
-    const noteModalClickHandler = (e: React.MouseEvent<SVGSVGElement>) => {
-        setOpen(!open)
-        e.stopPropagation()
-    }
-    const onDiscardClickHandler = () => {
-        setOpen(false)
 
 
-    }
     const str = `${createdAt}`;
     const localDate = new Date(str).toLocaleDateString('ru-RU')
 
@@ -187,16 +178,14 @@ const Note = ({
                 <small style={{margin: '5px 0 0 0'}}>{localDate}</small>
                 <DeleteIcon height={25} width={25} className={s.hoverStyle}
                             fill={colorizedColor.color}
-                            onClick={noteModalClickHandler}
+                            onClick={(e)=>deleteNote(noteId,e)}
                 />
 
                 <ColorizedBar
                     noteId={noteId} showColorBar={showColorBar}
                     setShowColorBar={setShowColorBar} currentColor={color}/>
             </div>
-            {open && (
-                <UniversalModalWindow title='Delete Note' noteId={noteId} isOpen={onDiscardClickHandler}/>
-            )}
+
         </div>
     )
 }
