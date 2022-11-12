@@ -1,0 +1,489 @@
+
+.singnInBlock {
+    height: 100vh;
+    position: relative;
+    @apply
+    flex
+    justify-center
+    items-center
+}
+
+.providerButton {
+    margin-bottom: 30px;
+    @apply
+    w-full
+    flex
+    justify-center
+    items-center
+}
+
+.absolutly {
+    position: absolute;
+}
+
+.wrapperCard {
+    text-align: center;
+    @apply
+    flex
+    justify-center
+}
+
+.inputI {
+    margin-left: 27px;
+    word-break: break-all;
+    @apply
+    h-[60px]
+    w-[428px]
+    bg-white
+    input
+    input-bordered
+    input-info
+    rounded-none
+    text-blue-dark
+    text-xl
+}
+
+.inputI:-webkit-autofill {
+    -webkit-text-fill-color: #5590C1 !important;
+}
+
+.inputI:-webkit-autofill,
+.inputI:-webkit-autofill:hover,
+.inputI:-webkit-autofill:focus,
+.inputI:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.inputI::placeholder {
+    @apply
+    text-blue-dark
+}
+
+.cardBody {
+    padding: 73px 52px 23px 52px;
+    text-align: center;
+}
+
+.titleWrapper {
+    position: relative;
+
+}
+
+.title {
+    @apply
+    font-medium
+    text-[50px]
+    mb-[73px]
+    card-title
+    flex
+    justify-center
+    text-blue-dark
+}
+
+.arrowIcon {
+    position: absolute;
+    left: 0;
+    top: -3px;
+    cursor: pointer;
+}
+
+.bgBlack {
+    background-color: #000000 !important;
+    color: white !important;
+
+}
+
+.formControl {
+    position: relative;
+    @apply
+    form-control
+    w-full
+}
+
+.label {
+    @apply
+    w-full
+    flex
+    justify-center
+    items-center
+
+}
+
+.arraw {
+    @apply
+    bg-arraw
+    bg-white
+
+    bg-no-repeat
+    bg-center
+    bg-[length:20px_20px]
+    w-[56px]
+    absolute
+    h-[calc(100%-10px)]
+    right-[2px] top-[5px]
+    pointer-events-none
+}
+
+.arrawError {
+    @apply
+    bg-arrawError
+    bg-[#FFF4F4]
+    bg-no-repeat
+    bg-center
+    bg-[length:20px_20px]
+    w-[56px]
+    absolute
+    h-[calc(100%-10px)]
+    right-[2px]
+    top-[5px]
+    pointer-events-none
+}
+
+.option {
+    width: 100%;
+    font-size: 15px;
+    word-break: break-all !important;
+    padding-right: 0;
+
+}
+
+
+.one {
+    margin-bottom: 30px;
+}
+
+.two {
+    margin-bottom: 56px;
+    position: relative;
+}
+
+.errorText {
+    color: red;
+    position: absolute;
+    bottom: -65%;
+    left: 27%;
+}
+
+.errorTextRegistration {
+    color: red;
+    position: absolute;
+    bottom: -45%;
+    left: 43%;
+}
+
+.errorTextInvalid {
+    color: red;
+    position: absolute;
+    bottom: -45%;
+    left: 36%;
+}
+
+.errorTextMust {
+    color: red;
+    position: absolute;
+    bottom: -46%;
+    left: 27%;
+}
+
+
+.errorInput {
+    background-color: #FFF4F4 !important;
+    height: 60px !important;
+    margin-left: 27px;
+    width: 428px;
+    border-color: #F06464 !important;
+    word-break: break-all;
+    @apply
+    input
+    input-bordered
+    input-info
+    placeholder:text-red
+    rounded-none
+    text-red
+    text-xl
+}
+
+.infoIcon {
+    display: block;
+    position: absolute;
+    right: -8%;
+    top: 27%;
+    cursor: pointer;
+}
+
+
+.tooltip {
+    display: block;
+    position: absolute;
+    right: -40px;
+    top: 53%;
+    background: #fff;
+    border: 1px solid #5590C1;
+    opacity: 0;
+    transform: translate(-45%, -22%) scale(0.75);
+    transform-origin: right center;
+    padding: 10px 30px;
+    text-align: center;
+    color: #5590C1;
+    transition: 0.15s ease-in-out;
+    pointer-events: none;
+}
+
+.tooltipHover p,
+.tooltip p {
+    text-align: left;
+}
+
+.tooltipHover {
+    display: block;
+    position: absolute;
+    right: -44%;
+    top: 53%;
+    background: #fff;
+    border: 1px solid #5590C1;
+    opacity: 1;
+    transform: translate(17%, -20%) scale(1);
+    transform-origin: right center;
+    padding: 10px 30px;
+    text-align: center;
+    color: #5590C1;
+    transition: 0.15s ease-in-out;
+}
+
+.tooltipError {
+    opacity: 1;
+    transform: translate(0%, -30%) scale(1);
+    pointer-events: none;
+}
+
+/*//стрелочка*/
+.tooltipHover:after,
+.tooltip:after {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border: 7px solid transparent;
+    border-right: 7px solid #5590C1;
+    position: absolute;
+    bottom: 0;
+    left: -3%;
+    transform: translate(-38%, -343%);
+}
+
+@media screen and (max-width: 1259px) {
+    .tooltipHover p,
+    .tooltip p {
+        font-size: 13px;
+
+    }
+
+    .tooltipHover {
+        padding: 10px;
+        right: -31%;
+        top: 55%;
+    }
+
+    .tooltipHover:after {
+        left: -4%;
+    }
+
+    #country.option {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 350px;
+    }
+
+}
+
+@media screen and (max-width: 1065px) {
+    .tooltipHover {
+        right: 7%;
+        top: 65%;
+    }
+
+    .tooltip:after,
+    .tooltipHover:after {
+        left: 85%;
+        bottom: 91px;
+        border-bottom: 7px solid #5590C1;
+        border-right: 7px solid #5590C1;
+        transform: rotate(226deg);
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .errorText {
+        bottom: -50%;
+        left: 24%;
+    }
+
+    .tooltipHover {
+        right: 10%;
+        top: 69%;
+    }
+
+    .tooltip:after,
+    .tooltipHover:after {
+        left: 72%;
+    }
+
+    .inputI, .errorInput {
+        margin-left: 20px;
+
+        @apply
+        w-[350px]
+    }
+
+    .cardBody {
+        padding: 60px 40px 23px 40px;
+    }
+
+    .infoIcon {
+        right: 3%;
+        top: 19%;
+    }
+
+    .title {
+        font-size: 45px;
+        margin-bottom: 60px;
+    }
+
+    .two {
+        margin-bottom: 40px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .errorText {
+        left: 18%;
+        top: 111%;
+    }
+
+    .errorTextRegistration{
+        font-size: 14px;
+        top:49px;
+    }
+
+    .cardBody form input {
+        margin-left: 10px;
+    }
+
+    .cardBody form select {
+        margin-left: 10px;
+    }
+
+    .cardBody {
+        padding: 45px 30px 23px 30px;
+    }
+
+    .providerButton {
+        margin-bottom: 15px;
+    }
+
+    .title {
+        font-size: 40px;
+        margin-bottom: 45px;
+    }
+
+    .inputI, .errorInput {
+        height: 50px !important;
+        @apply
+        w-[300px]
+    }
+
+    .one {
+        margin-bottom: 20px;
+    }
+
+
+}
+
+@media screen and (max-width: 470px) {
+    .errorText {
+        left: 14%;
+    }
+
+
+    .tooltip:after,
+    .tooltipHover:after {
+        left: 86%;
+        top: -6%;
+        border-bottom: 5px solid #5590C1;
+        border-right: 5px solid #5590C1;
+    }
+
+    .tooltipHover {
+        right: 16%;
+    }
+
+    .title {
+        font-size: 35px;
+        margin-bottom: 35px;
+    }
+
+    .cardBody {
+        padding: 30px 20px 15px 20px;
+    }
+
+    .cardBody form select {
+        font-size: 15px;
+    }
+
+    .inputI::placeholder,
+    .errorInput::placeholder {
+        font-size: 15px;
+    }
+
+    .inputI, .errorInput {
+        width: 280px;
+    }
+
+}
+
+@media screen and (max-width: 405px) {
+    .infoIcon{
+        top:25%;
+    }
+    .errorText {
+        font-size: 15px;
+        left: 8%;
+    }
+
+
+    .inputI, .errorInput {
+        width: 220px;
+        height: 40px;
+    }
+
+    .tooltipHover {
+        right: 19%;
+        top: 67%;
+        max-width: 170px;
+    }
+
+    .tooltip:after,
+    .tooltipHover:after {
+        left: 86%;
+        top: -4%;
+    }
+
+    .title {
+        font-size: 35px;
+        margin-bottom: 25px;
+    }
+
+    .title2 {
+        font-size: 27px;
+        margin-bottom: 25px;
+    }
+
+    .arraw,.arrawError {
+        width: 40px;
+        background-size: 15px;
+    }
+}
+
+

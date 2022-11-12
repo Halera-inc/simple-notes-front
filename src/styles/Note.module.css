@@ -1,0 +1,58 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    padding: 20px;
+    min-width: 250px;
+    max-width: 365px;
+    width: 100%;
+    min-height: 250px;
+    max-height: 500px;
+    transition: 0.15s ease-in-out;
+    @apply shadow-lg
+
+}
+
+.card:hover {
+    cursor: pointer;
+    outline: 1px solid;
+}
+
+.title_date_space {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cardTitle {
+    margin-bottom: 15px;
+    @apply
+    card-title
+}
+
+.text {
+    flex-grow: 1;
+    word-break: break-word;
+}
+
+.cardAction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    position: relative;
+    z-index: 1;
+    @apply
+    card-actions
+    justify-between
+
+}
+
+.hoverStyle {
+    width: 2em;
+    height: 2em;
+    transition: transform 0.25s;
+}
+
+.hoverStyle:hover {
+    transform: scale(1.3);
+}

@@ -1,0 +1,37 @@
+.footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 17vh;
+}
+.footer a {
+    cursor: pointer;
+}
+.text {
+    font-size: 20px;
+    line-height: 24px;
+    color: #C8C8C8;
+    text-align: center;
+}
+@media screen and (max-width: 913px){
+    .footer {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 625px) {
+    .footer {
+     align-items: flex-end;
+    }
+}
+
+@media (max-width: 430px) {
+    .footer {
+        font-size: 16px;
+    }
+}
+
+
+
+
+

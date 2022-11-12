@@ -1,0 +1,109 @@
+/*!* Tailwind init files *!*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+/* custom colors*/
+:root {
+    --bg-black: #212121;
+    --white: #FFFFFF;
+    --bg-white-dark: #F2F6F9;
+    --mustard: #F6F0D8;
+    --mustard-dark: #C6B05D;
+    --blue: #E5F1FD;
+    --blue-dark: #5590C1;
+    --violet: #E5DEF0;
+    --violet-dark: #866FA7;
+    --green: #D6EDD9;
+    --green-dark: #5E9C80;
+    --gray: #E5E5E5;
+    --red: #F06464;
+    --red-light: #FFF4F4;
+    --blue-night: #40617C;
+}
+
+html body #__next {
+    height: 100%;
+
+}
+
+textarea {
+    padding: 0 20px 0 0;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../assets/fonts/Montserrat-Bold.eot');
+    src: local('Montserrat Bold'), local('Montserrat-Bold'),
+    url('../assets/fonts/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/Montserrat-Bold.woff2') format('woff2'),
+    url('../assets/fonts/Montserrat-Bold.woff') format('woff'),
+    url('../assets/fonts/Montserrat-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../assets/fonts/Montserrat-Medium.eot');
+    src: local('Montserrat Medium'), local('Montserrat-Medium'),
+    url('../assets/fonts/Montserrat-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/Montserrat-Medium.woff2') format('woff2'),
+    url('../assets/fonts/Montserrat-Medium.woff') format('woff'),
+    url('../assets/fonts/Montserrat-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    /*border: 1px solid red;*/
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Montserrat, sans-serif;
+}
+
+::-webkit-scrollbar { /* 1 - скроллбар */
+    z-index: 100;
+    width: 15px;
+    height: 15px;
+    background-color: var(--blue);
+    border: 1px solid var(--blue-dark);
+    @apply
+    z-50
+}
+
+::-webkit-scrollbar-button { /* 2 - кнопка */
+    display: none;
+}
+
+::-webkit-scrollbar-track { /* 3 - трек */
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-track-piece { /* 4 - видимая часть трека */
+    cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb { /* 5 - ползунок */
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: var(--blue-dark);
+}
+
+::-webkit-scrollbar-corner { /* 6 - уголок */
+    cursor: pointer;
+}
+
+::-webkit-resizer { /* 7 - изменение размеров */
+    cursor: pointer;
+}

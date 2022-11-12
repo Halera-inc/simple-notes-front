@@ -1,0 +1,31 @@
+.landing {
+    position: relative;
+    padding: 0 100px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 1720px;
+    margin:0 auto;
+}
+
+@media screen and (max-width: 800px) {
+    .landing{
+        justify-content: center;
+    }
+}
+
+@media (max-width: 700px) {
+    .landing{
+        padding: 0 50px;
+    }
+}
+
+@media (max-width: 625px) {
+    .landing{
+        padding: 0 25px 15px 25px;
+        overflow: hidden;
+    }
+}
+
+

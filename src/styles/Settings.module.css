@@ -1,0 +1,251 @@
+.wrapperMainSettings {
+    @apply
+    flex
+    justify-between
+}
+
+.leftArea {
+    @apply
+    flex
+    flex-col
+}
+
+.myProfile {
+    gap: 17px;
+    margin-bottom: 75px;
+    padding-right: 50px;
+    @apply
+    flex
+    justify-between
+
+}
+
+.editWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.imgProfileWrapper {
+    border: 1px solid #5590C1;
+}
+
+.myName {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 30px;
+}
+
+.reg {
+    font-weight: 400;
+    margin-top: 10px;
+    font-size: 17px;
+    line-height: 20px;
+    color: #7D7D7D;
+
+}
+
+ul.editData li {
+    margin-bottom: 3px;
+
+}
+
+.edit {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.editMyProfile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.editMyProfile label {
+
+    display: flex;
+    justify-content: space-between;
+}
+
+ul.editMyProfile li {
+    height: 60px;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 27px;
+    color: #212121;
+    margin-bottom: 17px;
+    @apply
+    flex
+    justify-between
+    items-center
+
+}
+
+
+.otherSettings {
+    padding-right: 100px;
+}
+
+.other {
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 49px;
+    margin-bottom: 27px;
+}
+
+.otherWrapper {
+    width: 623px;
+}
+
+.collapseContent {
+    margin-top: 25px;
+    padding: 0 15px 0 0;
+    margin-bottom: -10px;
+
+}
+
+
+ul.collapseContent li {
+    @apply
+    flex
+    pb-5
+    justify-between
+    items-center
+
+}
+
+ul.collapseContent li p {
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    color: #5590C1;
+
+}
+
+.inputI {
+    width: 400px;
+    height: 60px !important;
+    @apply
+    input
+    input-bordered
+    placeholder-current
+    placeholder-black
+    input-info
+    rounded-none
+    text-blue-dark
+    text-lg
+    font-thin
+}
+
+.img {
+
+    background: red;
+}
+
+.imgProfileWrapper_img {
+    width: 200px;
+    height: 200px;
+    border: 2px solid var(--blue-dark);
+}
+
+
+@media screen and (max-width: 540px) {
+    .wrapperSettings {
+        padding: 0;
+        align-items: center;
+        align-content: flex-start;
+        width: max-content;
+        margin: 20px auto 20px;
+    }
+
+    .wrapperMaimSettings {
+        flex-direction: column;
+    }
+
+    .myProfile {
+        gap: 0;
+        margin-bottom: 0;
+        padding-right: 0;
+        flex-direction: column;
+    }
+
+    .leftArea {
+        width: 100%;
+    }
+
+    .imgProfileWrapper_img {
+        margin: 0 auto;
+    }
+
+    .imgProfileWrapper {
+        border: none;
+    }
+
+    .otherWrapper {
+        width: 250px;
+        margin: 0 auto;
+    }
+
+    .last_child {
+        margin-bottom: 80px;
+    }
+
+    .editData {
+        margin: 20px auto;
+    }
+
+    .otherSettings h3 {
+        margin: 20px auto;
+        font-size: 35px;
+        text-align: center;
+    }
+
+    .collapseContent li {
+        flex-direction: column;
+
+    }
+
+    .inputI {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .editMyProfile label li {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .editMyProfile input {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .edit {
+        text-align: -webkit-center;
+    }
+
+}
+
+@media screen and (min-width: 541px) {
+    .wrapperSettings {
+        padding: 130px 0 0 140px;
+        align-content: flex-start;
+        flex-direction: column;
+
+    }
+
+    .wrapperMaimSettings {
+        flex-direction: column;
+    }
+
+
+}
+
+@media screen and (min-width: 913px) {
+
+}
+
+

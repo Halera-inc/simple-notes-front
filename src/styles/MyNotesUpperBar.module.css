@@ -1,0 +1,32 @@
+.myNotes {
+    padding: 20px;
+    @apply
+    flex
+    justify-between
+}
+
+.title {
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 43px;
+    color: #212121;
+    margin: 10px;
+
+}
+
+.icons {
+    margin: 10px;
+    @apply
+    flex
+    w-72
+    justify-evenly
+}
+
+.icons:hover {
+    cursor: pointer;
+
+}
+
+.user {
+    margin: 10px;
+}
