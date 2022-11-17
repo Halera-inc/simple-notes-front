@@ -56,3 +56,11 @@
 .hoverStyle:hover {
     transform: scale(1.3);
 }
+
+@media (max-width: 961px) {
+    .card{
+        max-width: 500px;
+        min-height: 300px;
+    }
+
+}

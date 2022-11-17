@@ -1,4 +1,10 @@
-
+.notesWrapper{
+    @apply
+    pl-[100px]
+    h-[100%]
+    min-h-[100vh]
+    pt-[70px]
+}
 
 .notesBlock {
     gap: 25px;
@@ -30,13 +36,36 @@
     background-color:#7D7D7D ;
     opacity: 0.5;
 }
-
-
-@media screen and (max-width: 540px) {
-    .notesBlock {
-        padding: 0 20px 0 20px;
+@media screen and (max-width: 748px){
+    .notesBlock,.fixNoteBlock {
+        padding: 40px 30px 30px 55px;
     }
+    .fixNoteBlock::before{
+        width: 75% ;
+        left: 70px;
+    }
+}
+@media screen and (max-width: 561px){
+    .notesBlock,.fixNoteBlock {
+        padding: 40px 10px 30px 30px;
+    }
+
+
+}
+@media screen and (max-width: 540px) {
+    .notesBlock,.fixNoteBlock {
+        padding: 40px 30px 30px 30px;
+    }
+
     .notesWrapper {
         padding-left: 0;
+        padding-top: 80px;
     }
+}
+
+@media screen and (max-width: 405px) {
+    .notesBlock,.fixNoteBlock {
+        padding: 20px 20px 30px 20px;
+    }
+
 }

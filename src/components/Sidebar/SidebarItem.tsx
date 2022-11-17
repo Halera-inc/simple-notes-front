@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React, {ReactNode, useState} from "react";
-import s from '../../styles/SidebarItem.module.css'
 
 type PropsType = {
     icon: ReactNode
@@ -9,9 +8,10 @@ type PropsType = {
     active?: boolean
     redActive?: boolean
     onClick?: ()=>void
+    className?:string
 }
 
-const SidebarItem = ({icon, tooltipInfo, link, active, redActive, onClick}: PropsType) => {
+const SidebarItem = ({icon, tooltipInfo, link, active, redActive, onClick,...props}: PropsType) => {
 
 
     const [hover, setHover] = useState<boolean>(false)
@@ -19,7 +19,7 @@ const SidebarItem = ({icon, tooltipInfo, link, active, redActive, onClick}: Prop
 
     return (
         <Link href={link ? link : '#'}>
-            <div className={`tooltip tooltip-right ${s.wrapper} hover:bg-white ${active ? 'bg-white ' : 'none'}`}
+            <div className={props.className}
                  data-tip={tooltipInfo ? tooltipInfo : 'Other'}
                  onMouseEnter={() => setHover(true)}
                  onMouseLeave={() => setHover(false)}

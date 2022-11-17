@@ -18,6 +18,13 @@
     color: black;
 }
 
+.pageName{
+    @apply
+    text-[35px]
+    font-bold
+    text-black
+}
+
 .pagesHeader_search {
     display: flex;
     justify-content: space-between;
@@ -149,6 +156,27 @@
     }
 }
 
-@media screen and (min-width: 913px) {
+@media screen and (max-width: 639px) {
+    .pageName{
+        font-size: 30px;
+    }
+}
 
+@media screen and (max-width: 540px) {
+    .pageName{
+        margin-left: 30px;
+    }
+}
+
+
+@media screen and (max-width: 470px) {
+    .inputHidden{
+       border-bottom:1px solid black !important;
+        outline: none;
+    }
+}
+@media screen and (min-width: 470px) {
+    .inputHidden{
+       display: none;
+    }
 }

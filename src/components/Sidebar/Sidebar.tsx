@@ -138,8 +138,7 @@ const Sidebar = () => {
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === 'dark') {
             return (
-                <PlusIcon width={50}
-                          fill={'#ffffff'}
+                <PlusIcon fill={'#ffffff'}
                           className={"hover:fill-black"}
                     // onClick={onAddNoteClickHandler}
                 />
@@ -163,7 +162,7 @@ const Sidebar = () => {
     const renderNavbar = pagesWithNavbar.includes(pathname);
     return renderNavbar ? (
         <div
-            className={"z-[100] dark:bg-black flex fixed top-0 left-0 bottom-0 flex-col h-[100vh] bg-[#E5F1FD] w-[100px]"}>
+            className={`dark:bg-black ${s.sidebarWrapper}`}>
             <label ref={modalAddBtnRef} htmlFor='my-modal-add-note'
                    className="btn modal-button hidden">open
                 modal</label>
@@ -182,21 +181,24 @@ const Sidebar = () => {
             />}
             <div className={s.upBox}>
                 <span
-                    className={"flex items-center  justify-center bg-white h-[80px] w-[80px] rounded-[30px]"}>
+                    className={s.whiteBg}>
                     <PencilIcon width={50} fill={'none'} stroke={'#5590C1'}/>
                 </span>
             </div>
             <div className={s.middleBox}>
                 <SidebarItem tooltipInfo={'Create note'}
+                             className={`${s.sidebarItem} sr:order-2 ${s.wrapper}`}
                              link={'/notes'}
                              icon={RenderAddNoteIcon()}
                              onClick={onAddNoteClickHandler}/>
                 <SidebarItem tooltipInfo={'My notes'}
-                             active={router.pathname === '/notes'}
+                             className={`${s.sidebarItem} ${s.wrapper} sr:order-1 ${ router.pathname === '/notes'? 'bg-white ' : 'none'}`}
+                             // active={router.pathname === '/notes'}
                              link={'/notes'}
                              icon={RenderNotesIcon()}/>
                 <SidebarItem tooltipInfo={'Settings'}
-                             active={router.pathname === '/settings'}
+                             className={`${s.sidebarItem} sr:order-3  ${s.wrapper}  ${router.pathname === '/settings' ? 'bg-white ' : 'none'}`}
+                             // active={router.pathname === '/settings'}
                              link={'/settings'}
                              icon={RenderSettingIcon()}/>
             </div>

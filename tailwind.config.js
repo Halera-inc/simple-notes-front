@@ -39,19 +39,25 @@ module.exports = {
         screens: {
             'xl': {'max': '1495px'},
             // => @media (max-width: 1279px) { ... }
-
+            'xm': {'max': '1100px'},
+            // => @media (max-width: 1279px) { ... }
             'lg': {'max': '980px'},
             // => @media (max-width: 1023px) { ... }
-
+            'sa': {'max': '785px'},
+            'sc': {'max': '738px'},
+            'sd': {'max': '688px'},
             'sm': {'max': '639px'},
             // => @media (max-width: 639px) { ..!!. }
 
-            'sb': {'max': '560px'},
+            'sb': {'max': '561px'},
+            'sr': {'max': '540px'},
             'sl': {'max': '470px'},
-            // => @media (max-width: 639px) { ..!!. }
+            'ss': {'max': '450px'},
             'md': {'max': '430px'},
 
             'ms': {'max': '405px'},
+            'mm': {'max': '380px'},
+            'mmm': {'max': '340px'},
 
 
         },

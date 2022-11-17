@@ -82,7 +82,7 @@ const Notes = () => {
 
             />}
 
-            <div className={"dark:bg-grey pl-[100px] h-[100%] min-h-[100vh] pt-[70px]"}>
+            <div className={`dark:bg-grey ${s.notesWrapper}`}>
                 {notes.find(n =>  n.pinned) ? <div className={s.fixNoteBlock}>
                     {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase()) && n.pinned
                         || n.note_text && n.note_text.toLowerCase().includes(searchParams.toLowerCase()) && n.pinned).map((n, i) =>

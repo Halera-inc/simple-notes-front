@@ -6,10 +6,27 @@
     left: 0;
     bottom: 0;
     flex-direction: column;
-    /*height: 100vh;*/
     background: #E5F1FD;
     width: 100px;
 
+}
+.sidebarItem{
+    @apply
+    tooltip
+    tooltip-right
+}
+.sidebarItem:hover{
+    background-color: white;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 87px;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .whiteBg {
@@ -34,7 +51,6 @@
 }
 
 .middleBox {
-    /*height: 370px;*/
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -71,6 +87,15 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+    }
+}
+@media screen and (max-width: 405px) {
+    .sidebarWrapper {
+        top: calc(100% - 65px);
+        height: 65px;
+    }
+    .wrapper{
+        height: 70px;
     }
 }
 
