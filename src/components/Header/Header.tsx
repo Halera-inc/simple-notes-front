@@ -39,8 +39,7 @@ const Header = () => {
                     {session
                         ? <div
                             className={`dark:bg-grey pl-[150px] backdrop-blur-md dark:bg-grey/70 bg-white/70 fixed w-screen w-180
-                            z-40 justify-space flex justify-between
-                            items-center h-[100px]  sa:pl-[100px] sr:pl-0 ${hiddenName ? "sl:justify-center": '' } `}>
+                            z-5 justify-space flex justify-between items-center h-[100px] sv:pl-[120px] sr:pl-[30px] ${hiddenName ? "sl:justify-center": '' } `}>
                             { hiddenName ?
                                 ''
                                 :

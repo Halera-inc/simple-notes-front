@@ -1,5 +1,5 @@
 .sidebarWrapper {
-    z-index: 100;
+    z-index: 10;
     display: flex;
     position: fixed;
     top: 0;
@@ -10,12 +10,14 @@
     width: 100px;
 
 }
-.sidebarItem{
+
+.sidebarItem {
     @apply
     tooltip
     tooltip-right
 }
-.sidebarItem:hover{
+
+.sidebarItem:hover {
     background-color: white;
 }
 
@@ -69,7 +71,9 @@
 @media screen and (max-width: 540px) {
     .sidebarWrapper {
         flex-direction: row;
-        top: calc(100% - 79px);
+        left: 0;
+        bottom: 0;
+        top:auto;
         height: 80px;
         width: 100%;
     }
@@ -89,12 +93,13 @@
         align-items: center;
     }
 }
+
 @media screen and (max-width: 405px) {
     .sidebarWrapper {
-        top: calc(100% - 65px);
         height: 65px;
     }
-    .wrapper{
+
+    .wrapper {
         height: 70px;
     }
 }

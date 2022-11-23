@@ -47,8 +47,7 @@ module.exports = {
             'sc': {'max': '738px'},
             'sd': {'max': '688px'},
             'sm': {'max': '639px'},
-            // => @media (max-width: 639px) { ..!!. }
-
+            'sv': {'max': '615px'},
             'sb': {'max': '561px'},
             'sr': {'max': '540px'},
             'sl': {'max': '470px'},

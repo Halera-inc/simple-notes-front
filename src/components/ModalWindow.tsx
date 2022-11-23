@@ -117,7 +117,6 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
         return (
             <div className={s.modal} ref={modalWindowBackgroundRef}>
                 <div className={s.modalBox} style={colorizedColor} ref={modalWindowRef}>
-                    <div className={s.topArea}>
                         <input type="text" className={s.cardTitle} style={colorizedColor}
                                value={titleNode}
                                onChange={onTitleChange}
@@ -136,7 +135,6 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
                                   onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
                                   onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
                         />
-                    </div>
                     <div className={s.modalAction}>
                         <Button title={'Cancel'}
                                 color={'RED'}
@@ -167,7 +165,6 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
         return (
             <div className={s.modal} ref={modalWindowBackgroundRef}>
                 <div className={s.modalBox} style={defaultColor ? defaultNote : colorizedColorAdd} ref={modalWindowRef}>
-                    <div className={s.topArea}>
                         <input type="text" className={s.cardTitle}
                                style={defaultColor ? defaultNote : colorizedColorAdd}
                                placeholder={'Add new title'}
@@ -188,7 +185,6 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
                                   onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'create')}
                                   onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
                         />
-                    </div>
                     <div className={s.modalAction}>
                         <Button title={'Cancel'}
                                 color={'RED'}

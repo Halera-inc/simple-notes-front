@@ -45,9 +45,9 @@
         left: 70px;
     }
 }
-@media screen and (max-width: 561px){
+@media screen and (max-width: 643px){
     .notesBlock,.fixNoteBlock {
-        padding: 40px 10px 30px 30px;
+        padding: 40px 30px 30px 30px;
     }
 
 
@@ -63,9 +63,21 @@
     }
 }
 
+@media screen and (max-width: 473px){
+
+    .fixNoteBlock::before{
+        width: 80% ;
+        left: 50px;
+    }
+}
+
 @media screen and (max-width: 405px) {
     .notesBlock,.fixNoteBlock {
         padding: 20px 20px 30px 20px;
+    }
+    .fixNoteBlock::before{
+        width: 80% ;
+        left: 10%;
     }
 
 }

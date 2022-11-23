@@ -69,7 +69,7 @@ const Sidebar = () => {
                              icon={<SunnyIcon onClick={() => {
                                  setTheme('light')
                              }} width={50} fill={'#ffffff'}
-                                              className={"hover:fill-black"}/>}/>
+                                              className={" mb-[40px]"}/>}/>
             )
         }
         if (currentTheme !== 'dark') {
@@ -77,7 +77,8 @@ const Sidebar = () => {
                 <SidebarItem tooltipInfo={'Dark Side'}
                              icon={<MoonIcon onClick={() => {
                                  setTheme('dark')
-                             }} width={50} fill={'#5590C1'}/>}/>
+                             }} width={50} fill={'#5590C1'}
+                                             className={"mb-[40px]"}/>}/>
             )
         }
     }
@@ -206,6 +207,7 @@ const Sidebar = () => {
                 {RenderChangeThemeIcon()}
 
                 <SidebarItem tooltipInfo={'Log out'}
+                             className={'mb-[40px]'}
                              redActive={true}
                              link={'/#'}
                              icon={RenderLogoutIcon()}
