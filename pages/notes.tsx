@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useCallback, useEffect, useRef, useState} from 'react'
-import {dndNotes, editNote, getNotes, setEditNoteModalShow} from 'src/bll/slices/notesSlice';
+import {dndNotes, editNote, getNotes, setEditNoteModalShow, setUniversalModal} from 'src/bll/slices/notesSlice';
 import MainContainer from "../src/components/MainContainer";
 import Note from "../src/components/Note/Note";
 import s from "../src/styles/Notes.module.css"
@@ -9,6 +9,8 @@ import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
 import {getSession} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import {UniversalModalWindow} from "src/components/universalComponent/UniversalModalWindow";
+
 
 const Notes = () => {
 
@@ -21,6 +23,8 @@ const Notes = () => {
     const [modalText, setModalText] = useState('')
     const effectRan = useRef(false)
     const modalShow = useAppSelector(state => state.notes.editNoteModalShow)
+    const universalModalShow = useAppSelector(state => state.notes.openUniversalModal)
+    console.log(universalModalShow, 'universalModalShow')
 
     useEffect(() => {
         if (!effectRan.current) {
@@ -55,6 +59,12 @@ const Notes = () => {
         setModalTitle('')
         setModalText('')
     }
+    const onUniversalModalClickHandler = (noteId: string, e: ChangeEvent<HTMLTextAreaElement>) => {
+        setModalId(noteId)
+        dispatch(setUniversalModal({isUniversalModalShow: true}))
+        e.stopPropagation()
+
+    }
 
     const moveCards = useCallback((dragID: string, hoverID: string) => {
         let legacyNotes = [...notes]
@@ -82,6 +92,16 @@ const Notes = () => {
 
             />}
 
+            {universalModalShow &&
+            <UniversalModalWindow title='Delete Note'
+                                  noteId={modalId}
+
+
+            />
+            }
+
+            {/*<div className={"dark:bg-grey pl-[100px] h-[100%] min-h-[100vh] pt-[70px]"}>*/}
+            {/*    {notes.find(n => n.pinned) ? <div className={s.fixNoteBlock}>*/}
             <div className={`dark:bg-grey ${s.notesWrapper}`}>
                 {notes.find(n =>  n.pinned) ? <div className={s.fixNoteBlock}>
                     {notes && notes.filter(n => n.title && n.title.toLowerCase().includes(searchParams.toLowerCase()) && n.pinned
@@ -92,6 +112,7 @@ const Notes = () => {
                               color={n.color}
                               noteId={n._id}
                               edit={onCardClickHandler}
+                              deleteNote={onUniversalModalClickHandler}
                               createdAt={n.createdAt}
                               index={i}
                               moveCard={moveCards}
@@ -108,6 +129,7 @@ const Notes = () => {
                               color={n.color}
                               noteId={n._id}
                               edit={onCardClickHandler}
+                              deleteNote={onUniversalModalClickHandler}
                               createdAt={n.createdAt}
                               index={i}
                               moveCard={moveCards}

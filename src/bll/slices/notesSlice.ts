@@ -41,11 +41,18 @@ export const deleteNote = createAsyncThunk('notes/deleteNote', async (param: { n
 })
 
 export const editNote = createAsyncThunk('notes/editNote',
-    async (params: { id: string, title?: string, note_text?: string, color?: ColorSamplesType, note_mode?: NoteViewType, pinned?:boolean }, thunkAPI) => {
+    async (params: { id: string, title?: string, note_text?: string, color?: ColorSamplesType, note_mode?: NoteViewType, pinned?: boolean }, thunkAPI) => {
         try {
             const res = await notesAPI.updateNote(params.id, params.title,
-                params.note_text, params.color, params.note_mode,params.pinned)
-            return {noteId: params.id, newColor: params.color, newTitle: params.title, newText: params.note_text, newMode: params.note_mode, newPinned: params.pinned}
+                params.note_text, params.color, params.note_mode, params.pinned)
+            return {
+                noteId: params.id,
+                newColor: params.color,
+                newTitle: params.title,
+                newText: params.note_text,
+                newMode: params.note_mode,
+                newPinned: params.pinned
+            }
         } catch (error) {
             console.log(error)
             return thunkAPI.rejectWithValue(null)
@@ -53,7 +60,7 @@ export const editNote = createAsyncThunk('notes/editNote',
     })
 
 export const dndNotes = createAsyncThunk('notes/dndNote',
-    async (params: { newNotesArray: NoteTextType[]}, thunkAPI) => {
+    async (params: { newNotesArray: NoteTextType[] }, thunkAPI) => {
         try {
             const res = await notesAPI.dndNotes(params.newNotesArray)
             return res.data.insertedNotes
@@ -67,6 +74,7 @@ const initialState = {
     notes: [] as Array<NoteTextType>,
     editNoteModalShow: false,
     addNoteNodalShow: false,
+    openUniversalModal:false,
     searchParams: '',
 }
 
@@ -80,11 +88,15 @@ export const notesSlice = createSlice({
         setAddNoteNodalShow(state, action: PayloadAction<{ isModalShow: boolean }>) {
             state.addNoteNodalShow = action.payload.isModalShow
         },
-        setSearchParams(state, action: PayloadAction<{newValue: string}>){
+
+        setSearchParams(state, action: PayloadAction<{ newValue: string }>) {
             if (action.payload.newValue.length >= 2 || action.payload.newValue === '') {
                 state.searchParams = action.payload.newValue.trim()
             }
 
+        },
+        setUniversalModal(state,action:PayloadAction<{isUniversalModalShow:boolean}>){
+            state.openUniversalModal = action.payload.isUniversalModalShow
         }
     },
     extraReducers: (builder) => {
@@ -112,7 +124,7 @@ export const notesSlice = createSlice({
                 if (action.payload && action.payload.newMode) {
                     state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].note_mode = action.payload.newMode
                 }
-                if (action.payload && action.payload.newPinned !==undefined) {
+                if (action.payload && action.payload.newPinned !== undefined) {
                     state.notes[state.notes.findIndex((arrow) => action.payload && arrow._id === action.payload.noteId)].pinned = action.payload.newPinned
                 }
             })
@@ -122,7 +134,7 @@ export const notesSlice = createSlice({
     }
 })
 
-export const {setEditNoteModalShow, setAddNoteNodalShow, setSearchParams} = notesSlice.actions
+export const {setEditNoteModalShow, setAddNoteNodalShow,setUniversalModal, setSearchParams} = notesSlice.actions
 export const notesTestReducer = notesSlice.reducer
 export default notesSlice.reducer
 
