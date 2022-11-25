@@ -22,14 +22,14 @@ const Header = (props: { title: string }) => {
     }
 
     return (
-        <div className={"flex flex justify-between items-center h-[15vh]"}>
-            <h2 className={' font-bold p-y-[39px] p-x-[0] leading-[42px] text-[35px]  dark:text-white dark:font-semibold md:text-[30px] md:leading-[37px]'}>{props.title}</h2>
+        <div className="flex flex justify-between items-center h-[15vh]">
+            <h2 className='font-bold p-y-[39px] p-x-[0] leading-[42px] text-[35px]  dark:text-white dark:font-semibold md:text-[30px] md:leading-[37px]'>{props.title}</h2>
             <div className={s.wrapperBtn}>
                 <Link href={'/about'}>
                     <p className={s.about}>About</p>
                 </Link>
                 <Button
-                    className={'sm:px-[15px] sm:py-[10px] sm:text-[20px] md:text-[16px]'}
+                    className='sm:px-[15px] sm:py-[10px] sm:text-[20px] md:text-[16px]'
                     style={buttonHeader}
                     title='Login'
                     icon={<UserIcon/>}

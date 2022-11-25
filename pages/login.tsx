@@ -43,12 +43,12 @@ const Login = ({providers}: any) => {
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === 'dark') {
             return (
-                <GoogleIcon width={'2em'} height={'2em'} className={"sm:w-[1.5em] sm:h-[1.5em]"}
+                <GoogleIcon width={'2em'} height={'2em'} className="sm:w-[1.5em] sm:h-[1.5em]"
                             color={'#ffffff'}/>
             )
         } else {
             return (
-                <GoogleIcon width={'2em'} height={'2em'} className={"sm:w-[1.5em] sm:h-[1.5em]"}
+                <GoogleIcon width={'2em'} height={'2em'} className="sm:w-[1.5em] sm:h-[1.5em]"
                             color={'#5590C1'}/>
             )
         }
@@ -59,12 +59,12 @@ const Login = ({providers}: any) => {
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === 'dark') {
             return (
-                <GithubIcon width={'2.5em'} height={'2.5em'} className={"sm:w-[2em] sm:h-[2em]"}
+                <GithubIcon width={'2.5em'} height={'2.5em'} className="sm:w-[2em] sm:h-[2em]"
                             color={'#ffffff'}/>
             )
         } else {
             return (
-                <GithubIcon width={'2.5em'} height={'2.5em'} className={"sm:w-[2em] sm:h-[2em]"}
+                <GithubIcon width={'2.5em'} height={'2.5em'} className="sm:w-[2em] sm:h-[2em]"
                             color={'#5590C1'}/>
             )
         }
@@ -75,12 +75,12 @@ const Login = ({providers}: any) => {
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === 'dark') {
             return (
-                <UserIcon width={'3em'} height={'3em'} className={"sm:w-[2em] sm:h-[2em] sl:w-[1.7em] sl:h-[1.7em]"}
+                <UserIcon width={'3em'} height={'3em'} className="sm:w-[2em] sm:h-[2em] sl:w-[1.7em] sl:h-[1.7em]"
                           color={loginError ? '#F06464' : '#ffffff'}/>
             )
         } else {
             return (
-                <UserIcon width={'3em'} height={'3em'} className={"sm:w-[2.5em] sm:h-[2.5em] sl:w-[1.7em] sl:h-[1.7em]"}
+                <UserIcon width={'3em'} height={'3em'} className="sm:w-[2.5em] sm:h-[2.5em] sl:w-[1.7em] sl:h-[1.7em]"
                           color={loginError ? '#F06464' : '#5590C1'}/>
             )
         }
@@ -91,12 +91,12 @@ const Login = ({providers}: any) => {
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === 'dark') {
             return (
-                <KeyIcon width={'3em'} height={'3em'} className={"sm:w-[2em] sm:h-[2em] sl:w-[1.7em] sl:h-[1.7em]"}
+                <KeyIcon width={'3em'} height={'3em'} className="sm:w-[2em] sm:h-[2em] sl:w-[1.7em] sl:h-[1.7em]"
                          color={loginError ? '#F06464' : '#ffffff'}/>
             )
         } else {
             return (
-                <KeyIcon width={'3em'} height={'3em'} className={"sm:w-[2em] sm:h-[2em] sl:w-[1.7em] sl:h-[1.7em]"}
+                <KeyIcon width={'3em'} height={'3em'} className="sm:w-[2em] sm:h-[2em] sl:w-[1.7em] sl:h-[1.7em]"
                          color={loginError ? '#F06464' : '#5590C1'}/>
             )
         }
@@ -176,7 +176,7 @@ const Login = ({providers}: any) => {
             <div className={s.singnInBlock}>
                 <div className={s.wrapperCard}>
                     <div
-                        className={" bg-blue dark:bg-grey  card shadow-xl rounded-none border-solid border-[1px] border-blue-dark"}>
+                        className=" bg-blue dark:bg-grey  card shadow-xl rounded-none border-solid border-[1px] border-blue-dark">
                         <div className={s.cardBody}>
                             <div className={s.titleWrapper}>
                                 <h2 className={`dark:text-white ${s.title} `}> Sign
@@ -185,7 +185,7 @@ const Login = ({providers}: any) => {
                                     <Link href={"/"}>
                                         <ArrowBackIcon width={'2.5em'}
                                                        height={'2.5em'}
-                                                       color={'#5590C1'} className={"dark:text-white sm:w-[2em]  sm:h-[2em] sl:w-[1.7em] sl:h-[1.7em] ms:mt-[5px]"}/>
+                                                       color={'#5590C1'} className="dark:text-white sm:w-[2em]  sm:h-[2em] sl:w-[1.7em] sl:h-[1.7em] ms:mt-[5px]"/>
                                     </Link>
                                 </div>
                             </div>
@@ -230,8 +230,8 @@ const Login = ({providers}: any) => {
                                                 margin: '0 0 60px 0',
                                                 fontSize: 20
                                             }}/>
-                                    {loader ? <Spinner size={'50px'} className={'lg:right-[15%] lg:top-[6%] ' +
-                                            'sb:right-[9%] sb:top-[2%] ms:right-[4%] ' } style={{
+                                    {loader ? <Spinner size={'50px'} className='lg:right-[15%] lg:top-[6%] sb:right-[9%] sb:top-[2%] ms:right-[4%]'
+                                                       style={{
                                             position: "absolute",
                                             right: '19%',
                                             top: "4%",
@@ -243,10 +243,10 @@ const Login = ({providers}: any) => {
                                 </div>
                             </form>
                             <Link href={"/register"}><p
-                                className={"dark:text-white font-medium text-[15px] leading-[18px] mb-[15px] text-blue-dark cursor-pointer ms:text-[13px] ms:mb-[10px]"}>Registration</p>
+                                className="dark:text-white font-medium text-[15px] leading-[18px] mb-[15px] text-blue-dark cursor-pointer ms:text-[13px] ms:mb-[10px]">Registration</p>
                             </Link>
                             <p onClick={resetHandler}
-                               className={" font-medium text-[15px] leading-[18px] mb-[15px] text-blue-dark cursor-pointer ms:text-[13px] ms:mb-[10px]"}>Reset
+                               className=" font-medium text-[15px] leading-[18px] mb-[15px] text-blue-dark cursor-pointer ms:text-[13px] ms:mb-[10px]">Reset
                                 password</p>
                         </div>
                     </div>
