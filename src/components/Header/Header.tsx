@@ -49,13 +49,13 @@ const Header = () => {
                             <div className='flex justify-between w-[600px] items-center mr-[74px] xm:w-[auto] sd:mr-[30px] sb:mr-[15px] sl:mr-[30px]'>
                                 <SearchModule showSearchHandler={showSearchHandler}  setHiddenName={setHiddenName}
                                               hiddenName={hiddenName}/>
-                                <p className=' dark:text-white text-lg text-black xm:hidden '>{session?.user?.name}</p>
-                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className={"dark:text-white xm:hidden"}/>
+                                <p className='dark:text-white text-lg text-black xm:hidden '>{session?.user?.name}</p>
+                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className="dark:text-white xm:hidden"/>
                             </div>
                         </div>
-                        : <div className='  dark:bg-grey z-40 flex justify-between items-center h-10 pt-[45px] pb-[35px] pr-[100px]
+                        : <div className='dark:bg-grey z-40 flex justify-between items-center h-10 pt-[45px] pb-[35px] pr-[100px]
                         '>
-                            <p className=' dark:text-white px-32 text-[35px] font-bold ml-[75px]'>Simple Notes</p>
+                            <p className='dark:text-white px-32 text-[35px] font-bold ml-[75px]'>Simple Notes</p>
                             <div className='flex justify-between w-64 items-center mr-[100px]'>
                                 <a href={'/about'} className='text-blue-dark  text-[25px] mr-[90px]'>About</a>
                                 {session && <div>

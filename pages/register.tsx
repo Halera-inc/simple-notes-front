@@ -40,13 +40,13 @@ const Register = () => {
             const currentTheme = theme === "system" ? systemTheme : theme;
             if (currentTheme === 'dark') {
                 return (
-                    <UserIcon width={'3em'} height={'3em'}  className={"lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"} color={formik.errors.username && formik.touched.username
+                    <UserIcon width={'3em'} height={'3em'}  className="lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]" color={formik.errors.username && formik.touched.username
                         ? '#F06464'
                         : '#ffffff'}/>
                 )
             } else {
                 return (
-                    <UserIcon width={'3em'} height={'3em'}   className={"lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"} color={formik.errors.username && formik.touched.username
+                    <UserIcon width={'3em'} height={'3em'}   className="lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]" color={formik.errors.username && formik.touched.username
                         ? '#F06464'
                         : '#5590C1'}
                     />
@@ -59,14 +59,14 @@ const Register = () => {
             const currentTheme = theme === "system" ? systemTheme : theme;
             if (currentTheme === 'dark') {
                 return (
-                    <ListIcon width={'3em'} height={'3em'}  className={"lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"}
+                    <ListIcon width={'3em'} height={'3em'}  className="lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"
                               color={formik.errors.email && formik.touched.email
                                   ? '#F06464'
                                   : '#ffffff'}/>
                 )
             } else {
                 return (
-                    <ListIcon width={'3em'} height={'3em'}  className={"lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"}
+                    <ListIcon width={'3em'} height={'3em'}  className="lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"
                               color={formik.errors.email && formik.touched.email
                                   ? '#F06464'
                                   : '#5590C1'}/>
@@ -78,14 +78,14 @@ const Register = () => {
             const currentTheme = theme === "system" ? systemTheme : theme;
             if (currentTheme === 'dark') {
                 return (
-                    <CountryIcon width={'3em'} height={'3em'}  className={"lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"}
+                    <CountryIcon width={'3em'} height={'3em'}  className="lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"
                                  color={formik.errors.country && formik.touched.country
                                      ? '#F06464'
                                      : '#ffffff'}/>
                 )
             } else {
                 return (
-                    <CountryIcon width={'3em'} height={'3em'}  className={"lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"}
+                    <CountryIcon width={'3em'} height={'3em'}  className="lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"
                                  color={formik.errors.country && formik.touched.country
                                      ? '#F06464'
                                      : '#5590C1'}/>
@@ -97,14 +97,14 @@ const Register = () => {
             const currentTheme = theme === "system" ? systemTheme : theme;
             if (currentTheme === 'dark') {
                 return (
-                    <KeyIcon width={'3em'} height={'3em'}  className={"lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"}
+                    <KeyIcon width={'3em'} height={'3em'}  className="lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"
                              color={formik.errors.password && formik.touched.password
                                  ? '#F06464'
                                  : '#ffffff'}/>
                 )
             } else {
                 return (
-                    <KeyIcon width={'3em'} height={'3em'}  className={"lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"}
+                    <KeyIcon width={'3em'} height={'3em'}  className="lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"
                              color={formik.errors.password && formik.touched.password
                                  ? '#F06464'
                                  : '#5590C1'}/>
@@ -116,14 +116,14 @@ const Register = () => {
             const currentTheme = theme === "system" ? systemTheme : theme;
             if (currentTheme === 'dark') {
                 return (
-                    <KeyIcon width={'3em'} height={'3em'}  className={"lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"}
+                    <KeyIcon width={'3em'} height={'3em'}  className="lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"
                              color={formik.errors.password2 && formik.touched.password2
                                  ? '#F06464'
                                  : '#ffffff'}/>
                 )
             } else {
                 return (
-                    <KeyIcon width={'3em'} height={'3em'}  className={"lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"}
+                    <KeyIcon width={'3em'} height={'3em'}  className="lg:w-[2.5em] lg:h-[2.5em] sb:w-[2em] sb:h-[2em]  sl:w-[1.5em] sl:h-[1.5em]"
                              color={formik.errors.password2 && formik.touched.password2
                                  ? '#F06464'
                                  : '#5590C1'}/>
@@ -217,14 +217,14 @@ const Register = () => {
                     <div className={s.absolutly}>
                     <div className={s.wrapperCard}>
                         <div
-                            className={" bg-blue dark:bg-grey  card shadow-xl rounded-none  border-solid border-[1px] border-blue-dark"}>
+                            className=" bg-blue dark:bg-grey  card shadow-xl rounded-none  border-solid border-[1px] border-blue-dark">
                             <div className={s.cardBody}>
                                 <div className={"relative"}>
                                     <h2 className={`dark:text-white ${s.title} ${s.title2} `}> Registration</h2>
                                     <div className={s.arrowIcon}>
                                         <Link href={"/login"}>
                                             <ArrowBackIcon width={'2.5em'} height={'2.5em'}
-                                                           color={'#5590C1'} className={"dark:text-white sb:w-[2em] sb:h-[2em] sl:h-[1.6em] ms:mt-[5px] "}/>
+                                                           color={'#5590C1'} className="dark:text-white sb:w-[2em] sb:h-[2em] sl:h-[1.6em] ms:mt-[5px] "/>
                                         </Link>
                                     </div>
                                 </div>
@@ -304,8 +304,7 @@ const Register = () => {
                                         {formik.touched.password2 && formik.errors.password2 ? defferentPassword2Class : " "}
                                     </div>
                                     <div className="card-actions justify-center relative">
-                                        <Button className={"dark:bg-black dark:text-white dark:border-white lg:mb-[20px] sm:w-[160px]\n" +
-                                            "                                    sm:h-[50px] ms:w-[140px]  ms:text-[17px] ms:mb-[15px]"}
+                                        <Button className="dark:bg-black dark:text-white dark:border-white lg:mb-[20px] sm:w-[160px] sm:h-[50px] ms:w-[140px]  ms:text-[17px] ms:mb-[15px]"
                                                 type={'submit'}
                                                 title={'SignUp'}
                                                 style={{
@@ -315,8 +314,7 @@ const Register = () => {
                                                     fontSize: 18,
                                                     backgroundColor: "white",
                                                 }}/>
-                                        {loader ? <Spinner size={'50px'} className={'lg:right-[15%] lg:top-[6%] ' +
-                                                'sb:right-[9%] sb:top-[2%] ms:right-[4%] ' } style={{
+                                        {loader ? <Spinner size={'50px'} className='lg:right-[15%] lg:top-[6%] sb:right-[9%] sb:top-[2%] ms:right-[4%] ' style={{
                                                 position: "absolute",
                                                 right: '19%',
                                                 top: "4%",
@@ -325,7 +323,7 @@ const Register = () => {
                                     </div>
                                 </form>
                                 <Link href={"/login"}>
-                                    <p className={"dark:text-white font-medium text-[15px] leading-[18px] mb-[15px] text-blue-dark cursor-pointer sl:mb-[5px]"}>Login</p>
+                                    <p className="dark:text-white font-medium text-[15px] leading-[18px] mb-[15px] text-blue-dark cursor-pointer sl:mb-[5px]">Login</p>
                                 </Link>
 
                             </div>

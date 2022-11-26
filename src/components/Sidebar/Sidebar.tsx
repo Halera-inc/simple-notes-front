@@ -69,7 +69,7 @@ const Sidebar = () => {
                              icon={<SunnyIcon onClick={() => {
                                  setTheme('light')
                              }} width={50} fill={'#ffffff'}
-                                              className={" mb-[40px]"}/>}/>
+                                              className="mb-[40px]"/>}/>
             )
         }
         if (currentTheme !== 'dark') {
@@ -78,7 +78,7 @@ const Sidebar = () => {
                              icon={<MoonIcon onClick={() => {
                                  setTheme('dark')
                              }} width={50} fill={'#5590C1'}
-                                             className={"mb-[40px]"}/>}/>
+                                             className="mb-[40px]"/>}/>
             )
         }
     }
@@ -89,7 +89,7 @@ const Sidebar = () => {
         if (currentTheme === 'dark') {
             return (
                 <LoginIcon width={50} fill={'#ffffff'}
-                           className={"hover:fill-black"}
+                           className="hover:fill-black"
                     // onClick={onLogoutClickHandle}
                 />
             )
@@ -107,7 +107,7 @@ const Sidebar = () => {
         if (currentTheme === 'dark') {
             return (
                 <SettingIcon width={50} fill={router.pathname === '/settings' ? "dark:text-grey" : '#ffffff'}
-                             className={"hover:fill-black"}/>
+                             className="hover:fill-black"/>
             )
         } else {
             return (
@@ -123,13 +123,13 @@ const Sidebar = () => {
             return (
                 <NotesIcon width={50}
                            fill={router.pathname === '/notes' ? "dark:text-black" : '#ffffff'}
-                           className={"dark:text-grey hover:fill-black"}/>
+                           className="dark:text-grey hover:fill-black"/>
             )
         } else {
             return (
                 <NotesIcon width={50}
                            fill={'#5590C1'}
-                           className={"dark:text-grey"}/>
+                           className="dark:text-grey"/>
             )
         }
     }
@@ -140,7 +140,7 @@ const Sidebar = () => {
         if (currentTheme === 'dark') {
             return (
                 <PlusIcon fill={'#ffffff'}
-                          className={"hover:fill-black"}
+                          className="hover:fill-black"
                     // onClick={onAddNoteClickHandler}
                 />
             )
