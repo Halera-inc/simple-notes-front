@@ -2,7 +2,8 @@ import axios from 'axios'
 
 enum BASE_URLS {
     LOCAL = 'http://localhost:3000',
-    HEROKU = 'https://simple-notes-back.herokuapp.com/'
+    HEROKU = 'https://simple-notes-back.herokuapp.com/',
+    VERCEL = 'http://localhost:3000',
 }
 
 const instance = axios.create({
