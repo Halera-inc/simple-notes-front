@@ -3,7 +3,8 @@ import {MongoClient} from "mongodb"
 if (!process.env.MONGO_URL) {
     throw new Error("Please add your Mongo URI to .env.local")
 }
-const uri: string = process.env.MONGO_URL
+// const uri: string = process.env.MONGO_URL
+const uri: string = 'mongodb+srv://Festina:lostmineofphandelver@haleradev.clujbpt.mongodb.net/simple_notes?retryWrites=true&w=majority'
 console.log(uri)
 let client: MongoClient
 let clientPromise: Promise<MongoClient>
