@@ -1,7 +1,7 @@
 {
     "theme_color": "#5590C1",
     "background_color": "#5590C1",
-    "display": "browser",
+    "display": "standalone",
     "scope": "/",
     "start_url": "/",
     "name": "Simple Notes App",
