@@ -3,11 +3,11 @@ import axios from 'axios'
 enum BASE_URLS {
     LOCAL = 'http://localhost:3000',
     HEROKU = 'https://simple-notes-back.herokuapp.com/',
-    VERCEL = 'http://localhost:3000',
+    VERCEL = 'https://simple-notes-app-pearl.vercel.app',
 }
 
 const instance = axios.create({
-    baseURL: BASE_URLS.LOCAL,
+    baseURL: BASE_URLS.VERCEL,
     withCredentials: true
 })
 
