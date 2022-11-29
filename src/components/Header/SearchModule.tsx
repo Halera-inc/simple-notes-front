@@ -2,9 +2,12 @@ import React, {ChangeEvent, useEffect, useState} from 'react';
 import SearchIcon from "../../assets/images/SearchIcon";
 import {useDebounce} from 'use-debounce';
 import {useAppDispatch} from "../../utils/hooks";
-import {setSearchParams} from 'src/bll/slices/notesSlice';
+import { setSearchParams} from 'src/bll/slices/notesSlice';
 import SearchIconBlack from "../../assets/images/SearchIconBlack";
 import s from "./PagesHeader.module.css";
+import SearchIconWhite from "../../assets/images/SearchIconWhite";
+import {useTheme} from "next-themes";
+import PlusIcon from "../../assets/images/PlusIcon";
 
 type SearchModuleType = {
     showSearchHandler: (value: boolean) => void
@@ -17,21 +20,41 @@ const SearchModule = (props: SearchModuleType) => {
     const onSearchValueChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value)
     }
-    const closedHandler=()=>{
-        props.setHiddenName(false)
-    }
+
 
     const dispatch = useAppDispatch()
+    const {systemTheme, theme, setTheme} = useTheme();
+    const [mounted, setMounted] = useState(false);
     const [searchValue, setSearchValue] = useState('')
     const [debouncedSearchValue] = useDebounce<string>(searchValue, 700)
 
-
+    const RenderSearch = () => {
+        if (!mounted) return null;
+        const currentTheme = theme === "system" ? systemTheme : theme;
+        if (currentTheme === 'dark') {
+            return (
+                <SearchIconWhite className={`hidden sl:block   ${ props.hiddenName ? "sl:ml-[150px] sl:mr-[40px] ss:ml-[120px] md:ml-[90px] mm:ml-[65px] mmm:ml-[40px]": " " } `} height={35}
+                                 width={35}/>
+            )
+        } else {
+            return (
+                <SearchIconBlack className={`hidden sl:block   ${ props.hiddenName ? "sl:ml-[150px] sl:mr-[40px] ss:ml-[120px] md:ml-[90px] mm:ml-[65px] mmm:ml-[40px]": " " } `} height={35}
+                                 width={35}/>
+            )
+        }
+    }
     useEffect(() => {
         dispatch(setSearchParams({newValue: debouncedSearchValue}))
+        setMounted(true)
     }, [dispatch, debouncedSearchValue])
+
 
     const showSearchHandler = () => {
         props.setHiddenName(true)
+    }
+
+    const closedHandler=()=>{
+        props.setHiddenName(false);
     }
 
     return (
@@ -53,10 +76,11 @@ const SearchModule = (props: SearchModuleType) => {
             </div>
             {/*если тру-то показываем*/}
             {props.hiddenName ?
-                <input onChange={onSearchValueChange} onBlur={closedHandler} className={`sl:ml-[6%] ${s.inputHidden}`} type={'text'} placeholder={'search...'}/> : ''}
+                <input onChange={onSearchValueChange} onBlur={closedHandler} className={`dark:text-white dark:border-b-white 
+                 dark:bg-transparent sl:ml-[6%] ${s.inputHidden}`} type={'text'} placeholder={'search...'}/> : ''}
             <button className={'hidden sl:block'} onClick={showSearchHandler}>
-                <SearchIconBlack className={`hidden sl:block  ${ props.hiddenName ? "sl:ml-[150px] ss:ml-[120px] md:ml-[90px] mm:ml-[65px] mmm:ml-[40px]": " " } `} height={35}
-                                 width={35}/>
+                {RenderSearch()}
+
             </button>
 
         </div>

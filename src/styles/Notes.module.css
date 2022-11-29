@@ -46,34 +46,38 @@
     }
 }
 @media screen and (max-width: 643px){
-    .notesBlock,.fixNoteBlock {
+    .notesBlock {
         padding: 40px 30px 30px 30px;
     }
 
 
 }
-@media screen and (max-width: 540px) {
-    .notesBlock,.fixNoteBlock {
-        padding: 40px 30px 30px 30px;
-    }
 
+@media (max-width: 607px) {
+    .notesBlock,.fixNoteBlock {
+        padding: 15px 30px 30px 30px;
+    }
+}
+@media screen and (max-width: 540px) {
     .notesWrapper {
         padding-left: 0;
-        padding-top: 80px;
+        padding-top: 70px;
     }
 }
 
 @media screen and (max-width: 473px){
-
     .fixNoteBlock::before{
         width: 80% ;
         left: 50px;
     }
+    .notesBlock{
+        padding: 20px 20px 109px 20px;
+    }
 }
 
 @media screen and (max-width: 405px) {
-    .notesBlock,.fixNoteBlock {
-        padding: 20px 20px 30px 20px;
+    .notesBlock{
+        padding: 20px 20px 84px 20px;
     }
     .fixNoteBlock::before{
         width: 80% ;

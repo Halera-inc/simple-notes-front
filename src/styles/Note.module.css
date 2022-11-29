@@ -39,8 +39,6 @@
     align-items: center;
     justify-content: center;
     margin-top: 15px;
-    position: relative;
-    z-index: 1;
     @apply
     card-actions
     justify-between

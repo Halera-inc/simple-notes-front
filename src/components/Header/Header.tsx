@@ -1,6 +1,6 @@
 import UserCircleIcon from "../../assets/images/UserCircleIcon";
 import React, {useEffect, useState} from "react";
-import {useAppSelector} from "../../utils/hooks";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {useRouter} from "next/router";
 import {APP_ROOTS, getPageName} from "../../utils/getPageName";
 import ButtonIcon from "../../assets/images/ButtonIcon";
@@ -8,6 +8,7 @@ import {useSession} from "next-auth/react";
 import Button from "../universalComponent/Button/Button";
 import SearchModule from "./SearchModule";
 import s from "./PagesHeader.module.css"
+import {setSearchParams} from "../../bll/slices/notesSlice";
 
 
 const Header = () => {
@@ -15,7 +16,7 @@ const Header = () => {
     const {data: session} = useSession()
     const pageName = getPageName(useRouter().pathname as APP_ROOTS)
     const router = useRouter()
-
+    const dispatch = useAppDispatch()
     const [login, setLogin] = useState<boolean>(false)
     const [hiddenName, setHiddenName] = useState(false)
 
@@ -27,7 +28,9 @@ const Header = () => {
     }, []);
 
 
-
+    const backNotes=()=>{
+        dispatch(setSearchParams({newValue:''}))
+    }
     const showSearchHandler=(value:boolean)=>{
         setHiddenName(value)
     }
@@ -39,11 +42,11 @@ const Header = () => {
                     {session
                         ? <div
                             className={`dark:bg-grey pl-[150px] backdrop-blur-md dark:bg-grey/70 bg-white/70 fixed w-screen w-180
-                            z-5 justify-space flex justify-between items-center h-[100px] sv:pl-[120px] sr:pl-[30px] ${hiddenName ? "sl:justify-center": '' } `}>
+                            z-20 justify-space flex justify-between items-center h-[100px] sv:pl-[120px] sv:h-[86px] sr:pl-[30px] ${hiddenName ? "sl:justify-center": '' } `}>
                             { hiddenName ?
                                 ''
                                 :
-                            <p className={ `dark:text-white ${s.pageName}`}>
+                            <p onClick={backNotes} className={ `dark:text-white ${s.pageName}`}>
                                 {pageName}
                             </p>}
                             <div className='flex justify-between w-[600px] items-center mr-[74px] xm:w-[auto] sd:mr-[30px] sb:mr-[15px] sl:mr-[30px]'>
