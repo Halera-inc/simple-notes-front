@@ -46,7 +46,8 @@ const ColorizedBar: React.FC<ColorizedBarPropsType> = (
 
     return (
         <div style={modalStyle}
-             className={`cursor-pointer absolute flex duration-300 ${showColorBar ? 'bottom-[40px] sd:bottom-[60px] sd:left-[5px] ' : 'opacity-0 bottom-[30px]'}`}
+             className={`cursor-pointer absolute flex duration-300 ${showColorBar ? 'bottom-[40px] xm:bottom-[60px] xm:left-[25px]  sd:left-[5px] sr:bottom-[50px] sl:left-0 md:left-[0' +
+                 '] ms:left-[-32px]' : 'opacity-0 bottom-[30px]'}`}
              onClick={(event) => {
                  event.stopPropagation()
              }}>

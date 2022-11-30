@@ -69,7 +69,7 @@ const Sidebar = () => {
                              icon={<SunnyIcon onClick={() => {
                                  setTheme('light')
                              }} width={50} fill={'#ffffff'}
-                                              className="mb-[40px]"/>}/>
+                                              className="mb-[40px] "/>}/>
             )
         }
         if (currentTheme !== 'dark') {
@@ -89,7 +89,6 @@ const Sidebar = () => {
         if (currentTheme === 'dark') {
             return (
                 <LoginIcon width={50} fill={'#ffffff'}
-                           className="hover:fill-black"
                     // onClick={onLogoutClickHandle}
                 />
             )
@@ -139,7 +138,8 @@ const Sidebar = () => {
         const currentTheme = theme === "system" ? systemTheme : theme;
         if (currentTheme === 'dark') {
             return (
-                <PlusIcon fill={'#ffffff'}
+                <PlusIcon
+                    width={60} fill={'#ffffff'}
                           className="hover:fill-black"
                     // onClick={onAddNoteClickHandler}
                 />
@@ -207,7 +207,7 @@ const Sidebar = () => {
                 {RenderChangeThemeIcon()}
 
                 <SidebarItem tooltipInfo={'Log out'}
-                             className={'mb-[40px]'}
+                             className={ `${s.sidebarItem} mb-[40px] hover:bg-transparent`}
                              redActive={true}
                              link={'/#'}
                              icon={RenderLogoutIcon()}
