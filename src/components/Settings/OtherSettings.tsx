@@ -1,6 +1,6 @@
 import s from "../../styles/Settings.module.css";
 import Button from "../universalComponent/Button/Button";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useTheme } from "next-themes";
 
 export const OtherSettings = () => {
@@ -8,6 +8,7 @@ export const OtherSettings = () => {
         "  rounded-none  text-blue-dark mb-5 pl-3  text-xl "
 
     const {systemTheme, theme, setTheme} = useTheme();
+    const [side, setSide] = useState('false')
 
     const onThemeChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.checked){
