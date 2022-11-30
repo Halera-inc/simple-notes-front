@@ -1,9 +1,6 @@
 import s from "../../styles/Settings.module.css";
 import Button from "../universalComponent/Button/Button";
-import React from "react";
-import {
-    ChangeEvent
-} from "../../../../../../../../../Applications/WebStorm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/react";
+import React, { ChangeEvent } from "react";
 import { useTheme } from "next-themes";
 
 export const OtherSettings = () => {
