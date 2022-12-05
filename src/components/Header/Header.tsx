@@ -37,10 +37,6 @@ const Header = () => {
         setHiddenName(value)
     }
 
-    const onClickHandler = () => {
-        console.log({data: session})
-    }
-
 
 
     return (
@@ -57,9 +53,6 @@ const Header = () => {
                             <p onClick={backNotes} className={ `dark:text-white ${s.pageName}`}>
                                 {pageName}
                             </p>}
-                            <div>
-                                <button onClick={onClickHandler}>GetSessionInfo</button>
-                            </div>
                             <div className='flex justify-between w-[600px] items-center mr-[74px] xm:w-[auto] sd:mr-[30px] sb:mr-[15px] sl:mr-[30px]'>
                                 <SearchModule showSearchHandler={showSearchHandler}  setHiddenName={setHiddenName}
                                               hiddenName={hiddenName}/>
