@@ -70,6 +70,7 @@ export const authOptions = {
     },
     callbacks: {
         session: async ({session, token}) => {
+            console.log(session)
             if (session?.user) {
                 session.user.id = token.sub;
             }
@@ -81,6 +82,7 @@ export const authOptions = {
     },
     pages: {
         signIn: '/login',
+        error: '/404'
     },
     debug: process.env.NODE_ENV === 'development',
 }
