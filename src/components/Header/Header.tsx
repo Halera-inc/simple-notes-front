@@ -16,6 +16,7 @@ import {GetServerSideProps, GetServerSidePropsContext} from "next";
 const Header = () => {
     const userName = useAppSelector(state => state.profile.user)
     const {data: session} = useSession()
+    const tmpData = useSession()
     const pageName = getPageName(useRouter().pathname as APP_ROOTS)
     const router = useRouter()
     const dispatch = useAppDispatch()
@@ -39,6 +40,7 @@ const Header = () => {
 
     const onClickHandler = () => {
         console.log({data: session})
+        console.log(tmpData)
     }
 
 
