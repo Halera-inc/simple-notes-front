@@ -42,6 +42,7 @@
     @apply
     card-actions
     justify-between
+    relative
 
 }
 
@@ -56,9 +57,32 @@
 }
 
 @media (max-width: 961px) {
-    .card{
+    .card {
         max-width: 500px;
         min-height: 300px;
+    }
+
+}
+
+@media (max-width: 961px) {
+    .card {
+        max-width: 500px;
+        min-height: 300px;
+    }
+
+}
+
+@media (max-width: 635px) {
+    .card {
+        min-height: 100px;
+    }
+    .cardAction{
+        display: none;
+    }
+    .text{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
 }

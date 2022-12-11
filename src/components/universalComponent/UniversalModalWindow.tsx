@@ -34,8 +34,8 @@ export const UniversalModalWindow = ({title, noteId}: UniversalModalWindowType) 
                     {title}
                 </div>
                 <div className={s.buttons}>
-                    <Button title='Cancel' color='RED' callback={cancelHandler}/>
-                    <Button title='Delete' color='GREEN' callback={deleteNotesHandler}/>
+                    <Button title='Cancel'  color='GREEN' callback={cancelHandler}/>
+                    <Button title='Delete' color='RED'  callback={deleteNotesHandler}/>
                 </div>
 
 

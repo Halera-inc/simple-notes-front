@@ -2,7 +2,7 @@ import s from '../../styles/Note.module.css'
 import EditIcon from "../../assets/images/EditIcon";
 import DeleteIcon from "../../assets/images/DeleteIcon";
 import colorizeNote from "../../utils/colorizeNote";
-import {ChangeEvent, useRef, useState} from 'react';
+import {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {
     deleteNote,
@@ -58,6 +58,9 @@ const Note = ({
     const colorizedColor = colorizeNote(color)
 
     const [showColorBar, setShowColorBar] = useState(false)
+    const [showNote, setShowNote] = useState(false)
+
+
 
 
     const changePushPinHandler = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -158,9 +161,29 @@ const Note = ({
 
     drag(drop(ref))
     colorizedColor.opacity = isDragging ? 0 : 1
+    ///---end  drag-and-drop
+
+    const editHandler=()=>{
+        if(window.innerWidth>=635){
+            edit(title, note_text, colorizedColor, color, noteId)
+            setShowNote(false)
+        }else{
+            setShowNote(!showNote)
+        }
+
+
+    }
+
+    const doubleHandler=()=>{
+        if(window.innerWidth<635) {
+            edit(title, note_text, colorizedColor, color, noteId)
+            setShowNote(false)
+        }
+    }
+
     return (
-        <div className={s.card} style={colorizedColor} ref={ref} data-handler-id={handlerId}
-             onClick={() => edit(title, note_text, colorizedColor, color, noteId)}>
+        <div className={` ${showNote ? "min-h-[300px] max-w-[500px] w-[100%] flex shadow-lg flex-col p-[20px] transition-all truncate " :""}${s.card}`} style={colorizedColor} ref={ref} data-handler-id={handlerId}
+             onClick={editHandler}  onDoubleClick={doubleHandler}>
 
             <div className={s.title_date_space}>
 
@@ -170,8 +193,8 @@ const Note = ({
                                       onClick={changePushPinHandler}/>
                     : <PushPinIcon height={25} width={25} fill={colorizedColor.color} onClick={changePushPinHandler}/>}
             </div>
-            <p className={s.text}>{cropText(note_text)}</p>
-            <div className={s.cardAction}>
+            <p className={ ` ${showNote ?  "text-clip overflow-visible  whitespace-normal grow break-all " :""}${s.text}`}>{cropText(note_text)}</p>
+            <div className={` ${showNote ? "inline-flex card-actions justify-between relative" :""}${s.cardAction}`}>
                 <EditIcon height={25} width={25} fill={colorizedColor.color}
                           className={s.hoverStyle}
                           onClick={onColorChangeButtonClickHandler}/>

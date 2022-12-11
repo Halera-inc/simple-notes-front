@@ -66,12 +66,6 @@ const InputForm = () => {
                         />
                         </li>
 
-                    <li><div className="dark:text-white">Email:</div> <input
-                            disabled={true}
-                            placeholder="Enter New Email"
-                            className={inputStyle}
-                            {...formik.getFieldProps('email')}/></li>
-
                     <li><div className="dark:text-white">Country:</div> <input
                             placeholder="Change Country"
                             className={inputStyle}

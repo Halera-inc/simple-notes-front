@@ -55,7 +55,7 @@
 
 @media (max-width: 607px) {
     .notesBlock,.fixNoteBlock {
-        padding: 15px 30px 30px 30px;
+        padding: 20px 30px 30px 30px;
     }
 }
 @media screen and (max-width: 540px) {
