@@ -1,21 +1,22 @@
 import React, {ChangeEvent, useRef, useState} from 'react';
-import { useAppSelector} from "../../utils/hooks";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {convertFileToBase64} from "../../utils/convertFileToBase64";
 import s from "./../../styles/Settings.module.css";
 import {useSession} from "next-auth/react";
 import defaultImg from "./../../assets/images/nopic.jpg";
+import Image from 'next/image'
+import {changeImage} from "../../bll/slices/profileSlice";
 
 
 
 export const LoaderAvatar = () => {
+    const dispatch=useAppDispatch()
     const {data: session} = useSession()
 
 
     const userAvatar = useAppSelector(state => state.profile.userAvatar)
-    debugger
     const [avatar, setAvatar] = useState<any>(userAvatar ? userAvatar : defaultImg)
 
-debugger
     const refLoader = useRef<HTMLInputElement>(null)
     const selectImageHandler = () => {
         refLoader && refLoader.current?.click();
@@ -26,7 +27,7 @@ debugger
             if (file.size < 1000000) { //это одно из свойст загружаемого файла показано сколько mgbate-1, если больше то преобразование
                 convertFileToBase64(file, (file64: string) => {
                     setAvatar(file64)
-                    // dispatch(updateAvatarDataTC(file64));
+                     dispatch(changeImage(file64));
                 })
             } else {
                 // dispatch(setErrorAC('The file is more 1 mgBite'))
@@ -34,21 +35,15 @@ debugger
             }
         }
     }
-    let src = session ? session?.user?.image : avatar;
     return (
         <div className={s.imgProfileWrapper}>
-            <img
-                className={s.img}
-                alt={'avatar'}
-                width={200}
-                height={200}
-                src={src}
-                // src={defaultImg.src}
-            />
+            <Image   width={200}
+                     height={200}
+                     alt={'avatar'}
+                     src={avatar}
+                     className={s.img}/>
 
 
-            {/*<img*/}
-            {/*    src={avatar}/>*/}
             {session ? <>
                 <div onClick={selectImageHandler} color="action" className={s.download}>
                     <svg className="h-8 w-8 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -57,7 +52,6 @@ debugger
                         <line x1="12" y1="12" x2="12" y2="21"/>
                         <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/>
                     </svg>
-                    {/*<span>Download new avatar</span>*/}
                 </div>
                 <input type='file'
                        ref={refLoader}
