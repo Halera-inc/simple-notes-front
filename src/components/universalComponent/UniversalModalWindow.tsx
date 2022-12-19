@@ -6,12 +6,13 @@ import {useAppDispatch} from "src/utils/hooks";
 
 export type UniversalModalWindowType = {
     title: string,
-    noteId: string
+    noteId: string,
+    titleNote:string
 
 
 }
 
-export const UniversalModalWindow = ({title, noteId}: UniversalModalWindowType) => {
+export const UniversalModalWindow = ({title, noteId,titleNote}: UniversalModalWindowType) => {
     const dispatch = useAppDispatch()
     const modalWindowBackgroundRef = useRef<HTMLDivElement>(null)
 
@@ -32,7 +33,9 @@ export const UniversalModalWindow = ({title, noteId}: UniversalModalWindowType) 
 
                 <div className={s.modalTitle}>
                     {title}
+                    <div className={s.noteTitle}>{titleNote}</div>
                 </div>
+               
                 <div className={s.buttons}>
                     <Button title='Cancel'  color='GREEN' callback={cancelHandler}/>
                     <Button title='Delete' color='RED'  callback={deleteNotesHandler}/>

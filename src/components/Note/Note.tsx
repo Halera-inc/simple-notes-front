@@ -31,7 +31,7 @@ export type NotePropsType = {
     noteId: string
     pinned: boolean
     edit: (title: string, note_text: string, colorizedColor: colorizedColorType, color: ColorSamplesType, noteId: string) => void
-    deleteNote:(noteId:string,e:any)=>void
+    deleteNote:(noteId:string,e:any,title:string)=>void
     createdAt?: Date
 }
 
@@ -201,7 +201,7 @@ const Note = ({
                 <small style={{margin: '5px 0 0 0'}}>{localDate}</small>
                 <DeleteIcon height={25} width={25} className={s.hoverStyle}
                             fill={colorizedColor.color}
-                            onClick={(e)=>deleteNote(noteId,e)}
+                            onClick={(e)=>deleteNote(noteId,e,title)}
                 />
 
                 <ColorizedBar
