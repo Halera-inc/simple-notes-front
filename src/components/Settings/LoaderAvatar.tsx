@@ -12,10 +12,10 @@ export const LoaderAvatar = () => {
 
 
     const userAvatar = useAppSelector(state => state.profile.userAvatar)
-    debugger
+    // debugger
     const [avatar, setAvatar] = useState<any>(userAvatar ? userAvatar : defaultImg)
 
-debugger
+// debugger
     const refLoader = useRef<HTMLInputElement>(null)
     const selectImageHandler = () => {
         refLoader && refLoader.current?.click();
