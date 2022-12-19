@@ -3,7 +3,9 @@ import MainBlockSettings from "../src/components/Settings/MainBlockSettings";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import {getSession} from "next-auth/react";
 
-const Settings = () => {
+const Settings: React.FC<any> = ({session}) => {
+
+
     return (
         <MainContainer>
             <div className={"dark:bg-grey  dark:text-white pt-[130px] pr-[40px] pb-[0] pl-[140px] h-[100vh]"}>
@@ -23,7 +25,8 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
             props: {}
         }
     }
+
     return {
-        props: {session}
+        props: {...session}
     }
 }
