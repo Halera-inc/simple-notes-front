@@ -15,6 +15,8 @@ const MainBlockSettings = () => {
     const {data: session} = useSession()
     const user = useAppSelector<UserType>(state => state.profile.user)
     const [edit, setEdit] = useState(false);
+    const sessionData = useSession();
+    console.log(sessionData)
 
     const editProfileHandler = () => {
         setEdit(!edit);

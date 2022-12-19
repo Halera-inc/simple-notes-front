@@ -69,11 +69,31 @@ export const authOptions = {
         strategy: "jwt",
     },
     callbacks: {
+        async jwt({ token, account, profile }) {
+            // Persist the OAuth access_token and or the user id to the token right after signin
+            if (account) {
+                token.accessToken = account.access_token
+                if (profile){
+                    token.id = profile.id
+                }
+            }
+            // console.log('____token____')
+            // console.log(token)
+            // console.log('____/token/____')
+            return token
+        },
         session: async ({session, token}) => {
-            console.log(session)
+            // console.log('____session____')
             if (session?.user) {
                 session.user.id = token.sub;
+                session.user.accessToken = !!token.accessToken;
             }
+            // console.log(session)
+            // console.log('____/session/____')
+            // console.log('____token____')
+            // console.log(token)
+            // console.log('____/token/____')
+
             return session;
         },
     },
