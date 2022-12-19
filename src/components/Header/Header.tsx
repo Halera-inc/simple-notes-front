@@ -50,13 +50,16 @@ const Header = () => {
                             { hiddenName ?
                                 ''
                                 :
-                            <p onClick={backNotes} className={ `dark:text-white ${s.pageName}`}>
+                            <p onClick={backNotes} className={ `dark:text-white ${s.pageName } `}>
                                 {pageName}
                             </p>}
-                            <div className='flex justify-between w-[600px] items-center mr-[74px] xm:w-[auto] sd:mr-[30px] sb:mr-[15px] sl:mr-[30px]'>
+                            <div className={`flex  w-[600px] items-center mr-[74px] xm:w-[auto] sd:mr-[30px] sb:mr-[15px] sl:mr-[30px]
+                                ${router.pathname === '/settings' ? 'justify-end' : 'justify-between' }`}>
+                                {
+                                    router.pathname === '/settings' ? '':
                                 <SearchModule showSearchHandler={showSearchHandler}  setHiddenName={setHiddenName}
-                                              hiddenName={hiddenName}/>
-                                <p className='dark:text-white text-lg text-black xm:hidden '>{session?.user?.name}</p>
+                                              hiddenName={hiddenName}/>}
+                                <p className={`dark:text-white text-lg text-black xm:hidden  ${router.pathname === '/settings' ? 'mr-[20px]' :'' }`}>{session?.user?.name}</p>
                                 <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className="dark:text-white xm:hidden"/>
                             </div>
                         </div>

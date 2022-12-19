@@ -6,6 +6,7 @@ import InputForm from "src/components/Settings/inputform/InputForm";
 import {useSession} from "next-auth/react";
 import {OtherSettings} from "./OtherSettings";
 import {UserType} from "../../utils/types";
+import {LoaderAvatar} from "./LoaderAvatar";
 
 
 const MainBlockSettings = () => {
@@ -23,19 +24,8 @@ const MainBlockSettings = () => {
         <div className={s.wrapperMainSettings}>
             <div className={s.leftArea}>
                 <div className={s.myProfile}>
-                    <div className={s.imgProfileWrapper}>
-                        <img className={s.imgProfileWrapper_img}
+                    <LoaderAvatar/>
 
-                             alt={'avatar'}
-                             src={`${session?.user?.image}`}
-                        />
-
-                        {/*Пока убрал Image так как не знаю как правильно прописывать в next.config.js (Ваня)*/}
-                        {/*<Image src={`${session?.user?.image}`}*/}
-                        {/*       width={200}*/}
-                        {/*       height={200}*/}
-                        {/*       alt={'avatar'}/>*/}
-                    </div>
                     <div className={s.editWrapper}>
                         <ul className={s.editData}>
                             <li className={s.myName}>{session?.user?.email}</li>

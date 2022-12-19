@@ -54,6 +54,7 @@
     card-title
     text-blue-dark
     min-w-full
+    placeholder-current
 }
 
 .textTextArea {
@@ -71,6 +72,7 @@
     min-w-full
     bg-transparent
     text-blue-dark
+    placeholder-current
 }
 .hoverStyle {
     width: 2.5em;

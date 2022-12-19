@@ -16,7 +16,6 @@
     padding-right: 50px;
     @apply
     flex
-    justify-between
 
 }
 
@@ -28,13 +27,28 @@
 }
 
 .imgProfileWrapper {
+    position: relative;
+}
+.img{
     border: 1px solid #5590C1;
+    width: 200px !important;
+    height: 200px;
+    display: block;
+    object-fit: cover;
+}
+
+.download{
+    position: absolute;
+    top: 35px;
+    left: 215px;
+    cursor: pointer;
 }
 
 .myName {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 25px;
-    line-height: 30px;
+    letter-spacing: 1px;
+    line-height: 26px;
 }
 
 .reg {
@@ -138,17 +152,6 @@ ul.collapseContent li p {
     text-blue-dark
     text-lg
     font-thin
-}
-
-.img {
-
-    background: red;
-}
-
-.imgProfileWrapper_img {
-    width: 200px;
-    height: 200px;
-    border: 2px solid var(--blue-dark);
 }
 
 

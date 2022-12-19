@@ -9,7 +9,6 @@ import Button from "./universalComponent/Button/Button";
 import EditIcon from "../assets/images/EditIcon";
 import ColorizedBar from "./Note/ColorizedBar";
 import {useAppDispatch} from "../utils/hooks";
-import {UniversalModalWindow} from "src/components/universalComponent/UniversalModalWindow";
 
 
 export type ModalWindowType = 'edit' | 'create'
@@ -193,7 +192,7 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
                                     onDiscard && onDiscard()
                                 }}
                         />
-                        <EditIcon width={'2.5em'} height={'2.5em'} fill={colorizedColor.color}
+                        <EditIcon width={'2.5em'} height={'2.5em'} fill={defaultColor ? defaultNote.color : colorizedColorAdd.color}
                                   className={s.hoverStyle}
                                   onClick={onColorChangeButtonClickHandler}/>
                         <ColorizedBar modalStyle={modalStyle}
