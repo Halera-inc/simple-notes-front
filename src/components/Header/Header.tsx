@@ -11,16 +11,22 @@ import s from "./PagesHeader.module.css"
 import {setSearchParams} from "../../bll/slices/notesSlice";
 import { getServerSideProps } from "pages/notes";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import Image from "next/image";
+import defaultImg from "../../assets/images/nopic.jpg";
 
 
 const Header = () => {
     const userName = useAppSelector(state => state.profile.user)
+    const imgAvatar = useAppSelector(state => state.profile.userAvatar)
     const {data: session} = useSession()
     const pageName = getPageName(useRouter().pathname as APP_ROOTS)
     const router = useRouter()
     const dispatch = useAppDispatch()
     const [login, setLogin] = useState<boolean>(false)
     const [hiddenName, setHiddenName] = useState(false)
+
+
+
 
 
     useEffect(() => {
@@ -60,7 +66,11 @@ const Header = () => {
                                 <SearchModule showSearchHandler={showSearchHandler}  setHiddenName={setHiddenName}
                                               hiddenName={hiddenName}/>}
                                 <p className={`dark:text-white text-lg text-black xm:hidden  ${router.pathname === '/settings' ? 'mr-[20px]' :'' }`}>{session?.user?.name}</p>
-                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className="dark:text-white xm:hidden"/>
+                                {imgAvatar?   <Image   width={50}
+                                                       height={50}
+                                                       alt={'avatar'}
+                                                       src={imgAvatar}
+                                                       className={s.img}/> : <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className="dark:text-white xm:hidden"/>}
                             </div>
                         </div>
                         : <div className='dark:bg-grey z-40 flex justify-between items-center h-10 pt-[45px] pb-[35px] pr-[100px]
