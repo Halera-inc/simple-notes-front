@@ -7,9 +7,10 @@ import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
 import {colorizedColorType} from "../src/components/Note";
 import {ColorSamplesType} from "../src/api/notes-api";
-import {getSession} from "next-auth/react";
+import {getSession, useSession} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import {UniversalModalWindow} from "src/components/universalComponent/UniversalModalWindow";
+import { setUserData } from 'src/bll/slices/profileSlice';
 
 
 const Notes = () => {
@@ -24,7 +25,12 @@ const Notes = () => {
     const effectRan = useRef(false)
     const modalShow = useAppSelector(state => state.notes.editNoteModalShow)
     const universalModalShow = useAppSelector(state => state.notes.openUniversalModal)
-    console.log(universalModalShow, 'universalModalShow')
+    const sessionData = useSession()
+    useEffect(()=>{
+        if (sessionData.data){
+            dispatch(setUserData({userData: sessionData.data.user}))
+        }
+    },[sessionData])
 
     useEffect(() => {
         if (!effectRan.current) {

@@ -2,8 +2,13 @@ import s from "../../styles/Settings.module.css";
 import Button from "../universalComponent/Button/Button";
 import React, { ChangeEvent, useState } from "react";
 import { useTheme } from "next-themes";
+import { Session } from "next-auth/core/types";
 
-export const OtherSettings = () => {
+type OtherSettingsPropsType = {
+    session: Session & {user?: {accessToken?: boolean}} | null
+}
+
+export const OtherSettings: React.FC<OtherSettingsPropsType> = ({session}) => {
     const inputStyle= " collapse collapse-arrow border dark:text-white  border-blue-dark bg-blue dark:bg-black dark:color-white dark:border-none " +
         "  rounded-none  text-blue-dark mb-5 pl-3  text-xl "
 
@@ -56,7 +61,7 @@ export const OtherSettings = () => {
                         <p>Setting Three</p>
                     </div>
                 </div>
-                <div tabIndex={4}
+                {session && session.user && !session.user.accessToken && <div tabIndex={4}
                      className={`${s.last_child} ${inputStyle}`}>
                     <input type="checkbox"/>
                     <div className="collapse-title text-xl font-medium">
@@ -90,7 +95,7 @@ export const OtherSettings = () => {
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>}
             </div>
         </div>
     )

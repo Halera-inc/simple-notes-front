@@ -5,7 +5,7 @@ import {UserType} from "../../utils/types";
 
 const initialState = {
     user: {} as UserType,
-    userAvatar:'' as string || null,
+    userAvatar:'' as string | null,
 }
 
 export const updateUserData = createAsyncThunk('profileSlice/updateUserData',
@@ -24,7 +24,18 @@ export const profileSlice = createSlice({
     initialState,
     reducers: {
         changeImage(state,action:PayloadAction<string | null>){
-            state.userAvatar=action.payload
+            state.userAvatar = action.payload
+        },
+        setUserData(state, action:PayloadAction<{userData: UserType | undefined}>){
+            if (action.payload.userData){
+                state.user.id = action.payload.userData.id
+                state.user.name = action.payload.userData.name
+                state.user.email = action.payload.userData.email
+                state.user.image = action.payload.userData.image
+                if (action.payload.userData.image !== undefined){
+                    state.userAvatar = action.payload.userData.image
+                }
+            }
         }
     },
     extraReducers: (builder) => {
@@ -41,6 +52,6 @@ export type PutUserParamsType = {
 }
 
 export const  profileReducer = profileSlice.reducer
-export const {changeImage} = profileSlice.actions;
+export const {changeImage, setUserData} = profileSlice.actions;
 
-  export default profileSlice.reducer
+export default profileSlice.reducer
