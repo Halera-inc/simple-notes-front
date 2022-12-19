@@ -6,12 +6,16 @@ import {useSession} from "next-auth/react";
 import defaultImg from "./../../assets/images/nopic.jpg";
 import Image from 'next/image'
 import {changeImage} from "../../bll/slices/profileSlice";
+import { Session } from 'next-auth/core/types';
 
 
+type LoaderAvatarPropsType = {
+    session: Session & {user?: {accessToken?: boolean}} | null
+}
 
-export const LoaderAvatar = () => {
+export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
     const dispatch=useAppDispatch()
-    const {data: session} = useSession()
+    // const {data: session} = useSession()
 
 
     const userAvatar = useAppSelector(state => state.profile.userAvatar)
@@ -24,27 +28,29 @@ export const LoaderAvatar = () => {
     const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) { //e.target.files=это массив . нужно проверить что он тру и у него есть длина
             const file = e.target.files[0]
-            if (file.size < 1000000) { //это одно из свойст загружаемого файла показано сколько mgbate-1, если больше то преобразование
+            if (file.size < 1000000) { //это одно из свойст загружаемого файла показано сколько Mbyte-1, если больше то преобразование
                 convertFileToBase64(file, (file64: string) => {
                     setAvatar(file64)
                      dispatch(changeImage(file64));
                 })
             } else {
-                // dispatch(setErrorAC('The file is more 1 mgBite'))
+                // dispatch(setErrorAC('The file is more 1 Mbyte'))
                 alert('The file is more 1 mgBite')
             }
         }
     }
     return (
         <div className={s.imgProfileWrapper}>
-            <Image   width={200}
+            {userAvatar &&
+                <Image
+                     width={200}
                      height={200}
                      alt={'avatar'}
-                     src={avatar}
-                     className={s.img}/>
-
-
-            {session ? <>
+                     src={userAvatar}
+                     className={s.img}
+                />
+            }
+            {session && session.user && !session.user.accessToken ? <>
                 <div onClick={selectImageHandler} color="action" className={s.download}>
                     <svg className="h-8 w-8 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

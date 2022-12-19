@@ -7,16 +7,22 @@ import {useSession} from "next-auth/react";
 import {OtherSettings} from "./OtherSettings";
 import {UserType} from "../../utils/types";
 import {LoaderAvatar} from "./LoaderAvatar";
+import { Session } from 'next-auth/core/types';
 
 
-const MainBlockSettings = () => {
+
+type MainBlockSettingsPropsType = {
+    session: Session & {user?: {accessToken?: boolean}} | null
+}
+
+const MainBlockSettings:React.FC<MainBlockSettingsPropsType> = ({session}) => {
 
 
-    const {data: session} = useSession()
+    // const {data: session} = useSession()
     const user = useAppSelector<UserType>(state => state.profile.user)
     const [edit, setEdit] = useState(false);
-    const sessionData = useSession();
-    console.log(sessionData)
+    // const sessionData = useSession();
+    console.log(session)
 
     const editProfileHandler = () => {
         setEdit(!edit);
@@ -26,14 +32,14 @@ const MainBlockSettings = () => {
         <div className={s.wrapperMainSettings}>
             <div className={s.leftArea}>
                 <div className={s.myProfile}>
-                    <LoaderAvatar/>
+                    <LoaderAvatar session={session}/>
 
                     <div className={s.editWrapper}>
                         <ul className={s.editData}>
                             <li className={s.myName}>{session?.user?.email}</li>
                             <li className={s.reg}> {session?.user?.name}</li>
                         </ul>
-                        <Button title={'Edit'}
+                        {session && session.user && !session.user.accessToken && <Button title={'Edit'}
                                 callback={editProfileHandler}
                                 className={"dark:bg-black dark:border-white dark:text-white"}
                                 style={{
@@ -43,11 +49,12 @@ const MainBlockSettings = () => {
                                     margin:0
                                 }}
                               />
+                        }
                     </div>
                 </div>
                 {edit ? <InputForm/> : ''}
             </div>
-            <OtherSettings/>
+            <OtherSettings session={session}/>
         </div>
     );
 };

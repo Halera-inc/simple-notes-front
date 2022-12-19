@@ -4,9 +4,12 @@ import {store} from '../src/bll/store'
 import {Provider} from 'react-redux'
 import {ThemeProvider} from "next-themes";
 import Sidebar from "../src/components/Sidebar/Sidebar";
-import {SessionProvider} from 'next-auth/react';
+import {SessionProvider, useSession} from 'next-auth/react';
 import {HTML5Backend} from "react-dnd-html5-backend";
 import { DndProvider } from 'react-dnd';
+import { useEffect } from 'react';
+import { setUserData } from 'src/bll/slices/profileSlice';
+import { useAppDispatch } from 'src/utils/hooks';
 
 
 function MyApp({Component, pageProps: {session, ...pageProps}}: AppProps) {

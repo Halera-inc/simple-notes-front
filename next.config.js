@@ -23,16 +23,24 @@
 
 const runtimeCaching = require("next-pwa/cache");
 const withPWA = require("next-pwa")({
-  dest: "public",
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
-  runtimeCaching,
-  buildExcludes: [/middleware-manifest.json$/],
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+    disable: process.env.NODE_ENV === 'development',
+    runtimeCaching,
+    buildExcludes: [/middleware-manifest.json$/],
 });
 
 const nextConfig = withPWA({
-  // next config
+    images: {
+        // remotePatterns: [
+        //     {
+        //         protocol: 'https',
+        //         hostname: 'lh3.googleusercontent.com',
+        //     },
+        // ],
+        domains: ['lh3.googleusercontent.com'],
+    },
 });
 module.exports = nextConfig;
 
