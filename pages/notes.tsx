@@ -59,7 +59,8 @@ const Notes = () => {
         setModalTitle('')
         setModalText('')
     }
-    const onUniversalModalClickHandler = (noteId: string, e: ChangeEvent<HTMLTextAreaElement>) => {
+    const onUniversalModalClickHandler = (noteId: string, e: ChangeEvent<HTMLTextAreaElement>,title:string) => {
+        title && setModalTitle(title)
         setModalId(noteId)
         dispatch(setUniversalModal({isUniversalModalShow: true}))
         e.stopPropagation()
@@ -94,6 +95,7 @@ const Notes = () => {
 
             {universalModalShow &&
             <UniversalModalWindow title='Delete Note'
+                                  titleNote = {modalTitle}
                                   noteId={modalId}
 
 

@@ -30,12 +30,18 @@
 }
 
 .modalTitle {
+    display: flex;
+    flex-direction: column;
     font-size: 30px !important;
     margin-bottom: 15px;
     background-color: transparent;
     @apply
     card-title
     text-blue-dark
+}
+.noteTitle{
+    padding: 40px;
+    font-size: 20px !important;
 }
 
 .buttons {
