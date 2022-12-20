@@ -20,6 +20,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
 
     const userAvatar = useAppSelector(state => state.profile.userAvatar)
     const [avatar, setAvatar] = useState<any>(userAvatar ? userAvatar : defaultImg)
+    console.log(avatar)
 
     const refLoader = useRef<HTMLInputElement>(null)
     const selectImageHandler = () => {
@@ -41,12 +42,12 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
     }
     return (
         <div className={s.imgProfileWrapper}>
-            {userAvatar &&
+            {avatar &&
                 <Image
                      width={200}
                      height={200}
                      alt={'avatar'}
-                     src={userAvatar}
+                     src={avatar}
                      className={s.img}
                 />
             }
