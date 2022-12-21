@@ -19,6 +19,8 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
 
 
     const userAvatar = useAppSelector(state => state.profile.userAvatar)
+    const isNewImageUploaded = useAppSelector(state => state.profile.newImageUploaded)
+    console.log(userAvatar)
     const [avatar, setAvatar] = useState<any>(userAvatar ? userAvatar : defaultImg)
     console.log(avatar)
 
@@ -40,6 +42,11 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
             }
         }
     }
+    const onSaveClickHandler = () => {
+
+    }
+
+
     return (
         <div className={s.imgProfileWrapper}>
             {avatar &&
@@ -59,6 +66,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
                         <line x1="12" y1="12" x2="12" y2="21"/>
                         <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/>
                     </svg>
+                    {isNewImageUploaded && <button className='ml-[20px]'>Save</button>}
                 </div>
                 <input type='file'
                        ref={refLoader}

@@ -6,6 +6,7 @@ import {UserType} from "../../utils/types";
 const initialState = {
     user: {} as UserType,
     userAvatar:'' as string | null,
+    newImageUploaded: false as boolean
 }
 
 export const updateUserData = createAsyncThunk('profileSlice/updateUserData',
@@ -25,6 +26,7 @@ export const profileSlice = createSlice({
     reducers: {
         changeImage(state,action:PayloadAction<string | null>){
             state.userAvatar = action.payload
+            state.newImageUploaded = true
         },
         setUserData(state, action:PayloadAction<{userData: UserType | undefined}>){
             if (action.payload.userData){
