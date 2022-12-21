@@ -17,7 +17,12 @@
     margin-left: 128px;
     color: black;
 }
+.img{
+    border-radius: 50%;
+    display: block;
+    object-fit: cover;
 
+}
 
 .pagesHeader_search {
     display: flex;

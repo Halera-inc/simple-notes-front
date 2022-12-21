@@ -194,7 +194,7 @@ const Note = ({
                     : <PushPinIcon height={25} width={25} fill={colorizedColor.color} onClick={changePushPinHandler}/>}
             </div>
             <p className={ ` ${showNote ?  "text-clip overflow-visible  whitespace-normal grow break-all " :""}${s.text}`}>{cropText(note_text)}</p>
-            <div className={` ${showNote ? "inline-flex card-actions justify-between relative" :""}${s.cardAction}`}>
+            <div className={` ${showNote ? " relative flex justify-between card-actions " :""}${s.cardAction}`}>
                 <EditIcon height={25} width={25} fill={colorizedColor.color}
                           className={s.hoverStyle}
                           onClick={onColorChangeButtonClickHandler}/>

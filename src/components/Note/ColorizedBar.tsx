@@ -47,12 +47,12 @@ const ColorizedBar: React.FC<ColorizedBarPropsType> = (
     return (
         <div style={modalStyle}
              className={`cursor-pointer absolute flex duration-300 ${showColorBar ? 'bottom-[40px] xm:bottom-[60px] xm:left-[25px]  sd:left-[5px] sr:bottom-[50px] sl:left-0 md:left-[0' +
-                 '] ms:left-[-32px]' : 'opacity-0 bottom-[30px]'}`}
+                 '] ms:left-[-5px]' : 'opacity-0 bottom-[30px]'}`}
              onClick={(event) => {
                  event.stopPropagation()
              }}>
             {colorSamples.map((c, k) => {
-                const divClassName = `bg-[${colorizeNote(c).color}] hover:scale-125 transition w-[30px] h-[30px] border-[1px] mr-[10px]`
+                const divClassName = `bg-[${colorizeNote(c).color}] hover:scale-125 transition w-[30px] h-[30px] border-[1px] mr-[10px] ms:w-[25px] ms:h-[25px]`
                 return (
                     <div key={k}>
                         <div className={divClassName} onClick={() => onColorClick(c)}></div>
@@ -63,9 +63,9 @@ const ColorizedBar: React.FC<ColorizedBarPropsType> = (
             {/*Далее цвета не сделаны через map, т.к. в первом случае при применении данный цвет меняется на противоположный согласно настройкам темы,*/}
             {/*во втором случае, для отображения цвета использован код цвета "backgroundColor", а не "color"*/}
 
-            <div className='bg-[#212121] w-[30px] h-[30px] border-[1px] mr-[10px] hover:scale-125 transition'
+            <div className='bg-[#212121] w-[30px] h-[30px] border-[1px] mr-[10px] hover:scale-125 transition ms:w-[25px] ms:h-[25px]'
                  onClick={() => onColorClick('dark')}></div>
-            <div className='bg-[#E5E5E5] w-[30px] h-[30px] border-[1px] mr-[10px] hover:scale-125 transition'
+            <div className='bg-[#E5E5E5] w-[30px] h-[30px] border-[1px] mr-[10px] hover:scale-125 transition ms:w-[25px] ms:h-[25px]'
                  onClick={() => onColorClick('default')}></div>
             {/*<div className={`absolute flex bottom-[40px]`}>*/}
             {/*    <div className='bg-[#5590C1] w-[30px] h-[30px] mr-[10px] border-[1px]'></div>*/}
