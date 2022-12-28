@@ -12,7 +12,6 @@ export default async function handler(req, res) {
         case 'GET':
             try {
                 const notes = await Note.find({user: user.id})
-                console.log(notes)
                 res.status(200).json({notes})
             } catch (error) {
                 res.status(400).json({success: false})

@@ -1,12 +1,13 @@
-import React, {ChangeEvent, useRef, useState} from 'react';
+import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {convertFileToBase64} from "../../utils/convertFileToBase64";
 import s from "./../../styles/Settings.module.css";
 import {useSession} from "next-auth/react";
 import defaultImg from "./../../assets/images/nopic.jpg";
 import Image from 'next/image'
-import {changeImage} from "../../bll/slices/profileSlice";
+import {changeImage, updateUserData} from "../../bll/slices/profileSlice";
 import { Session } from 'next-auth/core/types';
+
 
 
 type LoaderAvatarPropsType = {
@@ -14,15 +15,26 @@ type LoaderAvatarPropsType = {
 }
 
 export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
+    const userAvatar = useAppSelector(state => state.profile.userAvatar)
+    const [avatar, setAvatar] = useState<any>(userAvatar ? userAvatar : defaultImg)
+
+    // useEffect(()=>{
+    //     if (userAvatar){
+    //         setAvatar(userAvatar)
+    //     }
+    // }, [userAvatar])
+
+    console.log(userAvatar)
+    console.log(avatar)
+
     const dispatch=useAppDispatch()
     // const {data: session} = useSession()
 
 
-    const userAvatar = useAppSelector(state => state.profile.userAvatar)
+
+    const userId = useAppSelector(state => state.profile.user.id)
     const isNewImageUploaded = useAppSelector(state => state.profile.newImageUploaded)
-    console.log(userAvatar)
-    const [avatar, setAvatar] = useState<any>(userAvatar ? userAvatar : defaultImg)
-    console.log(avatar)
+
 
     const refLoader = useRef<HTMLInputElement>(null)
     const selectImageHandler = () => {
@@ -43,7 +55,11 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
         }
     }
     const onSaveClickHandler = () => {
-
+        const newData = {
+            id: userId,
+            image: avatar,
+        }
+        dispatch(updateUserData(newData))
     }
 
 
@@ -66,7 +82,10 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
                         <line x1="12" y1="12" x2="12" y2="21"/>
                         <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/>
                     </svg>
-                    {isNewImageUploaded && <button className='ml-[20px]'>Save</button>}
+                </div>
+                <div>
+                    {isNewImageUploaded && <button className='ml-[20px]' onClick={onSaveClickHandler}>Save</button>}
+                    {/*<button className='ml-[20px]' onClick={onSaveClickHandler}>Save</button>*/}
                 </div>
                 <input type='file'
                        ref={refLoader}

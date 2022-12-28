@@ -14,6 +14,7 @@ const Settings = () => {
     useEffect(()=>{
         if (sessionData.data){
             dispatch(setUserData({userData: sessionData.data.user}))
+            console.log('sessionData.data')
             console.log(sessionData.data)
         }
     },[sessionData])

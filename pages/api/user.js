@@ -1,27 +1,37 @@
 import dbConnect from "../../serverUtils/dbConnect";
 import {getSession} from "next-auth/react";
+import User from "../../serverUtils/models/User";
 
 export default async function handler(req, res) {
     const {method} = req
     await dbConnect()
-      const session = await getSession({ req });
+    const session = await getSession({ req });
     const {user} = session
 
     switch (method) {
         case 'PUT':
             try {
-                const {username, email, country} = req.body
-                const candidate = await User.findOne({email})
-                if (candidate) {
-                    return res.status(400).json({message: 'An account is already registered with your email address'})
-                }
-                const updatedUser = await User.updateOne({_id: user.id}, {
+                const {id, username, country, image} = req.body
+                await User.findByIdAndUpdate(id, {
                     $set: {
                         username,
-                        email,
-                        country
-                    },
+                        country,
+                        image,
+                    }
                 }, {runValidators: true})
+                const updatedUser = await User.findById(id)
+                console.log('???UPDATE???')
+                console.log(updatedUser)
+                // if (candidate) {
+                //     return res.status(400).json({message: 'An account is already registered with your email address'})
+                // }
+                // const updatedUser = await User.updateOne({_id: userId}, {
+                //     $set: {
+                //         username,
+                //         image,
+                //         country
+                //     },
+                // }, {runValidators: true})
                 return res.status(200).json(updatedUser)
 
             } catch (e) {
@@ -36,13 +46,13 @@ export default async function handler(req, res) {
     }
 }
 
-class User {
-
-    async updateUser(req, res) {
-
-    }
-
-}
+// class User {
+//
+//     async updateUser(req, res) {
+//
+//     }
+//
+// }
 
 // async updateUserPassword(req, res) {
 //     try {

@@ -2,7 +2,7 @@ import {SettingsType} from "../api/notes-api";
 
 // STORE types ==================================
 export type UserType = {   //tmp type for develop //todo must be replace with original UserType when server API works
-    id?: number,
+    id?: string,
     name?: string | null | undefined,
     email?: string | null | undefined,
     image?: string | null | undefined,

@@ -34,13 +34,13 @@ export const authOptions = {
                 },
             },
             async authorize(credentials) {
-                // console.log(credentials)
                 await dbConnect();
 
                 // Find user with the email
                 const user = await User.findOne({
                     email: credentials?.email,
                 });
+
 
                 // Email Not found
                 if (!user) {
@@ -57,7 +57,9 @@ export const authOptions = {
                 if (!isPasswordCorrect) {
                     throw new Error("Password is incorrect");
                 }
-
+                // console.log('____DbUser____')
+                // console.log(user)
+                // console.log('____/DbUser/____')
                 return user;
             },
         }),
@@ -69,11 +71,28 @@ export const authOptions = {
         strategy: "jwt",
     },
     callbacks: {
-        async jwt({ token, account, profile }) {
+        async jwt({ token, user, account, profile }) {
             // Persist the OAuth access_token and or the user id to the token right after signin
+            if (user){
+                console.log('____CallbackUser____')
+                console.log(user)
+                console.log('____/CallbackUser/____')
+            }
+
             if (account) {
+                console.log('____account____')
+                console.log(account)
+                console.log('____/account/____')
                 token.accessToken = account.access_token
+                // if (user){
+                //     token.country = user.country
+                //     token.image = user.image
+                // }
+
                 if (profile){
+                    console.log('____profile____')
+                    console.log(profile)
+                    console.log('____/profile/____')
                     token.id = profile.id
                 }
             }
@@ -82,18 +101,24 @@ export const authOptions = {
             // console.log('____/token/____')
             return token
         },
-        session: async ({session, token}) => {
-            // console.log('____session____')
-            if (session?.user) {
-                session.user.id = token.sub;
-                session.user.accessToken = !!token.accessToken;
+        session: async ({session, token, user}) => {
+            if (token){
+                console.log('____SessionToken____')
+                console.log(token)
+                console.log('____/SessionToken/____')
             }
-            // console.log(session)
-            // console.log('____/session/____')
-            // console.log('____token____')
-            // console.log(token)
-            // console.log('____/token/____')
-
+            if (session?.user) {
+                console.log('____SessionUser____')
+                console.log(session.user)
+                console.log('____/SessionUser/____')
+                session.user.id = token.sub;
+                // session.user.country = token.country
+                // session.user.image = token.image
+                session.user.accessToken = !!token.accessToken;
+                console.log('____session____')
+                console.log(session)
+                console.log('____/session/____')
+            }
             return session;
         },
     },

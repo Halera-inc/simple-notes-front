@@ -25,7 +25,7 @@ const UserSchema = new Schema({
             default: 'default'
         }
     },
-    image: String
+    image: {type: String, default: ''}
 })
 
 const User = mongoose.models.User || mongoose.model('User', UserSchema)

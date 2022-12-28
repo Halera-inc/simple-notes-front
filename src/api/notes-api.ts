@@ -63,8 +63,8 @@ export const userAPI = {
     getUser(){
         return instance.get(`user`)
     },
-    updateUser(username?: string, email?: string, country?: string) {
-        return instance.put(`api/user`, {username,  country})
+    updateUser(id: string, username?: string, country?: string, image?: string) {
+        return instance.put(`api/user`, {id, username, country, image})
     }
 
 }

@@ -28,6 +28,7 @@ const Notes = () => {
     const sessionData = useSession()
     useEffect(()=>{
         if (sessionData.data){
+            console.log(sessionData.data.user)
             dispatch(setUserData({userData: sessionData.data.user}))
         }
     },[sessionData])

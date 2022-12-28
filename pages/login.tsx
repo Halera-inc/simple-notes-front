@@ -260,7 +260,7 @@ export default Login;
 
 export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
     const session = await getSession(context);
-    console.log(session)
+    // console.log(session)
     if (session) {
         return {
             redirect: {destination: '/notes'},
