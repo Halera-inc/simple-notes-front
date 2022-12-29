@@ -57,9 +57,9 @@ export const authOptions = {
                 if (!isPasswordCorrect) {
                     throw new Error("Password is incorrect");
                 }
-                // console.log('____DbUser____')
-                // console.log(user)
-                // console.log('____/DbUser/____')
+                console.log('____DbUser____')
+                console.log(user)
+                console.log('____/DbUser/____')
                 return user;
             },
         }),
@@ -73,16 +73,19 @@ export const authOptions = {
     callbacks: {
         async jwt({ token, user, account, profile }) {
             // Persist the OAuth access_token and or the user id to the token right after signin
+            console.log('_____JWTToken_start______')
+            console.log(token)
+            console.log('_____/JWTToken_start/______')
             if (user){
-                console.log('____CallbackUser____')
+                console.log('____JWTUser____')
                 console.log(user)
-                console.log('____/CallbackUser/____')
+                console.log('____/JWTUser/____')
             }
 
             if (account) {
-                console.log('____account____')
+                console.log('____JWTaccount____')
                 console.log(account)
-                console.log('____/account/____')
+                console.log('____/JWTaccount/____')
                 token.accessToken = account.access_token
                 // if (user){
                 //     token.country = user.country
@@ -90,15 +93,15 @@ export const authOptions = {
                 // }
 
                 if (profile){
-                    console.log('____profile____')
+                    console.log('____JWTprofile____')
                     console.log(profile)
-                    console.log('____/profile/____')
+                    console.log('____/JWTprofile/____')
                     token.id = profile.id
                 }
             }
-            // console.log('____token____')
-            // console.log(token)
-            // console.log('____/token/____')
+            console.log('____JWTtoken____')
+            console.log(token)
+            console.log('____/JWTtoken/____')
             return token
         },
         session: async ({session, token, user}) => {
@@ -114,6 +117,7 @@ export const authOptions = {
                 session.user.id = token.sub;
                 // session.user.country = token.country
                 // session.user.image = token.image
+                session.user.image = token.picture
                 session.user.accessToken = !!token.accessToken;
                 console.log('____session____')
                 console.log(session)
