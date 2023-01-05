@@ -7,7 +7,7 @@ import SearchIconBlack from "../../assets/images/SearchIconBlack";
 import s from "./PagesHeader.module.css";
 import SearchIconWhite from "../../assets/images/SearchIconWhite";
 import {useTheme} from "next-themes";
-import PlusIcon from "../../assets/images/PlusIcon";
+
 
 type SearchModuleType = {
     showSearchHandler: (value: boolean) => void
@@ -78,7 +78,7 @@ const SearchModule = (props: SearchModuleType) => {
             {props.hiddenName ?
                 <input onChange={onSearchValueChange} onBlur={closedHandler} className={`dark:text-white dark:border-b-white 
                  dark:bg-transparent sl:ml-[6%] ${s.inputHidden}`} type={'text'} placeholder={'search...'}/> : ''}
-            <button className={'hidden sl:block'} onClick={showSearchHandler}>
+            <button className={'hidden sm:block'} onClick={showSearchHandler}>
                 {RenderSearch()}
 
             </button>

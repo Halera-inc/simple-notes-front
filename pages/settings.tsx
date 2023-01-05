@@ -21,7 +21,7 @@ const Settings = () => {
 
     return (
         <MainContainer>
-            <div className={"dark:bg-grey  dark:text-white pt-[130px] pr-[40px] pb-[0] pl-[140px] h-[100vh]"}>
+            <div className={"dark:bg-grey  dark:text-white pt-[130px] pr-[40px] pb-[0] pl-[140px] h-[100vh] xm:pt-[100px] sv:pt-[80px]  sr:pl-[30px] sr:pb-[120px] mmm:pr-[20px] mmm:pl-[20px]"}>
             <MainBlockSettings session={sessionData.data}/>
             </div>
         </MainContainer>

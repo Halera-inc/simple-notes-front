@@ -9,10 +9,7 @@ import Button from "../universalComponent/Button/Button";
 import SearchModule from "./SearchModule";
 import s from "./PagesHeader.module.css"
 import {setSearchParams} from "../../bll/slices/notesSlice";
-import { getServerSideProps } from "pages/notes";
-import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import Image from "next/image";
-import defaultImg from "../../assets/images/nopic.jpg";
 
 
 const Header = () => {
@@ -52,14 +49,14 @@ const Header = () => {
                     {session
                         ? <div
                             className={`dark:bg-grey pl-[150px] backdrop-blur-md dark:bg-grey/70 bg-white/70 fixed w-screen w-180
-                            z-20 justify-space flex justify-between items-center h-[100px] sv:pl-[120px] sv:h-[86px] sr:pl-[30px] ${hiddenName ? "sl:justify-center": '' } `}>
+                            z-20 justify-space flex justify-between items-center h-[100px]  sc:pl-[120px] sv:h-[80px] sr:pl-[30px] ${hiddenName ? "sl:justify-center": '' } `}>
                             { hiddenName ?
                                 ''
                                 :
                             <p onClick={backNotes} className={ `dark:text-white ${s.pageName } `}>
                                 {pageName}
                             </p>}
-                            <div className={`flex  w-[600px] items-center mr-[74px] xm:w-[auto] sd:mr-[30px] sb:mr-[15px] sl:mr-[30px]
+                            <div className={`flex  w-[600px] items-center mr-[74px] sa:mr-[6px] xm:w-[auto] sd:mr-[-16px] sb:mr-[-44px] md:mr-[-20px]
                                 ${router.pathname === '/settings' ? 'justify-end' : 'justify-between' }`}>
                                 {
                                     router.pathname === '/settings' ? '':
@@ -70,7 +67,7 @@ const Header = () => {
                                                        height={50}
                                                        alt={'avatar'}
                                                        src={imgAvatar}
-                                                       className={s.img}/> : <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className="dark:text-white xm:hidden"/>}
+                                                       className={`${s.img} xm:hidden`}/> : <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className="dark:text-white xm:hidden"/>}
                             </div>
                         </div>
                         : <div className='dark:bg-grey z-40 flex justify-between items-center h-10 pt-[45px] pb-[35px] pr-[100px]

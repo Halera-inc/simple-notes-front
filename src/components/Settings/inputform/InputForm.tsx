@@ -9,14 +9,12 @@ import {EJSON} from "bson";
 import stringify = EJSON.stringify;
 
 
-
 const InputForm = () => {
     const dispatch = useAppDispatch()
     const {data: session} = useSession()
 
-    const inputStyle= "h-[100%] w-[412px] bg-white dark:bg-black dark:border-none " +
-        "word-break: break-all  font-thin  text-lg input  input-bordered  placeholder-current input-info  placeholder-blue-dark dark:placeholder-blue-dark rounded-none text-black dark:text-white"
-
+    const inputStyle = "h-[100%] w-[412px] bg-white dark:bg-black dark:border-none " +
+        "word-break: break-all  font-thin  text-lg input  input-bordered  placeholder-current input-info  placeholder-blue-dark dark:placeholder-blue-dark rounded-none text-black dark:text-white sc:w-[300px] sc:h-[80%] sv:w-[200px]"
 
 
     // const {register, handleSubmit} = useForm<{ username: string, email: string, country: string }>({
@@ -38,9 +36,9 @@ const InputForm = () => {
     }
     const formik = useFormik({
         initialValues: {
-            user:'',
+            user: '',
             email: '',
-            country:'',
+            country: '',
 
 
         },
@@ -55,7 +53,9 @@ const InputForm = () => {
         <form onSubmit={formik.handleSubmit}>
             <div className={s.edit}>
                 <ul className={s.editMyProfile}>
-                    <li><div className="dark:text-white">Username:</div> <input
+                    <li>
+                        <div className={`dark:text-white ${s.username}`}>Username:</div>
+                        <input
                             type="text"
                             placeholder="Enter UserName"
                             className={inputStyle}
@@ -64,16 +64,18 @@ const InputForm = () => {
                             defaultValue={session?.user?.name}
                             onChange={formik.handleChange}
                         />
-                        </li>
+                    </li>
 
-                    <li><div className="dark:text-white">Country:</div> <input
+                    <li>
+                        <div className={`dark:text-white ${s.country}`}>Country:</div>
+                        <input
                             placeholder="Change Country"
                             className={inputStyle}
                             {...formik.getFieldProps('country')}/>
-                        </li>
+                    </li>
                 </ul>
                 <Button title={'Save'} type={'submit'}
-                        className={"dark:bg-black dark:border-white dark:text-white"}
+                        className={"dark:bg-black dark:border-white dark:text-white sv:w-[140px] sv:h-[40px] sv:text-[16px] "}
                         style={{
                             width: 158,
                             height: 60,
