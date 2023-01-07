@@ -71,10 +71,11 @@
     input.inputSearch {
         width: 200px;
         margin-left: 20px;
+
     }
 }
 
-@media (max-width: 607px) {
+@media (max-width: 658px) {
     .pageName {
         font-size: 30px;
     }
@@ -102,103 +103,5 @@
     }
 }
 
-
-/*    }*/
-
-/*    .notAuth_header {*/
-/*        display: flex;*/
-/*        flex-direction: column;*/
-/*        justify-content: space-between;*/
-/*        align-items: center;*/
-/*        width: 100%;*/
-/*        height: 300px;*/
-/*        margin: 20px auto;*/
-/*    }*/
-
-/*    .noAuth_header__authBlock {*/
-/*        flex-direction: column;*/
-/*        justify-content: space-between;*/
-/*        width: 100%;*/
-/*        height: 180px;*/
-/*        margin: 0 auto;*/
-/*    }*/
-
-/*    .noAuth_header__authBlock a {*/
-/*        margin: 0 auto;*/
-/*    }*/
-
-/*    .noAuth_header__authBlock div {*/
-/*        margin: 0 auto;*/
-/*    }*/
-
-/*    .pagesHeader_wrapper p {*/
-/*        margin-left: 0;*/
-/*        font-size: 35px;*/
-/*    }*/
-
-/*    .pagesHeader_search {*/
-/*        display: flex;*/
-/*        justify-content: center;*/
-/*        align-items: center;*/
-/*        margin: 10px 0 0;*/
-/*        width: 100%;*/
-
-/*    }*/
-
-/*    .pagesHeader_search span svg {*/
-/*        display: none;*/
-/*    }*/
-/*}*/
-
-
-/*@media screen and (min-width: 541px) {*/
-/*    .pagesHeader_wrapper {*/
-/*        margin: 0 20px 0 100px;*/
-/*        padding-bottom: 0;*/
-/*        width: calc(100% - 100px);*/
-
-/*    }*/
-
-/*    .pagesHeader_wrapper p {*/
-/*        width: 50%;*/
-/*    }*/
-
-/*    .pagesHeader_title {*/
-/*        margin: 30px 30px;*/
-/*        color: black;*/
-
-/*    }*/
-
-/*    .notAuth_header h1 {*/
-/*        margin: 0 auto;*/
-/*        font-size: 35px;*/
-/*    }*/
-
-/*    .notAuth_header {*/
-/*        display: flex;*/
-/*        flex-direction: column;*/
-/*        justify-content: space-between;*/
-/*        align-items: center;*/
-/*        width: 100%;*/
-/*        height: 300px;*/
-/*        margin: 20px auto;*/
-/*    }*/
-
-/*    .noAuth_header__authBlock {*/
-/*        flex-direction: column;*/
-/*        justify-content: space-between;*/
-/*        width: 100%;*/
-/*        height: 180px;*/
-/*        margin: 0 auto;*/
-/*    }*/
-
-/*    .noAuth_header__authBlock a {*/
-/*        margin: 0 auto;*/
-/*    }*/
-
-/*    .noAuth_header__authBlock div {*/
-/*        margin: 0 auto;*/
-/*    }*/
-/*}*/
 
 

@@ -2,7 +2,6 @@ import React, {ChangeEvent, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {convertFileToBase64} from "../../utils/convertFileToBase64";
 import s from "./../../styles/Settings.module.css";
-import {useSession} from "next-auth/react";
 import defaultImg from "./../../assets/images/nopic.jpg";
 import Image from 'next/image'
 import {changeImage} from "../../bll/slices/profileSlice";
@@ -15,7 +14,6 @@ type LoaderAvatarPropsType = {
 
 export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
     const dispatch=useAppDispatch()
-    // const {data: session} = useSession()
 
 
     const userAvatar = useAppSelector(state => state.profile.userAvatar)
@@ -41,13 +39,13 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
         }
     }
     return (
-        <div className={s.imgProfileWrapper}>
+        <>
             {avatar &&
                 <Image
-                     width={200}
-                     height={200}
                      alt={'avatar'}
                      src={avatar}
+                     width={200}
+                     height={200}
                      className={s.img}
                 />
             }
@@ -66,7 +64,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
                        style={{display: 'none'}}
                        accept={'img/gif'}/></> : ''}
 
-        </div>
+        </>
     );
 };
 
