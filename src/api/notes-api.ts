@@ -65,6 +65,12 @@ export const userAPI = {
     },
     updateUser(id: string, username?: string, country?: string, image?: string) {
         return instance.put(`api/user`, {id, username, country, image})
+    },
+    updateIcon(user: string, icon: string) {
+        return instance.post(`api/icons`,{user, icon})
+    },
+    getIcon(){
+        return instance.get(`api/icons`)
     }
 
 }
@@ -119,6 +125,18 @@ export type TaskType = {
     idTask: string,
     taskTitle: string,
     isDone: boolean
+}
+export type sessionDataType = {
+    data: {
+        expires: string
+        user: {
+            name?: string
+            email?: string
+            image?: string
+            accessToken?: boolean
+        }
+    }
+    status: string
 }
 export type NoteViewType = 'note_text' | 'note_todo'
 export type ColorSamplesType =

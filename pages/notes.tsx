@@ -6,11 +6,11 @@ import s from "../src/styles/Notes.module.css"
 import {useAppDispatch, useAppSelector} from "../src/utils/hooks";
 import ModalWindow from "../src/components/ModalWindow";
 import {colorizedColorType} from "../src/components/Note";
-import {ColorSamplesType} from "../src/api/notes-api";
+import {ColorSamplesType, sessionDataType} from "../src/api/notes-api";
 import {getSession, useSession} from "next-auth/react";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import {UniversalModalWindow} from "src/components/universalComponent/UniversalModalWindow";
-import { setUserData } from 'src/bll/slices/profileSlice';
+import {getUserIcon, setUserData } from 'src/bll/slices/profileSlice';
 
 
 const Notes = () => {
@@ -25,7 +25,8 @@ const Notes = () => {
     const effectRan = useRef(false)
     const modalShow = useAppSelector(state => state.notes.editNoteModalShow)
     const universalModalShow = useAppSelector(state => state.notes.openUniversalModal)
-    const sessionData = useSession()
+    const sessionData = useSession() as sessionDataType
+    sessionData.data && sessionData.data.user && console.log(sessionData.data.user.accessToken)
     useEffect(()=>{
         if (sessionData.data){
             console.log(sessionData.data.user)
@@ -35,7 +36,9 @@ const Notes = () => {
 
     useEffect(() => {
         if (!effectRan.current) {
+            console.log('effectRan')
             dispatch(getNotes())
+            !sessionData.data.user.accessToken && dispatch(getUserIcon())
             return () => {
                 effectRan.current = true
             }

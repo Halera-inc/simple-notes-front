@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import s from '../../styles/Settings.module.css'
 import Button from "../universalComponent/Button/Button";
 import {useAppSelector} from "src/utils/hooks";
-import InputForm from "src/components/Settings/inputform/InputForm";
+import InputForm from "src/components/Settings/InputForm/InputForm";
 import {useSession} from "next-auth/react";
 import {OtherSettings} from "./OtherSettings";
 import {UserType} from "../../utils/types";

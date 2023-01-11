@@ -73,19 +73,19 @@ export const authOptions = {
     callbacks: {
         async jwt({ token, user, account, profile }) {
             // Persist the OAuth access_token and or the user id to the token right after signin
-            console.log('_____JWTToken_start______')
-            console.log(token)
-            console.log('_____/JWTToken_start/______')
-            if (user){
-                console.log('____JWTUser____')
-                console.log(user)
-                console.log('____/JWTUser/____')
-            }
+            // console.log('_____JWTToken_start______')
+            // console.log(token)
+            // console.log('_____/JWTToken_start/______')
+            // if (user){
+            //     console.log('____JWTUser____')
+            //     console.log(user)
+            //     console.log('____/JWTUser/____')
+            // }
 
             if (account) {
-                console.log('____JWTaccount____')
-                console.log(account)
-                console.log('____/JWTaccount/____')
+                // console.log('____JWTaccount____')
+                // console.log(account)
+                // console.log('____/JWTaccount/____')
                 token.accessToken = account.access_token
                 // if (user){
                 //     token.country = user.country
@@ -93,35 +93,47 @@ export const authOptions = {
                 // }
 
                 if (profile){
-                    console.log('____JWTprofile____')
-                    console.log(profile)
-                    console.log('____/JWTprofile/____')
+                    // console.log('____JWTprofile____')
+                    // console.log(profile)
+                    // console.log('____/JWTprofile/____')
                     token.id = profile.id
                 }
             }
-            console.log('____JWTtoken____')
-            console.log(token)
-            console.log('____/JWTtoken/____')
+            // console.log('____JWTtoken____')
+            // console.log(token)
+            // console.log('____/JWTtoken/____')
             return token
+            // return {token, user}
         },
         session: async ({session, token, user}) => {
-            if (token){
-                console.log('____SessionToken____')
-                console.log(token)
-                console.log('____/SessionToken/____')
-            }
+            // if (token){
+            //     console.log('____SessionToken____')
+            //     console.log(token)
+            //     // console.log(token.token.token.user)
+            //     // console.log(token.token.token.token)
+            //     console.log('____/SessionToken/____')
+            // }
+            // if (user){
+            //     console.log('____SessionUser____')
+            //     console.log(session.user)
+            //     console.log('____/SessionUser/____')
+            // }
+            // if (session){
+            //     console.log('____session____')
+            //     console.log(session)
+            //     console.log('____/session/____')
+            // }
             if (session?.user) {
-                console.log('____SessionUser____')
-                console.log(session.user)
-                console.log('____/SessionUser/____')
+                // console.log('____JUSTUser____')
+                // console.log(user)
+                // console.log('____/JUSTUser/____')
                 session.user.id = token.sub;
                 // session.user.country = token.country
                 // session.user.image = token.image
-                session.user.image = token.picture
+                // session.user.image = token.picture
+                // session.user = token.token.token.user
                 session.user.accessToken = !!token.accessToken;
-                console.log('____session____')
-                console.log(session)
-                console.log('____/session/____')
+
             }
             return session;
         },

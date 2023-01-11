@@ -3,13 +3,19 @@ import MainBlockSettings from "../src/components/Settings/MainBlockSettings";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import {getSession, useSession} from "next-auth/react";
 import { useAppDispatch } from "src/utils/hooks";
-import { useEffect } from "react";
-import { setUserData } from "src/bll/slices/profileSlice";
+import { useEffect, useRef } from "react";
+import {getUserIcon, setUserData } from "src/bll/slices/profileSlice";
+import { sessionDataType } from "src/api/notes-api";
 
 const Settings = () => {
 
     const dispatch = useAppDispatch()
-    const sessionData = useSession()
+    const sessionData = useSession() as sessionDataType
+    const effectRan = useRef(false)
+
+    useEffect(() => {
+        sessionData.data && !sessionData.data.user.accessToken && dispatch(getUserIcon())
+    }, [sessionData])
 
     useEffect(()=>{
         if (sessionData.data){

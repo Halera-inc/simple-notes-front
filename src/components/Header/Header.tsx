@@ -11,6 +11,7 @@ import s from "./PagesHeader.module.css"
 import {setSearchParams} from "../../bll/slices/notesSlice";
 import { getServerSideProps } from "pages/notes";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
+import Image from 'next/image'
 
 
 const Header = () => {
@@ -21,6 +22,8 @@ const Header = () => {
     const dispatch = useAppDispatch()
     const [login, setLogin] = useState<boolean>(false)
     const [hiddenName, setHiddenName] = useState(false)
+    const sessionData = useSession()
+    const userAvatar = useAppSelector(state => state.profile.userAvatar)
 
 
     useEffect(() => {
@@ -37,6 +40,10 @@ const Header = () => {
         setHiddenName(value)
     }
 
+    const getSessionInfoHandler = () => {
+
+        console.log(sessionData)
+    }
 
 
     return (
@@ -59,8 +66,12 @@ const Header = () => {
                                     router.pathname === '/settings' ? '':
                                 <SearchModule showSearchHandler={showSearchHandler}  setHiddenName={setHiddenName}
                                               hiddenName={hiddenName}/>}
+
+                                {/*<button onClick={getSessionInfoHandler}>GetSessioninfo</button>*/}
                                 <p className={`dark:text-white text-lg text-black xm:hidden  ${router.pathname === '/settings' ? 'mr-[20px]' :'' }`}>{session?.user?.name}</p>
-                                <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className="dark:text-white xm:hidden"/>
+                                {!userAvatar
+                                    ? <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className="dark:text-white xm:hidden"/>
+                                    : <Image width={60} height={60} alt={'avatar'} src={userAvatar} className={s.img}/>}
                             </div>
                         </div>
                         : <div className='dark:bg-grey z-40 flex justify-between items-center h-10 pt-[45px] pb-[35px] pr-[100px]
