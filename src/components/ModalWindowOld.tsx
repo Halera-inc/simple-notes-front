@@ -109,7 +109,7 @@ const ModalWindowOld: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsT
                                       onChange={props.onTextChange}
                                       onKeyPress={(e) => onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
                                       onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
-                                      onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                                      onKeyUp={(e)=>onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e)}
                             />
                         </div>
                         <div className={s.modalAction}>
@@ -168,7 +168,7 @@ const ModalWindowOld: React.FC<ModalWindowPropsType> = (props: ModalWindowPropsT
                                       onChange={props.onTextChange}
                                       onKeyPress={(e) => onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'create')}
                                       onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'create')}
-                                      onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                                      onKeyUp={(e)=>onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e)}
                             />
                         </div>
                         <div className={s.modalAction}>

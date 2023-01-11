@@ -52,6 +52,8 @@ ul.editData li {
     top: 164px;
     left: 220px;
     cursor: pointer;
+
+    display: flex;
 }
 
 .myName {

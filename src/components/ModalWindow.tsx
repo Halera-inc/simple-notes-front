@@ -133,7 +133,7 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
                                   onChange={onTextChange}
                                   onKeyPress={(e) => onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
                                   onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'edit')}
-                                  onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                                  onKeyUp={(e)=>onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e)}
                         />
                     <div className={s.modalAction}>
                         <Button title={'Cancel'}
@@ -183,7 +183,7 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
                                   onChange={onTextChange}
                                   onKeyPress={(e) => onKeyPressHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'create')}
                                   onKeyDown={(e) => onKeyDownHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e, 'create')}
-                                  onKeyUp={onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>}
+                                  onKeyUp={(e)=>onKeyUpHandler<React.KeyboardEvent<HTMLTextAreaElement>>(e)}
                         />
                     <div className={s.modalAction}>
                         <Button title={'Cancel'}
