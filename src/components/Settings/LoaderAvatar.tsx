@@ -101,7 +101,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
                            accept={'img/gif'}/>
                 </>
                 : ''}
-        </div>
+        </>
     );
 };
 
