@@ -70,7 +70,11 @@
         width: 80% ;
         left: 50px;
     }
-    .notesBlock{
+    .fixNoteBlock{
+        padding: 20px 20px 30px 20px;
+    }
+
+    .notesBlock {
         padding: 20px 20px 109px 20px;
     }
 }

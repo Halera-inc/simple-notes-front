@@ -17,7 +17,8 @@
     margin-left: 128px;
     color: black;
 }
-.img{
+
+.img {
     border-radius: 50%;
     display: block;
     object-fit: cover;
@@ -66,7 +67,9 @@
     font-size: 35px;
     font-weight: bold;
     cursor: pointer;
+
 }
+
 @media (max-width: 750px) {
     input.inputSearch {
         width: 200px;
@@ -74,6 +77,12 @@
 
     }
 }
+
+/*@media (max-width: 1100px){*/
+/*    .img{*/
+/*        display: none;*/
+/*    }*/
+/*}*/
 
 @media (max-width: 658px) {
     .pageName {
@@ -84,7 +93,7 @@
 
 @media (max-width: 563px) {
     input.inputSearch {
-     margin-left: 0;
+        margin-left: 0;
         width: 180px;
     }
 }

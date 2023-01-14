@@ -4,14 +4,16 @@ import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {useRouter} from "next/router";
 import {APP_ROOTS, getPageName} from "../../utils/getPageName";
 import ButtonIcon from "../../assets/images/ButtonIcon";
-import {useSession} from "next-auth/react";
+import {signOut, useSession} from "next-auth/react";
 import Button from "../universalComponent/Button/Button";
 import SearchModule from "./SearchModule";
 import s from "./PagesHeader.module.css"
 import {setSearchParams} from "../../bll/slices/notesSlice";
-import { getServerSideProps } from "pages/notes";
+import {getServerSideProps} from "pages/notes";
 import {GetServerSideProps, GetServerSidePropsContext} from "next";
 import Image from 'next/image'
+import LogoutMobile from "../../assets/images/LogoutMobile";
+import SidebarItem from "../Sidebar/SidebarItem";
 
 
 const Header = () => {
@@ -27,24 +29,21 @@ const Header = () => {
 
 
     useEffect(() => {
-        if(window.innerWidth>470){
+        if (window.innerWidth > 470) {
             setHiddenName(false)
         }
     }, []);
 
 
-    const backNotes=()=>{
-        dispatch(setSearchParams({newValue:''}))
+    const backNotes = () => {
+        dispatch(setSearchParams({newValue: ''}))
     }
-    const showSearchHandler=(value:boolean)=>{
+    const showSearchHandler = (value: boolean) => {
         setHiddenName(value)
     }
-
-    const getSessionInfoHandler = () => {
-
-        console.log(sessionData)
+    const onLogoutClickHandle = () => {
+        signOut()
     }
-
 
     return (
         <>
@@ -52,26 +51,35 @@ const Header = () => {
                 ? <div>
                     {session
                         ? <div
-                            className={`dark:bg-grey pl-[150px] backdrop-blur-md dark:bg-grey/70 bg-white/70 fixed w-screen w-180
-                            z-20 justify-space flex justify-between items-center h-[100px]  sc:pl-[120px] sv:h-[80px] sr:pl-[30px] ${hiddenName ? "sl:justify-center": '' } `}>
-                            { hiddenName ?
+                            className={`dark:bg-grey pl-[150px] pr-[50px] backdrop-blur-md dark:bg-grey/70 bg-white/70 fixed w-screen w-180
+                            z-20 justify-space flex justify-between items-center h-[100px] sa:pr-[30px] sb:pr-[20px]  sc:pl-[120px] sv:h-[80px] sr:pl-[30px] ${hiddenName ? "sl:justify-center" : ''} `}>
+                            {hiddenName ?
                                 ''
                                 :
-                            <p onClick={backNotes} className={ `dark:text-white ${s.pageName } `}>
-                                {pageName}
-                            </p>}
-                            <div className={`flex  w-[600px] items-center mr-[74px] sa:mr-[6px] xm:w-[auto] sd:mr-[-16px] sb:mr-[-44px] md:mr-[-20px]
-                                ${router.pathname === '/settings' ? 'justify-end' : 'justify-between' }`}>
+                                <p onClick={backNotes} className={`dark:text-white ${s.pageName} `}>
+                                    {pageName}
+                                </p>}
+                            <div className={`flex  mw-[650px] items-center  sa:mr-[6px] xm:w-[auto] 
+                                ${router.pathname === '/settings' ? 'justify-end' : 'justify-between'}`}>
                                 {
-                                    router.pathname === '/settings' ? '':
-                                <SearchModule showSearchHandler={showSearchHandler}  setHiddenName={setHiddenName}
-                                              hiddenName={hiddenName}/>}
-
-                                {/*<button onClick={getSessionInfoHandler}>GetSessioninfo</button>*/}
-                                <p className={`dark:text-white text-lg text-black xm:hidden  ${router.pathname === '/settings' ? 'mr-[20px]' :'' }`}>{session?.user?.name}</p>
+                                    router.pathname === '/settings' ? '' :
+                                        <SearchModule showSearchHandler={showSearchHandler}
+                                                      setHiddenName={setHiddenName}
+                                                      hiddenName={hiddenName}/>}
+                                <p className={`dark:text-white mr-[20px] text-lg text-black xm:hidden `}>{session?.user?.name}</p>
                                 {!userAvatar
-                                    ? <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'} className="dark:text-white xm:hidden"/>
-                                    : <Image width={60} height={60} alt={'avatar'} src={userAvatar} className={s.img}/>}
+                                    ? <UserCircleIcon width={'3em'} height={'3em'} fill={'#212121'}
+                                                      className={`dark:text-white  ${router.pathname === '/settings' ? 'sr:hidden' : 'xm:hidden'} `}/>
+                                    : <Image width={60} height={60} alt={'avatar'} src={userAvatar} className={`${s.img}   ${router.pathname === '/settings' ? 'sr:hidden' : 'xm:hidden'} `}/> }
+
+                                { router.pathname === '/settings'            //в settings пропадает иконка на малой ширине экрана и появляется иконка logout
+                                   ? <SidebarItem tooltipInfo={'Log out'}
+                                                 className={`${s.sidebarItem} hidden sr:block hover:bg-transparent hover:cursor-pointer`}
+                                                 redActive={true}
+                                                 link={'/#'}
+                                                 icon={<LogoutMobile/>}
+                                                 onClick={onLogoutClickHandle}/>
+                                    : ""}
                             </div>
                         </div>
                         : <div className='dark:bg-grey z-40 flex justify-between items-center h-10 pt-[45px] pb-[35px] pr-[100px]

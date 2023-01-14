@@ -58,8 +58,8 @@ const SearchModule = (props: SearchModuleType) => {
     }
 
     return (
-        <div className='form-control sl:flex-row sl:scale-x-100'>
-            <div className='flex sb:mr-[20px] sl:hidden'>
+        <div className='form-control mr-[20px] sl:flex-row sl:scale-x-100 lg:mr-[-60px]'>
+            <div className='flex  sl:hidden'>
                 <input onChange={onSearchValueChange}
                        type="text"
                        placeholder="Search"

@@ -2,11 +2,11 @@ import React, {ChangeEvent, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import {convertFileToBase64} from "../../utils/convertFileToBase64";
 import s from "./../../styles/Settings.module.css";
-import {useSession} from "next-auth/react";
 import defaultImg from "./../../assets/images/nopic.jpg";
 import Image from 'next/image'
 import {changeImage, getUserIcon, updateUserData, updateUserIcon} from "../../bll/slices/profileSlice";
 import {Session} from 'next-auth/core/types';
+import Button from "../universalComponent/Button/Button";
 
 
 type LoaderAvatarPropsType = {
@@ -90,8 +90,8 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
                         </svg>
                     </div>
                     <div>
-                        {isNewImageUploaded && <button className='ml-[20px]' onClick={onSaveClickHandler}>Save</button>}
-                        <button className='ml-[20px]' onClick={onGetClickHandler}>Get</button>
+                        {isNewImageUploaded && <Button className="ms:text-[14px] ms:m-[0px]"  title={'Save image'}  callback={onSaveClickHandler}/>}
+                        {/*<button className='ml-[20px]' onClick={onGetClickHandler}>Get</button>*/}
                         {/*<button className='ml-[20px]' onClick={onSaveClickHandler}>Save</button>*/}
                     </div>
                     <input type='file'
