@@ -39,7 +39,7 @@ const ModalWindowAlternative = ({titleNode, textNode, typeNode, onTitleChange, o
 
     useEffect(() => {
         document.body.addEventListener('click', (e: any) => {
-            if (e.path.includes(modalWindowBackgroundRef.current) && !e.path.includes(modalWindowRef.current) && modalShow) {
+            if (e.path && e.path.includes(modalWindowBackgroundRef.current) && !e.path.includes(modalWindowRef.current) && modalShow) {
                 if (typeNode === 'edit'){
                     onDiscard && onDiscard()
                 } else {
