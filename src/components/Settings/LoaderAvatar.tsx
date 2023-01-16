@@ -7,7 +7,7 @@ import Image from 'next/image'
 import {changeImage, getUserIcon, updateUserData, updateUserIcon} from "../../bll/slices/profileSlice";
 import {Session} from 'next-auth/core/types';
 import Button from "../universalComponent/Button/Button";
-
+import {SnackBar} from "../universalComponent/Snackbar/SnackBar";
 
 type LoaderAvatarPropsType = {
     session: Session & { user?: { accessToken?: boolean } } | null
@@ -32,7 +32,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
 
     const userId = useAppSelector(state => state.profile.user.id)
     const isNewImageUploaded = useAppSelector(state => state.profile.newImageUploaded)
-
+    const isNewImageSave = useAppSelector(state => state.profile.newImageIsSave)
 
     const refLoader = useRef<HTMLInputElement>(null)
     const selectImageHandler = () => {
@@ -61,6 +61,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
         //@ts-ignore
         // dispatch(updateUserData(newData))
         dispatch(updateUserIcon(newData))
+       
     }
 
     const onGetClickHandler = () => {
@@ -71,13 +72,13 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
     return (
         <>
             {avatar &&
-                <Image
-                    width={200}
-                    height={200}
-                    alt={'avatar'}
-                    src={avatar}
-                    className={s.img}
-                />
+            <Image
+                width={200}
+                height={200}
+                alt={'avatar'}
+                src={avatar}
+                className={s.img}
+            />
             }
             {session && session.user && !session.user.accessToken
                 ? <>
@@ -90,7 +91,8 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
                         </svg>
                     </div>
                     <div>
-                        {isNewImageUploaded && <Button className="ms:text-[14px] ms:m-[0px]"  title={'Save image'}  callback={onSaveClickHandler}/>}
+                        {isNewImageUploaded && <Button className="ms:text-[14px] ms:m-[0px]" title={'Save image'}
+                                                       callback={onSaveClickHandler}/>}
                         {/*<button className='ml-[20px]' onClick={onGetClickHandler}>Get</button>*/}
                         {/*<button className='ml-[20px]' onClick={onSaveClickHandler}>Save</button>*/}
                     </div>
@@ -101,6 +103,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
                            accept={'img/gif'}/>
                 </>
                 : ''}
+            {isNewImageSave && <SnackBar  />}
         </>
     );
 };

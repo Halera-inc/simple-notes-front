@@ -7,7 +7,9 @@ const initialState = {
     user: {} as UserType,
     userAvatar:'' as string | null,
     newImageUploaded: false as boolean,
+    newImageIsSave: false as boolean,
     isUserInitialize: false as boolean,
+
 }
 
 export const updateUserData = createAsyncThunk('profileSlice/updateUserData',
@@ -52,6 +54,8 @@ export const profileSlice = createSlice({
         changeImage(state,action:PayloadAction<string | null>){
             state.userAvatar = action.payload
             state.newImageUploaded = true
+            state.newImageIsSave = false
+
         },
         setUserData(state, action:PayloadAction<{userData: UserType | undefined}>){
             if (action.payload.userData){
@@ -80,6 +84,7 @@ export const profileSlice = createSlice({
             })
             .addCase(updateUserIcon.fulfilled, (state) => {
                 state.newImageUploaded = false
+                state.newImageIsSave = true
             })
 
     }

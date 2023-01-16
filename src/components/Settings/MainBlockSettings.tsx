@@ -12,11 +12,12 @@ import {Session} from 'next-auth/core/types';
 
 type MainBlockSettingsPropsType = {
     session: Session & { user?: { accessToken?: boolean } } | null
+
+
 }
 
 const MainBlockSettings: React.FC<MainBlockSettingsPropsType> = ({session}) => {
-
-
+   
     // const {data: session} = useSession()
     const user = useAppSelector<UserType>(state => state.profile.user)
     const [edit, setEdit] = useState(false);
@@ -27,11 +28,14 @@ const MainBlockSettings: React.FC<MainBlockSettingsPropsType> = ({session}) => {
         setEdit(!edit);
     }
 
+
     return (
         <div className={s.wrapperMainSettings}>
             <div className={s.leftArea}>
                 <div className={s.myProfile}>
-                    <LoaderAvatar session={session}/>
+                    <LoaderAvatar session={session}
+
+                    />
 
 
                     <ul className={s.editData}>
@@ -54,6 +58,7 @@ const MainBlockSettings: React.FC<MainBlockSettingsPropsType> = ({session}) => {
                 {edit ? <InputForm/> : ''}
             </div>
             <OtherSettings session={session}/>
+          
         </div>
     );
 };
