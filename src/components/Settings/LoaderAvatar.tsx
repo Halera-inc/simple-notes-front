@@ -5,6 +5,7 @@ import s from "./../../styles/Settings.module.css";
 import defaultImg from "./../../assets/images/nopic.jpg";
 import Image from 'next/image'
 import {changeImage, getUserIcon, updateUserData, updateUserIcon} from "../../bll/slices/profileSlice";
+import {setIsAppSuccess} from '../../bll/slices/appSlice';
 import {Session} from 'next-auth/core/types';
 import Button from "../universalComponent/Button/Button";
 import {SnackBar} from "../universalComponent/Snackbar/SnackBar";
@@ -16,13 +17,20 @@ type LoaderAvatarPropsType = {
 export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
     const userAvatar = useAppSelector(state => state.profile.userAvatar)
     const [avatar, setAvatar] = useState<any>(userAvatar ? userAvatar : defaultImg)
-
+    const avatarIsSavedStatus = useAppSelector(state => state.app.isAppSuccess.status)
     useEffect(() => {
         if (userAvatar) {
             setAvatar(userAvatar)
         }
     }, [userAvatar])
 
+    useEffect(() => {
+        if (avatarIsSavedStatus) {
+            setTimeout(() => {
+                dispatch(setIsAppSuccess({status: false}))
+            }, 1500)
+        }
+    }, [avatarIsSavedStatus])
     // console.log(userAvatar)
     // console.log(avatar)
 
@@ -32,7 +40,8 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
 
     const userId = useAppSelector(state => state.profile.user.id)
     const isNewImageUploaded = useAppSelector(state => state.profile.newImageUploaded)
-    const isNewImageSave = useAppSelector(state => state.profile.newImageIsSave)
+    // const isNewImageSave = useAppSelector(state => state.profile.newImageIsSave)
+
 
     const refLoader = useRef<HTMLInputElement>(null)
     const selectImageHandler = () => {
@@ -61,7 +70,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
         //@ts-ignore
         // dispatch(updateUserData(newData))
         dispatch(updateUserIcon(newData))
-       
+        dispatch(setIsAppSuccess({status: true, title: "Avatar update succesfully !"}))
     }
 
     const onGetClickHandler = () => {
@@ -103,7 +112,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
                            accept={'img/gif'}/>
                 </>
                 : ''}
-            {isNewImageSave && <SnackBar  />}
+            {avatarIsSavedStatus ? <SnackBar/> : ''}
         </>
     );
 };

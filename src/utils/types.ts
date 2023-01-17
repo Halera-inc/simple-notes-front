@@ -13,6 +13,11 @@ export type UserType = {   //tmp type for develop //todo must be replace with or
     accessToken?: boolean
 }
 
+export type AppSuccessType = {
+    title?:string,
+    status?: boolean
+}
+
 // export type SessionType = {
 //     expires: string
 //     user: UserType
