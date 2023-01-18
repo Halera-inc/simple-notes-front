@@ -1,9 +1,18 @@
-import React from 'react';
-import {useAppSelector} from "src/utils/hooks";
+import React,{useEffect} from 'react';
+import {useAppSelector,useAppDispatch} from "src/utils/hooks";
+import {setIsAppSuccess} from '../../../bll/slices/appSlice';
 
 export const SnackBar = () => {
-    // const avatarIsSavedStatus = useAppSelector(state=>state.app.isAppSuccess.status)
+    const dispatch = useAppDispatch()
+     const avatarIsSavedStatus = useAppSelector(state=>state.app.isAppSuccess.status)
      const avatarIsSavedTitle = useAppSelector(state=>state.app.isAppSuccess.title)
+    useEffect(() => {
+        if (avatarIsSavedStatus) {
+            setTimeout(() => {
+                dispatch(setIsAppSuccess({status: false}))
+            }, 1500)
+        }
+    }, [avatarIsSavedStatus])
     return (
 
             <div className="alert alert-info shadow-lg">

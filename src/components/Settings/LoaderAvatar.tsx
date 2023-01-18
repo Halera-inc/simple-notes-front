@@ -24,13 +24,15 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
         }
     }, [userAvatar])
 
-    useEffect(() => {
-        if (avatarIsSavedStatus) {
-            setTimeout(() => {
-                dispatch(setIsAppSuccess({status: false}))
-            }, 1500)
-        }
-    }, [avatarIsSavedStatus])
+    // useEffect(() => {
+    //     if (avatarIsSavedStatus) {
+    //         setTimeout(() => {
+    //             dispatch(setIsAppSuccess({status: false}))
+    //         }, 1500)
+    //     }
+    // }, [avatarIsSavedStatus])
+
+
     // console.log(userAvatar)
     // console.log(avatar)
 
@@ -70,7 +72,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
         //@ts-ignore
         // dispatch(updateUserData(newData))
         dispatch(updateUserIcon(newData))
-        dispatch(setIsAppSuccess({status: true, title: "Avatar update succesfully !"}))
+        //dispatch(setIsAppSuccess({status: true, title: "Avatar update succesfully !"}))
     }
 
     const onGetClickHandler = () => {
