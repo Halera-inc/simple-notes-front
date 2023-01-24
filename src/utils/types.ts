@@ -14,8 +14,8 @@ export type UserType = {   //tmp type for develop //todo must be replace with or
 }
 
 export type AppSuccessType = {
-    title?:string,
-    status?: boolean
+    title:string,
+    status: boolean
 }
 
 // export type SessionType = {
