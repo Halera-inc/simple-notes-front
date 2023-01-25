@@ -18,6 +18,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
     const userAvatar = useAppSelector(state => state.profile.userAvatar)
     const [avatar, setAvatar] = useState<any>(userAvatar ? userAvatar : defaultImg)
     const avatarIsSavedStatus = useAppSelector(state => state.app.isAppSuccess.status)
+    const avatarIsSavedTitle = useAppSelector(state=>state.app.isAppSuccess.title)
     useEffect(() => {
         if (userAvatar) {
             setAvatar(userAvatar)
@@ -114,7 +115,7 @@ export const LoaderAvatar: React.FC<LoaderAvatarPropsType> = ({session}) => {
                            accept={'img/gif'}/>
                 </>
                 : ''}
-           <SnackBar/> 
+           <SnackBar title={avatarIsSavedTitle}/> 
         </>
     );
 };
